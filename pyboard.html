@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>Pyboard Notes</title>
+  </head>
+
+<body>
+<h1 id="pyboard-notes">Pyboard Notes</h1>
+<p>I plan to try out the pyboard and keep notes here.</p>
+<p>Pyboard is a ARM based microcontoller board designed as a platform for 
+Micro Python.</p>
+<ul>
+<li><a href="http://micropython.org/">http://micropython.org/</a></li>
+<li><a href="https://micropython.org/doc/general">General information about the pyboard</a></li>
+<li><a href="http://micropython.org/doc/tut-intro">Understanding your pyboard</a><ul>
+<li><a href="http://www.st.com/web/en/resource/technical/document/datasheet/DM00037051.pdf">ST MCU datasheet</a></li>
+<li><a href="http://forum.micropython.org/viewtopic.php?f=6&amp;t=162">GPIO Pins are 5 v tolerant except x5,x6</a> For more specifics and limitations check the link.</li>
+<li>The User switch is the button switch closer to the microSD socket. The button switch closer to the edge of the board is the reset switch.</li>
+</ul>
+</li>
+<li><a href="http://www.arm.com/products/processors/cortex-m/index.php">www.arm.com</a></li>
+<li>The creator of the Pyboard and Micro Python Dr Damien P. George<ul>
+<li><a href="http://www.damtp.cam.ac.uk/people/dpg39/">http://www.damtp.cam.ac.uk/people/dpg39/</a></li>
+<li><a href="http://dpgeorge.net">http://dpgeorge.net</a></li>
+</ul>
+</li>
+</ul>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#pyboard-notes">Pyboard Notes</a><ul>
+<li><a href="#micro-python-on-pyboard">Micro Python on Pyboard</a></li>
+<li><a href="#board-reset">Board Reset</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="micro-python-on-pyboard">Micro Python on Pyboard</h2>
+<iframe width="560" height="315" src="http://www.youtube.com/embed/5LbgyDmRu9s" frameborder="0" allowfullscreen></iframe>
+
+<h2 id="board-reset">Board Reset</h2>
+<p>Tested soft rest using Debian Linux and Minicom.</p>
+<div class="codehilite"><pre><span class="n">PYB</span><span class="p">:</span> <span class="n">sync</span> <span class="n">filesystems</span>
+<span class="n">PYB</span><span class="p">:</span> <span class="n">soft</span> <span class="n">reboot</span>
+<span class="n">Micro</span> <span class="n">Python</span> <span class="n">v1</span><span class="o">.</span><span class="mf">3.3</span> <span class="n">on</span> <span class="mi">2014</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mo">02</span><span class="p">;</span> <span class="n">PYBv1</span><span class="o">.</span><span class="mi">0</span> <span class="k">with</span> <span class="n">STM32F405RG</span>
+<span class="n">Type</span> <span class="s">&quot;help()&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span>
+</pre></div>
+
+
+<p><img alt="zoomed image of pyboard" src="pyboard/pyboard-zoom.png" /></p>
+
+</body>
+
+</html>
