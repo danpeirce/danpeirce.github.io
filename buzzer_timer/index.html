@@ -1,0 +1,191 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Dan Peirce">
+   <meta name="GENERATOR" content="Mozilla/4.8 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>Buzzer Timer for Kwantlen Science Challenge</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+
+<center>
+<h1>
+Buzzer Timer</h1></center>
+
+<center>
+<h1>
+for Kwantlen Science Challenge</h1></center>
+
+<center>by Dan Peirce B.Sc.</center>
+
+<p><br>
+<center><table BORDER CELLPADDING=8 WIDTH="80%" >
+<tr>
+<td>Nov. 22, 2007</td>
+</tr>
+
+<tr>
+<td>The buzzer timer is built into a used computer speaker case. Pre-existing
+circuits from the speaker amplifier were retained. The timer operates as
+follows:
+<br>&nbsp;
+<ol>
+<li>
+The <b>9 Vdc 800 mA AC wall adapter</b> plugs into the <b>9 Vdc power jack</b>
+at the back of the speaker unit. The other jacks on the back of the unit
+are no longer used.</li>
+
+<li>
+The <b>power switch</b>, power <b>LED</b> and <b>volume control </b>operate
+as before. Four momentary switches have been added to the top of the case.
+They are labeled as: <b>Buzz Now</b>, <b>Reset</b>, <b>ten sec. and</b>
+<b>five sec. </b>The buzzer has 4 modes corresponding to the four switches.
+Pressing a switch will cancel the previous mode and activate the new mode
+unless the buzzer timer is already in that mode. If a switch is pressed
+that corresponds to the current mode nothing will change.</li>
+
+<li>
+The two time modes are time limited. Once timed out the current mode is
+automatically canceled and the buzzer timer will switch to the <b>Buzz</b>
+mode. The buzzer timer stays in the <b>Buzz</b> mode until it is canceled
+by pressing any of the other three switches.</li>
+
+<li>
+The time period of the timer is activated by the press of the switch and
+the time of the release is irrelevant as long as the button is released
+before the timer times out. The following is not expected to happen, but
+if the time switch is still pressed at the end of the timed period the
+timer will switch to the buzz mode momentarily then jump back to the timer
+mode starting a new time cycle. The modes would change too quickly in this
+case for the buzzer sound to be audible (in the order of 10s of microseconds).</li>
+</ol>
+
+<hr WIDTH="100%">
+<br>More comments have been added to the file <b>buzzer_timer.c</b>
+<br>see<font size=+1> <a href="buzzer_timer_5.zip">buzzer_timer.zip</a></font>
+<br>unused files (com.c and com.h) have been removed from the zip file.
+<br>
+<hr WIDTH="100%">
+<center><table CELLPADDING=8 >
+<tr>
+<td VALIGN=TOP>The Pin assignments on the PIC18F4525 were made as follows:
+<br>&nbsp;
+<table CELLPADDING=4 >
+<tr>
+<td>input to amplifier circuit</td>
+
+<td>SPEAKER&nbsp;</td>
+
+<td>PIN20</td>
+</tr>
+
+<tr>
+<td>push button switch&nbsp;</td>
+
+<td>TEN_SEC</td>
+
+<td>PIN21</td>
+</tr>
+
+<tr>
+<td>push button switch&nbsp;</td>
+
+<td>FIVE_SEC</td>
+
+<td>PIN22</td>
+</tr>
+
+<tr>
+<td>push button switch&nbsp;</td>
+
+<td>RESET</td>
+
+<td>PIN27</td>
+</tr>
+
+<tr>
+<td>push button switch&nbsp;</td>
+
+<td>BUZZ_NOW</td>
+
+<td>PIN28</td>
+</tr>
+</table>
+</td>
+
+<td></td>
+
+<td>
+<center><b>Switch hole label</b></center>
+<img SRC="label.GIF" height=203 width=203></td>
+</tr>
+</table></center>
+</td>
+</tr>
+</table></center>
+
+<center>
+<p><b>Schematic of circuits added to computer speaker to create the Buzzer
+Timer</b>
+<br><img SRC="circuit_sch.GIF" HSPACE=2 VSPACE=2 BORDER=3 height=590 width=900></center>
+
+<center><table BORDER CELLPADDING=8 WIDTH="80%" >
+<tr>
+<td>Nov. 20, 2007</td>
+</tr>
+
+<tr>
+<td>The buzzer itself was completed today. I don't have a lot of time to
+update this page at the moment. When I get a chance I will add more information
+about the circuit and operation instructions.
+<p>It looks like this. The AC-DC adapter is rated at 9 Vdc 800 mA.
+<p>Note that there is an on off switch on the front and a volume control.
+It seems that the Buzz Now button needs to be pressed harder than the others.
+<center>
+<p><img SRC="finished_buzzer.jpg" HSPACE=2 VSPACE=2 BORDER=3 height=530 width=750>
+<p>The switches and label look like this close up (the flash washed it
+out a bit).
+<br><img SRC="switches.jpg" HSPACE=2 VSPACE=2 BORDER=3 height=351 width=335></center>
+
+<p>The code for the PIC inside is contained in this <a href="buzzer_timer_5.zip">zip
+file</a>.&nbsp;</td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<center><table BORDER CELLPADDING=8 WIDTH="80%" >
+<tr>
+<td>Nov. 9, 2007</td>
+</tr>
+
+<tr>
+<td>A computer speaker will be hacked into a 5 second -- 10 second timer
+buzzer for one of the science challenge events for 2007.
+<center>
+<p>This image shows the circuit board from the computer speaker. Connection
+points are shown.
+<br><img SRC="circuit_brd_marked.JPG" HSPACE=2 VSPACE=2 BORDER=3 height=549 width=630></center>
+
+<p>A custom PIC18F4525 <a href="http://www3.telus.net/danpeirce/c_18/mcu_ubiquitous.html">microcontroller
+board</a> is being prepared to fit into the battery compartment of the
+computer speaker. The PIC18F4525 microcontroller will be programmed in
+<a href="http://www3.telus.net/danpeirce/c_18/">C
+language</a> to respond to button switch inputs and it will also create
+the signal that will be amplified and fed to the speaker. The Pins along
+the top of the board will be used to program the microcontroller in circuit.
+<center><img SRC="PIC_brd_encl.jpg" HSPACE=2 VSPACE=2 BORDER=3 height=812 width=532>
+<p>The image below shows the solder side of the PIC18F4525 custom board.
+<br><img SRC="PIC_brd_sside.jpg" HSPACE=2 VSPACE=2 BORDER=3 height=458 width=359>
+<p>Downloading first test program
+<br><img SRC="programming.jpg" HSPACE=2 VSPACE=2 BORDER=3 height=601 width=682>
+<p>Waveform for Buzzer
+<br><img SRC="wave_300Hz.jpg" HSPACE=2 VSPACE=2 BORDER=3 height=361 width=502>
+<p>from the following program
+<br>&nbsp;<a href="buzzer_timer.zip">buzzer_timer.zip</a></center>
+
+<p>Next I will work on the logic for the switches.</td>
+</tr>
+</table></center>
+
+</body>
+</html>
