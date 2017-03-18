@@ -1,0 +1,1645 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <title>Static Water Pressure - Water Column and Sensor Calibration</title>
+  <meta content="Dan Peirce B.Sc." name="author">
+</head>
+<body vlink="#000088" alink="#000088" bgcolor="#ffffff" link="#0000ff"
+ text="#000000">
+<div align="center">
+<h1>Static Water Pressure</h1>
+<h1>Water Column and Sensor Calibration</h1>
+Notes by Dan Peirce B.Sc.<br>
+<br>
+back to <a href="../EvaluationLabQuestMini.html">LabQuest Mini
+Evaluation index</a><br>
+<blockquote>
+  <blockquote>
+    <div align="left">
+    <hr width="100%" size="2"><a name="calibration_sensor"></a>June 30,
+2011
+    <hr width="100%" size="2">A 5v AC-DC converter (<a
+ href="http://products.cui.com/CUI_EPS050100_Datasheet.pdf?fileID=2447">EPS050100</a>)
+has
+been incorporated into the prototype sensor box.<br>
+    <ul>
+      <li>The source voltage to the sensor is now <b>5.109 volts</b>
+and should be consistent regardless of the supply to the Labquest mini.</li>
+      <li>With only ambient pressure applied to the sensor (0 mm of
+water in the tube) the output reading was <b>V<sub>so</sub></b> =
+2.571 V.</li>
+      <li>With those reading the calibration equation is <b>P = 10.87
+Vs - 27.96&nbsp; kPa </b>or it could be written as<b> P = 10.87 (V<sub>s</sub>
+- V<sub>so</sub>)&nbsp; kPa<br>
+        </b></li>
+    </ul>
+To verify the calibration equation based on new source voltage the
+water column tube was filled to<b> 165.7 mm </b>of water.<b> </b>There
+was
+very good agreement between the equation (which was entered into
+LoggerPro for the sensor calibration)<b> </b>and the expected pressure
+based on depth of water.<b><br>
+    </b>
+    <div align="center"><a href="watercolumn_sensor00_pressure.cmbl">the
+callibration
+file can be downloaded from here</a>.<br>
+    </div>
+    <div align="center"><img alt="" src="sPressureCompare.png"
+ vspace="3" width="956" border="3" height="370" hspace="3"><br>
+    <br>
+    <div align="left">When I started constructing the prototype I had
+not anticipated needing to incorporate an independent voltage source
+for the sensor. In the sensor boxes I make for the class set I will
+rearrange the layout in the box a bit so that both cords come out the
+same side.<br>
+    <br>
+    <h2>Emptying the Apparatus</h2>
+It appears that it will be helpfull if there are a couple of buckets
+around as a places to empty the water from the apparatus into. As it is
+the apparatus will have two cords coming from the sensor box. To empty
+the apparatus one needs two hands; one to hold the <b>water column tube</b>
+and the other to hold the <b>air trap / sensor</b>.<br>
+    <br>
+    <br>
+    </div>
+    </div>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">June 28, 2011
+    <hr width="100%" size="2">
+    <h2><a name="regulated5V"></a>Regulated 5V</h2>
+I expect I could have the sensors calibrated so the students simply
+open the corresponing configuration file and they will be ready to take
+data. For consistancy I will purchase regulated AC to DC converters.<br>
+    <blockquote><!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Normal</w:View>
+  <w:Zoom>0</w:Zoom>
+  <w:TrackMoves/>
+  <w:TrackFormatting/>
+  <w:PunctuationKerning/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>EN-US</w:LidThemeOther>
+  <w:LidThemeAsian>X-NONE</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:EnableOpenTypeKerning/>
+   <w:DontFlipMirrorIndents/>
+   <w:OverrideTableStyleHps/>
+  </w:Compatibility>
+  <m:mathPr>
+   <m:mathFont m:val="Cambria Math"/>
+   <m:brkBin m:val="before"/>
+   <m:brkBinSub m:val="&#45;-"/>
+   <m:smallFrac m:val="off"/>
+   <m:dispDef/>
+   <m:lMargin m:val="0"/>
+   <m:rMargin m:val="0"/>
+   <m:defJc m:val="centerGroup"/>
+   <m:wrapIndent m:val="1440"/>
+   <m:intLim m:val="subSup"/>
+   <m:naryLim m:val="undOvr"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="true"
+  DefSemiHidden="true" DefQFormat="false" DefPriority="99"
+  LatentStyleCount="267">
+  <w:LsdException Locked="false" Priority="0" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Normal"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="heading 1"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 2"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 3"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 4"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 5"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 6"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 7"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 8"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 9"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 1"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 2"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 3"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 4"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 5"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 6"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 7"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 8"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 9"/>
+  <w:LsdException Locked="false" Priority="35" QFormat="true" Name="caption"/>
+  <w:LsdException Locked="false" Priority="10" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Title"/>
+  <w:LsdException Locked="false" Priority="1" Name="Default Paragraph Font"/>
+  <w:LsdException Locked="false" Priority="11" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtitle"/>
+  <w:LsdException Locked="false" Priority="22" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Strong"/>
+  <w:LsdException Locked="false" Priority="20" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Emphasis"/>
+  <w:LsdException Locked="false" Priority="59" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Table Grid"/>
+  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Placeholder Text"/>
+  <w:LsdException Locked="false" Priority="1" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="No Spacing"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 1"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 1"/>
+  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Revision"/>
+  <w:LsdException Locked="false" Priority="34" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="List Paragraph"/>
+  <w:LsdException Locked="false" Priority="29" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Quote"/>
+  <w:LsdException Locked="false" Priority="30" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Quote"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 1"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 1"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 2"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 2"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 2"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 3"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 3"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 3"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 4"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 4"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 4"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 5"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 5"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 5"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 6"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 6"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 6"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="19" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtle Emphasis"/>
+  <w:LsdException Locked="false" Priority="21" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Emphasis"/>
+  <w:LsdException Locked="false" Priority="31" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtle Reference"/>
+  <w:LsdException Locked="false" Priority="32" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Reference"/>
+  <w:LsdException Locked="false" Priority="33" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Book Title"/>
+  <w:LsdException Locked="false" Priority="37" Name="Bibliography"/>
+  <w:LsdException Locked="false" Priority="39" QFormat="true" Name="TOC Heading"/>
+ </w:LatentStyles>
+</xml><![endif]--><!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";
+	mso-ascii-font-family:Calibri;
+	mso-ascii-theme-font:minor-latin;
+	mso-hansi-font-family:Calibri;
+	mso-hansi-theme-font:minor-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;}
+</style>
+<![endif]-->
+      <p class="MsoNormal" style="margin-left: 0.5in;">I believe this
+will allow all the
+sensors to be technician calibrated so that the students can simply
+rely on the
+static pressure readings. The voltage output from the sensor is
+dependent on
+the source voltage. It could be problematic to use the USB 5 volt
+source as the
+spec says that can be anything from 4.75 to 5.25 volts. The computers I
+tested
+so far were at the high end of the range but the voltage drops as it is
+loaded.
+It would be best to have a calibration the we can depend on in all
+circumstances
+and that will not change if additional sensors are added to the
+LabQuest Mini.<br>
+      </p>
+    </blockquote>
+    </div>
+  </blockquote>
+  <div align="left">
+  <p class="MsoNormal" style="margin-left: 0.5in;"><a name="Funnel"></a>Funnel<br>
+  </p>
+  <blockquote>
+    <blockquote>
+      <blockquote>Funnels ordered for this apparatus have come in. This
+should help avoid spillage.<br>
+        <div align="center">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; <img alt="" src="funnel.jpg" vspace="3" width="533"
+ border="3" height="800" hspace="3"><br>
+        </div>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+  </div>
+  <blockquote>
+    <div align="left">
+    <blockquote></blockquote>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">June 24, 2011
+    <hr width="100%" size="2">On June 22 I noticed that plugging
+additional sensors into the labquest mini has an effect on the USB
+voltage. It may be far better to have an indepentent supply
+for the sensor since the source voltage is included in the calibration
+equation.<br>
+    <div align="center"><b>Vout = Vs ( (0.018) P + 0.5)<br>
+    </b>
+    <div align="left"><br>
+We could possibly use the following addaptor to power the
+sensor box rather than using the USB supplied voltage:<strike><br>
+    </strike>
+    <div align="center"><a
+ href="http://products.cui.com/CUI_EPS050100_Datasheet.pdf?fileID=2447">http://products.cui.com/CUI_EPS050100_Datasheet.pdf?fileID=2447</a><br>
+note: efficency mark V see<br>
+    <a
+ href="http://www.energystar.gov/ia/partners/prod_development/revisions/downloads/International_Efficiency_Marking_Protocol.pdf">http://www.energystar.gov/ia/partners/prod_development/revisions/downloads/International_Efficiency_Marking_Protocol.pdf</a><br>
+    <img
+ src="file:///C:/DOCUME%7E1/danp/LOCALS%7E1/Temp/moz-screenshot-12.png"
+ alt=""><br>
+    <div align="left"><br>
+I attached the labpro to a laptop and measured the same voltage from
+the sensor port when loaded with a pressure sensor as I had measured on
+a desktop computer. <br>
+    <ul>
+      <li>It appears that the voltage is dependent on what is connected
+to the analog sensor ports of the LabQuest Mini</li>
+      <li>It does not appear to be different on different computers.<br>
+        <br>
+        <font color="blue">"The specification provides for no more than
+5.25&nbsp;V and no less than 4.75&nbsp;V (5&nbsp;V±5%) between the
+positive and negative bus power lines. For USB 2.0 the voltage supplied
+by low-powered hub ports is 4.4–5.25&nbsp;V."</font> <br>
+See <a href="http://en.wikipedia.org/wiki/Universal_Serial_Bus#Power">http://en.wikipedia.org/wiki/Universal_Serial_Bus#Power</a><br>
+        <br>
+At the sensor port I am actually measuring a bit more than 5.265 if no
+sensors are connected to the analog sensor ports (attaching a flash
+drive to the USB does not seem to change this). This voltage jumps to
+5.353 if the Labquest voltage adaptor is attached (and drops back down
+to 5.341 if the pressure sensor is attached).<br>
+      </li>
+    </ul>
+I do not know if the sensor supply will be the same for each Labquest
+or if it will be different from one to the next but the as I make more
+measurments in more configurations I believe I am seeing consistancy
+and I am gaining some confidence this will be the same for all labquest
+mini's. <strike>It is possible that the Labquest Mini contains some
+sort of <a href="http://www.intersil.com/data/an/an1317.pdf">boost
+converter</a> to supply the Vs to the analog outputs (I am starting to
+doubt this as I try more combinations). </strike><br>
+    <strike><br>
+That would explain why I measured essntially the same value when
+attached to different computers.</strike> <br>
+If the power adaptor is connected to the Labquest Mini but the computer
+is powered down the sensor voltage remains at 0 volts.&nbsp; The
+voltage jumps to the 5.341 volt value during the boot sequence before
+the login screen is shown but after the first windows welcome screen.<br>
+    <br>
+In investigating the Vs (source voltage to the sensor) I discovered
+that the <b>Vernier voltage probe</b> gave a reading that differed
+from a multimeter by about 1%. I tested all four Fluke117's and two
+other types of digital meters and measured essentially the same reading
+on them all. It appears that the error is in the LabQuest mini itself
+(this may differ from Labquest to Labquest but I have only one to test
+so far). The default slope for the plus/minus 10V input is 1 and the
+default intercept is 0. <b>This difference can be fixed by calibrating
+the voltage probe to the Fluke117 (using a two point calibration). The
+calibration can be saved in a configuration file.</b> I suspect each
+Labquest mini may need a different calibration to if they are all to
+closely match the Fluke (I am purchasing the "calibrated" version of
+the fluke117).<br>
+    <br>
+    <b>The 0-5 volt input does not have this issue.</b> It is giving
+the same reading as the fluke (some variation in the LS digit -- but
+there are four digits). I suspect the signal conditioning is the issue.
+The Labquest mini has different inputs for the two different voltage
+ranges (conductor 1 for 0-5V and conductor 6 for -10 to +10V). I'm
+guessing the <b>-10 to +10 volt</b> range is divided and shifted
+internally and fed to the same 0-5 volt ADC. It appears the loss of
+precision is in the signal condictioning and not in the ADC.<br>
+    </div>
+    </div>
+    </div>
+    </div>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">June 22, 2011
+    <hr width="100%" size="2">
+    <h2><a name="calibration_procedure"></a>Calibration Procedure</h2>
+Tested a sensor mounted in a box and new (better) calibration procedure.<br>
+    <br>
+    <div align="center"><b>This photo shows the sensor box mounted
+above the air trap.</b><br>
+Only two short pieces of rubber hose are required (they will need
+periodic replacment I expect).<br>
+    </div>
+    <div align="center"><img alt="" src="sensor_in_box.png" vspace="3"
+ width="436" border="3" height="800" hspace="3"><br>
+    <br>
+    <div align="left">For sensor calibration I used the equation
+provided by the sensor manufacturer.<br>
+    <br>
+    <div align="center"><b>Vout = Vs ( (0.018) P + 0.5) +or- ERROR</b><br>
+    <br>
+    <div align="left">On the plot provided on the datasheet it appears
+that the most significant variation from sensor to sensor is the zero
+offset.<br>
+    <br>
+    <div align="center">from page 4 of&nbsp; <a
+ href="http://www.freescale.com/files/sensors/doc/data_sheet/MPXV7025.pdf">http://www.freescale.com/files/sensors/doc/data_sheet/MPXV7025.pdf</a><br>
+    <img alt="" src="transferFunction.png" vspace="3" width="466"
+ border="3" height="350" hspace="3"><br>
+    <br>
+    <div align="center">Today with this sensor I found Vout at <b>P =
+0 to be 2.640 V</b><br>
+    <br>
+so I rewrote the equation as<br>
+    <b>Vout = Vs (0.018) P +2.640</b><br>
+    <br>
+I also measured Vs (a nominal value of 5V was expected)<br>
+When this photo was taken the sensor was plugged into ch1 and the extra
+probe was plugged into ch2 of the LabQuest mini<br>
+This voltage may be a bit different on each computer (and it may change
+depending on the USB devices attached). This is the voltage supplied
+over the USB cable!<br>
+    <img alt="" src="USB_voltage_Vs.png" vspace="3" width="800"
+ border="3" height="600" hspace="3"><br>
+    <br>
+The equation becomes<br>
+    <b>Vout = 5.252 (0.018) P + 2.640</b><br>
+    <br>
+solving for P<br>
+    <b>P = 10.58 Vout - 27.93</b><br>
+    <br>
+I filled the water column tube to a hight of <b>160.2 cm </b><br>
+and read a potential of <b>4.123 Volts</b><br>
+    <br>
+using the calibration equation that works out to <b>15.69 kPa</b><br>
+    <br>
+I did a simple look up of a <a
+ href="http://www.cleavebooks.co.uk/scol/ccpress.htm">web pressure
+conversion calculator</a><br>
+and found good agreement<br>
+    <img alt="" src="pressure_conversion_calc_scrn_sht.png" vspace="3"
+ width="646" border="3" height="326" hspace="3"><br>
+    <div align="left"><br>
+It is possible to enter the calibration equation into logger pro:<br>
+    <div align="center"><img alt="" src="experiment_calibrate.png"
+ vspace="3" width="532" border="3" height="392" hspace="3"><br>
+    <br>
+    <img alt="" src="calibrate_equation.png" vspace="3" width="476"
+ border="3" height="522" hspace="3"><br>
+    <br>
+    <br>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">June 10, 2011
+    <hr width="100%" size="2">added new <a href="#table_clamp">photo
+of table clamp</a> as I realized we could use two fewer parts than I
+had shown before.<br>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">June 7, 2011
+    <hr width="100%" size="2">New raw data. Used apparatus with air
+trap. This is what I was looking for in data linear down to zero head
+of water.<br>
+    <div align="center"><img alt=""
+ src="raw_voltage_data_method_June07.png" vspace="3" width="900"
+ border="3" height="612" hspace="3"><br>
+    <br>
+    <table width="256" border="1" cellpadding="2" cellspacing="1">
+      <col style="width: 48pt;" width="64" span="4"> <tbody>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl65" style="height: 12.75pt; width: 48pt;"
+ width="64" height="17">Table 1</td>
+          <td class="xl66" style="width: 48pt;" width="64">Water Head
+Pressure</td>
+          <td class="xl67" style="width: 48pt;" width="64">&nbsp;</td>
+          <td class="xl68" style="width: 48pt;" width="64">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td colspan="2" class="xl69" style="height: 12.75pt;"
+ height="17">Height of Water Column above Static Pressure Port (cm)</td>
+          <td colspan="2" class="xl69" style="border-left: medium none;">Sensor
+Potential<span style="">&nbsp; </span>(V)</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td colspan="4" class="xl69" style="height: 12.75pt;"
+ height="17">Identify your printout! Names here.</td>
+        </tr>
+        <tr style="height: 14.25pt;" height="19">
+          <td class="xl70"
+ style="border-top: medium none; height: 14.25pt;" height="19">X</td>
+          <td class="xl71"
+ style="border-top: medium none; border-left: medium none;">d<font
+ class="font5">X</font></td>
+          <td class="xl70"
+ style="border-top: medium none; border-left: medium none;">Y</td>
+          <td class="xl71"
+ style="border-top: medium none; border-left: medium none;">d<font
+ class="font5">Y</font></td>
+        </tr>
+        <tr style="height: 14.25pt;" height="19">
+          <td class="xl72"
+ style="border-top: medium none; height: 14.25pt;" align="right"
+ height="19">0</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">2.642</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl72"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">4</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">2.679</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl72"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">9.3</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">2.727</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl72"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">20</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">2.825</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl72"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">38.4</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">2.998</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl72"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">49.7</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">3.103</td>
+          <td class="xl72"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl73"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">61.8</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">3.216</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl73"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">81.4</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">3.396</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl73"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">95.5</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">3.527</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl73"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">111.2</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">3.673</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl73"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">124.8</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">3.797</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl73"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">132.3</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">3.866</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl73"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">140.2</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">3.94</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl73"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">150</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">4.03</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl73"
+ style="border-top: medium none; height: 12.75pt;" align="right"
+ height="17">160.9</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;"
+ align="right">4.132</td>
+          <td class="xl73"
+ style="border-top: medium none; border-left: medium none;">&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div align="left">I did not record the water temperature when this
+data was taken. For good calibration data the experiment should be
+repeated with the water temperature recoded. Once a trend line is
+recorded and the water temperature is know one could look up the
+density of water and use that and the height column to calculate a
+pressure column (it becomes essentially a unit conversion for a given
+density). Darryl is talking about also using salt water with a
+different density.<br>
+    <br>
+I expect the slope and intercept to be a bit different for each sensor
+but I expect them to be consistent from day to day. This should be
+checked. I will be putting tag numbers on the sensor boxes so that they
+can be identified.<br>
+    </div>
+    </div>
+    <br>
+    <a name="column_trap_sensor"></a>The air trap connected to the
+water column and sensor. Taping the ruler
+onto the air trap was an afterthought. This keeps the sensor tube from
+getting any kinks. This is just a prototype. I will add a vertical
+piece of Plexiglas to the final apparatus and the sensor is going into
+a small box. In this first image the apparatus was on the bench top.<br>
+    <div align="center"><img alt=""
+ src="static_pressure_tube_air_trap_sensor.jpg" vspace="3" width="429"
+ border="3" height="800" hspace="3"><br>
+    <br>
+The apparatus was moved to the floor. Image from a different angle.<br>
+    <img alt="" src="static_pressure_tube_air_trap_sensor2.jpg"
+ vspace="3" width="682" border="3" height="800" hspace="3"><br>
+    <div align="left">The suggested labels given to the parts here
+should aid in discussion and procedure instructions. <br>
+For example I can now say: <br>
+    <ul>
+      <li>the height of the static pressure port on the air trap should
+be at the same height as the static pressure port on the water column. <br>
+      </li>
+      <li>The height of the center of the static pressure port on the
+water column is taken as the zero in height.</li>
+      <li>The air pressure at the sensor is the same as the static
+water pressure at the static pressure tube.</li>
+      <li>There will be some water entering the Air Trap as the height
+of water increases in the water column because the air in the air trap
+is compressed as the static pressure at the static pressure port
+increases. The air trap is 1.5" by 1.5" at the bottom and only 1"
+height. This is large enough to ensure the water level in the air trap
+does not go significantly above the static pressure port and avoids a
+pressure offset. The static pressure tube is horizontal which means the
+pressure will always be the same at both ends. The sensor tube is
+vertical but never has any water in it. The air pressure in the air
+trap and along the sensor tube will be the same at all points.<br>
+      </li>
+    </ul>
+On older posts, before there was an air trap, the sensor tube and the
+static pressure tube were the same thing. Since it was a vertical tube
+attached to a 90 deg port fitting the pressure was not the same at the
+old static pressure port and the sensor. This could be compensated for
+in calibration but the fitting at the static pressure port had both a
+small horizontal part and a small vertical part. This made it
+impossible to do a simple calibration compensation that would work all
+the way down to zero gauge pressure. Water would first enter the
+horizontal part of the tube and the pressure would stay constant. Once
+the water stated to move up the vertical part of the fitting the
+pressure would be less at the air water interface than at the elbow.
+Now the calibration compensation is not needed because the water air
+interface remains at the static pressure port elevation. <br>
+    <br>
+The sensor needs to be above the water sensor interface because the
+sensor data-sheet stipulates that only dry air enter the sensor body.<br>
+    <br>
+    <a name="table_clamp"></a>Using the Universal table clamp we can
+avoid getting a large bulky
+retort stand. Also, by putting the bottom of the tube on the floor the
+top of the 6' tube is still within reach for filling.<br>
+    <br>
+    <div align="center">(image added June 10 when I relized we could
+use fewer parts this way)<br>
+    </div>
+    <div align="center"><img alt="" src="table_clamp2.jpg" vspace="3"
+ width="800" border="3" height="718" hspace="3"><br>
+    </div>
+    </div>
+    <img alt="" src="table_clamp.jpg" vspace="3" width="638" border="3"
+ height="800" hspace="3"><br>
+    <br>
+The sensor and 1/8" rubber tubing will be put into a small project box.
+On the outside of the box I will have a fitting for the red tubing.<br>
+    <img alt="" src="sensor2.png" vspace="3" width="644" border="3"
+ height="784" hspace="3"><br>
+    <br>
+    <br>
+    </div>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">June 3, 2011
+    <hr width="100%" size="2">I had added two fittings to the custom
+sensor
+reservoir prototype (air trap). The box has inner dimensions of 1.5 x
+1.5 x 1 inch. Fittings are just lengths of 1/4" copper tubing.<br>
+I'm expecting little water to enter the box so I think it will be more
+appropriate to call it an air trap rather than a reservoir. The purpose
+is to ensure there is very little change in water level on the sensor
+side so that the air pressure will be the same as the water pressure at
+the level the pressure tube is inserted into the column.<br>
+    <br>
+    <div align="center">
+    <table border="0" cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td colspan="2" rowspan="1" valign="top"><img alt=""
+ src="airTrap.png" vspace="3" width="800" border="3" height="642"
+ hspace="3"><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><img alt="" src="airTrap2.png" vspace="3"
+ width="400" border="3" height="372" hspace="3"><br>
+          </td>
+          <td valign="top"><img alt="" src="airTrap3.png" vspace="3"
+ width="321" border="3" height="372" hspace="3"><br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div align="left">Used Lapage 11 Regular Epoxy to seal fittings in
+place.<br>
+    </div>
+    </div>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">May 31, 2011
+    <hr width="100%" size="2">Received call that the custom sensor
+reservoir prototype is ready for pick-up. I'll pick it up on the way
+into work tomorrow morning.<br>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">May 27, 2011
+    <hr width="100%" size="2">The raw data I collected on the 26th (and
+plot) can be seen here =&gt; <a href="#raw_data01">raw data</a> (more
+data taken on the 27th <a href="#raw_data02">raw data 02</a>)<br>
+    <br>
+    <a name="procedure27thMay"></a>As shown in the May 26th entries I
+altered the apparatus so that the
+sensor tube is attached to a fitting that has been fixed in a hole on
+the side of the apparatus near the bottom.<br>
+For this run I avoided doing a two point calibration in logger pro.
+Instead I took raw data of sensor voltage and water head level and
+plotted that in Excel. The result was clearly linear with very little
+scatter in the data.<br>
+    <div align="center"><img alt="" src="water_column_tape_marks.jpg"
+ vspace="3" width="305" border="3" height="800" hspace="3"><br>
+    </div>
+I started with the tube nearly full.<br>
+    <ol>
+      <li>For each water level I placed a piece of masking tape at the
+water level. The top of the tape was aligned with the top of the water.</li>
+      <li>Water was removed from the apparatus with a siphon tube. I
+simply pinched of the siphon tube by folding it when I wanted to stop
+the flow (like one might do with a garden hose). Note that in hindsight
+I see that it would have been easier to just add some water for each
+level.<br>
+      </li>
+      <li>Once the water level had dropped around 10 cm I placed
+another
+piece of tape to mark that level. I did not go any lower than 26.2 cm
+because I was avoiding parallax as much as possible and I can only
+easily get so low. I image the students could easily get down lower. I
+should perhaps have taken a reading with no water but at the time I was
+thinking that could lead to inconsistent results.<br>
+      </li>
+      <li>The sensor voltage was recorded with loggerpro. I held the
+siphon tube pinched (and the water level steady) long enough so that
+the voltage would be clearly distinguishable in the logger pro plot. (I
+had not thought of that at first so the first two levels don't appear
+in the logger pro plot shown below -- I had written those levels down).
+When Logger pro is running one can simply move the mouse to any place
+in the window and obtain the voltage from the value in the lower left
+corner. In this photo of the computer screen for example one can see
+the mouse is located at 2.870 volts (in this image the mouse cursor
+appears in the lower right part of the screen as cross hairs).<br>
+        <div align="center"><img alt=""
+ src="raw_voltage_data_method.jpg" vspace="3" width="800" border="3"
+ height="600" hspace="3"><br>
+        <br>
+        </div>
+      </li>
+      <li>After tape markers were in place for each level I removed the
+remaining water from the apparatus and put it down horizontally on the
+bench top to ease the distance measurements. A tape measure was taped
+to the apparatus with masking tape (the zero end of the masking tape
+was aligned with the top of the sensor tube). The position of the top
+of each piece of tape was recorded.<br>
+        <div align="center"><img alt="" src="measuring_positions.jpg"
+ vspace="3" width="436" border="3" height="800" hspace="3"><br>
+        <div align="left"><br>
+I am thinking of purchasing an adhesive metric scale that can attach to
+the tube permanently.<br>
+        <div align="center"><img alt=""
+ src="http://boreal.com/images/250/69586-10.JPG" vspace="3" width="250"
+ border="3" height="250" hspace="3"><br>
+        <br>
+        </div>
+        </div>
+        </div>
+      </li>
+    </ol>
+Rather than purchase retort stands for Langley I would rather get
+clamps that would fit the edge of the bench (if possible) since they
+would take less storage space and their would be less bulk to bring out
+and put away for the lab. It would be a good idea to have a drain tube
+attached near the bottom of the apparatus to avoid having to dump the
+water out (and possibly get the computer wet). I think we could use a
+simple hose clamp to avoid flow during the experiment (different clamps
+are shown in the May 26th entry).<br>
+    <br>
+Perhaps I should also get a spirit level to make it easy to get the
+apparatus vertical.<br>
+    <br>
+    <a name="raw_data02"></a>I took some more data today. The points
+taken today corresponded well
+with those taken on the 26th as long as:<br>
+    <ol>
+      <li>I made sure the sensor tube was straight along the side of
+the apparatus</li>
+      <li>I did not include 0 mm. It appears that the value at 0 is
+offset. I will give that more thought but I'm guessing it has to do
+with the configuration of the sensor tube and fitting. The sensor tube
+fitting is an elbow. I expect air gets trapped in the elbow. As the
+pressure increases and the air is compressed the water would first move
+horizontally and then vertically up the fitting and into the tube. I am
+wondering
+if the sensor tube configuration were changed if it would then give a
+linear result down to 0 mm. <br>
+        <br>
+I am thinking I really should add a reservoir as it would virtually
+eliminate changes in water level within the sensor tube configuration.
+I expect this would make a small change in the slope of the graph.<br>
+      </li>
+    </ol>
+The measuring tape attached to the apparatus made using bits of tape to
+mark the water level unnecessary.<br>
+    <br>
+    <div align="center">
+    <table border="0" cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td valign="top">
+          <table width="114" border="1" cellpadding="2" cellspacing="0">
+            <col style="width: 45pt;" width="60"> <col
+ style="width: 41pt;" width="54"> <tbody>
+              <tr style="height: 12.75pt;" height="17">
+                <td style="height: 12.75pt; width: 45pt;" width="60"
+ height="17">Head</td>
+                <td style="width: 41pt;" width="54">Potential</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">163.7</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.873</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">155.2</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.812</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">145.8</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.744</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">136.6</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.679</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">124.4</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.586</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">113.8</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.509</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">105.3</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.447</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">97.4</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.386</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">90.2</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.336</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">75.9</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.23</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">63.8</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.142</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">52.2</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">3.056</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">41.5</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">2.981</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl65" style="height: 12.75pt; width: 45pt;"
+ width="60" align="right" height="17">26.2</td>
+                <td class="xl65" style="width: 41pt;" width="54"
+ align="right">2.87</td>
+              </tr>
+            </tbody>
+          </table>
+          </td>
+          <td valign="top">
+          <table width="114" border="1" cellpadding="3" cellspacing="0">
+            <col style="width: 45pt;" width="60"> <col
+ style="width: 41pt;" width="54"> <tbody>
+              <tr style="height: 12.75pt;" height="17">
+                <td style="height: 12.75pt; width: 45pt;" width="60"
+ height="17">27th #2</td>
+                <td style="width: 41pt;" width="54"><br>
+                </td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td style="height: 12.75pt;" height="17">Head</td>
+                <td>Potential</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td class="xl63" style="height: 12.75pt;" align="right"
+ height="17"><s>0</s></td>
+                <td class="xl63" align="right"><s>2.641</s></td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td style="height: 12.75pt;" align="right" height="17">59.2</td>
+                <td align="right">3.104</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td style="height: 12.75pt;" align="right" height="17">118.3</td>
+                <td align="right">3.537</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td style="height: 12.75pt;" align="right" height="17">137.1</td>
+                <td align="right">3.676</td>
+              </tr>
+              <tr style="height: 12.75pt;" height="17">
+                <td style="height: 12.75pt;" align="right" height="17">160</td>
+                <td align="right">3.844</td>
+              </tr>
+            </tbody>
+          </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <img alt="" src="chart_raw_data27th.png" vspace="3" width="814"
+ border="3" height="698" hspace="3"><br>
+    <div align="left"><br>
+I have removed the copper elbow at the bottom of the apparatus and will
+put in a strait piece of copper to act a fitting. I will see if I can
+find a good container to use as a reservoir.</div>
+    </div>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">May 26, 2011
+    <hr width="100%" size="2">On the 25th Darryl and I discussed
+changing the design of the apparatus so that the sensor tube would be
+attached to the water column via a fitting placed in a hole in the
+Plexiglas tube side near the bottom. I had thought of this originally
+but opted for the other setup initially to get some testing done
+quickly.<br>
+    <div align="center">
+    <table border="0" cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><img alt=""
+ src="mod01_water_column_w_hose.png" vspace="3" width="356" border="3"
+ height="600" hspace="3"><br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div align="left">After taking some data carefully I found it was
+quite linear. (rev. May 27, 2011)<br>
+    </div>
+    <div align="left">
+    <blockquote>I was also thinking we could possibly
+improve the
+apparatus by using a sensor reservoir rather than a long sensor tube.
+It might also aid calibration if we add a drain valve. I'm thinking
+that if the water level on the sensor side is stay very close to the
+level of the sensor hole the air pressure in the sensor side will be as
+close as possible to the static pressure at the sensor hole. On the
+other hand if water goes up the sensor tube as the air compresses we
+can compensate for this with the calibration<strike> but the
+compensation would
+only be linear to the extent that the air is acting as an idea gas. </strike>If
+we
+have
+a
+wide
+low
+closed
+reservoir
+then
+the
+change
+of
+water
+level
+will
+be
+minimal. <strike>Alternatively one could
+raise or lower the reservoir so that the top of the water in the
+reservoir is aligned with the top of the static pressure tube ensuring
+the pressure at the sensor is precisely the same as the pressure at the
+top of the horizontal static pressure tube fitting.</strike> <b>I
+guess I am thinking adjusting the error pressure just using calibration
+(and not by minimizing the change in water level on the sensor side)
+could be seen as hand waving rather than physics.</b><br>
+    </blockquote>
+    <br>
+    <div align="center">concept<br>
+    <img alt="" src="concept_mod02.jpg" vspace="3" width="392"
+ border="3" height="600" hspace="3"><br>
+    <div align="left">During the calibration procedure it may be a good
+idea to not calibrate to 0 but to do the calibration from a small
+finite value so that air never enters or leaves the static pressure
+tube for the duration of the experiment. It might also be a good idea
+to have an empty hole near the top of the tube so that there could be
+consistent calibration points. <br>
+    <br>
+I am considering getting some Metric Adhesive tape and attaching it to
+the tube for the scale.<br>
+    <div align="center">
+    <div align="right"><a
+ href="http://boreal.com/metric-adhesive-tape/p/IG0026632/">http://boreal.com/metric-adhesive-tape/p/IG0026632/</a>
+    <img alt="" src="http://boreal.com/images/250/69586-10.JPG"
+ vspace="3" width="250" border="3" height="250" hspace="3"><br>
+    </div>
+    <div align="left"><br>
+The tape 0 should be aligned with the top of the horizontal sensor tube
+fitting since air in the senor tube/reservoir will not compress before
+the horizontal fitting is completely full.<br>
+    <br>
+    <div align="right">Might also want to try <a
+ href="http://boreal.com/hoffman-screw-tubing-clamp/p/IG0026560/">http://boreal.com/hoffman-screw-tubing-clamp/p/IG0026560/</a>
+    <img alt="" src="http://boreal.com/images/250/S6113001.MS.JPG"
+ vspace="3" width="175" border="3" height="175" hspace="3"><br>
+    </div>
+    <br>
+    <div align="right">and/or <a
+ href="http://boreal.com/dayand%238217%3Bs-pinchcock-tubing-clamp/p/IG0026562/">http://boreal.com/dayand%238217%3Bs-pinchcock-tubing-clamp/p/IG0026562/</a>
+    <img alt="" src="http://boreal.com/images/250/S61140.MS.JPG"
+ vspace="3" width="184" border="3" height="184" hspace="3"><br>
+    </div>
+    <div align="right">Also <a
+ href="http://boreal.com/straight-connecting-tubes/p/IG0026127/">http://boreal.com/straight-connecting-tubes/p/IG0026127/</a>
+    <img alt="" src="http://boreal.com/images/250/45226-00.JPG"
+ vspace="3" width="147" border="3" height="145" hspace="3"><br>
+    <br>
+Alternate way to empty water out <a
+ href="http://www.canadiantire.ca/AST/browse/4/Auto/AutoSafetySecurity/GasCans/PRD%7E0283009P/Deluxe%252BPump.jsp?locale=en">http://www.canadiantire.ca/AST/browse/4/Auto/AutoSafetySecurity/GasCans/PRD~0283009P/Deluxe%252BPump.jsp?locale=en</a><br>
+    <img alt="" src="0283009_1.jpg" vspace="3" width="160" border="3"
+ height="160" hspace="3"><br>
+    <br>
+    <div align="left">
+    <div align="center">
+    <hr width="100%" size="2">
+    <div align="left">
+    <h2><a name="raw_data01"></a>Raw Data</h2>
+I took some data today and it looks linear.<br>
+    </div>
+Some Data<br>
+    </div>
+    <div align="center">
+    <table width="153" border="0" cellpadding="0" cellspacing="0">
+      <col style="width: 53pt;" width="71"> <col style="width: 62pt;"
+ width="82"> <tbody>
+        <tr style="height: 12.75pt;" height="17">
+          <td style="height: 12.75pt; width: 53pt;" width="71"
+ height="17">Head (cm)</td>
+          <td style="width: 62pt;" width="82">Potential (V)</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">163.7</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.873</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">155.2</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.812</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">145.8</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.744</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">136.6</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.679</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">124.4</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.586</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">113.8</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.509</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">105.3</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.447</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">97.4</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.386</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">90.2</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.336</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">75.9</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.23</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">63.8</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.142</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">52.2</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">3.056</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">41.5</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">2.981</td>
+        </tr>
+        <tr style="height: 12.75pt;" height="17">
+          <td class="xl63" style="height: 12.75pt; width: 53pt;"
+ width="71" align="right" height="17">26.2</td>
+          <td class="xl63" style="width: 62pt;" width="82" align="right">2.87<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <img alt="" src="chart_raw_data.png" vspace="3" width="814"
+ border="3" height="698" hspace="3"><br>
+    <div align="left"><br>
+I gave the procedures some thought today and realized it could be made
+a simple one person task. The students could still work in groups of
+two but if there is an odd number of students is is certainly possible
+to take the data without assistance using this method.<br>
+    <br>
+    <div align="center">I'll post the procedure I used in
+the <a href="#procedure27thMay">May 27th entry</a>.<br>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">May 25, 2011
+    <hr width="100%" size="2">On May 24 I showed Darryl the equipment
+that I had thrown together for testing and we ran through a quick
+calibration. He suggested that the sensor board be put in a box.<br>
+    <br>
+On the way into work today I was thinking about the calibration
+procedure. There two things that could be done to improve the
+resolution in the static pressure calibration.<br>
+    <ol>
+      <li>Measure the head of water in mm rather than inches. I had
+been measuring in inches since inches of water is a common unit of
+pressure (just like mm of mercury). The down side of this is that I
+often tend to read to the closest quarter inch and we could do better
+than that. Reading in meters, cm or mm would tend to help one read to
+the closest mm. The actual measurement might be plus or minus a few mm.<br>
+      </li>
+      <li>I could added a little op amp circuit in the sensor box to
+set a rough zero and span with analog electronics before the Analog to
+digital conversion in the labquest mini. <a
+ href="#skip_conditioning_for_2011">[<b>decided to not add the extra
+signal conditioning circuit for this sensor -- at least not this year</b>]</a><br>
+      </li>
+    </ol>
+Item 2 above would probably give us a better calibration lab anyway.
+The box would contain two trim pots (access with a trimming tool
+through small holes). The students would adjust the zero trim to get
+somewhere between 0.25 and 0.5 volts with the sensor tube out of the
+water. They then would put the sensor tube in the water to about the
+full depth and adjust the span (or gain) trim to get an output of about
+4.5 to 4.75 volts. This would ensure that most of the 0 to 5 volt input
+raw voltage range is used. The students would then do the fine
+calibration digitally with the computer as before.<br>
+    <br>
+Note only would we better utilize the ADC in the lab quest mini and get
+better resolution but many of the calibrations the students might do in
+other course lab work might involve adjusting trim pots. Later in the
+term when the students do the lab that involves voltage dividers they
+could learn what the trim pots are actually doing.<br>
+    <br>
+Alternately I could just do the rough analog adjustment once and leave
+it since it does not need to be precise. It simply puts the sensor
+output in a good range for the ADC.<br>
+    <br>
+I was also wondering then if it might be a good idea to put the sensor
+in one box and the op amp circuit and Analog cable end in another. Each
+box could have three screw terminals so the boxes could be cabled
+together. This way we would have a sensor box, a signal conditioning
+box (rough calibration) and an analog to digital converter with USB
+interface box (the Labquest mini). I think having these separate could
+be somewhat instructive to the students as to the basic block
+components of a data acquisition system. These elements are essentially
+common to all systems although they may or may not be in separate boxes
+in different systems. In fact our sensor does have some signal
+conditioning already built in; it has a preamplifier and temperature
+compensation all built into the one small package.<br>
+    <br>
+As for boxes I was looking through digikey for a plastic box similar in
+size and shape to the one Vernier uses for there Barometer sensor. <br>
+From <a href="http://www.budind.com/pdf/hb11850PXX.pdf">http://www.budind.com/pdf/hb11850PXX.pdf</a>
+    <br>
+Note I have re-sized the image so it is no longer 1:1 scale. Print the
+PDF file to get a 1:1 scale as shown on drawing.<a
+ href="http://www.budind.com/pdf/hb11850PXX.pdf"><br>
+    </a>
+    <div align="center"><img alt="" src="box_drawing.png" vspace="3"
+ width="653" border="3" height="372" hspace="3"><br>
+    <br>
+    <img alt="" src="box_img.jpg" vspace="3" width="271" border="3"
+ height="166" hspace="3"><br>
+    <div align="left"><br>
+If we decide that signal conditioning would be a good idea I think the
+LMC5484IN-ND would be a good choice of&nbsp; operational Amplifier. I
+would wire it up on protoboard and put it in the box. either in the
+same box as the sensor or perhaps a separate box for signal
+conditioning.I have some of these op amps already as I have been
+considering using them for another project.<br>
+see <a href="http://www.national.com/ds/LM/LMC6484.pdf">http://www.national.com/ds/LM/LMC6484.pdf</a><br>
+    <div align="center"><img alt="" src="LMC6484_datasheet_page.png"
+ vspace="3" width="946" border="3" height="731" hspace="3"><br>
+    </div>
+    <div align="center"><br>
+    <img alt="" src="LMC6484_datasheet_pinout.png" vspace="3"
+ width="412" border="3" height="327" hspace="3"><br>
+    <br>
+    <div align="left"><b><a name="skip_conditioning_for_2011"></a></b>I
+did a measurement of the voltages coming off the sensor for the full
+depth of the water column and for the sensor hose in air. <br>
+    <br>
+    <div align="center">
+    <table border="1" cellpadding="7" cellspacing="2">
+      <tbody>
+        <tr>
+          <td valign="top">sensor hose in air<br>
+          </td>
+          <td valign="top">2.56 volts<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">max head of water<br>
+          </td>
+          <td valign="top">3.8 volts<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div align="left"><b>It appears the resolution could be improved by
+a factor of about 2.5. This may not be enough to warrant the time it
+would take to construct the amplifiers.</b> I think what this summer I
+will mount the sensors in boxes without extra signal conditioning. We
+can review the lab after the first run and decide if adding the
+amplifier would be warranted.<br>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">May 17, 2011<br>
+    <hr width="100%" size="2">
+    <div align="left">Today I mounted the sensor, attached a Plexiglas
+flat bottom to a Plexiglas tube and experimented with the sensor tube
+arrangement using stuff I had on hand. This could be refined.<br>
+The sensor ( see <a
+ href="http://www.freescale.com/files/sensors/doc/data_sheet/MPXV7025.pdf">http://www.freescale.com/files/sensors/doc/data_sheet/MPXV7025.pdf</a>
+)
+    <div align="center"><img alt="" src="sensor.jpg" vspace="3"
+ width="800" border="3" height="621" hspace="3"><br>
+    <br>
+    <div align="left">Raw Voltage into breadboard probe. The sensor can
+measure both positive and negative pressures. It uses a 0 to 5 volt
+supply with 0 differential pressure giving about half the total span. <br>
+    <ul>
+      <li>Since we don't really care what the voltage from the sensor
+is but would like to know the static pressure in inches of water I
+thought it best to use this probe and manually set it up. The
+calibration method is shown a few images down (two point calibration).</li>
+      <li>This also allows me to power the sensor from the labquest
+mini
+which is powered from the USB.<br>
+      </li>
+    </ul>
+    <div align="center"><img alt="" src="Breadboard_raw_voltage.jpg"
+ vspace="3" width="800" border="3" height="932" hspace="3"><br>
+    <br>
+    <div align="left">Other end of probe wire goes into LabQuest Mini.
+In this case Ch3 was used.<br>
+    <div align="center"><img alt="" src="labquest_mini.jpg" vspace="3"
+ width="568" border="3" height="800" hspace="3"><br>
+    <br>
+    <div align="left">Set up of top of water column and sensor.<br>
+    <div align="center"><img alt="" src="sensor_w_column_setup.jpg"
+ vspace="3" width="800" border="3" height="780" hspace="3"><br>
+    <br>
+    <div align="left">Bottom of Water Column. I was not sure if my
+Plexiglas weld would hold so I put the bottom in a bucket.<br>
+    <div align="center"><img alt="" src="bottom_column.jpg" vspace="3"
+ width="400" border="3" height="964" hspace="3"><br>
+    <br>
+    <div align="left">Close up of end of Sensor Tube (taped onto rod to
+hold straighter).<br>
+    <div align="center"><img alt="" src="tube_end.jpg" vspace="3"
+ width="600" border="3" height="800" hspace="3"><br>
+    <br>
+    <div align="left">Calibration<br>
+    <ul>
+      <li>The sensor tube was taken out of the water for reading 1 (0
+inch)</li>
+      <li>The sensor tube was lowered into the water for the Reading 2
+(I measured it at 29.25 inch from top of water to bottom of tube)</li>
+    </ul>
+I would recommend using full depth for the calibration but since I was
+alone it is difficult to hold both ends of the measuring tape so I used
+a shorter distance.<br>
+I then pushed the tube in the rest of the way which I measured as about
+58 inches. Note my measurements were quick just to see if things seemed
+to be working.<br>
+    <div align="center"><img alt="" src="calibrate.png" vspace="3"
+ width="465" border="3" height="365" hspace="3"><br>
+    <br>
+    <div align="left">Histogram (2000 samples taken at 1000
+sample/second)<br>
+    <div align="center"><img alt="" src="hist.png" vspace="3"
+ width="681" border="3" height="491" hspace="3"><br>
+    <br>
+    <div align="left"><br>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <hr width="100%" size="2"><br>
+    </div>
+  </blockquote>
+</blockquote>
+<br>
+</div>
+</body>
+</html>

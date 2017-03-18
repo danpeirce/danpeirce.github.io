@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>Solar Panel Dummy Load</title>
+  </head>
+
+<body>
+<h1 id="dummy-load-for-the-solar-panel">Dummy Load for the Solar Panel</h1>
+<p>By Dan Peirce B.Sc. 2012</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#dummy-load-for-the-solar-panel">Dummy Load for the Solar Panel</a><ul>
+<li><a href="#early-results">Early Results</a></li>
+<li><a href="#revised-dummy-load">Revised Dummy Load</a></li>
+<li><a href="#early-concept">Early Concept</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="early-results">Early Results</h2>
+<p>Tested the dummy load on the solar panel. Clearly light just from our florescent tube lighting 
+in the lab is insufficiently bright to generate a significant amount of power.</p>
+<p>Results with Dummy Load inside lab (there was very little sun light at 7 pm)</p>
+<table>
+<thead>
+<tr>
+<th>potential</th>
+<th>current</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9.26 V</td>
+<td>6.7 mA</td>
+</tr>
+</tbody>
+</table>
+<p>My calculations for the design of the dummy load were based on the assumption a minimal 
+current would be <strong>200 ma</strong>.  The rating for bright sunlight is 15V at 2A for 30Watts. </p>
+<p>The "typical" curves I saw in the datasheet appear to be different from the I/V values I 
+am measuring for the diodes in the lab. When I run 2A through the diodes they get quite warm 
+and the I-V curve shifts (total voltage drops at a given current). I am testing the load with a 
+power supply set to current control mode. Current control mode avoids thermal run away and allows 
+the voltage to stabilize at a set current. </p>
+<ul>
+<li>Thermal run away can occur in voltage control mode because at a set voltage a temperature 
+  increase shifts the I-V curve allowing the current to increase which causes more power dissipation, 
+  more heating allowing more current...  This positive feedback can cause the temperature and current 
+  to increase out of control.</li>
+<li>In current control mode an increase in temperature causes the I-V curve to shift such that the 
+  voltage drops resulting in less power dissipation. This negative feedback allows the temperature 
+  and voltage to stabilize.</li>
+</ul>
+<p>The solar panel itself is not fixed in voltage or current but it does have a maximum power output 
+which depends on the amount of light hitting the panel. This will ensure that the diode power can 
+not run away. The I-V curve of the diodes will constrain the voltage within limits and the primary 
+change resulting from changes in light level will be in current.</p>
+<p>This does not look like a typical I/V curve because the temperature of the diode stabilizes at a 
+different values as the current changes+ACE The voltage will initially increase as the current increases 
+but then will drop as the temperature of the diode load increases.</p>
+<p>I / V Values (current fixed by supply so temperature can stabilize)</p>
+<table>
+<thead>
+<tr>
+<th>Current (A)</th>
+<th>Potential (V)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.99</td>
+<td>10.6</td>
+</tr>
+<tr>
+<td>1.00</td>
+<td>10.8</td>
+</tr>
+<tr>
+<td>0.50</td>
+<td>10.9</td>
+</tr>
+<tr>
+<td>0.30</td>
+<td>11.0</td>
+</tr>
+<tr>
+<td>0.14</td>
+<td>10.9</td>
+</tr>
+<tr>
+<td>0.08</td>
+<td>10.7</td>
+</tr>
+<tr>
+<td>0.04</td>
+<td>10.3</td>
+</tr>
+<tr>
+<td>0.02</td>
+<td>9.9</td>
+</tr>
+<tr>
+<td>0.01</td>
+<td>9.5</td>
+</tr>
+</tbody>
+</table>
+<p>Based on these result it would be necessary to add some more components to get a load that looks 
+more like a battery. I am thinking of 4 more diodes plus a resistor (about 1 ohms 10W). This would 
+also reduce the heating in each of the diodes.</p>
+<p><img alt="dummy-load" src="test-load.jpg" /></p>
+<h2 id="revised-dummy-load">Revised Dummy Load</h2>
+<p>I have added additional diodes and a resistor to the dummy load to better simulate a 12 volt lead 
+acid battery. There are now 19 diodes and a single one ohm resistor all in series. Above 0.15 A 
+there is significant heating in the diodes. It takes the diodes a few minutes to stabilize to a 
+new temperature. The supply was used in current control mode to allow the temperature to stabilize.</p>
+<p>I / V Values (current fixed by supply so temperature can stabilize) </p>
+<table>
+<thead>
+<tr>
+<th>Current (A)</th>
+<th>Potential (V)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.01</td>
+<td>12.0</td>
+</tr>
+<tr>
+<td>0.02</td>
+<td>12.8</td>
+</tr>
+<tr>
+<td>0.04</td>
+<td>13.2</td>
+</tr>
+<tr>
+<td>0.08</td>
+<td>13.7</td>
+</tr>
+<tr>
+<td>0.15</td>
+<td>14.2</td>
+</tr>
+<tr>
+<td>0.51</td>
+<td>14.3</td>
+</tr>
+<tr>
+<td>1.00</td>
+<td>14.6</td>
+</tr>
+<tr>
+<td>2.00</td>
+<td>15.0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="early-concept">Early Concept</h2>
+<p>I have looked up some specs on 3A diodes and charging curves for Lead Acid batteries.
+If I purchase some <strong>1N5402G diodes</strong> I should be able to make a dummy load that behave somewhat 
+like a charging Lead acid battery.
+If I purchase about 25 (giving me some spares -- there is a price break at 25) I could put 
+15 diodes in series. The forward voltage on these diodes will be about 0.9 volts at 2As and 
+about 0.8 volts down around 200mA so we could expect the total voltage to range from about 
+12V to 13.5 volts. This is much like a charging Lead acid battery.</p>
+<p><a href="http://www.scubaengineer.com/documents/lead_acid_battery_charging_graphs.pdf">http://www.scubaengineer.com/documents/lead_acid_battery_charging_graphs.pdf</a></p>
+<p>The price for 25 diodes is just $7.52.</p>
+<p>We can use our fluke meter on the 10A scale to measure current. A second meter could measure voltage.</p>
+<p>If we want to measures with the Labquest mini we should would need the higher capacity current probe. 
+I already have one of the 30V voltage probes. In Langley we currently have a class set of 
+differential voltage Probes (plus minus 6V) and standard current probes (plus minus about 600mA).</p>
+<p>They have a 10A current probe intended for this type of application.<br />
+<a href="http://www.vernier.com/products/sensors/current-sensors/hcs-bta/">http://www.vernier.com/products/sensors/current-sensors/hcs-bta/</a></p>
+<p>30V voltage probe<br />
+<a href="http://www.vernier.com/products/sensors/voltage-probes/30v-bta/">http://www.vernier.com/products/sensors/voltage-probes/30v-bta/</a></p>
+
+</body>
+
+</html>

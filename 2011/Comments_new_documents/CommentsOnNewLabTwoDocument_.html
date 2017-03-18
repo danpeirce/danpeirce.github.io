@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Comments on New ENVI2307 Lab Two Document</title>
+  <meta content="Dan Peirce B.Sc." name="author">
+</head>
+<body vlink="#000088" alink="#000088" bgcolor="#ffffff" link="#0000ff"
+ text="#000000">
+<div align="center">
+<h1>Comments on New ENVI2307 Lab Two Document</h1>
+By Dan Peirce B.Sc.<br>
+<blockquote>
+  <blockquote>
+    <div align="left">
+    <hr width="100%" size="2">July 22, 2011
+    <hr width="100%" size="2">
+    <blockquote><font color="blue">"On the other hand, thermocouples do
+no<i><u><b><font color="#000000">t</font></b></u></i> exhibit a linear
+relationship between voltage and <font color="#000000"><u><i><b>temperature</b></i></u></font>
+for such non-l<i><font color="#000000"><b>i</b></font></i>near
+transducers, one must rely on the manufacturer&#8217;s calibration curves or
+directly determine the voltage signal relationship."</font><br>
+    </blockquote>
+The word temperature was missing.<br>
+    <br>
+    <div align="center"><b>_______________[I sent the following in an
+email on July 21]</b>__________________________________<br>
+    </div>
+With regard to thermocouples your statement is correct and
+linearization is required for good accuracy. The Vernier specification
+for their type K thermocouple shows<br>
+    <br>
+    <b>Typical Accuracy<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0&ordm;C to
+900&ordm;C&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 2.2&ordm;C<br>
+&nbsp;&nbsp;&nbsp; &#8211;200&ordm;C to 0&ordm;C&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 5&ordm;C<br>
+&nbsp;&nbsp;&nbsp;&nbsp; 900&ordm;C to 1400&ordm;C &nbsp;&nbsp;&nbsp;
+15&ordm;C</b><br>
+    <br>
+Which leads me to believe that Vernier are not concerned with accuracy
+for the full temperature range of the thermocouple. If we use the
+vernier type K thermocouple I believe it is not linearized.<br>
+    <br>
+The vernier documentation is not clear on this, but on <a
+ href="http://www.vernier.com/til/1440.html">http://www.vernier.com/til/1440.html</a>
+it says the sensor can be calibrated with a two point
+calibration!&nbsp; (the procedure for the calibration is given on page
+3 of <a href="http://www2.vernier.com/booklets/tca-bta.pdf">http://www2.vernier.com/booklets/tca-bta.pdf</a>
+).<br>
+    <br>
+The error if the linerization is not done: from ( <a
+ href="http://www.mstarlabs.com/sensors/thermocouple-calibration.html">http://www.mstarlabs.com/sensors/thermocouple-calibration.html
+    </a>)<br>
+&nbsp;<img alt=""
+ src="http://www.mstarlabs.com/sensors/images/thrmoerr.png" vspace="3"
+ width="360" border="3" height="242" hspace="3"> <img alt=""
+ src="http://www.mstarlabs.com/sensors/images/thrmocrv.png" vspace="3"
+ width="360" border="3" height="270" hspace="3"><br>
+    <br>
+Some polynomials for linearization<br>
+    <a href="http://www.omega.com/temperature/z/pdf/z198-201.pdf">http://www.omega.com/temperature/z/pdf/z198-201.pdf</a><br>
+    <br>
+    <div align="center"><b>_______________________________[added on
+July 22]</b>_________________________________________<br>
+    </div>
+In the context of the text quoted from the manual up above a thermistor
+would likely be an example that the students could more likely
+appreciated since the non-linearity is more pronounced and the
+manufacturer can supply a relatively simple equation that relates
+resistance to temperature (not the high order polynomials that are
+supplied for thermocouples).<br>
+    <br>
+the following is quoted from <a
+ href="http://www.epcos.com/web/generator/Web/Sections/ProductCatalog/Sensors/TemperatureMeasurement/PDF/PDF__StandardizedRT,property=Data__en.pdf;/PDF_StandardizedRT.pdf"><b>epcos</b>
+.../PDF_StandardizedRT.pdf</a> <br>
+    <div align="center"><img alt="" src="thermistor_eqn.png" vspace="3"
+ width="1056" border="3" height="691" hspace="3"><br>
+    <br>
+The definition of the temperature coefficient can be found at <br>
+    <a
+ href="http://www.epcos.com/web/generator/Web/Sections/ProductCatalog/Sensors/TemperatureMeasurement/PDF/PDF__General__technical__information,property=Data__en.pdf;/PDF_General_technical_information.pdf">http://www.epcos.com/web/generator/Web/Sections/ProductCatalog/Sensors/TemperatureMeasurement/PDF/PDF__General__technical__information,property=Data__en.pdf;/PDF_General_technical_information.pdf</a><br>
+    <br>
+    <img alt=""
+ src="file:///Y:/faculty/dpeirce/notes/envi2307/2011/Comments_new_documents/def_alfa.png"
+ width="171" height="65"><br>
+    <img alt="" src="def_B.png" width="466" height="120"><br>
+    <br>
+and from the datasheet<br>
+    <img alt="" src="thermistor_ours.png" vspace="3" width="730"
+ border="3" height="167" hspace="3"><br>
+    <br>
+    <br>
+    <br>
+    <div align="left">...the datasheet for the <a
+ href="../../EvaluationLabPro.html#Thermistor">thermistor I tested</a>
+("ours") is at <a
+ href="http://media.digikey.com/pdf/Data%20Sheets/Epcos%20PDFs/B57560G.pdf">http://media.digikey.com/pdf/Data%20Sheets/Epcos%20PDFs/B57560G.pdf</a><br>
+    </div>
+    </div>
+    <hr width="100%" size="2"><br>
+    <hr width="100%" size="2">July 13, 2011<br>
+    <hr width="100%" size="2">
+    <blockquote><font color="blue"><a name="precision"></a>"Precision
+and Significant Figures"</font><br>
+    </blockquote>
+Just wondering if this section should not be in lab 1 instead of lab 2
+since lab 1 is sort of the introduction lab?<br>
+    <br>
+    <div align="center">
+    <table border="1" cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td valign="top"><font color="blue">"Many measurements these
+days are made on digital scales. These measurements are easy to record.
+If you simply record all the digits that are displayed on the readout,
+you will have recorded the measurement to the highest precision
+possible for that instrument.</font>"<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div align="left"><br>
+If this were included in lab one it could dovetail very well with a
+discussion of the resolution of the Analog to Digital conversion. For
+example if the students are using the Vernier differential voltage
+probe they can calculate the maximum possible resolution of a 12 bit
+Analog to Digital conversion because we know the LabQuest mini does a
+12 bit conversion.<br>
+    <ul>
+      <li>there are 2<sup>12</sup> quantization levels.</li>
+      <li>The differentail voltage probe is usable between -6 and +6
+volts</li>
+      <li>The voltage of each quantization level for the differential
+voltage probe is <br>
+        <img alt="" src="differential_probe_resolution.png" width="185"
+ height="116"></li>
+      <li>The standard voltage probe has a range of -10 to +10 volts so
+it has a resolution of 4.88 mv/level</li>
+      <li>the raw 0-5 volt input of the breadboard probe has a
+resolution of 1.22 mv/level (input used for the custom static pressure
+sensor in new <a href="../waterColumn/StaticWaterPressure.html">lab 3</a>)</li>
+      <ul>
+        <li>given this resolution one can calculte the resolution of
+the pressure as <b>P = 10.87 (V<sub>s</sub>
+- V<sub>so</sub>)&nbsp; kPa </b>which implies<b> <br>
+P<sub>res</sub> = 10.87*1.22(10<sup>-3</sup>)<br>
+          </b><b>P<sub>res</sub> = 0.0133 kPa/level</b></li>
+      </ul>
+      <li>The current probe ranges from -600 mA to +600 mA so the
+resolution is 0.293 mA/level</li>
+    </ul>
+    <div align="center">From Fluke document<br>
+    <b><i>Understanding specifications for precision multimeters</i></b><br>
+(I needed to provide my email
+address to get access to this document at
+http://support.fluke.com/calibration-sales/Download/Asset/2547797_6203_ENG_B_W.PDF)<br>
+    <table border="0" cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td valign="top" align="center"><img alt=""
+ src="DMM_blockdiagram.png" vspace="3" width="469" border="3"
+ height="178" hspace="3"><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><b>comments on this fluke block diagram</b><br>
+          <ul>
+            <li>the triangle between te divider
+and the Analog to Digital Converter represents an amplifier and it
+should be pointing the other way!</li>
+            <li>the diagram would be more complete if <br>
+            </li>
+            <ul>
+              <li>it showed a display</li>
+              <li>it also showed an <b>embedded computer/digital
+signal processor</b> between the Analog to Digital Converter and the
+display.</li>
+              <ul>
+                <li>for DC measurements it will take multiple samples
+and do some digital filtering</li>
+                <li>for true RMS measurements it needs to (definitely
+need a microprocessor for this)<br>
+                </li>
+                <ul>
+                  <li>take a large number of samples each cycle</li>
+                  <li>calculate the square of each sample</li>
+                  <li>find the average</li>
+                  <li>take the square root<br>
+                  </li>
+                </ul>
+              </ul>
+            </ul>
+          </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div align="left">For the average digital instrument we use the
+manufacturer does not
+specify the resolution of the analog to digital conversion but give the
+resolution in a different format. For example with our Fluke 117 meters
+we are given the following information<br>
+    </div>
+    </div>
+    <b><br>
+    </b>
+    <div align="center">From Fluke True-rms Miltimeters manual (114,
+115, 117)<br>
+    </div>
+    <b> </b>
+    <div align="center"><img alt=""
+ src="../Kirchoff/fluke117_volt_spec.png" vspace="3" width="800"
+ border="3" height="659" hspace="3"><br>
+    <div align="left">
+    <ul>
+      <li>looking at the DC Volts 6 V Range they say the Resolution is
+0.001 V. In this case the "resolution" has a different meaning than in
+the discussion I gave above. This is the resolution to which the meter
+reports the voltage. In the "Accuracy" Column they say the accuracy is
+0.5% + 2 counts. By two counts they mean 2 times the stated resolution.
+This means that actual reporting resolution is 2*0.001 = 0.002 volts.
+Looking to fluke documents for some understanding of what this actually
+means I find the following statement <br>
+        <div align="center"><font color="blue">"Fluke uses a confidence<br>
+of 99 %, which corresponds to<br>
+2.6 standard deviations on a<br>
+normal distribution.</font>"<br>
+        <div align="left">So with the A to D discussion up above I was
+giving the absolute resolution of a single sample based on the number
+of quantization levels. Fluke is not doing that here. The meter take
+multiple samples over a period of time and then reports an average
+value with 99% confidence. There is always noise in a digital meter and
+this causes the ADC readings to fluctuate. Noise is a random
+fluctuation
+added to the actual signal. If the noise is at least a little bigger
+than the quantization levels and averaging is done with enough samples
+the reported resolution could actually be better than the absolute ADC
+resolution.<br>
+        <br>
+        <div align="center">see <a
+ href="http://ww1.microchip.com/downloads/en/AppNotes/Achieving%20Higher%20ADC%20Resolution%20Using%20Oversampling%2001152A.pdf">AN1152
+Achieving
+Higher
+ADC Resolution Using Oversampling</a><br>
+        </div>
+        <div align="center"><img alt="" src="signal_processing.png"
+ vspace="3" width="379" border="3" height="191" hspace="3"><br>
+also see <a
+ href="http://www.atmel.com/dyn/resources/prod_documents/doc8003.pdf">AVR121:
+Enhancing
+ADC
+resolution by oversampling</a><br>
+        <br>
+more from the Fluke document</div>
+        </div>
+        </div>
+      </li>
+      <div align="center"><img alt="" src="baseline_uncertainty.png"
+ vspace="3" width="307" border="3" height="716" hspace="3"><br>
+      <br>
+      <img alt="" src="baseline_uncertainty2.png" vspace="3" width="311"
+ border="3" height="295" hspace="3"><br>
+      <br>
+      <img alt="" src="pitfall_usingDMM_specs.png" vspace="3"
+ width="510" border="3" height="226" hspace="3"><br>
+      </div>
+    </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    <br>
+    <hr width="100%" size="2"></div>
+  </blockquote>
+</blockquote>
+</div>
+</body>
+</html>
