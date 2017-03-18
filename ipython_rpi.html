@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>IPython on the Raspberry Pi</title>
+  </head>
+
+<body>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#ipython-on-the-raspberry-pi">IPython on the Raspberry Pi</a><ul>
+<li><a href="#starting-ipython-within-a-qt-console">Starting IPython within a Qt Console</a></li>
+<li><a href="#creating-a-matplotlib-plot-from-in-ipython">Creating a Matplotlib Plot from in IPython</a></li>
+<li><a href="#getting-the-plots-inline-rather-then-in-figure-window">Getting the plots inline rather then in figure window</a></li>
+<li><a href="#invoking-ipython-qtconsole-and-pylab">Invoking IPython Qtconsole and Pylab</a></li>
+<li><a href="#ipython-qtconsole-configuration">ipython qtconsole configuration</a><ul>
+<li><a href="#the-path">The Path</a></li>
+<li><a href="#the-file-ipython_qtconsole_configpy">The file ipython_qtconsole_config.py</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="ipython-on-the-raspberry-pi">IPython on the Raspberry Pi</h1>
+<div class="codehilite"><pre><span class="n">Notes</span> <span class="n">by</span> <span class="n">Dan</span> <span class="n">Peirce</span> <span class="n">B</span><span class="p">.</span><span class="n">Sc</span><span class="p">.</span>  <span class="p">(</span><span class="n">reformated</span> <span class="n">from</span> <span class="n">my</span> <span class="n">pages</span> <span class="n">at</span> 
+              <span class="n">danpeirce</span><span class="p">.</span><span class="n">net46</span><span class="p">.</span><span class="n">net</span><span class="o">/</span><span class="n">dokuwiki</span><span class="o">/</span>
+</pre></div>
+
+
+<p>I have just started to explore this. In the examples given below IPython is
+run on a headless Raspberry Pi. TightVNCServer is used to export the Raspberry
+Pi desktop and a TightVNC Client is run on a Windows XP computer to operate
+the Raspberry Pi. This gives on access to IPython without having to install it
+on a PC. Also, any PC on the LAN could access the Raspberry Pi.</p>
+<p>IPython can also be used on other platforms. More general info at
+<a href="ipython_notes.html">ipython_notes</a></p>
+<h2 id="starting-ipython-within-a-qt-console">Starting IPython within a Qt Console</h2>
+<p>(Starting IPython from the command line to run in a Qt Console)
+<img alt="" src="ipython/start_ipython_qtconsole.png"></p>
+<h2 id="creating-a-matplotlib-plot-from-in-ipython">Creating a Matplotlib Plot from in IPython</h2>
+<p><img alt="" src="ipython/ipython_01.png"></p>
+<h2 id="getting-the-plots-inline-rather-then-in-figure-window">Getting the plots inline rather then in figure window</h2>
+<p><img alt="" src="ipython/ipython_02_inlinefig.png"></p>
+<h2 id="invoking-ipython-qtconsole-and-pylab">Invoking IPython Qtconsole and Pylab</h2>
+<p>The following typed at the bash command line will invoke IPython in Qtconsole
+with Pylab and all figures will be inline:</p>
+<div class="codehilite"><pre><span class="n">ipython</span> <span class="n">qtconsole</span> <span class="o">--</span><span class="n">pylab</span><span class="o">=</span><span class="n">inline</span>
+</pre></div>
+
+
+<p><img alt="" src="ipython/plotxqinline.png"></p>
+<p>The image shows part of the Raspberry Pi desktop in a
+<a href="vnc.html#vnc-client-on-debian-linux-pc">ssvnc</a> session on a netbook running
+Debian Linux.</p>
+<h2 id="ipython-qtconsole-configuration">ipython qtconsole configuration</h2>
+<p>By default no Gui editor is set for the ipython qtconsole. That means the
+magic command %edit will not work. To fix this I needed to go to the correct
+directory in my home folder and create a file called
+<strong>ipython_qtconsole_config.py</strong></p>
+<h3 id="the-path">The Path</h3>
+<div class="codehilite"><pre><span class="nb">cd</span> ~/.config/ipython/profile_default
+</pre></div>
+
+
+<h3 id="the-file-ipython_qtconsole_configpy">The file ipython_qtconsole_config.py</h3>
+<div class="codehilite"><pre><span class="nv">c</span><span class="o">=</span>get_config<span class="o">()</span>
+c.IPythonWidget.editor <span class="o">=</span> <span class="s1">&#39;leafpad&#39;</span>
+</pre></div>
+
+
+<p>Info came from
+<a href="http://wiki.ipython.org/Cookbook/Moving_config_to_IPython_0.11">http://wiki.ipython.org/Cookbook/Moving_config_to_IPython_0.11</a> except he set
+it up for emacs. I used leafpad (pre installed on Raspberry Pi).</p>
+
+</body>
+
+</html>

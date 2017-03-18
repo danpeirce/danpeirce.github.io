@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>Git</title>
+  </head>
+
+<body>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#revision-control-systems">Revision Control Systems</a></li>
+</ul>
+<li><a href="#git">git</a><ul>
+<li><a href="#more-organized-set-of-notes-work-in-progress">More Organized set of Notes (work in progress)</a></li>
+</ul>
+</li>
+<li><a href="#initial-notes-on-git">Initial Notes On git</a><ul>
+<li><a href="#git-on-the-raspberry-pi">git on the Raspberry Pi</a></li>
+<li><a href="#pushing-repository-to-bitbucket">Pushing Repository to bitbucket</a></li>
+<li><a href="#git-on-windows">git on Windows</a><ul>
+<li><a href="#windows-git-and-mplab-ide-85">Windows, git and MPlab IDE 8.5</a><ul>
+<li><a href="#robot-project">Robot Project</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#simple-curve-follower-repository-made-public">Simple Curve Follower Repository Made Public</a><ul>
+<li><a href="#readmemd-file-created">README.md File Created</a></li>
+</ul>
+</li>
+<li><a href="#created-git-repository-for-pic18_serial_io-project">Created git Repository for PIC18_serial_io Project</a></li>
+<li><a href="#git-notes-in-txt2tags-project">git Notes in txt2tags project</a></li>
+<li><a href="#vim">Vim</a></li>
+</ul>
+</li>
+</div>
+<h2 id="revision-control-systems">Revision Control Systems</h2>
+<p>The stumbling block in the past for adopting a revision control system for
+APSC1299 has been that the systems that MPlab IDE has supported natively have
+all been centralized revision control systems. Any of those systems would be
+more trouble than they were worth for the type of work the students were
+doing. A distributed version control system would make a lot more sense for
+use but I did not start to look at those before simply because I first focused
+on what MPlab IDE had direct support for.</p>
+<p>Having spent some time looking at git (a distributed version control system) I
+have come to believe it is a system easy enough to use even though it is not
+directly supported by MPlab IDE and that using it would have some significant
+advantages to our students.</p>
+<p>The alternative (used so far) has been to copy the project directory to a
+directory with a new name for a new version of a project. Students are also
+expected to keep notes of changes to a project in a notebook. git provides a
+very easy method to keep old versions of a project that one might want to
+revert back to. It also provides useful tools that would help one keep
+accurate notes on changes to a project and progress. It also provides useful
+tools for project collaboration (group work).</p>
+<h1 id="git">git</h1>
+<div class="codehilite"><pre><span class="n">by</span> <span class="n">Dan</span> <span class="n">Peirce</span> <span class="n">B</span><span class="p">.</span><span class="n">Sc</span><span class="p">.</span>
+</pre></div>
+
+
+<p>Reformatted from <a href="http://danpeirce.net46.net/dokuwiki/doku.php?id=git">dokuwiki</a></p>
+<p>So far the notes in the sections that follow are based on trying out
+procedures given at:</p>
+<ul>
+<li>
+<p><a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/ch01.html">http://www-cs-students.stanford.edu/~blynn/gitmagic/ch01.html</a> -- <strong>helpful</strong></p>
+<ul>
+<li><a href="http://gitref.org/basic/#commit">http://gitref.org/basic/#commit</a> -- fills in details</li>
+</ul>
+</li>
+</ul>
+<p>The standford.edu page was helpful in getting started and trying some examples
+but the standford.edu page on it's own leaves one with many unanswered
+questions and does not provide a full explanation of default workflow and
+possible shortcuts (although shortcuts are used in the examples).</p>
+<p>A more comprehensive understanding of git concepts can be found in the ebook
+from:</p>
+<ul>
+<li><a href="http://git-scm.com/book">http://git-scm.com/book</a></li>
+</ul>
+<h2 id="more-organized-set-of-notes-work-in-progress">More Organized set of Notes (work in progress)</h2>
+<p>The initial notes below are a result of working through a tutorial. I have
+been using git for a while now and think I could better organize new notes on
+a new page. I will call the new page <strong><a href="git_notes">git_notes</a></strong>.</p>
+<hr>
+<h1 id="initial-notes-on-git">Initial Notes On git</h1>
+<h2 id="git-on-the-raspberry-pi">git on the Raspberry Pi</h2>
+<p>I have been playing with git on the <a href="raspberry_pi">Raspberry Pi</a>. I will
+document this as time permits.</p>
+<p>This shows Firefox running on a windows machine which is pointed at the git
+repository on the Raspberry Pi. The Raspberry Pi is running headless to run
+git command a secure shell was used over the LAN. <a href="rpi:ssh"> The SSH server runs on the
+Raspberry Pi and it can be accessed on a windows machine using
+PuTTY</a>.</p>
+<p><img alt="" src="git/git_apsc1299files.png"></p>
+<h2 id="pushing-repository-to-bitbucket">Pushing Repository to bitbucket</h2>
+<p>Bitbucket allows private free repositories. Other online git hosting sights I
+have looked at allow free public repositories but charge for private
+repositories. It was simple to create an account, create a bare repository and
+push the local repository from the Raspberry Pi onto it.</p>
+<div class="codehilite"><pre><span class="n">danp</span><span class="p">@</span><span class="n">raspberrypi</span> <span class="o">~</span> $ <span class="n">cd</span> <span class="n">apsc1299</span>
+<span class="n">danp</span><span class="p">@</span><span class="n">raspberrypi</span> <span class="o">~/</span><span class="n">apsc1299</span> $ <span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">danpeirce</span><span class="p">@</span><span class="n">bitbucket</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">danpeirce</span><span class="o">/</span><span class="n">apsc1299labs</span><span class="p">.</span><span class="n">git</span>
+<span class="n">danp</span><span class="p">@</span><span class="n">raspberrypi</span> <span class="o">~/</span><span class="n">apsc1299</span> $ <span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">master</span>
+<span class="n">Password</span> <span class="k">for</span> <span class="s">&#39;https://danpeirce@bitbucket.org&#39;</span><span class="p">:</span>
+<span class="n">Counting</span> <span class="n">objects</span><span class="p">:</span> 49<span class="p">,</span> <span class="n">done</span><span class="p">.</span>
+<span class="n">Compressing</span> <span class="n">objects</span><span class="p">:</span> 100<span class="c">% (40/40), done.</span>
+<span class="n">Writing</span> <span class="n">objects</span><span class="p">:</span> 100<span class="c">% (49/49), 32.18 KiB, done.</span>
+<span class="n">Total</span> 49 <span class="p">(</span><span class="n">delta</span> 7<span class="p">),</span> <span class="n">reused</span> 0 <span class="p">(</span><span class="n">delta</span> 0<span class="p">)</span>
+<span class="n">remote</span><span class="p">:</span> <span class="n">bb</span><span class="o">/</span><span class="n">acl</span><span class="p">:</span> <span class="n">danpeirce</span> <span class="n">is</span> <span class="n">allowed</span><span class="p">.</span> <span class="n">accepted</span> <span class="n">payload</span><span class="p">.</span>
+<span class="n">To</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">danpeirce</span><span class="p">@</span><span class="n">bitbucket</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">danpeirce</span><span class="o">/</span><span class="n">apsc1299labs</span><span class="p">.</span><span class="n">git</span>
+ <span class="o">*</span> <span class="p">[</span><span class="n">new</span> <span class="n">branch</span><span class="p">]</span>      <span class="n">master</span> <span class="o">-&gt;</span> <span class="n">master</span>
+<span class="n">Branch</span> <span class="n">master</span> <span class="n">set</span> <span class="n">up</span> <span class="n">to</span> <span class="n">track</span> <span class="n">remote</span> <span class="n">branch</span> <span class="n">master</span> <span class="n">from</span> <span class="n">origin</span><span class="p">.</span>
+
+<span class="n">danp</span><span class="p">@</span><span class="n">raspberrypi</span> <span class="o">~/</span><span class="n">apsc1299</span> $ <span class="n">echo</span> &quot;# <span class="n">This</span> <span class="n">is</span> <span class="n">my</span> <span class="n">README</span>&quot; <span class="o">&gt;&gt;</span> <span class="n">README</span><span class="p">.</span><span class="n">md</span>
+<span class="n">danp</span><span class="p">@</span><span class="n">raspberrypi</span> <span class="o">~/</span><span class="n">apsc1299</span> $ <span class="n">git</span> <span class="n">add</span> <span class="n">README</span><span class="p">.</span><span class="n">md</span>
+<span class="n">danp</span><span class="p">@</span><span class="n">raspberrypi</span> <span class="o">~/</span><span class="n">apsc1299</span> $ <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> &quot;<span class="n">Adding</span> <span class="n">a</span> <span class="n">README</span> <span class="p">(</span><span class="n">suggested</span> <span class="n">on</span> <span class="n">bitbucket</span><span class="p">)</span>&quot;
+<span class="p">[</span><span class="n">master</span> <span class="n">b11846b</span><span class="p">]</span> <span class="n">Adding</span> <span class="n">a</span> <span class="n">README</span> <span class="p">(</span><span class="n">suggested</span> <span class="n">on</span> <span class="n">bitbucket</span><span class="p">)</span>
+ 1 <span class="n">file</span> <span class="n">changed</span><span class="p">,</span> 1 <span class="n">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">)</span>
+ <span class="n">create</span> <span class="n">mode</span> 100644 <span class="n">README</span><span class="p">.</span><span class="n">md</span>
+<span class="n">danp</span><span class="p">@</span><span class="n">raspberrypi</span> <span class="o">~/</span><span class="n">apsc1299</span> $ <span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">master</span>
+<span class="n">Password</span> <span class="k">for</span> <span class="s">&#39;https://danpeirce@bitbucket.org&#39;</span><span class="p">:</span>
+<span class="n">Counting</span> <span class="n">objects</span><span class="p">:</span> 4<span class="p">,</span> <span class="n">done</span><span class="p">.</span>
+<span class="n">Compressing</span> <span class="n">objects</span><span class="p">:</span> 100<span class="c">% (2/2), done.</span>
+<span class="n">Writing</span> <span class="n">objects</span><span class="p">:</span> 100<span class="c">% (3/3), 327 bytes, done.</span>
+<span class="n">Total</span> 3 <span class="p">(</span><span class="n">delta</span> 0<span class="p">),</span> <span class="n">reused</span> 0 <span class="p">(</span><span class="n">delta</span> 0<span class="p">)</span>
+<span class="n">remote</span><span class="p">:</span> <span class="n">bb</span><span class="o">/</span><span class="n">acl</span><span class="p">:</span> <span class="n">danpeirce</span> <span class="n">is</span> <span class="n">allowed</span><span class="p">.</span> <span class="n">accepted</span> <span class="n">payload</span><span class="p">.</span>
+<span class="n">To</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">danpeirce</span><span class="p">@</span><span class="n">bitbucket</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">danpeirce</span><span class="o">/</span><span class="n">apsc1299labs</span><span class="p">.</span><span class="n">git</span>
+   2<span class="n">cd405c</span><span class="p">..</span><span class="n">b11846b</span>  <span class="n">master</span> <span class="o">-&gt;</span> <span class="n">master</span>
+<span class="n">Branch</span> <span class="n">master</span> <span class="n">set</span> <span class="n">up</span> <span class="n">to</span> <span class="n">track</span> <span class="n">remote</span> <span class="n">branch</span> <span class="n">master</span> <span class="n">from</span> <span class="n">origin</span><span class="p">.</span>
+</pre></div>
+
+
+<p>Scroll the frame shown below to the right to find download link. (Bitbucket
+recently changed the format of the page)<br>
+Look for this:</p>
+<p><img alt="" src="git/bitb_download.png"></p>
+<h2 id="git-on-windows">git on Windows</h2>
+<ol>
+<li>
+<p>downloaded git from windows from link provided in bitbuckets </p>
+<ul>
+<li><a href="https://confluence.atlassian.com/display/BITBUCKET/Set+up+Git+and+Mercurial">https://confluence.atlassian.com/display/BITBUCKET/Set+up+Git+and+Mercurial</a> <br>
+I don't have any intention of also installing Mercurial. For git I mostly
+chose the defaults except as shown here (that is on my home computer -- on the
+prep-room computer I just took all of the defaults):</li>
+</ul>
+</li>
+</ol>
+<p><img alt="" src="git/git_inst_opt.png"></p>
+<p>Launching git on my windows machine gives me a unix/linux like environment.</p>
+<p><img alt="" src="git/mingw32_window.png"></p>
+<p>Knowing some UNIX commands is helpful (as it is on the <a href="raspberry_pi.html">Raspberry
+Pi</a>}.</p>
+<ul>
+<li>
+<p>First task to find where one is in the file system with a "pwd" (print working directory).</p>
+</li>
+<li>
+<p>change to the desired directory to make a repository. I have a backup for this website and thought it would be good to make that into a git repository.</p>
+</li>
+</ul>
+<p><img alt="" src="git/path_to_net46.png"></p>
+<div class="codehilite"><pre>$ <span class="n">git</span> <span class="n">init</span>
+$ <span class="n">git</span> <span class="n">add</span> <span class="n">functions</span>
+$ <span class="n">git</span> <span class="n">add</span> <span class="n">hello33</span><span class="p">.</span><span class="n">c</span>
+$ <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> &quot;<span class="n">peirce</span><span class="p">.</span><span class="n">dan</span><span class="p">@</span><span class="n">gmail</span><span class="p">.</span><span class="n">com</span>&quot;
+$ <span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="p">.</span><span class="n">name</span> &quot;<span class="n">Dan</span> <span class="n">Peirce</span>&quot;
+$ <span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> &quot;<span class="n">first</span> <span class="n">commit</span>&quot;
+</pre></div>
+
+
+<p>So I created a repository to for 3.3 volt hello world project for the
+pic18lf2620. Only <em>.c and </em>.h files were added to the project repository (all
+the files in the <strong>functions</strong> folder and the hello33.c file.</p>
+<div class="codehilite"><pre>$ <span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">danpeirce</span><span class="p">@</span><span class="n">bitbucket</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">danpeirce</span><span class="o">/</span><span class="n">hello33</span><span class="p">.</span><span class="n">git</span>
+$ <span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">master</span>   # <span class="n">to</span> <span class="n">push</span> <span class="n">changes</span> <span class="k">for</span> <span class="n">the</span> <span class="n">first</span> <span class="n">time</span>
+</pre></div>
+
+
+<p>Of course there is more to git than just setting up a repository but this is a
+start.</p>
+<p><img alt="" src="git/hello33_git.png"></p>
+<p>The image above shows that I pushed the project to bitbucket. This is into a
+private repository that bitbucket allows for free. This could be useful for me
+so that I could work on the same project at home and at work on different
+computers. bitbucket also allows private team projects. This way students
+working in groups could have their own branches of a repository on their own
+computers and yet could share their branch (version) with the team (group).
+git allows branches to be merged. This has been developed for teamwork.</p>
+<h3 id="windows-git-and-mplab-ide-85">Windows, git and MPlab IDE 8.5</h3>
+<p>On the prep-room computer I also did an install but this time took all of the
+defaults. This means that the git GUI, and git integration with windows
+explorer were also installed. The integration with windows explorer means that
+it is possible to get git options from within windows explorer (I don't know
+how buggy this might be).</p>
+<p><img alt="" src="git/git_int_winexpl.png"></p>
+<p>I wanted to create a repository for an individual apsc1299 project including:</p>
+<ul>
+<li>the source files </li>
+<li>project file</li>
+</ul>
+<h4 id="robot-project">Robot Project</h4>
+<p>If I were to redo this project (and I probably will) I would us a .gitignore
+file and retain the file structure used in previous years.</p>
+<p>The .gitignore file would make it easy to follow all files in the project
+except those generated by MPlab (which all have known file extensions). It is
+the <em>.c , </em>.h and *.mcp (project) files as well as any readme files that need
+to be included.</p>
+<p>All <em>.o , </em>.cof , <em>.hex , </em>.map and *.mcs files generated by MPlab should be
+excluded and not be tracked.</p>
+<p>I did not include the workspace file or any of the object files. To make this
+easy I rearranged the file structure for the project a bit. The <strong>function</strong>
+folder and the <strong>robot</strong> folder both sit in the <strong>robot_project</strong> folder. The
+files that MPlab creates all end up in the project folder <strong>robot_project</strong>.
+With this setup git commands can be used to add <strong>functions</strong>, <strong>robot</strong> and
+the project file <strong>robot_project.mcp</strong> to the repository and the rest of the
+files are intentionally left out of the repository. Also in creating the
+project in MPlab I was careful to ensure all paths were relative so it would
+still be valid regardless of the actual path of the project folder.</p>
+<p><img alt="" src="git/robot_project_files.png"></p>
+<p>The repository was created as follows:</p>
+<p><img alt="" src="git/commit_robot.png"></p>
+<p>I made a change to a comment in main.c and committed the change. From windows
+explorer <strong>git history</strong> was opened and showed this:</p>
+<p><img alt="" src="git/git_history.png"></p>
+<p>Also, checked out first commit and the file main.c changed as expected.</p>
+<p><img alt="" src="git/checkoutc52a96.png"></p>
+<p><img alt="" src="git/checkoutc957922.png"></p>
+<p><img alt="" src="git/checkout_master.png"></p>
+<p>The project was pushed to bitbucket from the prep room computer. The project
+was cloned from bitbucket to my home computer.</p>
+<div class="codehilite"><pre>$ <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">danpeirce</span><span class="p">@</span><span class="n">bitbucket</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">danpeirce</span><span class="o">/</span><span class="n">robot</span><span class="o">-</span><span class="n">from</span><span class="o">-</span><span class="n">simple</span><span class="o">-</span><span class="n">curve</span><span class="o">-</span><span class="n">follower</span><span class="p">.</span><span class="n">git</span>
+</pre></div>
+
+
+<p>I was able to open the project file in windows explorer and double click on
+the project file to launch MPlab IDE 8.5. The project build worked as expected
+(and generated the expected object files which are not included in the
+repository).</p>
+<p>I made a change by uncommenting the threshold assignment in main.c, committed
+the change locally and pushed the updated project back onto bitbucket.</p>
+<div class="codehilite"><pre>$ <span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+</pre></div>
+
+
+<p>bitbucket accepted the update.</p>
+<h2 id="simple-curve-follower-repository-made-public">Simple Curve Follower Repository Made Public</h2>
+<ul>
+<li>
+<p>I made this repository public at <a href="https://bitbucket.org/danpeirce/robot-from-simple-curve-follower">https://bitbucket.org/danpeirce/robot-from-simple-curve-follower</a>.</p>
+</li>
+<li>
+<p>A zip file of the current source code can be obtained simply by using this link <a href="https://bitbucket.org/danpeirce/robot-from-simple-curve-follower/get/e15f8ef55da6.zip">https://bitbucket.org/danpeirce/robot-from-simple-curve-follower/get/e15f8ef55da6.zip</a></p>
+</li>
+<li>
+<p>A wiki page was added to the code repository for this project. It contains a short description and links back to our kwantlen pages.</p>
+</li>
+</ul>
+<p>Since this is now public I did not want to keep changes that were actually
+just about messing around to see how the system works. It is possible to
+delete/destroy all changes after a give commit if one knows the hash number of
+the commit we want as the new master (if not know <strong>$ git log</strong> gives a list
+of commits with hash numbers and commit messages).</p>
+<div class="codehilite"><pre>$ <span class="n">git</span> <span class="n">reset</span> <span class="o">--</span><span class="n">hard</span> <span class="n">c52a96</span>
+<span class="n">HEAD</span> <span class="n">is</span> <span class="n">now</span> <span class="n">at</span> <span class="n">c52a96d</span> <span class="n">first</span> <span class="n">commit</span>
+</pre></div>
+
+
+<p>Then the change was pushed onto bitbucket. The push is rejected unless a -f
+switch is used to force it (git on bitbucket will assume that the push is
+being done from an old version of the repository because the newer stuff is
+missing -- one would want to only use -f when they really intend to
+permanently delete newer changes).</p>
+<div class="codehilite"><pre>$ <span class="n">git</span> <span class="n">push</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">danpeirce</span><span class="p">@</span><span class="n">bitbucket</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">danpeirce</span><span class="o">/</span><span class="n">robot</span><span class="o">-</span><span class="n">from</span><span class="o">-</span><span class="n">simple</span><span class="o">-</span><span class="n">curve</span><span class="o">-</span><span class="n">follower</span><span class="p">.</span><span class="n">git</span> <span class="o">-</span><span class="n">f</span>
+</pre></div>
+
+
+<h3 id="readmemd-file-created">README.md File Created</h3>
+<p>On bitbucket and similar sites it is customary to provide a README file. One
+of the file formats accepted on bitbucket is Markdown.</p>
+<p>Markdown is a lightweight markup language that can be converted automatically
+to xhtml. It allows multiple levels of headings, lists, tables and hyperlinks.
+The markup is simple and easy to type relative to valid xhtml. The converted
+contents of the README.md file will be shown on bitbucket on the overview tab
+along with information about recent commits.</p>
+<p>In the following frame the README information can be seen beneath the Recent
+Commit information:</p>
+<p>The actual content of README.md is as follows:.</p>
+<div class="codehilite"><pre><span class="c">#Simple Curve Follower</span>
+
+<span class="n">This</span> <span class="n">is</span> <span class="nb">example</span> <span class="n">code</span> <span class="k">for</span> <span class="n">APSC1299</span> <span class="n">at</span> <span class="n">Kwantlen</span> <span class="n">Polytechnic</span> <span class="n">University</span><span class="p">.</span>
+
+<span class="c">##Target</span>
+
+<span class="n">This</span> <span class="n">project</span> <span class="n">is</span> <span class="k">for</span> <span class="n">a</span> <span class="n">PIC18F4525</span> <span class="n">on</span> <span class="n">a</span> <span class="n">modified</span> <span class="n">Sumovore</span> <span class="n">robot</span><span class="p">.</span> <span class="p">(</span><span class="n">we</span> <span class="n">upgrade</span> <span class="n">the</span> <span class="n">MCU</span> <span class="nb">and</span> <span class="n">modify</span> <span class="n">the</span> <span class="n">wiring</span> <span class="n">to</span> <span class="n">allow</span> <span class="n">dynamic</span> <span class="n">braking</span><span class="p">).</span>
+
+<span class="c">##Tools</span>
+
+<span class="n">The</span> <span class="n">project</span> <span class="n">file</span> <span class="n">was</span> <span class="n">created</span> <span class="n">in</span> <span class="n">MPlab</span> <span class="n">IDE</span> <span class="nb">version</span> 8<span class="p">.</span>5<span class="p">.</span>
+<span class="n">The</span> <span class="n">student</span> <span class="nb">version</span> <span class="n">C18</span> <span class="n">compiler</span> <span class="n">is</span> <span class="n">assumbed</span><span class="p">.</span>
+
+<span class="c">##Purpose</span>
+
+<span class="n">As</span> <span class="n">is</span> <span class="n">this</span> <span class="n">code</span> <span class="n">allows</span> <span class="n">the</span> <span class="n">robot</span> <span class="n">to</span> <span class="n">follow</span> <span class="n">simple</span> <span class="n">curved</span> <span class="n">lines</span><span class="p">.</span> <span class="n">It</span> <span class="n">is</span> <span class="n">a</span> <span class="n">starting</span> <span class="n">point</span> <span class="k">for</span> <span class="n">students</span> <span class="nb">who</span> <span class="n">will</span> <span class="n">modify</span> <span class="n">the</span> <span class="n">code</span> <span class="n">so</span> <span class="n">that</span> <span class="n">the</span> <span class="n">robot</span> <span class="n">will</span> <span class="n">be</span> <span class="n">able</span> <span class="n">to</span> <span class="n">follow</span> <span class="n">much</span> <span class="n">more</span> <span class="nb">complex</span> <span class="n">lines</span> <span class="n">with</span> <span class="n">abrupt</span> <span class="n">sharp</span> <span class="n">turns</span><span class="p">,</span> <span class="n">gaps</span> <span class="n">in</span> <span class="n">the</span> <span class="nb">line</span><span class="p">,</span> <span class="n">crossing</span> <span class="n">lines</span> <span class="nb">and</span> <span class="n">other</span> <span class="n">obstacles</span><span class="p">.</span>
+
+<span class="n">See</span>
+
+  <span class="o">*</span> <span class="p">[</span><span class="n">APSC1299</span><span class="p">](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">kwantlen</span><span class="p">.</span><span class="n">ca</span><span class="o">/</span><span class="n">science</span><span class="o">/</span><span class="n">physics</span><span class="o">/</span><span class="n">engineering</span><span class="o">/</span><span class="n">APSC1299</span><span class="o">/</span><span class="p">)</span>
+  <span class="o">*</span> <span class="p">[</span><span class="n">Changes</span> <span class="n">to</span> <span class="n">Sumovore</span> <span class="nb">and</span> <span class="n">BB2</span><span class="p">](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">kwantlen</span><span class="p">.</span><span class="n">ca</span><span class="o">/</span><span class="n">science</span><span class="o">/</span><span class="n">physics</span><span class="o">/</span><span class="n">faculty</span><span class="o">/</span><span class="n">dpeirce</span><span class="o">/</span><span class="n">notes</span><span class="o">/</span><span class="n">sumovore_maintenance_log</span><span class="o">/</span><span class="n">ChangesToSumovoreBB2</span><span class="p">.</span><span class="n">html</span><span class="p">)</span>
+      <span class="o">*</span> <span class="n">Sumovore</span> <span class="n">kit</span> <span class="n">can</span> <span class="n">be</span> <span class="n">purchased</span> <span class="n">from</span> <span class="p">[</span><span class="n">Solarbotics</span><span class="p">:</span> <span class="n">sumovore</span><span class="p">](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">solarbotics</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">product</span><span class="o">/</span><span class="n">k_sv</span><span class="o">/</span><span class="p">)</span>
+      <span class="o">*</span> <span class="n">PIC</span> <span class="n">brainboard</span> <span class="n">can</span> <span class="n">also</span> <span class="n">be</span> <span class="n">purchased</span> <span class="n">from</span> <span class="p">[</span><span class="n">Solarbotics</span><span class="p">:</span> <span class="n">PIC</span> <span class="n">brainboard</span> 2<span class="p">](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">solarbotics</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">product</span><span class="o">/</span><span class="n">k_sv</span><span class="o">-</span><span class="n">pic</span><span class="p">)</span>
+          <span class="o">*</span> <span class="n">we</span> <span class="n">replace</span> <span class="n">the</span> <span class="n">PIC16F877A</span> <span class="n">with</span> <span class="n">a</span> <span class="n">PIC18F4525</span><span class="p">.</span> <span class="n">see</span> <span class="nb">link</span> <span class="n">to</span> <span class="n">ChangesToSumovoreBB2</span><span class="p">.</span><span class="n">html</span> <span class="n">above</span> <span class="k">for</span> <span class="n">other</span> <span class="n">changes</span><span class="p">...</span>
+</pre></div>
+
+
+<h2 id="created-git-repository-for-pic18_serial_io-project">Created git Repository for PIC18_serial_io Project</h2>
+<p>Notes at <a href="rpi_pic_led#simple_led_and_echo_pr
+ogram_in_c">simple_led_and_echo_program_in_c</a></p>
+<p>Also see <a href="https://bitbucket.org/danpeirce/pic18_serial_io/overview">https://bitbucket.org/danpeirce/pic18_serial_io/overview</a></p>
+<h2 id="git-notes-in-txt2tags-project">git Notes in txt2tags project</h2>
+<p>Notes at <a href="http://www3.telus.net/danpeirce/git/git_notes.xhtml">http://www3.telus.net/danpeirce/git/git_notes.xhtml</a>.</p>
+<h2 id="vim">Vim</h2>
+<p>Found out that MINGW32 (git Bash) includes Vim.</p>
+<p>There is no default editor set up for Git for Windows. This can be changed by</p>
+<div class="codehilite"><pre><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">core</span><span class="p">.</span><span class="n">editor</span> &quot;<span class="n">vim</span>&quot;
+</pre></div>
+
+
+<p>This has the advantage that if a <code>git commit</code> is done without a <strong>-m</strong> switch
+the Vim editor will come up rather than having the commit rejected. This can
+be handy because comments appear in the editor that can be helpful in
+composing the commit message.</p>
+<ul>
+<li><a href="http://www.vim.org/docs.php">http://www.vim.org/docs.php</a></li>
+</ul>
+<p>Decided to try Vim on the Raspberry Pi also. Found only Vim-tiny was installed
+so I installed Vim (Vim-runtime). Before I make that change I was not able to
+remap the jk to <esc>.</p>
+<div class="codehilite"><pre><span class="p">:</span><span class="n">imap</span> <span class="n">jk</span> <span class="o">&lt;</span><span class="n">esc</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p>also used</p>
+<div class="codehilite"><pre><span class="p">:</span><span class="n">mkv</span>
+</pre></div>
+
+
+<p>Which saved the change to the ~/.vimrc file. This is helpful because <esc> is
+hard to touch type. Also, it does not appear on the default android virtual
+keyboard. One reason to choose Vim as a text editor for the Raspberry Pi is
+that I often use an Android and Connectbot to operate the Raspberry Pi
+remotely via Wi-fi.</p>
+
+</body>
+
+</html>
