@@ -1,0 +1,258 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Dan Peirce">
+   <meta name="GENERATOR" content="Mozilla/4.8 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>Photogate Comparison</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+
+<center>
+<h1>
+Photogate Comparison</h1></center>
+
+<center>Old Pasco, New Pasco and Vernier
+<br>By Dan Peirce B.Sc.</center>
+
+<br>&nbsp;
+<center><table BORDER CELLPADDING=8 COLS=1 WIDTH="85%" >
+<tr>
+<td>October 9, 2005</td>
+</tr>
+
+<tr>
+<td>On the 5th I also looked at the circuit inside a new vernier photogate.
+The new vernier photogates contain a <a href="Vernier/74HC_HCT132_CNV_2.pdf">74HC132</a>
+high speed CMOS quad 2 input nand schmitt trigger. See <a href="Vernier/index.html">photo
+of vernier photogate board &lt;link>.</a>&nbsp; I believe the newer technology
+in this photogate may work more reliably with our relativily new PCI NI
+data aquasition boards than the older technology in the old pasco photogates!
+I recomend testing the vernier photogates with our air track setups.&nbsp;
+<br>
+<hr WIDTH="100%">
+<p>The physical dimensions of the new vernier photogate are different from
+the old photogates. I have looked at possible ways to mount the new vernier
+photogate on our rotational apparatus. See <a href="Vernier/table/index.html">&lt;link></a></td>
+</tr>
+</table></center>
+
+<table>
+<tr>
+<td></td>
+</tr>
+</table>
+
+<center><table BORDER CELLPADDING=8 COLS=1 WIDTH="85%" >
+<tr>
+<td>October 5, 2007</td>
+</tr>
+
+<tr>
+<td>Jill found a setup that caused problems when load resistor was absent
+and I was able to get the waveforms that show how the load resistor affects
+the output of photogate P08.
+<p>See waveforms at <a href="problem_photogate_08">problem_photogate_08</a></td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<center><table BORDER CELLPADDING=8 COLS=1 WIDTH="85%" >
+<tr>
+<td>Oct. 4, 2007&nbsp;&nbsp; (<a href="photogates_NI/index.html">also see
+more photogate Comparisons showing different photogates connected with
+and without NI board</a>)</td>
+</tr>
+
+<tr>
+<a name=erroneousData> </a> 
+<td><h2>Erroneous Data</h2>
+    I have caught more photogate data. This time I found a photogate that
+was <b>consistently causing erroneous data</b> in the photo data using
+the picket fence VI (in room 3290 using the air track).
+<center>
+<p><img SRC="bad_run_no_load.jpg" height=455 width=543></center>
+
+<p>In this instance a load resistor to ground did not help; however, a
+1 K pull-up resistor eliminated the false triggers. Waveforms are shown
+below for the no load case and the pull up resistor case.
+<table>
+<tr>
+<td><img SRC="proplem_old_pasco_no_pull_up.jpg" height=358 width=450></td>
+
+<td><img SRC="proplem_old_pasco_1k_pull_up.jpg" height=355 width=446></td>
+</tr>
+</table>
+
+<h2>Interpretation of Results</h2>
+<p><b>My interpretation of these results is as follows:</b>
+<blockquote>When the photogate is not blocked the output is 5 Volts. When
+the photogate is blocked the output is 0 volts. Labview is falsely reading
+a the transition from 0 volts to 5 volts as a transition from 5 volts to
+0 volts because the signal is not a clean rising edge but both rises and
+falls. This means that the first interval is actually the time from the
+leading edge of the first tine to the trailing edge of the first tine.
+The second interval is the time from the trailing edge of the first tine
+to the leading edge of the second tine. Note that the intervals are normally
+leading edge to leading edge. This interpretation is suggests that the
+first two times would be in the ratio of the tine width to the distance
+between the tines. This is the case. Both the times ratio and the width
+spacing ratio are about 1 to 2.
+<p>The addition of the pull up resistor cleaned up the signal enough that
+no more false triggers occurred.
+<p>The same photogate did not consistently cause the problem on a different
+computer in the other lab on a different day (Oct. 2). I am speculating
+that this is because the level at which the NI board reads a transition
+varies some what from board to board.
+<br>&nbsp;</blockquote>
+<b>This is quite different from what I was looking at in fall of 2005:</b>
+<blockquote>The problem I looked in 2005 was primarily the situation in
+which only one or a few points were in error there was no consistency from
+run to run which points were involved. Some runs had problems and others
+did not. In that case noise spikes seemed to be the problem (ie they are
+random). In some cases relocated the blowers to the floor and adding power
+bars seemed to help. Load resisters seemed to eliminate the problems related
+to noise but in some cases the load resistor would cause this systematic
+problem to arise. Some stations have load resistors and some to not and
+I added them and took them away as the situation required.</blockquote>
+</td>
+</tr>
+</table></center>
+
+<center><table BORDER CELLPADDING=8 WIDTH="85%" >
+<tr>
+<td>Oct. 2, 2007</td>
+</tr>
+
+<tr>
+<td>The following shows a comparison of photogate accessories. Three types
+were looked at: Old Pasco, New Pasco and Vernier. The responses of the
+three types are all quite different. I believe more investigation is warranted.
+In Richmond we are currently using mostly the old Vernier sensors. If the
+signal in transition is too slow or lingers near the transition point too
+long false triggering could result. When that lab is free I will collect
+more data.&nbsp;
+<p>It appears that the <a href="#vernier">vernier photogate</a> is significantly
+faster than the pasco photogate but at least one of them goes into intermittent
+oscillations.
+<p>See <a href="#inlab01">waveform collected in lab between lab sections.</a>
+<br>&nbsp;
+<br>&nbsp;
+<center><table BORDER >
+<tr>
+<td><img SRC="old_pasco_no_load_fall.jpg" height=350 width=450>
+<center>Old Pasco Falling edge (no load)
+<br>50 ns/div</center>
+</td>
+
+<td><img SRC="old_pasco_no_load_rise.jpg" height=359 width=450>
+<center>Old Pasco Rising edge (no load)
+<br>50 ns/div</center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><img SRC="old_pasco_w_load_fall.jpg" height=350 width=450>
+<br>Old Pasco Falling edge (with 220 ohm load)
+<br>50 ns/div</center>
+</td>
+
+<td><img SRC="old_pasco_w_load_rise.jpg" height=345 width=450>
+<center>Old Pasco Rising Edge (with 220 ohm load)
+<br>50 ns/div</center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><img SRC="new_pasco_no_load_fall.jpg" height=349 width=450>
+<br>New Pasco Falling Edge (no load)
+<br>note 25ns/div time scale</center>
+</td>
+
+<td>
+<center><img SRC="new_pasco_no_load_rise.jpg" height=351 width=450>
+<br>New Pasco Rising Edge (no load)
+<br>note 100ns/div time scale
+<br>May want to look at using a pull up resistor to speed rise time?</center>
+</td>
+</tr>
+
+<tr>
+<td><a NAME="vernier"></a><img SRC="vernier_fall.jpg" height=350 width=450>
+<center>Vernier Falling Edge (no load)
+<br>25 ns/div</center>
+</td>
+
+<td><img SRC="vernier_rise.jpg" height=346 width=450>
+<center>Vernier Rising Edge (no load)
+<br>25 ns/div</center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center><img SRC="vernier_fall_load.jpg" height=336 width=441>
+<br>Vernier Falling Edge (200 ohm load)
+<br>25 ns/div</center>
+</td>
+
+<td>
+<center><img SRC="vernier_rise_load.jpg" height=330 width=429>
+<br>Vernier Rising Edge (200 ohm load)
+<br>25 ns/div</center>
+</td>
+</tr>
+
+<tr>
+<td><img SRC="vernier_osc.jpg" height=337 width=436>
+<center>vernier photogate in oscillation.
+<br>Note timescale has been changed to 250 ns/sec</center>
+</td>
+
+<td VALIGN=TOP>At least one of the Vernier photogates intermittently goes
+into oscillation. More testing required (could be related to the power
+supply that was in use).</td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<center><table BORDER >
+<tr>
+<td><img SRC="old_pasco_no_load_rise_ring.jpg" height=297 width=385>
+<center>This is an Old Pasco photogate Rising Edge.
+<br>50 ns/div</center>
+</td>
+
+<td VALIGN=TOP>
+<h2>
+<a NAME="inlab01"></a>This waveform was caught between labs.</h2>
+
+<p><br>This photogate was in room 3265 and was giving some false triggers.&nbsp;
+<br>The problem was intermittent and I have not yet caught an actual errant
+point. I think it should not be hard to believe that it would not take
+much noise on top of this signal to cause a false trigger. The labview
+program is normally triggering off the falling edges. A false trigger at
+the rising edge would cause an erroneous data point.
+<p>I still want to collect a wave that I know occurred for an errant point.</td>
+</tr>
+</table></center>
+
+<p>In October 2005 I caught this noise signal at the NI terminal bloxk.
+It was induced in to the photogate signal cable from the blower power line
+(this is without load resistors -- signal wire intentianally placed close
+to the blower power line -- Note that the blowers use a universal motor
+which are known to be a source of bad EMI).
+<center>
+<p><img SRC="imageMLJ.JPG" height=612 width=800></center>
+</td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;
+</body>
+</html>
