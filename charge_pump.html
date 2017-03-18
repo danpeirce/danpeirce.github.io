@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>Charge Pump</title>
+  </head>
+
+<body>
+<h1 id="charge-pump">Charge Pump</h1>
+<div class="codehilite"><pre><span class="n">by</span> <span class="n">Dan</span> <span class="n">Peirce</span> <span class="n">B</span><span class="p">.</span><span class="n">Sc</span><span class="p">.</span>
+</pre></div>
+
+
+<p>Reformated from <a href="danpeirce.net46.net/dokuwiki/doku?=charge_pump">dokuwiki</a> on July 20, 2013</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#charge-pump">Charge Pump</a><ul>
+<li><a href="#part-of-the-33-volt-lcd">Part of the 3.3 Volt LCD</a></li>
+<li><a href="#tip-on-mcu-charge-pumps">Tip on MCU Charge Pumps</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="part-of-the-33-volt-lcd">Part of the 3.3 Volt LCD</h2>
+<p>This is from the datasheet of the 3.3 volt LCD datasheet. The capacitors shown
+are part of a voltage booster (charge pump). See pins 8, 9 and 10 (from
+<a href="http://www.newhavendisplay.com/specs/NHD-C0216CZ-FSW-FBW-3V3.pdf">http://www.newhavendisplay.com/specs/NHD-C0216CZ-FSW-FBW-3V3.pdf</a> )</p>
+<p><img alt="" src="charge_pump/lcdchargepump.png"></p>
+<h2 id="tip-on-mcu-charge-pumps">Tip on MCU Charge Pumps</h2>
+<p>Could be used to generate RS232 voltages.</p>
+<p>By the way Microchip provides a tip of a very simple charge pump circuit to
+generate a voltage greater than Vdd. A similar circuit could be used to
+generate a negative voltage. If the existing level shifter does not work with
+the G-m instrument we could possibly modify it to use voltages generated from
+PIC charge pump circuits.</p>
+<p>( see tip 10 from <a href="http://ww1.microchip.com/downloads/en/devicedoc/40040b.pdf">http://ww1.microchip.com/downloads/en/devicedoc/40040b.pdf</a>
+)</p>
+<p><img alt="" src="charge_pump/mcuchargepump.png"></p>
+
+</body>
+
+</html>

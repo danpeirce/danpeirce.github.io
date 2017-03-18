@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>DC to DC Converter</title>
+  </head>
+
+<body>
+<h1 id="dc-to-dc-converter">DC to DC Converter</h1>
+<div class="codehilite"><pre> <span class="n">by</span> <span class="n">Dan</span> <span class="n">Peirce</span> <span class="n">B</span><span class="p">.</span><span class="n">Sc</span><span class="p">.</span>
+</pre></div>
+
+
+<p>I mounted the polou DC to DC converter on a small piece of protoboard which
+was mounted on a solderless breadboard.</p>
+<p><img alt="" src="dc_dc/dc-dc_converter.jpg"></p>
+<p>I then tested the board with a sparkfun 5V dc LCD display. For this test there
+is a 470 ohm load resistor and the LCD display which has the back-light LED
+turned on (takes another 60ish mA. The two AA batteries are not completely
+fresh and the total battery voltage at this time was 2.8 volts. As shown in
+this photo the output of the DC-DC converter is 5.02 v (that was as close to 5
+volts as I could adjust the trip pot in a reasonable period of time).</p>
+<p><img alt="" src="dc_dc/stand_alone_lcd.jpg"></p>
+<p>The application this quick test would be good for is stand-alone battery
+operated PIC projects. This should mantain a stable 5 Volts even as the
+battery voltage drops.</p>
+<ul>
+<li><a href="http://content.solarbotics.com/products/documentation/19200_pololu_vreg_s8v3a.pdf">http://content.solarbotics.com/products/documentation/19200_pololu_vreg_s8v3a.pdf</a></li>
+</ul>
+
+</body>
+
+</html>
