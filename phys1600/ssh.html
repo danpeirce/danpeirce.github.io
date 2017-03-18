@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>Raspberry Pi SSH</title>
+  </head>
+
+<body>
+<h3 id="link-back-to-raspberry_pi">link back to raspberry_pi</h3>
+<p>link back to <a href="raspberry_pi.html">raspberry_pi.html</a><br />
+link back to <a href="git.html">git.html</a></p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#link-back-to-raspberry_pi">link back to raspberry_pi</a></li>
+<li><a href="#raspberry-pi-ssh">Raspberry Pi SSH</a><ul>
+<li><a href="#the-settings-for-putty">The settings for PuTTY</a></li>
+<li><a href="#remote-login-from-android-tabletphone">Remote Login from Android Tablet/Phone</a><ul>
+<li><a href="#remote-login-from-an-iphone">Remote Login from an iPhone</a></li>
+</ul>
+</li>
+<li><a href="#sftp">sFTP</a><ul>
+<li><a href="#headless-operation-other-considerations">Headless Operation other Considerations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="raspberry-pi-ssh">Raspberry Pi SSH</h1>
+<p>The basic instruction needed to set up Secure Shell remote access to the
+Raspberry Pi are given at<br />
+</p>
+<ol>
+<li><a href="http://elinux.org/RPi_Remote_Access">http://elinux.org/RPi_Remote_Access</a></li>
+<li><a href="http://elinux.org/RPi_Beginners#Create_a_new_user_with_sudo-privileges">http://elinux.org/RPi_Beginners#Create_a_new_user_with_sudo-privileges</a></li>
+</ol>
+<p>Working at home I have a router between the high speed modem and local LAN.
+This allows me to reserve IP addresses for different devices and yet allows
+them to obtain their IP address from the router through DHCP.</p>
+<ul>
+<li>I assigned the Raspberry Pi to <strong>192.168.0.109</strong> <br />
+<img alt="" src="rpi/network_connections_home.png" /><br />
+</li>
+</ul>
+<p>Notes<br />
+</p>
+<div class="codehilite"><pre><span class="mi">1</span><span class="o">.</span> <span class="n">when</span> <span class="n">this</span> <span class="n">diagram</span> <span class="n">was</span> <span class="n">drawn</span> <span class="n">I</span> <span class="n">had</span> <span class="ow">not</span> <span class="n">yet</span> <span class="n">reconfigured</span> <span class="sr">/dev/</span><span class="n">ttyAMA0</span> <span class="k">for</span> <span class="n">general</span> <span class="k">use</span><span class="o">.</span> <span class="n">Once</span> <span class="n">this</span> <span class="n">is</span> <span class="n">done</span> <span class="n">the</span> <span class="n">PIC</span> <span class="n">can</span> <span class="n">be</span> <span class="n">connected</span> <span class="n">directly</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Raspberry</span> <span class="n">Pi</span> <span class="p">(</span><span class="n">see</span> <span class="p">[</span><span class="n">ttyama0_configuration_reset</span><span class="p">](</span><span class="n">raspberry_pi</span><span class="o">.</span><span class="n">html</span><span class="c1">#ttyama0-configuration-reset))</span>
+
+<span class="mi">2</span><span class="o">.</span> <span class="n">The</span> <span class="n">connection</span> <span class="n">to</span> <span class="n">the</span> <span class="n">USB</span> <span class="n">to</span> <span class="n">Serial</span> <span class="n">FTDI</span> <span class="n">board</span> <span class="n">is</span> <span class="n">more</span> <span class="n">reliable</span> <span class="n">when</span> <span class="n">the</span> <span class="n">Raspberry</span> <span class="n">Pi</span> <span class="n">is</span> <span class="n">connected</span> <span class="n">to</span> <span class="n">a</span> <span class="n">USB</span> <span class="n">hub</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">USB</span> <span class="n">to</span> <span class="n">Serial</span> <span class="n">FTDI</span> <span class="n">board</span> <span class="n">is</span> <span class="n">downstream</span> <span class="n">of</span> <span class="n">the</span> <span class="n">hub</span><span class="o">.</span>
+</pre></div>
+
+
+<ul>
+<li>In that physics lab I don't have a local router and the Raspberry Pi gets assigned a IP address by DHCP. The Raspberry Pi is getting an IP of <strong>10.213.1.85 (MAC is b8-27-eb-fc-b8-d1)</strong> when connected in the Richmond physics lab. In the Surrey Physics lab it would get a different IP address. A different Raspberry Pi would have a different MAC address and so would get a different IP address. More on this at <a href="raspberry_pi.html#logging-the-ip-address">logging_the_ip_address</a> . <br />
+<img alt="" src="rpi/network_connections_r_lab.png" /></li>
+</ul>
+<p>In the raspbian distribution
+<a href="http://linux.about.com/od/commands/l/blcmdl8_sshd.htm">sshd</a> is running by
+default.
+ sshd is the program running on the Raspberry Pi that acts as a Secure
+SHell server <a href="http://www.linfo.org/daemon.html">daemon</a>. PuTTY can be run as a
+secure shell client on a windows PC.</p>
+<h2 id="the-settings-for-putty">The settings for PuTTY</h2>
+<p><img alt="" src="rpi/puttysession.png" /></p>
+<p>This resulted in a login that looked like this:</p>
+<p><img alt="" src="rpi/login.png" /></p>
+<p>The white on black looks like an old 1980's terminal. It can be made to look
+more like a standard window by changing a setting. Add a check to "Use System
+Colors". This make it easier on the eye's.</p>
+<p><img alt="" src="rpi/system_color_setting.png" /></p>
+<p><img alt="" src="rpi/login_system_color.png" /></p>
+<h2 id="remote-login-from-android-tabletphone">Remote Login from Android Tablet/Phone</h2>
+<p>The router I am using has four LAN ports as well as Wi-Fi. With Wi-Fi between
+the Android and the router and a cat5 cable from the router to the Raspberry
+Pi it is also possible to login to the Raspberry Pi from an Android
+Tablet/Phone device.</p>
+<p>I did a test using <strong>connectbot</strong> (see
+<a href="http://code.google.com/p/connectbot/">http://code.google.com/p/connectbot/</a>). It is easy to login but with my
+Android I have no way to enter some key combinations unless an alternate
+virtual keyboard is installed (the "<a href="https://play.google.co
+m/store/apps/details?id=org.pocketworkstation.pckeyboard&amp;hl=en">Hackers Keyboard"</a> from the
+Android market makes it possible to use the control key). This is not a
+problem in the shell but in some applications like the pico editor there is no
+way to enter the command functions (my tablet uses only a virtual keyboard).
+Fortunately sFTP works great so files can simply be edited on the Android and
+transferred to the Raspberry Pi using sFTP. Better still one can use a secure
+shell and edit files on the Raspberry Pi remotely using
+<a href="http://www.vim.org">Vim</a> (Vim does not require the use of the control key and
+it is possible to remap the Esc key to another key combination -- say the
+combination jk).</p>
+<p>I first logged in on a winXP desktop computer (IP 192.168.0.101) and second
+logged in from an Android tablet (IP 192.168.0.108). The following box shows
+the result of a <strong>who</strong> command run on the desktop.</p>
+<ul>
+<li>
+<p><a href="http://lowfatlinux.com/linux-users-who.html">who</a></p>
+<p>danp@raspberrypi ~ $ who
+danp     pts/0        2012-08-02 19:56 (192.168.0.101)
+danp     pts/1        2012-08-02 20:03 (192.168.0.108)</p>
+<p>danp@raspberrypi ~ $</p>
+</li>
+</ul>
+<p>This underscores that the Raspberry Pi is a multi user system allowing
+simultaneous logins of more than one user (in this case the same user logged
+in from two different devices).</p>
+<h3 id="remote-login-from-an-iphone">Remote Login from an iPhone</h3>
+<p>I have not tested an iPhone because I don't have access to one. It should work
+as well as the Android if a ssh client is installed.</p>
+<ul>
+<li><a href="http://www.messagingnews.com/onmessage/ben-gross/iphone-ssh-clients-reviewed-issh-pterm-and-touchterm">http://www.messagingnews.com/onmessage/ben-gross/iphone-ssh-clients-reviewed-issh-pterm-and-touchterm</a></li>
+</ul>
+<h2 id="sftp">sFTP</h2>
+<p>sFTP clients can be run on computers/tablets for file transfer. They connect
+to the secure shell on the Raspberry Pi. For a windows sFTP client I used
+<a href="http://filezilla-project.org/">FileZilla</a> since I already had it installed on
+my windows computer to access other sites.</p>
+<p><img alt="" src="rpi/filezilla_setup_rpi.png" /> <img alt="" src="rpi/sftp.png" /></p>
+<p>On the Android tablet there also was a sFTP client installed. It is [ ES file]
+(https://play.google.com/store/apps/details?id=com.estrongs.android.pop&amp;hl=en)
+manager which can be used both for local and remote file management.</p>
+<h3 id="headless-operation-other-considerations">Headless Operation other Considerations</h3>
+<ul>
+<li><a href="http://www.penguintutor.com/linux/raspberrypi-headless">http://www.penguintutor.com/linux/raspberrypi-headless</a></li>
+</ul>
+<p>If one is going to use the Raspberry Pi headless only it is possible to change
+the memory split between the main system and video. I'll be coming back to
+this.</p>
+
+</body>
+
+</html>
