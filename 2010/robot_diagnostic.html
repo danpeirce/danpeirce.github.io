@@ -1,0 +1,779 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.79 [en] (Windows NT 5.0; U) [Netscape]">
+   <meta name="Author" content="Dan Peirce">
+   <title>Robot Diagnostic notes</title>
+</head>
+<body>
+
+<center>
+<h1>
+Robot Diagnostic</h1></center>
+
+<center>
+<h1>(<a href="https://github.com/danpeirce/robot_diagnostic">current version on github</a>)</h1><br>
+(<a href="#v4002">v4.002</a>)</center>
+
+<center>by Dan Peirce B.Sc.</center>
+
+<blockquote>
+<blockquote><a NAME="overview"></a>
+<hr WIDTH="100%">Nov. 18, 2010
+<hr WIDTH="100%">
+<br><font size=+2>Overview</font>
+<br>The purpose of the Robot Diagnostic program is primarily to test the
+correct functioning of the different parts of the robot. The students often
+add new code to their programs and find the robot stops working in ways
+they don't think are related to their new code. It is nessesary to have
+a program that can test all aspects of the robot to ensure it works. That
+is the puropse of the diagnostic program. It was designed to be easy to
+use by students, lab instructors and technicians.
+<p>The program was written to be used with hyperterminal
+<blockquote>(although I have also written a Perl/TK script that includs
+a GUI and can be run on a PC that has Strawbarry Hill Perl installed [as
+well as the following perl modules Tk and Win32::SerialPort] ---- note
+that Tk must be compiled and installed and this takes some time -- more
+at&nbsp; <a href="PerlTkGUIdiag.html">PerlTkGUIdiag.html</a>&nbsp; ).</blockquote>
+The robot is connected to a PC with a simple passive cable. The program
+uses a menu system that is easy to navigate.</blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote><a NAME="encompassing_state_machine"></a>
+<hr WIDTH="100%">Oct. 26, 2010 (rev. Oct 27, 2010)
+<hr WIDTH="100%">
+<br>Significant changes to <a href="robot_diagnostic4002/main.c">main.c
+</a>were
+made for version 4.001 (4.002 fixed a bug). The state machine for the menu
+system has been retained but it is now the default state of a more encompassing
+state machine. The function pointer for the new robot diagnostic state
+machine is called diagnostic_state and as of this version of the program
+it can point at one of the four possible states. The <a href="MenuStateMachineDiagnosticProgram.html#get_command">function
+pointer concept </a>is presented in some detail with regard to the menu
+system function pointer. The idea is the same here.
+<br>&nbsp;
+<center>
+<h2>
+state transition diagram</h2></center>
+
+<center><img SRC="diagnostic_STD_s.gif" HSPACE=3 VSPACE=3 BORDER=3 height=381 width=440></center>
+
+<p>The <a href="MenuStateMachineDiagnosticProgram.html"><font size=+1>menu
+system</font> runs within the process_command state</a>. The menu system
+must be in the motor menu1 state in order for the jog option to be available.
+Restructuring the program in this way should permit the addition of other
+non menu driven states. For example the simple line follower program itself
+could be added as a new state of the diagnostic program.
+<p>Note that the ovals in the state transition diagram indicate program
+states. The arrows indicate possible state transitions. The letters adjacent
+to the arrows indicate a keyboard press in hyperterminal (or a graphical
+button activated by a mouse press if using the Perl/tk GUI). The arrow
+without a letter indicates an automatic state transition.
+<p>The jog1 and jog2 states both themselves contain a series of sequential
+sub-states.
+<p>Before the diagnostic state machine is started an initialzation function
+from sumovore.c is run. As part of the initialization of the robot hardware
+flags are read to determine what type of reset has occured. More on this
+at&nbsp; <a href="changesSumovore_h.html">Changes to sumovore.c and Sumovore.h</a>
+.
+<br>
+<hr WIDTH="100%"></blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote>
+<hr WIDTH="100%"><a NAME="v4002"></a>Oct. 22, 2010
+<hr WIDTH="100%">
+<br><a href="robot_diagnostic4002/v4002_files.html">Files specific to version
+4.002 can be found at this link</a>
+<p>
+<hr WIDTH="100%">Sept. 2, 2010
+<hr WIDTH="100%">Bluetooth restults moved to a new page&nbsp; see <a href="bluetooth.html">bluetooth.html</a>
+<br>
+<hr WIDTH="100%"></blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote>
+<hr WIDTH="100%">August 24, 2010
+<hr WIDTH="100%">Considering modifying a brainboard to use bluetooth.
+<br>&lt;added Oct. 22, 2010> Note that while I have done this out of curiosity
+it is not needed to use the diagnositc program; however, it could be used
+to remove the tether between the robot and the PC and allow the PC to gather
+data as the robot moves around a course or maze.
+<p><iframe src="https://docs.google.com/document/pub?id=18NNMVyVqcXbTBjH7FvrYkkrUO2XDVpdrRVAsFwaJKvg&amp;embedded=true" width="100%" ></iframe>
+<hr WIDTH="100%"></blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote><a NAME="GUI"></a>
+<hr WIDTH="100%">July 30, 2010
+<hr WIDTH="100%">
+<br>Created a simple graphical interface that allows one to interact with
+the Robot Diagnostic program with mouse clicks rather than typing keyboard
+keys. More at the link ->&nbsp;&nbsp; <a href="gui/PerlTkGUIdiag.html">gui/PerlTkGUIdiag.html
+</a>or
+in this iframe<iframe src="gui/PerlTkGUIdiag.html" width="100%" height=400></iframe>
+<br>
+<hr WIDTH="100%">
+<p><a NAME="version4001"></a>
+<hr WIDTH="100%">July 6, 2010
+<hr WIDTH="100%">
+<br><b>Version 4.001</b> of the Robot Diagnostic program now allows one
+to stop the jog cycle using either a "u" or a "U" on the PC keyboard. It
+also allows one to switch from a jog1 sequence to a jog2 sequence by typing
+a "2" (one can switch back by typing a "1". At the moment the difference
+between jog1 an jog2 is only in the motor speed. jog2 is at full speed
+while jog1 is a medium speed.
+<center>&nbsp;<a href="robot_diagnostic4001/robot_diagnostic4001.hex">robot_diagnostic4001.hex</a></center>
+
+<p>To accommodate different jog sequences (and the possibility of additional
+sequences) a simple state machine was added to <a href="robot_diagnostic4001/main.c">main.c</a>.
+The new state variable is called <b>diagnostic_state</b>. <b>diagnostic_state</b>
+is a pointer to a function. In this version <b>diagnostic_state</b> can
+be one of four values (shown in the table below).
+<br>&nbsp;
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<td VALIGN=TOP>diagnostic_state = <b><a href="robot_diagnostic4001/jog1.c">jog1_state</a></b>;
+<br>diagnostic_state = <b><a href="robot_diagnostic4001/jog2.c">jog2_state</a></b>;
+<br>diagnostic_state = <b><a href="robot_diagnostic4001/process_command.c">process_command</a></b>;
+<br>diagnostic_state = <b><a href="robot_diagnostic4001/main.c">stop_state</a></b>;</td>
+
+<td VALIGN=TOP>same as version 3.000 jog sequence
+<br>new jog sequence
+<br>process_command is the same function used in version 3
+<br>new state used for transition from jog1 and jog2 back to process_command</td>
+</tr>
+</table></center>
+
+<p>The file <a href="robot_diagnostic4001/command_list.h">command_list.h</a>
+has also been updated with new commands. The commands were added so that
+the function pointer variable <b>diagnostic_state</b> could have limited
+scope (only in the file main.c).
+<p>The files <a href="robot_diagnostic4001/menu.c">menu.c</a>, <a href="robot_diagnostic4001/sumovore.c">sumovore.c</a>
+and <a href="robot_diagnostic4001/interrupts.c">interrupts.c</a> have also
+been updated.
+<center>
+<p><a href="robot_diagnostic4001/filelist.html">all files in version 4.001</a></center>
+
+<hr WIDTH="100%">
+<p>
+<hr WIDTH="100%">June24, 2010
+<hr WIDTH="100%">
+<br>An updated version of the diagnostic program will be coming soon for
+two reasons.
+<ol>
+<li>
+The existing jog sequence created BrownOut Resets on version 1.0 robots
+before I started added an extra 22 microFarad capacitor to the output of
+that regulator. Now this capacitor is in place it appears a different jog
+sequence is more likely to cause trouble.</li>
+
+<ul>
+<li>
+The output of the regulator was somewhat unstable when it lacked a large
+capacitor near the output pins. This problem showed up at medium speed.
+It seems plausible the reason was the PWM created a lot of edges and the
+transients associated with those edges feed the instability in the regulator.</li>
+
+<li>
+With the instability fixed BORs are not happening with fresh batteries.
+As the batteries become depleted the chances of the Low Voltage Detect
+being activated becomes greater. The event most likely to cause this is
+having both motors reverse direction at the same time (this draws a lot
+of current). This could be tested for with a Jog sequence that runs the
+motors at full speed and allows the motors to obtain full speed before
+reversing. The new version of the program will probably have two or more
+jog sequences.</li>
+
+<br>&nbsp;</ul>
+
+<li>
+The changes to sumovore.c and interupts.c should be incorparated into the
+simple curve follower project. In that project the need for further tweeks
+to sumovore.c are apparent and it would be best to have only one sumovore.c
+file so that will result in further small changes in the diagnostic project.</li>
+</ol>
+At the moment I have the sense that we can avoid the addition of a extra
+battery for the brainboard. Additional testing would be helpful to see
+how much difference it would make. I suspect that it would allow the use
+of more depleted batteries but the question remains of how useful that
+would be. Would it be worth the addition of the extra battery?
+<br>
+<hr WIDTH="100%">
+<p>
+<hr width="100%" />April 23, 2010&nbsp;
+<hr width="100%" />
+<br>On April 22 a new feature was added to the diagnostic program that
+is intended to find a value for the threshold that will ensure the line
+can not be lost between two sensors. (this works well on the Richmond robots
+with adjusted sensor resistors but not on the Surrey robot I tested).
+<br>Files for this project can be found at the following links:
+<br>&nbsp;
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<td><a href="robot_diagnostic1100/main.c">main.c</a></td>
+
+<td>&nbsp;&nbsp; <a href="robot_diagnostic1100/menu.c">menu.c</a></td>
+
+<td><a href="robot_diagnostic1100/menu.h">menu.h</a></td>
+
+<td>&nbsp;<a href="robot_diagnostic1100/robot_diagnostic.hex">robot_diagnostic.hex</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;<a href="robot_diagnostic1100/process_command.c">process_command.c</a></td>
+
+<td>&nbsp;&nbsp; <a href="robot_diagnostic1100/process_command.h">process_command.h</a></td>
+
+<td>&nbsp;<a href="robot_diagnostic1100/motor_control.c">motor_control.c</a></td>
+
+<td><a href="robot_diagnostic1100/motor_control.h">motor_control.h</a></td>
+</tr>
+
+<tr>
+<td>&nbsp;<a href="robot_diagnostic1100/sensor.c">sensor.c</a></td>
+
+<td>&nbsp;<a href="robot_diagnostic1100/sensor.h">sensor.h</a></td>
+
+<td>&nbsp;<a href="robot_diagnostic1100/sumovore.c">sumovore.c</a></td>
+
+<td>&nbsp;<a href="robot_diagnostic1100/sumovore.h">sumovore.h</a></td>
+</tr>
+</table></center>
+
+<p>osc.c and osc.h are also needed and are expected to be found in the
+folder "..\Functions".
+<blockquote><b>(added April 27, 2010) </b>The source files contain few
+comments. For an overview of how the program works click on this link or
+on the image of the <a href="MenuStateMachineDiagnosticProgram.html">State
+Diagram for the Menu system of the Diagnostic Program for the Robot (see
+below in April 26, 2010)</a>.</blockquote>
+
+<p><br>Communication with the robot is accomplished with hyperterminal.
+The configuration file for hyperterminal is here:
+<br>&nbsp;
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<td>&nbsp;<a href="robot_diagnostic1100/robot_diagnostic.ht">robot_diagnostic.ht</a></td>
+</tr>
+</table></center>
+
+<p><a NAME="passiveCable"></a>A simple passive cable is needed to connect
+between the robot and the PC COM1 port. Page 13 of the <a href="http://www.solarbotics.com/assets/documentation/solarbotics_sumovore_pic_brainboard_v2.pdf">PIC
+brainboard V 2.0 manual </a>PIC brainboard V 2.0 manual shows the connections
+between the DB9 connector and pins that fit into the brainboard. As suggested
+I used a cable from a dead serial mouse for the connector and cable.
+<p>Note the level shifter is built into the new Brainboard version 2's
+so there is <b>no need for the spark fun level shifter.</b>
+<br>(image added Nov. 11, 2010)
+<br><img SRC="image1CP.JPG" height=713 width=1092>
+<br>
+<hr width="100%" />
+<p>
+<hr SIZE=5 WIDTH="100%">
+<br><a NAME="april26_2010"></a>April 26, 2010
+<hr SIZE=5 WIDTH="100%">
+<br>The diagnostic program that runs on a robot works through a menu system.
+The robot must be connected to a computer with a <a href="#passiveCable">simple
+passive cable</a>.
+<p>The menu system has been inplemented as a state machine. Click on image
+below for a link that gives the details. (<b>rev. May 14, 2010 -- there
+is more detail for both the Motor Menu 1 state and the Sensor Menu 1 state;
+these have been put into new images -- click on image below&nbsp; </b>).
+<center><a href="MenuStateMachineDiagnosticProgram.html#State transition diagram"><img SRC="TopMenu_STD.gif" HSPACE=3 VSPACE=3 BORDER=3 height=476 width=404></a></center>
+The top menu of the menu system looks like this screen shot below. There
+are essentially two choices at this level: motor or sensor.
+<ul>
+<li>
+The robot should be on a block if motor is chosen. An empty breadboard
+works well as a block.</li>
+
+<li>
+The robot should be on a test track if sensor is chosen.</li>
+</ul>
+
+<center><img SRC="top_menu1_1.gif" HSPACE=3 VSPACE=3 BORDER=3 height=335 width=506>
+<br><a NAME="top_menu"></a>In hyperterminal you must enter either m or
+S for motor or sensor.
+<br>In this HTML page you can click on the link to see the next menu...</center>
+
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<td><tt>&nbsp;&nbsp; Kwantlen Polytechnic University</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+APSC1299</tt>
+<br><tt>&nbsp;&nbsp; program by Dan Peirce B.Sc.</tt>
+<br><tt>&nbsp;&nbsp; version 1.100 April 22, 2010</tt>
+<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Top Level Menu</tt>
+<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m => motor</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="robot_diagnostic_sensor_menu.html">S
+=> sensor</a></tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ? or h => help print
+this menu</tt>
+<p><tt>_</tt></td>
+</tr>
+</table></center>
+
+<p>
+<hr SIZE=5 WIDTH="100%">
+<p>
+<hr SIZE=5 WIDTH="100%"><a NAME="2010_05_03"></a>May 3, 2010
+<hr SIZE=5 WIDTH="100%">
+<br>The documentation has not kept up with the new versions of the diagnositic
+program.
+<ul>
+<li>
+In <b>version 2</b> a feature was added to the motor menu to <b>automatically
+jog the robot</b> to the left and right. This was intended to be used to
+check for reliable program execution. (<b>added June 15, 2010</b> -- set
+usart to 9600 b&nbsp;&nbsp;&nbsp; ps )</li>
+
+<li>
+In <b>version 3</b> a<b> reliability features</b> were added to watch for
+<b>brownout
+conditions</b>, <b>low voltage conditions</b>, and <b>stack overflow</b>
+. The <b>watchdog timer </b>feature was also enabled. ( <b>added June 15,
+2010</b> -- set usart back to 115200 bps).</li>
+
+<br><a href="#v3code_hex">v3 code, .HEX &amp; ht file</a>
+<ul>
+<li>
+I was working out details of using these <i>version 3</i> features of the
+PIC in 2008 and only now have picked it up again -</li>
+
+<br>see
+<ul>&nbsp;
+<table CELLPADDING=5 >
+<tr>
+<td VALIGN=TOP>
+<ul>
+<li>
+<a href="http://www3.telus.net/danpeirce/c_18/init_LVINT/">/init_LVINT/</a></li>
+
+<li>
+<a href="http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/apsc1299/real_time_code.html#LVD">real_time_code.html#LVD</a>&nbsp;</li>
+</ul>
+</td>
+
+<td VALIGN=TOP>Low voltage interupt</td>
+
+<td VALIGN=TOP>If the supply voltage should drop 4.5 volts a a low voltage
+service routine is called.&nbsp;</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP>
+<ul>
+<li>
+<a href="http://www3.telus.net/danpeirce/c_18/WDT/WDTpic18.html">WDT/WDTpic18.html</a></li>
+</ul>
+</td>
+
+<td VALIGN=TOP>Watchdog timer</td>
+
+<td>The program is written so that the watchdog timer is reset frequently.
+If
+something interferes with normal program execution and the timer is not
+reset before it times out the timer will reset the PIC. The timeout could
+occur when there is a bug in the program or if the PIC itself does not
+execute the program correctly.</td>
+</tr>
+
+<tr>
+<td>
+<ul>
+<li>
+<a href="http://www3.telus.net/danpeirce/c_18/bor_lib/index.html">/bor_lib/index.html</a></li>
+</ul>
+</td>
+
+<td VALIGN=TOP>brownout reset</td>
+
+<td>If the supply voltage drops below 4.3 volts the PIC is held in reset
+until the voltage returns to normal. This is to avoid possible unpredictable
+behavior below 4.2 volts.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP>
+<ul>
+<li>
+<a href="http://www3.telus.net/danpeirce/c_18/stack_eeprom-int/index.html">stack_eeprom-int/index.html</a>&nbsp;</li>
+</ul>
+</td>
+
+<td VALIGN=TOP>stack overflow reset</td>
+
+<td VALIGN=TOP>The PIC has a hardware stack to retain return addresses
+when C function calls are made. The stack has room for 31 return values.
+After that the stack will overflow and code will not be executed as expected.
+This stack overflow reset is intended to alert the programmer that an overflow
+has occured.</td>
+</tr>
+</table>
+(There is an index of PIC features I investigated in 2008 at&nbsp; <a href="http://www3.telus.net/danpeirce/c_18/stdout_change/changing_stdout.html">http://www3.telus.net/danpeirce/c_18/stdout_change/changing_stdout.html</a>
+)</ul>
+
+<li>
+at that time I wrote the pages linked above&nbsp; I was using the EEPROM
+data to retain messages -- The diagnostic program is menu (hyperterminal)
+driven so I am now sending the messages to the USART for the diagnostic
+program. The new PIC board V2.0 makes comunication between the robot and
+a PC easier (only a passive cable is needed with the new PIC board.</li>
+</ul>
+
+<hr WIDTH="100%"></ul>
+
+<blockquote>&nbsp;
+<center><table BORDER CELLPADDING=4 >
+<tr>
+<td><font size=+1>rev. Nov. 18, 2010</font>
+<br><font size=+1>Perhaps I should make clear that I have concluded that
+optical isolation is </font><u><font size=+2>not</font></u><font size=+1>
+needed in our case. I also don't expect an additional battery will be needed.
+Those ideas are discussed below but the result of that investigation was
+to add a capacitor to the mainboard of version 1.0 robots and to enable
+features already built into the microcontroller to improved reliability.</font>
+<p>In my experience optical isolation is typically used when:
+<ol>
+<li>
+interfacing to AC circuits.</li>
+
+<li>
+in industrial installations in which it might be possible for control wiring
+and power wiring to be accidentally shorted together in a mishap.</li>
+
+<li>
+when the wires are very long (meaning they go beyond the interior of a&nbsp;
+single building).</li>
+</ol>
+I believe that the motor driver IC provides sufficient isolation in our
+case with small PM motors and very short wires. <b>This is in regard to
+the quote of Mazidi, Mckinlay and Causey down below! These issues were
+investigated and I think we can now put them to rest.</b></td>
+</tr>
+</table></center>
+
+<hr WIDTH="100%"></blockquote>
+<font size=-1>It has been found that brown out conditions can be created.
+An extra battery was added so that the PIC had a separate 5v supply but
+the brownouts persisted (prior to June this had only be tried on version
+1.0 robots -- <b>added June 17, 2010</b>). The next step is to add optical
+isolation between the PIC and the motor driver IC (the L293D). It appears
+this can be done without modifying the existing boards if new boards are
+added between the mainboard and Brainboard. (it does not now seem that
+is will be necessary!!! -- <b>added June 17, 2010</b>)</font>
+<p><font size=-1>Note at&nbsp; <a href="../../../../../engineering/APSC1299/files_for_lab/battery_replacement.html#optoisolation">battery_replacement.html#optoisolation</a></font>
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<td><font size=-1>I should point out that in <b><i>PIC Microcontroller
+and Embedded Systems</i> by Mazidi, McKinlay and Causey </b>it is suggested
+that "the PIC18 is protected from EMI created by the motor brushes <b>by
+using an optoisolator and a separate power supply</b>."&nbsp;</font>
+<br><font size=-1>In Figure 17-18 page 656 they show an opto isolator used
+with the L293 (same driver chip used on the sumovore) and separate power
+supplies are suggested PIC and the L293 driver. I have run into hobbyists
+who recommend modifying the sumovore to use a separate battery for the
+PIC to avoid unexpected resets.</font></td>
+</tr>
+</table></center>
+
+<blockquote>&nbsp;
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<td><font size=-1><b>(rev. May 14, 2010)</b> The plan that was outlined
+in the box shown below is starting to seem like too much work. Last night
+I thought of an alternate plan which would require fewer optical isolators
+(just 3 rather than 6) and would require no further changes to the existing
+robot or brain board 2! One would add circuits and a battery to an expansion
+board available from microchip.</font>
+<p><font size=-1>In this scenario the PIC on the brain board would continue
+to control the robot as before; however, the student program would be run
+in a second PIC on an add-on board. The add-on board would have it's own
+power supply and would connect to the brain board through optical isolators
+so it would in fact be completely electrically isolated from the robot!</font>
+<p><font size=-1>The PIC on the brain board v2 would have just one reliability
+feature enabled; the watchdog timer would be enabled. This would mean that
+if the program running on this PIC stopped executing the code in the normal
+way the watchdog timer would time out causing the PIC to reset and so reenter
+a known state. This would occur in the order of 30 to 40 ms.&nbsp;</font>
+<p><font size=-1>I have found that if I enable the brownout reset the resets
+occur to frequently with the existing setup. The brownout circuit must
+be sensitive to conditions that actually only rarely cause the PIC fail.
+This can be tolerated except when it is important not to lose any values
+stored in RAM. On reset all values in RAM are lost. This is not important
+with regard to the low level control close to the hardware as long as the
+condition does not persist for too long. It is only on the order of 30
+ms I think this would hardly be noticeable as long as it does not happen
+too frequently.</font>
+<p><font size=-1>At a higher level one must maintain flags and other variables
+regarding if the robot has recently seen a line off to the right or the
+left. In the case of a maze one would keep an internal map of the maze.
+No resets can be tolerated. If the higher functionality was maintained
+in a PIC completely isolated from the electric EMI of the motors is should
+be robust and reliable.</font>
+<br>
+<hr WIDTH="100%">
+<br><b><font size=-1>(rev. May 18, 2010)</font></b>
+<br><font size=-1>Having looked at using the <b>I<sup>2</sup>C</b> interface
+or the <b>RS232</b> interface I have decided it would be simpler to use
+the <b>RS232</b> interface although this will require the addition of one
+jumper to the version 2 brain board.&nbsp;</font>
+<p><font size=-1>Using the <b>I<sup>2</sup>C</b> interface would not have
+required any change to the version 2 brain board; however, it would be
+much more complex to build an isolation circuit given the bi-directional
+nature of the <b>I<sup>2</sup>C</b> interface lines.</font>
+<p><font size=-1>From a softward point of view the <b>RS232</b> seems more
+straight forward. The purpose of <b>I<sup>2</sup>C </b>is to allow a microcontroller
+to talk to several peripherals over the same two line interface. That adds
+complexity that is not required here. For example the <b>I<sup>2</sup>C</b>
+message includes an address so the specified peripheral will respond. The
+microcontroller is the master and the peripherals are slaves (they only
+send information reqested).</font>
+<p><font size=-1>The intent of <b>RS232 </b>is more our actual situation.
+We will have two microcontrollers talking to each other peer to peer. <b>RS232</b>
+will allow messages to be going in both directions at the same time. This
+will allow the software to be simpler. The complication is the built in
+level shifting interface intended to let the brain board talk to a PC.
+That can be worked around. For example the expansion board can be removed
+when the diagnostic program is being run on the robot.</font></td>
+</tr>
+
+<tr>
+<td><font size=-1><b>(rev. June 16, 2010) </b>On the 15th tests showed
+very different results for version 1.0 robots and version 1.1 robots (currently
+there are only 2 version 1.1 robots in Richmond.</font>
+<p><font size=-1>from email from me to Mike C.</font>
+<br>
+<hr WIDTH="100%">
+<blockquote><font size=-1>I have setup the diagnostic program to test for
+brownouts and got some surprising results when comparing old version 1
+robots to the newer version 1.1 robots.&nbsp;</font>
+<p><font size=-1>I only have two of the newer robots at the Richmond campus
+but in testing today so far I have found my jog sequence always causes
+a brown out reset on version 1 robots and never does on version 1.1 robots
+(with fresh batteries).&nbsp; I did the test with fresh out of the box
+batteries and batteries that had a total of 8.7 volts (voltage measured
+when the robot was on and the motors were disabled).</font>
+<p><font size=-1>Note that I tried moving a brainboard from an the new
+1.1 robot to the old 1.0 robot and the result was the same; there was a
+reset on the 1.0 version robot.</font>
+<p><font size=-1>The first implication of this is that the version 1.1
+robots may be a great deal more reliable than the version 1.0 robots. The
+new version of the robot main board has what looks like a more logical
+layout with shorter ground traces. see <a href="http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/sumovore_maintenance_log/sumovoreVersions.html">http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/sumovore_maintenance_log/sumovoreVersions.html</a></font>
+<br><font size=-1>and</font>
+<br><font size=-1>&nbsp;More on this below at&nbsp; <a href="#LVD">Low
+votage detect</a></font>
+<p><font size=-1>I guess the question then would be is the isolation still
+necessary with version 1.1 of the robot (it may be a lot easier to simply
+use version 1.1 robots if that is all it takes to get better reliability).</font>
+<p><font size=-1>I should try more tests with older batteries.</font>
+<p><font size=-1>indication of brownout reset <b>&lt;BOR></b> (running
+<b>version
+1.0 robot</b>)</font>
+<br><font size=-1>Note it should say version 3.000 (guess I forgot to change
+the message in the program).</font>
+<br><img SRC="BOR_.png" HSPACE=3 VSPACE=3 BORDER=3 height=409 width=654>
+<p><font size=-1>Where as the<b> version 1.1 robot </b>just kept going
+and going (I stoped it after 1000 jogs -- &lt;POR> indicates a power on
+reset i.e. I turned the power off and back on)&nbsp;</font>
+<br><img SRC="jog8.png" HSPACE=3 VSPACE=3 BORDER=3 height=580 width=675>
+<p><img SRC="jog1012.jpg" HSPACE=3 VSPACE=3 BORDER=3 height=316 width=524>
+<br>&nbsp;
+<p>
+<hr WIDTH="100%"></blockquote>
+
+<h3>
+<a NAME="LVD"></a><font size=-1>Low Voltage Detect</font></h3>
+
+<center><img SRC="R10_6-2.png" HSPACE=3 VSPACE=3 BORDER=3 height=196 width=468></center>
+<font size=-1>When I ran tried the jog sequence on a <b>new version 1.1
+robot with old batteries</b> I found I started to get low voltage detection
+when the total voltage on the batteries was drained to about 6.1 volts.
+Initially the voltage was higher but after 3069 jog cycles the batteries
+had discharged down to 6.1 volts and the LVD's started to occur. Initially
+they were occurring every 200 or so jog cycles. As the batteries continued
+to discharge the frequency of LVD's increased.</font>
+<p><font size=-1>There is a significant <b>difference between the LVD and
+the BOR</b>. <strike>The voltage difference between the two is small.</strike>
+The LVD causes an interrupt. The interrupt service routine turns off most
+of the IO of the PIC as quickly as possible in an attempt to slow down
+the voltage drop. <strike>If a BOR occurs it means there was insufficient
+time to avoid having the voltage drop to the BOR level. If a LVD is indicated
+then the interrupt service routine was able to avoid a BOR by turning off
+the motors (and LED's). This means the BOR is an indication of a large
+<b>dV/dt</b>
+and a LVD is an indication of a smaller <b>dV/dt.</b></strike></font>
+<blockquote>
+<h3>
+
+<hr SIZE=4 WIDTH="80%"><b>[correction made on Feb. 25th. 2011 -- including
+the strike out of characters above]</b></h3>
+If a low voltage condition last longer than T<sub>BOR</sub> then a BOR
+condition exists. The datasheet gives only a minumum value for T<sub>BOR</sub>
+.
+<center><b>T<sub>BOR </sub>> 200 micro seconds</b></center>
+
+<hr SIZE=4 WIDTH="80%"></blockquote>
+<font size=-1>It appears that changing the layout for the version 1.1 robot
+reduced the <b><strike>dV/dt</strike></b>&nbsp; [<b>correction</b> ---
+repaced dv/dt with duration] duration that the PIC sees a low voltage condition
+on the 5 volt supply. I'm guessing that on the ground lines the high current
+path to the motor controller and the low current path to the PIC was separated
+so that noise on the ground of the high current path would have less effect
+on the PIC and the brainboard in general. Also, it is possible the the
+location of the large filter capacitor is more effective on the version
+1.1 board.&nbsp;</font>
+<p><font size=-1>I have had a close look at the layout of the version 1.0
+and version 1.1 boards and <b>it appears that the version 1.1 board has
+a smaller dv/dt because the 1000 micro farad capacitor C1 is connected
+very close to the output of the regulator.</b> On the version 1.0 board
+the capactor C1 is a long way from the regulator and the motor driver is
+between (a bad layout). See <a href="http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/apsc1299/2010/mainboard/ground_layout.html">http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/apsc1299/2010/mainboard/ground_layout.html</a></font>
+<p><font size=-1>In the image below black indicates a highlighted ground
+trace on the component side of the board. Gray is a highlighted trace ground
+trace that is on the solder side of the board (dark gray is a trace I could
+see -- light gray is a trace I am guessing must be there -- I'm guessing
+because I don't currently have access to one of these boards that does
+not have a bracket obscuring where I think the trace most likely is and
+the manual is no help because it does not show the solder side of the new
+board; the solder side photo is clearly the old 1.0 version board).&nbsp;</font>
+<center><a href="mainboard/mainboard_v1_1_h.PNG"><img SRC="mainboard_v1_1_h.PNG" HSPACE=3 VSPACE=3 BORDER=3 height=300 width=290></a></center>
+
+<blockquote>
+<hr WIDTH="100%"></blockquote>
+<font size=-1>Bob brought over a robot from Richmond today. I used the
+diagnostic program to look at readings from the sensors. I found the sensors
+on that robot were saturated as I would expect. The automatic threshold
+selection option of the diagnostic program will not work with the highly
+saturated sensors. I tried setting the threshold manually and found with
+a setting of 35 the line could not be lost between any two sensors but
+with a setting of 40 it could be. The setting for the calibrated richmond
+sensors typically is between 450 and 512 and the automatic setting procedure
+works.</font></td>
+</tr>
+
+<tr>
+<td><font size=-1><b>(prior to May 14) </b>Solarbotics calls the controller
+board a brainboard and I have been doing the same. I am considering starting
+to call it the PIC board or microcontroller board.&nbsp; The new boards
+could be called isolation boards 1 and 2. It seems two boards will be needed
+because the connectors to the mainboard need to be in the same relative
+position as the connectors to the PIC board.</font>
+<p><font size=-1>The plan is <b>(was prior to May 14 -- it was noted on
+May 14 that this would be too much work hardware wise -- see alternet plan
+May 14 and 18 above -- note as of June 15 this has not yet been implemented)</b>
+to make the <b>isolation</b> between the main board and the PIC board as
+compleate as reasonably possible. Motor control outputs will go to <a href="../../../../../engineering/APSC1299/files_for_lab/PC942J00000F.pdf">optical
+isolators</a>.</font>
+<blockquote>
+<li>
+<font size=-1>The five volt supply for the LED's will come from the PIC
+board independed supply.</font></li>
+
+<li>
+<font size=-1>The supply for the sensor side of the IR refective sensors
+will also come from the PIC board supply.</font></li>
+
+<li>
+<font size=-1>The IR emitters will be supplied from the main board supply.</font></li>
+</blockquote>
+<font size=-1>The one point where isolation will not be complete is the
+IR emitters and IR sensors share a common ground. This would not necessary
+but the sensor board is designed such that there is a copper trace directly
+between the IR emitter and IR sensor under each IR reflective sensor.&nbsp;
+The only way to separate these would be to make a new replacement boards.
+I think we should be able to tolerate the point of contact between the
+two supply systems without getting Brownout conditions since it will be
+the only point of contact. I am considering running a ground wire from
+the sensor board to the PIC board to provide the return path for the sensors.</font>
+<p><font size=-1>I should test the new version of the main board to see
+if the brownout reset is an issue with it as well. I have been testing
+on Robot 07 (version 1 robot) because that was the one I was testing on
+back in 2008.</font></td>
+</tr>
+</table></center>
+</blockquote>
+
+<hr SIZE=5 WIDTH="100%">
+<br><a NAME="v3code_hex"></a>
+<br>
+<hr SIZE=5 WIDTH="100%"><font size=-1>May 4, 2010</font>
+<hr SIZE=5 WIDTH="100%">
+<br><font size=-1><b>Version 3 of diagnostic program</b>.</font>
+<ol>
+<li>
+<font size=-1>At the time I posted this there are two version of jogx.c
+and motor_controlx.c. I am still deciding which I want to include and at
+any given time only one of the two varients of both files should be included
+in the project workspace.</font></li>
+
+<li>
+<font size=-1>the bit rate for the USART is set in sumovore.c. The rate
+for this version of the program is <b>115200 bps</b>. (for version 2 only
+it had been changed to 9600 bps).</font></li>
+</ol>
+
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<td><font size=-1><a href="robot_diagnostic3000/main.c">main.c</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/menu.c">menu.c</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/menu.h">menu.h</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/command_list.h">command_list.h</a></font></td>
+</tr>
+
+<tr>
+<td><font size=-1><a href="robot_diagnostic3000/interrupts.c">interrupts.c</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/interrupts.h">interrups.h</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/process_command.c">process_command.c</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/process_command.h">process_command.h</a></font></td>
+</tr>
+
+<tr>
+<td><font size=-1><a href="robot_diagnostic3000/jog1.c">jog1.c</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/jog2.c">jog2.c</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/jog.h">jog.h</a></font></td>
+
+<td><b><strike><font size=-1>robot_diagnostic.ht</font></strike></b></td>
+</tr>
+
+<tr>
+<td><font size=-1><a href="robot_diagnostic3000/motor_control1.c">motor_control1.c</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/motor_control2.c">motor_control2.c</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/motor_control.h">motor_control.h</a></font></td>
+
+<td><b><font size=-1><a href="robot_diagnostic3000/robot_diagnostic3000.hex">robot_diagnostic3000.hex</a></font></b></td>
+</tr>
+
+<tr>
+<td><font size=-1><a href="robot_diagnostic3000/sensor.c">sensor.c</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/sensor.h">sensor.h</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/sumovore.c">sumovore.c</a></font></td>
+
+<td><font size=-1><a href="robot_diagnostic3000/sumovore.h">sumovore.h</a></font></td>
+</tr>
+</table></center>
+
+<p>
+<hr SIZE=5 WIDTH="100%"></blockquote>
+</blockquote>
+
+</body>
+</html>

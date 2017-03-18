@@ -1,0 +1,1006 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Dan Peirce">
+   <meta name="GENERATOR" content="Mozilla/4.79 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>Changes to Sumovore.h and Sumovore.c for 2011</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+
+<center>
+<h1>
+Changes to Sumovore.h and Sumovore.c for 2011</h1></center>
+
+<center>by Dan Peirce B.Sc.</center>
+
+<blockquote>
+<blockquote>
+<hr WIDTH="100%">Oct. 21, 2010 -- (rev. Oct 27, 2010)
+<hr WIDTH="100%">
+<br><a NAME="simple_line_follower"></a>new files (<b>simple line follower
+project</b>) <a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/main.c">Robot/main.c</a>
+| <a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/motor_control.c">Robot/motor_control.c</a>
+| <a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/motor_control.h">Robot/motor_control.h</a>
+| <a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/sumovore.c">Robot/sumovore.c</a>&nbsp;
+| 
+<a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/sumovore.h">Robot/sumovore.h</a>&nbsp;
+| <a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/interrupts.c">Robot/interrupts.c</a>
+| <a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/interrupts.h">Robot/interrupts.h</a>
+|&nbsp; <a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/simple_curve_follower.hex">Robot/simple_curve_follower.hex</a>
+<br>
+<hr WIDTH="100%">
+<br><a NAME="LVD"></a>Two new files were added to support the <b>low voltage
+detect &lt;LVD></b> feature. Interrupts.c and interrupts.h.
+<p>I have also changed sumovore.c and sumovore.h so that the <b>low voltage
+detect</b>, <b>brownout reset</b>, <b>stack overflow reset</b> and <b>watchdog
+timer</b> features are now enabled. This will force the students to change
+batteries if the PIC starts to detect low voltage conditions (which could
+otherwise make code execution unreliable). The stack overflow will reset
+the PIC if it detects that the hardware stack actually becomes full (unlikely
+unless the code has recursive function calls). The watchdog timer will
+reset the processor if it is allowed to timeout (could happen if the processor
+goes into an undefined state or if there is an unexpected endless loop
+in the code).
+<p>One difference with these new files (and a updated main.c) is that when
+the robot is turned on (or if any sort of reset occurs ) initially it will
+sit still with LED1 and LED2 flashing alternately (a clear indication of
+a reset). If the reset was a normal Power On Reset normal code execution
+will occur after a few seconds. If the reset was a result of a brownout
+or low voltage detection or something else the LEDs will indicate the cause
+and the robot will do nothing else until a power on reset has occurred!
+<p>One change is that when the robot turns on led1 and led2 flash alternately
+for a few seconds. If no other LED's go on at that time this indicates
+a normal Power On Reset&nbsp; &lt;POR>.
+<br>If the LED's keep flashing then a code should be displayed to show
+the problem
+<p>LED
+<br>3&nbsp; 4&nbsp; 5
+<br>0&nbsp; 0&nbsp; 1&nbsp; Brown Out Reset&nbsp;&nbsp; &lt;BOR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b>(fixed error in table March 3, 2011)</b>
+<br>0&nbsp; 1&nbsp; 0&nbsp; Low Voltage Detect&nbsp;&nbsp; &lt;LVD>
+<br>0&nbsp; 1&nbsp; 1&nbsp; &lt;not defined> should not get this
+<br>1&nbsp; 0&nbsp; 0&nbsp; WatchDog Timer reset&nbsp; &lt;WDT>
+<br>1&nbsp; 0&nbsp; 1&nbsp; Stack Overflow&nbsp;&nbsp; &lt;SCKFUL>
+<br>1&nbsp; 1&nbsp; 1&nbsp; RESET task &lt;reset>&nbsp; (say a software
+reset -- this one has not been tested)
+<p>If a communication cable is attached to the robot messages will also
+be sent to a PC ( &lt;POR>, &lt;LVD>, &lt;BOR>... ).
+<p>As it stands now <a href="../2011/LVDandBOR.html">the robots themselves
+will tell us when BOR and/or LVD's start to occur</a>. This will start
+to occur as the batteries become depleted. If they happen frequently it
+is time to change the batteries.&nbsp; If they happen very infrequently
+then one may want to continue using the same batteries a little longer
+but at least one will know the issue at a given time was a brownout or
+LVD and not a program error. I don't think they will occur at all with
+completely fresh batteries (based on the testing I was able to do).
+<p>I'd suggest that if a BOR or a LVD were to occur during a competition
+that the students be permitted to redo that run.
+<p>For the older version 1.0 of the robots the addition of&nbsp; 22 microFarad
+capacitor to the output of that regulator seems to solve problems of inconsistent
+PIC behavior that sometimes occur when the motors are started up at less
+than 100% duty cycle. Bob has replaced all of the older robots in Surrey
+but I have 8 of them still in use in Richmond. Exploring the issues of
+what was going on with the unreliable code execution was facilitated by
+the creation of a diagnostic program, and the realization that the version
+1.1 robots did not have the same issue as the version 1.0 robots (2009
+was the first year I had any of the version 1.1 robots in operation). So
+far as I can tell the addition of the 22 microFard capacitor makes the
+older robots as reliable as the new ones. I bring this up here because
+prior to this modification attempting to use less than 100% duty cycle
+on the version 1.0 robots would probably have made them significantly less
+reliable than leaving both motors at 100% and this would have implication
+regarding keeping the robot running smoothly. Not all of the robots are
+modified yet. The robot types are easy to identify when looking at the
+main board.
+<br>
+<hr WIDTH="100%">
+<br>My new main.c (for the <b>simple line follower project</b>) looks like
+this:
+<br>
+<hr WIDTH="100%">
+<br><b><tt>#include &lt;stdio.h></tt></b>
+<br><b><tt>#include &lt;p18f4525.h></tt></b>
+<br><b><tt>#include "sumovore.h"</tt></b>
+<br><b><tt>#include "motor_control.h"</tt></b>
+<br><b><tt>#include "interrupts.h"</tt></b>
+<br>&nbsp;
+<p><b><tt>// main acts as a cyclical task sequencer</tt></b>
+<br><b><tt>void main(void)</tt></b>
+<br><b><tt>{</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; initialization(); // function from sumovore.c</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// it sets up pwm (using timer2),</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// IO pins, the ADC, the</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// USART and the default</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// threshold</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; printf("\n\rKwantlen APSC1299 simple curve
+follower -- with error codes\n\r");</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; ClrWdt();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// defined in &lt;p18f4525.h></tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; while(1)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; {</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_sensors();&nbsp;&nbsp;&nbsp;
+// from sumovore.c</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; set_leds();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// function from sumovore.c</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// each LED indicates a sensor</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// value. If you need to use the LED's for</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// a different purpose change this line</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// and make your own LED setting function</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; motor_control();&nbsp;&nbsp;&nbsp;
+// function from motor_control.c</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ClrWdt();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// defined in &lt;p18f4525.h></tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(lvd_flag_set())&nbsp;
+LVtrap();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; }</tt></b>
+<br><b><tt>}</tt></b>
+<br>
+<hr WIDTH="100%">
+<br>sumovore.c has a number of new functions:
+<br>
+<hr WIDTH="100%">
+<br><b><tt>void PORtask(void)&nbsp; // rev. June 18, 2010</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned long count1=0, count2=0;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; StatusReset();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// sets flags /POR and /BOR</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp; comment corrected Feb. 25, 2011</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; printf("&lt;POR>");</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED1(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED2(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED3(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED4(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED5(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; while(count1&lt;10u)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//trap here</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; {</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ClrWdt();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (count2==30000u)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+count2=0;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+count1++;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+setLED1(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+setLED2(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else if (count2==15000u)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+setLED1(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+setLED2(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; count2++;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; }</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>void BORtask(void)&nbsp; // rev. June 18, 2010</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; StatusReset();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// sets flags /POR and /BOR</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// comment corrected Feb. 25, 2011</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; printf("&lt;BOR>");</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED1(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED2(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED3(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED4(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED5(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; gtrap();&nbsp;&nbsp;&nbsp; // trap code here
+until POR</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>void WDTtask(void)&nbsp; // rev. April 30, 2010</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; printf("&lt;WDT TO>");</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED1(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED2(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED3(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED4(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED5(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; gtrap();&nbsp;&nbsp;&nbsp; // trap code here
+until POR</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>void STKFULtask(void)&nbsp;&nbsp;&nbsp; // rev. April 30, 2010</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// An error on the hardware stack</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; STKPTRbits.STKFUL = 0; //&nbsp; caused a
+reset!</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; printf("&lt;STKFUL>");&nbsp;&nbsp;&nbsp;
+//&nbsp; continue</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED1(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED2(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED3(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED4(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED5(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; gtrap();&nbsp;&nbsp;&nbsp; // trap code here
+until POR</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>void RESETtask(void)&nbsp;&nbsp;&nbsp; // rev. April 30, 2010</tt></b>
+<br><b><tt>{</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; printf(" &lt;reset> "); // may modify this
+to count # of POR</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED1(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED2(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED3(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED4(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED5(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; gtrap();&nbsp;&nbsp;&nbsp; // trap code here
+until POR</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>// this function sets up the low voltage</tt></b>
+<br><b><tt>//&nbsp; detect feature of the PIC18F4525</tt></b>
+<br><b><tt>//&nbsp;&nbsp; sets HLVDIP to a high priority interupt</tt></b>
+<br><b><tt>void openLVD(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; RCONbits.IPEN = 1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; HLVDCONbits.HLVDEN = 1; // HLVDEN enabled</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; IPR2bits.HLVDIP = 1; // sets HLVD to high
+priority</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; HLVDCONbits.VDIRMAG = 0; // interupt occures
+if voltage below</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp; trip point</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; HLVDCONbits.HLVDL3 = 1; // set to about 4.59
+volts</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; HLVDCONbits.HLVDL2 = 1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; HLVDCONbits.HLVDL1 = 1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; HLVDCONbits.HLVDL0 = 0;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; PIR2bits.HLVDIF = 0; // ensure interupt is
+clear</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; PIE2bits.HLVDIE = 1; // enables HLVD interupt</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; INTCONbits.GIEH = 1; // globle enable of
+interupts</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>void LVtrap(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; printf("\\&lt;LVD>");</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; openPORTD();&nbsp; // set as outputs for
+LED's</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED1(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED2(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED3(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED4(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; setLED5(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; gtrap();&nbsp;&nbsp;&nbsp; // trap code here
+until POR</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>void gtrap(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned long count=0;</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; while(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//trap here</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; {</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ClrWdt();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (count==30000u)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+count=0;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+setLED1(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+setLED2(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else if (count==15000u)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+setLED1(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+setLED2(1);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; count++;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; }</tt></b>
+<br><b><tt>}</tt></b>
+<br>
+<hr WIDTH="100%">
+<br>and changes to the initilization() function
+<br>
+<hr WIDTH="100%">
+<br><b><tt>void initialization(void)</tt></b>
+<br><tt>{</tt>
+<br><b><tt>&nbsp;&nbsp;&nbsp; RCONbits.IPEN = 1;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// rev. April 30, 2010</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; INTCONbits.GIEH = 0;&nbsp;&nbsp;&nbsp; //
+rev. April 30, 2010</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; INTCONbits.GIEL = 0;&nbsp;&nbsp;&nbsp; //
+rev. April 30, 2010</tt></b>
+<p><tt>&nbsp;&nbsp;&nbsp; set_osc_32MHz();&nbsp; // to change the internal
+oscillator frequency (see osc.h osc.c)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; openPORTCforUSART();</tt>
+<p><tt>&nbsp;&nbsp;&nbsp; OpenUSART( USART_TX_INT_OFF &amp; USART_RX_INT_OFF
+&amp; USART_ASYNCH_MODE &amp; USART_EIGHT_BIT &amp; USART_CONT_RX &amp;
+USART_BRGH_HIGH,</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+16 );&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// for 19200 bit per second</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// (32000000/115200/16)-1 = 16</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// actual buad rate is 32000000/(16*(16+1)) = 117647 baud (note a 2% error
+in frequency)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // see http://en.wikibooks.org/wiki/Serial_Programming/Typical_RS232_Hardware_Configuration#Oscillator_.26_Magic_Quartz_Crystal_Values</tt>
+<br>&nbsp;
+<p><tt>&nbsp;&nbsp;&nbsp; openPORTD();</tt>
+<br><tt><b>&nbsp;&nbsp;&nbsp; </b>PORTD = 0;&nbsp; // TURN ALL LED'S OFF</tt>
+<p><b><tt>&nbsp;&nbsp;&nbsp; if( isPOR() ) PORtask();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// rev. April 30, 2010</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; else if (isBOR() ) BORtask();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; else if(isWDTTO() ) WDTtask();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; else if(STKPTRbits.STKFUL) STKFULtask();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; else RESETtask();</tt></b>
+<p><tt><b>&nbsp;&nbsp;&nbsp; </b>openPORTCforPWM();</tt>
+<p><tt>&nbsp;&nbsp;&nbsp; openPORTA();</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; openPORTB();</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; openPORTE();</tt>
+<br>&nbsp;
+<p><b><tt>&nbsp;&nbsp;&nbsp; openLVD();</tt></b>
+<br>&nbsp;
+<br>&nbsp;
+<p><tt><b>&nbsp;&nbsp;&nbsp; </b>OpenADC(ADC_FOSC_32 &amp; ADC_RIGHT_JUST
+&amp; ADC_6_TAD , ADC_CH1 &amp; ADC_INT_OFF &amp; ADC_VREFPLUS_VDD &amp;
+ADC_VREFMINUS_VSS, AN0_AN4);</tt>
+<br><tt>// AN0-AN4 is defined in sumovore.h the others are defined in adc.h
+(C18 library)</tt>
+<p><tt>&nbsp;&nbsp;&nbsp; RmotorGoFwd = NO;&nbsp; // NO is defined as 0b0
+in sumovore.h</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; RmotorGoFwdCmp = NO;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; LmotorGoFwd = NO;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; LmotorGoFwdCmp = NO;</tt>
+<br><tt>//&nbsp; PWMperiod = [(period)+1]x 4 x Tosc x TMR2</tt>
+<br><tt>//&nbsp; period Tosc&nbsp;&nbsp;&nbsp;&nbsp; TMR2Pre&nbsp; pwm_period&nbsp;
+freq</tt>
+<br><tt>//&nbsp; 255&nbsp;&nbsp;&nbsp;&nbsp; 3.13E-08 16&nbsp;&nbsp;&nbsp;
+5.12E-04&nbsp; 1.95E+03</tt>
+<p><tt>&nbsp;&nbsp;&nbsp; OpenTimer2(TIMER_INT_OFF &amp; T2_PS_1_16 &amp;
+T2_POST_1_1);&nbsp; // TMR2 prescale is 16</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; OpenPWM1(199);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// TPWM = (199+1)*4*(31.25 ns)*16</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 0.400 ms&nbsp;&nbsp; or 2500 Hz</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; OpenPWM2(199);</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; SetDCPWM1(0);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// TDC&nbsp; = 64*(31.25 ns)*16</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 0.032 ms</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 0% * TPWM&nbsp; (800 will give 100%)</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; SetDCPWM2(0);</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; threshold = THRESHOLD_DEFAULT;</tt>
+<p><b><tt>}</tt></b>
+<p>
+<hr WIDTH="100%"></blockquote>
+</blockquote>
+
+<center>
+<h1>
+Changes to Sumovore.h and Sumovore.c for 2010</h1></center>
+
+<center>by Dan Peirce B.Sc.</center>
+
+<blockquote>
+<blockquote>
+<hr SIZE=5 WIDTH="100%">Nov 17, 2009
+<hr SIZE=5 WIDTH="100%">
+<br>new files&nbsp; <a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/main_11-17-2009.c">Robot/main.c</a><a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/motor_control.c">Robot/motor_control.c</a><a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/motor_control.h">Robot/motor_control.h</a><a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/sumovore_11-17-2009.c">Robot/sumovore.c</a>
+
+<a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/sumovore_11-17-2009.h">Robot/sumovore.h</a><a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/simple_curve_follower_2009.mcp">simple_curve_follower.mcp</a><a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/simple_curve_follower_2009.mcw">simple_curve_follower.mcw</a><a href="../../../../../engineering/APSC1299/files_for_lab/2010/MyProjects/Robot/simple_curve_follower_2009.hex">simple_curve_follower.hex</a>
+<br>
+<hr SIZE=5 WIDTH="100%">
+<br>My new main.c looks like this:
+<p><b><tt>#include "sumovore.h"</tt></b>
+<br><b><tt>#include "motor_control.h"</tt></b>
+<p><b><tt>// main acts as a cyclical task sequencer</tt></b>
+<br><b><tt>void main(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; initialization(); // function from sumovore.c</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// it sets up pwm (using timer2),</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// IO pins, the ADC, the</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// USART and the default</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// threshold</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; // can change threshold from default value
+here!</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; //&nbsp; threshold = {an unsigned int value}</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; while(1)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; {</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_sensors();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; set_leds();&nbsp;&nbsp;&nbsp;&nbsp;
+// function from sumovore.c</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// each LED indicates a sensor</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// value. If you need to use the LED's for</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// a different purpose change this line</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// and make your own LED setting function</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; motor_control();
+// function from motor_control.c</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; }</tt></b>
+<br><b><tt>}</tt></b>
+<p>I noticed that now that we moved the definitions of check_sensors()
+and set_leds() to sumovore.c we did not need most of the #include directives
+that used to be in this file. I removed the unneeded directives. That got
+me thinking and I moved all the #pragma lines to the top of sumovore.c.
+This means the robot and PIC dependent stuff is all in sumovore.c and sumovore.h.
+<br>In this form main.c, motor_control.c and motor_control.h can be compiler,
+robot and IC independent.
+<p>This very simple version of main.c has the advantage of not containing
+extra junk.
+<p>I have added comments to sumovore.h
+<p><b><tt>// ********************************************************************</tt></b>
+<br><b><tt>// this file sumovore.h is for use with the solarbotics sumovore</tt></b>
+<br><b><tt>//&nbsp;&nbsp; and the PIC18F4525 and microchip 18C compiler</tt></b>
+<br>&nbsp;
+<p><b><tt>//&nbsp; By Dan Peirce B.Sc.</tt></b>
+<br><b><tt>//&nbsp; For Kwantlen Polytechnic University</tt></b>
+<br><b><tt>//&nbsp; rev. Nov. 17 new function like macro's defined for
+LED's</tt></b>
+<br><b><tt>//&nbsp; rev. May 22, 2009 for brainboard 2</tt></b>
+<br><b><tt>//&nbsp; some comments revised March 5, 2007</tt></b>
+<br><b><tt>//&nbsp; rev. March 13, 2007</tt></b>
+<br><b><tt>//&nbsp; rev. March 2, 2007</tt></b>
+<p><b><tt>// *******************************************************************</tt></b>
+<p><b><tt>#define setLED1(a) PORTDbits.RD0=~a&nbsp; // When a = ON or OFF,</tt></b>
+<br><b><tt>#define setLED2(a) PORTDbits.RD1=~a&nbsp; //&nbsp; setLEDn(ON)
+turns on LEDn</tt></b>
+<br><b><tt>#define setLED3(a) PORTDbits.RD2=~a&nbsp; //&nbsp; setLEDn(OFF)
+turns off LEDn</tt></b>
+<br><b><tt>#define setLED4(a) PORTDbits.RD3=~a&nbsp; // a could also be
+any char or integer</tt></b>
+<br><b><tt>#define setLED5(a) PORTDbits.RD4=~a&nbsp; // but only the least
+significant</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// bit will be used.</tt></b>
+<p><b><tt>#define set_all_LEDs(a)&nbsp; PORTD=(((~a)&amp;0b00011111)|(PORTD&amp;0b11100000))</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp; // in set_all_LEDs(a) a can be any
+5 bit value or variable</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp; // if a has more than 5 bit the most
+significant bits will</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp; // be ignored</tt></b>
+<p><b><tt>#define&nbsp;&nbsp;&nbsp; LeftIR&nbsp; !PORTDbits.RD5&nbsp;&nbsp;
+// RD5 is pin 28</tt></b>
+<br><b><tt>#define&nbsp;&nbsp;&nbsp; RightIR !PORTDbits.RD6&nbsp;&nbsp;
+// RD6 is pin 29</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Note that the IR detectors output low when an object</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp;&nbsp;&nbsp;&nbsp; is detected so the not "!" of the pin is used</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp; in the define to maintain positive logic</tt></b>
+<p><b><tt>#define&nbsp;&nbsp;&nbsp; EnableRmotor&nbsp; PORTCbits.RC2&nbsp;&nbsp;&nbsp;
+// pin_c2&nbsp; -- Enable Right motor</tt></b>
+<br><b><tt>#define&nbsp;&nbsp;&nbsp; EnableLmotor&nbsp; PORTCbits.RC1&nbsp;&nbsp;&nbsp;
+// pin_c1&nbsp; -- Enable Left motor</tt></b>
+<br><b><tt>#define&nbsp;&nbsp;&nbsp; RmotorGoFwd&nbsp;&nbsp; PORTCbits.RC5&nbsp;&nbsp;&nbsp;
+// rev for bb2&nbsp; -- Right motor forward</tt></b>
+<br><b><tt>#define&nbsp;&nbsp;&nbsp; RmotorGoFwdCmp PORTEbits.RE0&nbsp;&nbsp;
+// rev for bb2&nbsp; -- Right motor forward complement</tt></b>
+<br><b><tt>#define&nbsp;&nbsp;&nbsp; LmotorGoFwd&nbsp;&nbsp; PORTCbits.RC0&nbsp;&nbsp;&nbsp;
+// rev for bb2&nbsp; -- Left motor forward</tt></b>
+<br><b><tt>#define&nbsp;&nbsp;&nbsp; LmotorGoFwdCmp PORTEbits.RE1&nbsp;&nbsp;
+// rev for bb2&nbsp; -- Left motor forward complement</tt></b>
+<p><b><tt>#define&nbsp;&nbsp;&nbsp; RLS_LeftCH0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ADC_CH0&nbsp;&nbsp;&nbsp; // AN0&nbsp; (left reflective line sensor)</tt></b>
+<br><b><tt>#define&nbsp;&nbsp;&nbsp; RLS_CntLeftCH1&nbsp;&nbsp; ADC_CH1&nbsp;&nbsp;&nbsp;
+// AN1&nbsp; (center left reflective line sensor)</tt></b>
+<br><b><tt>#define&nbsp;&nbsp;&nbsp; RLS_CenterCH2&nbsp;&nbsp;&nbsp; ADC_CH2&nbsp;&nbsp;&nbsp;
+// AN2&nbsp; (center reflective line sensor)</tt></b>
+<br><b><tt>#define&nbsp;&nbsp;&nbsp; RLS_CntRightCH3&nbsp; ADC_CH3&nbsp;&nbsp;&nbsp;
+// AN3&nbsp; (center right reflective line sensor)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Pin RA4 No connection</tt></b>
+<br><b><tt>#define&nbsp;&nbsp;&nbsp; RLS_RightCH4&nbsp;&nbsp;&nbsp;&nbsp;
+ADC_CH4&nbsp;&nbsp;&nbsp; // AN4&nbsp; (right reflective line sensor)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// note PortA is only 6 bits!</tt></b>
+<p><b><tt>#define YES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0b1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// used to turn on an individual bit</tt></b>
+<br><b><tt>#define NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0b0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// used to turn off an individual bit</tt></b>
+<br><b><tt>#define ON&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0b1</tt></b>
+<br><b><tt>#define OFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0b0</tt></b>
+<p><b><tt>#define AN0_AN4&nbsp;&nbsp;&nbsp; 0B1010&nbsp; // used for configuration
+of PCFG3:PCFG0</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// A/D port Configuration Control Bits</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// these determine which pins are analog inputs</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// see page 224 of PIC18F4525 datasheet</tt></b>
+<p><b><tt>#define THRESHOLD_DEFAULT 512u</tt></b>
+<p><b><tt>struct sensors</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned&nbsp;&nbsp;&nbsp;&nbsp; Left:1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned&nbsp; CntLeft:1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned&nbsp;&nbsp; Center:1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned CntRight:1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned&nbsp;&nbsp;&nbsp; Right:1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned :3;</tt></b>
+<br><b><tt>};</tt></b>
+<p><b><tt>union sensor_union</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned char B;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; struct sensors b;</tt></b>
+<br><b><tt>};</tt></b>
+<p><b><tt>void initialization(void);&nbsp; // defined in sumovore.c</tt></b>
+<p><b><tt>unsigned int adc(unsigned char channel);&nbsp; // defined in
+sumovore.c</tt></b>
+<p><b><tt>enum motor_speed_setting { rev_fast, rev_medium, rev_slow, stop,
+slow, medium, fast };</tt></b>
+<p><b><tt>enum motor_selection { left, right };</tt></b>
+<p><b><tt>void set_motor_speed(enum motor_selection the_motor, enum motor_speed_setting
+motor_speed, int speed_modifier);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// defined in sumovore.c</tt></b>
+<br><b><tt>void motors_brake_all( void );</tt></b>
+<br><b><tt>void set_leds(void);</tt></b>
+<br><b><tt>void check_sensors(void);</tt></b>
+<p><b><tt>extern union sensor_union SeeLine;</tt></b>
+<br>&nbsp;
+<p>I also removed some old comments from sumovore.c that were no longer
+consistant with the way it is set up. There was an old comment about the
+expectation that PWM would be used in a future versions of the file. PWM
+was included a long time ago. I also removed the initialization of the
+motor enable lines because that is not done by the PWM (and also has been
+that way for a long time).
+<br>&nbsp;
+<p><b><tt>// File sumovore.c by Dan Peirce B.Sc.</tt></b>
+<p><b><tt>// Kwantlen Polytechnic University</tt></b>
+<br><b><tt>// apsc1299</tt></b>
+<p><b><tt>// rev. Nov. 17 2009 to make use of new LED macro's,</tt></b>
+<br><b><tt>//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to incorparate
+#pragma lines and</tt></b>
+<br><b><tt>//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to point to osc.h
+in Functions folder</tt></b>
+<br><b><tt>// rev. june 2009 for dynamic braking</tt></b>
+<br><b><tt>// rev. May 22, 2009 to refect changes for BB2</tt></b>
+<br><b><tt>// rev. March 13, 2007</tt></b>
+<br><b><tt>// rev. March 2, 2007</tt></b>
+<br><b><tt>#pragma config WDT = OFF</tt></b>
+<br><b><tt>#pragma config OSC = INTIO67&nbsp; // allows osc1 (pin 13) and
+osc2 (pin 14) to be used as inputs</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// note there is a crystal attached to these pins on the</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// brainboard</tt></b>
+<br><b><tt>#pragma config MCLRE = OFF</tt></b>
+<br><b><tt>#pragma config LVP = OFF</tt></b>
+<br><b><tt>// #pragma config lines must come before #include "sumovore.h"
+as sumovore.h redefines OFF!!!</tt></b>
+<p><b><tt>#include &lt;p18F4525.h></tt></b>
+<br><b><tt>#include &lt;usart.h></tt></b>
+<br><b><tt>#include &lt;stdio.h></tt></b>
+<br><b><tt>#include &lt;adc.h></tt></b>
+<br><b><tt>#include &lt;pwm.h></tt></b>
+<br><b><tt>#include &lt;timers.h></tt></b>
+<br><b><tt>#include "..\Functions\osc.h"</tt></b>
+<br><b><tt>#include "sumovore.h"</tt></b>
+<br>&nbsp;
+<p><b><tt>void openPORTCforPWM(void);</tt></b>
+<br><b><tt>void openPORTCforUSART(void);</tt></b>
+<br><b><tt>void openPORTA(void);</tt></b>
+<br><b><tt>void openPORTB(void);</tt></b>
+<br><b><tt>void openPORTD(void);</tt></b>
+<br><b><tt>void openPORTE(void);</tt></b>
+<p><b><tt>union sensor_union SeeLine = 0;</tt></b>
+<br><b><tt>unsigned int threshold;&nbsp;&nbsp;&nbsp; // value compared
+to adc result</tt></b>
+<br>&nbsp;
+<p><b><tt>void initialization(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; set_osc_32MHz();&nbsp; // to change the internal
+oscillator frequency (see osc.h osc.c)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; openPORTCforUSART();</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; OpenUSART( USART_TX_INT_OFF &amp; USART_RX_INT_OFF
+&amp; USART_ASYNCH_MODE &amp; USART_EIGHT_BIT &amp; USART_CONT_RX &amp;
+USART_BRGH_HIGH,</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+16 );&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// for 19200 bit per second</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// (32000000/19200/16)-1 = 103.17</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// actual buad rate is 32000000/(16*(103+1)) = 19230.8 baud</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; openPORTCforPWM();</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; openPORTA();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; openPORTB();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; openPORTD();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; openPORTE();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; PORTD = 0;&nbsp; // TURN ALL LED'S OFF</tt></b>
+<br>&nbsp;
+<p><b><tt>&nbsp;&nbsp;&nbsp; OpenADC(ADC_FOSC_32 &amp; ADC_RIGHT_JUST &amp;
+ADC_6_TAD , ADC_CH1 &amp; ADC_INT_OFF &amp; ADC_VREFPLUS_VDD &amp; ADC_VREFMINUS_VSS,
+AN0_AN4);</tt></b>
+<br><b><tt>// AN0-AN4 is defined in sumovore.h the others are defined in
+adc.h (C18 library)</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; RmotorGoFwd = NO;&nbsp; // NO is defined as
+0b0 in sumovore.h</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; RmotorGoFwdCmp = NO;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; LmotorGoFwd = NO;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; LmotorGoFwdCmp = NO;</tt></b>
+<br><b><tt>//&nbsp; PWMperiod = [(period)+1]x 4 x Tosc x TMR2</tt></b>
+<br><b><tt>//&nbsp; period Tosc&nbsp;&nbsp;&nbsp;&nbsp; TMR2Pre&nbsp; pwm_period&nbsp;
+freq</tt></b>
+<br><b><tt>//&nbsp; 255&nbsp;&nbsp;&nbsp;&nbsp; 3.13E-08 16&nbsp;&nbsp;&nbsp;
+5.12E-04&nbsp; 1.95E+03</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; OpenTimer2(TIMER_INT_OFF &amp; T2_PS_1_16
+&amp; T2_POST_1_1);&nbsp; // TMR2 prescale is 16</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; OpenPWM1(199);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// TPWM = (199+1)*4*(31.25 ns)*16</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 0.400 ms&nbsp;&nbsp; or 2500 Hz</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; OpenPWM2(199);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; SetDCPWM1(0);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// TDC&nbsp; = 64*(31.25 ns)*16</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 0.032 ms</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = 0% * TPWM&nbsp; (800 will give 100%)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; SetDCPWM2(0);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; threshold = THRESHOLD_DEFAULT;</tt></b>
+<p><b><tt>}</tt></b>
+<p><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+openPORTCforUSART()</tt></b>
+<br><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>void openPORTCforUSART(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp; TRISCbits.TRISC6 = 0;&nbsp; // set TX (RC6) as output</tt></b>
+<br><b><tt>&nbsp; TRISCbits.TRISC7 = 1;&nbsp; // and RX (RC7) as input</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+openPORTCforPWM()</tt></b>
+<br><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>void openPORTCforPWM(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; TRISCbits.TRISC0 = 0; // Direction Left M</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; TRISCbits.TRISC1 = 0; // Enable Left M</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; TRISCbits.TRISC2 = 0; // Enable Right M</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; TRISCbits.TRISC3 = 0; // I2C SCL</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; TRISCbits.TRISC4 = 0; // I2C SDA</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; TRISCbits.TRISC5 = 0; // Direction Right
+M</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; // TRISC6 and TRISC 7 initialized in openPORTCforUSART()</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+openPORTA()</tt></b>
+<br><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>void openPORTA(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; TRISA = 0B11101111; // RA0/AN0, RA1/AN1,
+RA2/AN2, RA3/AN3, RA5/AN4 SET AS INPUTS</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// RA4 not used set as output</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// bits RA6 and RA7 are left as inputs (crystal still attached</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp; on sumovore)</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+openPORTB()</tt></b>
+<br><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>void openPORTB(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; TRISB = 0B11000000; // PORTB mostly not used</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// reserve pins 39 (RB6/PGC) and 40 (RB7/PGD)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// as inputs to avoid conflict if ISP and PICkit2</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+openPORTD()</tt></b>
+<br><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>void openPORTD(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; TRISD = 0b01100000; // RD7 not connected</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; // RD6 is IR Right, RD5 is IR Left, RD4 is
+LED5, RD3 is LED4</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; // RD2 is LED3, RD1 is LED2 and RD0 is LED1</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+openPORTE()</tt></b>
+<br><b><tt>//***********************************************************************************</tt></b>
+<br><b><tt>void openPORTE(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; TRISE = 0b000; // all outputs</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// E0 and E1 are now used for motor direction and</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// dynamic braking</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// E2 is not used</tt></b>
+<br><b><tt>}</tt></b>
+<br>&nbsp;
+<br>&nbsp;
+<p><b><tt>void set_motor_speed(enum motor_selection the_motor, enum motor_speed_setting
+motor_speed, int speed_modifier)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; const static int motor_speeds[] = { -800,
+-600, -400, 0, 400, 600, 800};</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; int duty_cycle;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; enum e_direction {reverse,forward} dir_modifier=
+forward;</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; duty_cycle = motor_speeds[ motor_speed ] +
+speed_modifier;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; if ( duty_cycle &lt; 0 )</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; {</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dir_modifier = reverse;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; duty_cycle = -1 *
+duty_cycle;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; }</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; if ( duty_cycle > 800 ) duty_cycle = 800;</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; if (the_motor == left)</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; {</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SetDCPWM2((unsigned
+int) duty_cycle );</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( dir_modifier
+== reverse ) LmotorGoFwd = NO;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else LmotorGoFwd
+= YES;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LmotorGoFwdCmp =
+!LmotorGoFwd;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; }</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; else</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; {</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SetDCPWM1((unsigned
+int) duty_cycle );</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( dir_modifier
+== reverse ) RmotorGoFwd = NO;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else RmotorGoFwd
+= YES;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RmotorGoFwdCmp =
+!RmotorGoFwd;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; }</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>void motors_brake_all( void )&nbsp; // created june 26, 2009</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; SetDCPWM1(800u ); // enable motors 100% for
+braking</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; SetDCPWM2(800u ); //</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; LmotorGoFwdCmp = NO; // ground all direction
+lines</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; LmotorGoFwd = NO;&nbsp; // motor terminals
+will have dead short</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; RmotorGoFwdCmp = NO;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; RmotorGoFwd = NO;</tt></b>
+<p><b><tt>}</tt></b>
+<p><b><tt>unsigned int adc(unsigned char channel)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; SetChanADC( channel );</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; ConvertADC();</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; while( BusyADC() );</tt></b>
+<p><b><tt>&nbsp;&nbsp;&nbsp; return ReadADC();</tt></b>
+<br><b><tt>}</tt></b>
+<p><b><tt>// ****************************************************************</tt></b>
+<br><b><tt>//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+check_sensors</tt></b>
+<br><b><tt>// ****************************************************************</tt></b>
+<br><b><tt>void check_sensors(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SeeLine.b.Left =
+( adc(RLS_LeftCH0) > threshold );&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // adc()
+prototye in sumovore.h</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SeeLine.b.CntLeft
+= ( adc(RLS_CntLeftCH1) > threshold );&nbsp;&nbsp; // adc() code in sumovore.c</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SeeLine.b.Center
+= ( adc(RLS_CenterCH2) > threshold );&nbsp;&nbsp;&nbsp; //&nbsp; ledx turns
+on when corresponding</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SeeLine.b.CntRight
+= ( adc(RLS_CntRightCH3) > threshold );&nbsp; //&nbsp;&nbsp;&nbsp; reflective
+sensore sees a line</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SeeLine.b.Right =
+( adc(RLS_RightCH4) > threshold );</tt></b>
+<br><b><tt>}</tt></b>
+<br><b><tt>// ******************************************************************</tt></b>
+<br>&nbsp;
+<p><b><tt>// ****************************************************************</tt></b>
+<br><b><tt>//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+set_leds</tt></b>
+<br><b><tt>// ****************************************************************</tt></b>
+<br><b><tt>void set_leds(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setLED1(SeeLine.b.Left);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setLED2(SeeLine.b.CntLeft);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setLED3(SeeLine.b.Center);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setLED4 (SeeLine.b.CntRight);</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; setLED5(SeeLine.b.Right);</tt></b>
+<br><b><tt>}</tt></b>
+<br><b><tt>// ****************************************************************</tt></b>
+<br>&nbsp;
+<p>
+<hr SIZE=5 WIDTH="100%">
+<br>
+<hr SIZE=5 WIDTH="100%">Nov. 13, 2009
+<hr SIZE=5 WIDTH="100%">
+<br>My current version of sumovore.c and sumovore.h.
+<center>&nbsp;<a href="sumovore.c">sumovre.c -- with changes for Brainboard
+2 and dynamic braking</a>
+<br><a href="sumovore.h">sumovre.h&nbsp; -- with changes for Brainboard
+2 and dynamic braking</a></center>
+
+<p>If corrections additions are required I will update these files.
+<br>
+<hr SIZE=5 WIDTH="100%">
+<p>
+<hr SIZE=5 WIDTH="100%">
+<br>Oct. 08, 2009
+<hr SIZE=5 WIDTH="100%"></blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote>With the new files students will have more choices for the
+motor_speed parameter&nbsp;&nbsp; (2009 pages 45, 140):
+<blockquote>enum motor_speed_setting { <b>rev_fast, rev_medium, rev_slow,
+stop, slow, medium, fast</b> };</blockquote>
+The new <b>set_motor_speed()</b> function sets LmotorGoFwd and RmotorGoFwd&nbsp;
+(based on if it is a forward or reverse speed) so the students don't actually
+have to manipulate those direction variables themselves. Also the robots
+have been modified to allow for dynamic braking (more on this down below).
+This means that there are now four direction lines defined rather than
+two.
+<p>Changes resulting from using the new mother boards will be transparent
+to the students apart from the macro definitions shown on <b>page 139</b>.
+The new macro's look like
+<blockquote><tt>#define&nbsp;&nbsp;&nbsp; EnableRmotor&nbsp; PORTCbits.RC2&nbsp;&nbsp;&nbsp;
+// pin_c2&nbsp; -- Enable Right motor</tt>
+<br><tt>#define&nbsp;&nbsp;&nbsp; EnableLmotor&nbsp; PORTCbits.RC1&nbsp;&nbsp;&nbsp;
+// pin_c1&nbsp; -- Enable Left motor</tt>
+<br><tt>#define&nbsp;&nbsp;&nbsp; <b>RmotorGoFwd</b>&nbsp;&nbsp; PORTCbits.RC5&nbsp;&nbsp;&nbsp;
+// rev for bb2&nbsp; -- Right motor forward</tt>
+<br><tt>#define&nbsp;&nbsp;&nbsp; <b>RmotorGoFwdCmp</b> PORTEbits.RE0&nbsp;&nbsp;
+// rev for bb2&nbsp; -- Right motor forward complement</tt>
+<br><tt>#define&nbsp;&nbsp;&nbsp; <b>LmotorGoFwd</b>&nbsp;&nbsp; PORTCbits.RC0&nbsp;&nbsp;&nbsp;
+// rev for bb2&nbsp; -- Left motor forward</tt>
+<br><tt>#define&nbsp;&nbsp;&nbsp; <b>LmotorGoFwdCmp</b> PORTEbits.RE1&nbsp;&nbsp;
+// rev for bb2&nbsp; -- Left motor forward complement</tt></blockquote>
+A modification to the brain board and robot allows one to use dynamic braking.
+This should allow batteries to be used over a wider part of the discharge
+curve (braking by reversing the motors draws down old batteries a great
+deal). Dynamic braking occurs when the motor leads are shorted together.
+This can be achieved by grounding both sides of the motor. A modification
+to the robot and brainboard permit the grounding of both sides of the motor.
+From the student perspective they can simply use a new function declaired
+in sumovore.h.
+<br>&nbsp;
+<blockquote><b>void motors_brake_all( void );</b>
+<p>The function is defined in sumovore.c
+<p><b><tt>void motors_brake_all( void )&nbsp; // created june 26, 2009</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; SetDCPWM1(800u ); // enable motors 100% for
+braking</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; SetDCPWM2(800u ); //</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; LmotorGoFwdCmp = NO; // ground all direction
+lines</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; LmotorGoFwd = NO;&nbsp; // motor terminals
+will have dead short</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; RmotorGoFwdCmp = NO;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; RmotorGoFwd = NO;</tt></b>
+<p><b><tt>}</tt></b></blockquote>
+
+<p><br>Some variable names were improved (changed)&nbsp; <b>page 140</b>.
+<blockquote><b><tt>void check_sensors(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SeeLine.b.Left =
+( adc(RLS_LeftCH0) > threshold );&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // adc()
+prototye in sumovore.h</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SeeLine.b.CntLeft
+= ( adc(RLS_CntLeftCH1) > threshold );&nbsp;&nbsp; // adc() code in sumovore.c</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SeeLine.b.Center
+= ( adc(RLS_CenterCH2) > (threshold) );&nbsp;&nbsp;&nbsp; //&nbsp; ledx
+turns on when corresponding</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SeeLine.b.CntRight
+= ( adc(RLS_CntRightCH3) > threshold );&nbsp; //&nbsp;&nbsp;&nbsp; reflective
+sensore sees a line</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SeeLine.b.Right =
+( adc(RLS_RightCH4) > (threshold) );</tt></b>
+<br><b><tt>}</tt></b></blockquote>
+
+<blockquote><b><tt>void set_leds(void)</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LED1 = !SeeLine.b.Left;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LED2 = !SeeLine.b.CntLeft;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LED3 = !SeeLine.b.Center;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LED4 = !SeeLine.b.CntRight;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LED5 = !SeeLine.b.Right;</tt></b>
+<br><b><tt>}</tt></b></blockquote>
+
+<p><br>The inversion on the LEDx assingments is requried because the LED's
+on the new brain board are wired from the output pin to +5. On the old
+boards they were wired between the output pin and ground.
+<p>Note the the definition of SeeLine has changed to a union so that individual
+bits can be set (as shown up above) or the entire byte can be accessed
+at once using SeeLine.B. An <b>Example:</b>
+<br><b><tt>&nbsp;&nbsp; test = SeeLine.B &amp; 0b00010001;&nbsp;&nbsp;&nbsp;&nbsp;
+// mask off&nbsp; inner three sensors SeeLine.B is an unsigned char</tt></b>
+<br><b><tt>&nbsp;&nbsp; switch (test)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// use both outer sensors only in this switch statment</tt></b>
+<p>declaration is as follows (in sumovore.h) :
+<blockquote><b><tt>struct sensors</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned&nbsp;&nbsp;&nbsp;&nbsp; Left:1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned&nbsp; CntLeft:1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned&nbsp;&nbsp; Center:1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned CntRight:1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned&nbsp;&nbsp;&nbsp; Right:1;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned :3;</tt></b>
+<br><b><tt>};</tt></b>
+<p><b><tt>union sensor_union</tt></b>
+<br><b><tt>{</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; unsigned char B;</tt></b>
+<br><b><tt>&nbsp;&nbsp;&nbsp; struct sensors b;</tt></b>
+<br><b><tt>};</tt></b>
+<p><b><tt>extern union sensor_union SeeLine;</tt></b></blockquote>
+
+<p><br>The declarations allow all files that include sumovore.h to make
+use of SeeLine. SeeLine can only be defined once and that is in sumovore.c
+<blockquote><b><tt>union sensor_union SeeLine;</tt></b></blockquote>
+Note that "Edge" has been dropped from the names in the sensor structure
+since Edge makes little sense here and just makes the varible names longer.
+Solarbotics uses "Edge" in the designations because the sumovore is primarally
+sold as a minisumo robot and in that event the reflective sensors are used
+to detect the edge of the minisumo ring.
+<p>Macro's are shown on page 139 for the Reflective Line Sensors (RLS).
+I have changed the names as follows:
+<blockquote><b>#define&nbsp;&nbsp;&nbsp; RLS_LeftCH0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ADC_CH0&nbsp;&nbsp;&nbsp; // AN0&nbsp; (left reflective line sensor)</b>
+<br><b>#define&nbsp;&nbsp;&nbsp; RLS_CntLeftCH1&nbsp;&nbsp; ADC_CH1&nbsp;&nbsp;&nbsp;
+// AN1&nbsp; (center left reflective line sensor)</b>
+<br><b>#define&nbsp;&nbsp;&nbsp; RLS_CenterCH2&nbsp;&nbsp;&nbsp; ADC_CH2&nbsp;&nbsp;&nbsp;
+// AN2&nbsp; (center reflective line sensor)</b>
+<br><b>#define&nbsp;&nbsp;&nbsp; RLS_CntRightCH3&nbsp; ADC_CH3&nbsp;&nbsp;&nbsp;
+// AN3&nbsp; (center right reflective line sensor)</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// Pin RA4 No connection</b>
+<br><b>#define&nbsp;&nbsp;&nbsp; RLS_RightCH4&nbsp;&nbsp;&nbsp;&nbsp; ADC_CH4&nbsp;&nbsp;&nbsp;
+// AN4&nbsp; (right reflective line sensor)</b>
+<br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// note PortA is only 6 bits!</b></blockquote>
+Those names are long but they don't get used in more than one place and
+they are very descriptive indicating that this is an input from a RLS,
+a description of which channel (center...) and an indication of which channel
+of the ADC is used.
+<p>
+<hr SIZE=5 WIDTH="100%">
+<p>I have suggested giving the students a simpler version of <b>simple_curve_follower.c</b>.
+Simpler algorithm but a little more structure to make it more obvious where
+to put their code. The structure in this example project would also encourage
+the students to write the code they add in a modular form using functions.
+<p>The very simple control that works only with a very simple oval track
+is provided by the following function
+<blockquote><tt>void <b>very_simple_control</b>(void)</tt>
+<br><tt>{</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; if ( SeeLine.b.Center )straight_fwd();</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; else if ( SeeLine.b.CntLeft || SeeLine.b.Left)
+turn_left();</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp; else if ( SeeLine.b.CntRight || SeeLine.b.Right)turn_right();</tt>
+<br><tt>}</tt></blockquote>
+<tt>This code can only follow gentle curves.</tt>
+<center>
+<p>
+<hr SIZE=5 WIDTH="100%"></center>
+</blockquote>
+</blockquote>
+
+</body>
+</html>

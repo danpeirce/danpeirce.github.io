@@ -1,0 +1,58 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Dan Peirce">
+   <meta name="GENERATOR" content="Mozilla/4.79 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>Robot Diagnostic v4.002 Files</title>
+</head>
+<body>
+
+<center>
+<h1>
+Robot Diagnostic v4.002 Files</h1></center>
+
+<center>by Dan Peirce B.Sc.</center>
+
+<blockquote>
+<blockquote>
+<hr WIDTH="100%">
+<center>&nbsp;<a href="robot_diagnostic4002.hex">robot_diagnostic4002.hex</a>
+<br>Should be recompiled (little menu fix done on Oct. 22, 2010 so show
+current version number in menu 1)
+<p>change from previous version</center>
+A bug was fixed in the process_command.c file in the automatic_threshold_gap_left()
+function that had been resulting in a timeout of the watchdog timer. The
+solution was simply to reset the watchdog timer near the end of the function
+just before a call to menu_Schar2().
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<td>file_000=<a href="main.c">main.c</a>
+<br>file_001=<a href="process_command.c">process_command.c</a>
+<br>file_002=<a href="sumovore.c">sumovore.c</a>
+<br>file_003=<a href="menu.c">menu.c</a>
+<br>file_004=<a href="sensor.c">sensor.c</a>
+<br>file_005=<a href="motor_control1.c">motor_control1.c</a>
+<br>file_006=<a href="interrupts.c">interrupts.c</a>
+<br>file_007=<a href="jog1.c">jog1.c</a>
+<br>file_008=..\Functions\osc.c
+<br>file_009=<a href="jog2.c">jog2.c</a>
+<br>file_010=<a href="motor_control.h">motor_control.h</a>
+<br>file_011=<a href="process_command.h">process_command.h</a>
+<br>file_012=<a href="sumovore.h">sumovore.h</a>
+<br>file_013=<a href="command_list.h">command_list.h</a>
+<br>file_014=<a href="menu.h">menu.h</a>
+<br>file_015=<a href="sensor.h">sensor.h</a>
+<br>file_016=<a href="jog.h">jog.h</a>
+<br>file_017=<a href="interrupts.h">interrupts.h</a>
+<br>file_018=..\Functions\osc.h</td>
+</tr>
+</table></center>
+
+<center>
+<hr WIDTH="100%"></center>
+</blockquote>
+</blockquote>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Dan Peirce">
+   <meta name="GENERATOR" content="Mozilla/4.79 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>Perl/Tk Graphical Interface for Robot Diagnostic Program</title>
+</head>
+<body>
+
+<center>
+<h1>
+Perl/Tk Graphical Interface for Robot Diagnostic Program</h1></center>
+
+<center>by Dan Peirce B.Sc.
+<br>link to page on <a href="../robot_diagnstic.html">Robot Diagnostic
+program</a></center>
+
+<blockquote>
+<blockquote>
+<hr WIDTH="100%">
+<br>July 30, 2010
+<hr WIDTH="100%">
+<br>Largely on my own time I have written a <a href="http://www.perltk.org/">Perl/Tk</a>
+script to interact with the Robot Diagnostic Program that runs on the sumovore
+robots.
+<br><a href="http://www.perl.org/">Perl</a> and Tk are available for free
+and together allow one to produce a simple graphical interface without
+a great deal of effort. I had previously worked with Tcl/Tk but find I
+like Perl much better since it has a syntax more like C than Tcl does.
+I opted for the Strawberry Hill distribution of Perl which allows one to
+make use of the Perl modules at <a href="http://www.cpan.org/">CPAN</a>.
+<br>&nbsp;
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<td>&nbsp;<a href="http://strawberryperl.com/">http://strawberryperl.com/</a></td>
+
+<td>link to current install file for <b>Perl</b></td>
+</tr>
+
+<tr>
+<td>&nbsp;<a href="http://search.cpan.org/~srezic/Tk-804.029/pod/gencmd">http://search.cpan.org/~srezic/Tk-804.029/pod/gencmd</a></td>
+
+<td>link to download file for <b>Tk</b>
+<br>note that strawberryperl includes a C compiler&nbsp;
+<br>to compile this module for a particular platform&nbsp;
+<br>(it does take a long time since the module is big)</td>
+</tr>
+
+<tr>
+<td><a href="http://search.cpan.org/~bbirth/Win32-SerialPort-0.22/lib/Win32/SerialPort.pm">http://search.cpan.org/~bbirth/Win32-SerialPort-0.22/lib/Win32/SerialPort.pm</a></td>
+
+<td>link to download file for Win32::SerialPort
+<br>This is needed to make use of the computer&nbsp;
+<br>serial port under windows.
+<br>(this module compiles quickly as it is small).</td>
+</tr>
+</table></center>
+
+<p>I don't have a lot of time to document the program at this time so I
+am just going to post some screen shots of it working. <a href="rtk.pl">The
+program</a> is quite simple and acts as a simple substitute for hyperterminal.
+It only displays the response from the robot and does not interpret it
+(not yet). It allows one to operate the diagnostic program with mouse clicks
+rather than entering menu items. The top window is the Tk window with the
+buttons. The bottom window contains the text response from the robot.
+<center><img SRC="top.jpg" HSPACE=3 VSPACE=3 BORDER=3 height=482 width=351>
+<p>clicked on <b>motor</b>
+<br><img SRC="motor.jpg" HSPACE=3 VSPACE=3 BORDER=3 height=384 width=632>
+<p>clicked on <b>left</b>
+<br><img SRC="left.jpg" HSPACE=3 VSPACE=3 BORDER=3 height=353 width=540>
+<p>clicked on <b>slow</b>
+<br><img SRC="slow.jpg" HSPACE=3 VSPACE=3 BORDER=3 height=355 width=381>
+<p>clicked on <b>reverse</b> followed by <b>forward</b>
+<br><img SRC="forwardslow.jpg" HSPACE=3 VSPACE=3 BORDER=3 height=356 width=376>
+<p>clicked on <b>coast</b>
+<br><img SRC="coast.jpg" HSPACE=3 VSPACE=3 BORDER=3 height=360 width=365>
+<p>example of <b>jog1</b> when batteries are too low.
+<br>This resulted in a Low Voltage Detection. &lt;LVD>
+<br><img SRC="jog1-LVD.jpg" HSPACE=1 VSPACE=1 BORDER=1 height=342 width=355>
+<p><b>jog1</b> with better batteries
+<br><img SRC="jog1-running.jpg" HSPACE=3 VSPACE=3 BORDER=3 height=333 width=422>
+<p>batteries not fresh enough for<b> jog2.</b>
+<br>Had been running jog1 but<b> Brown Out Reset </b>occurred
+<br>when 2 was clicked on!
+<br><img SRC="jog2-BOR.jpg" HSPACE=3 VSPACE=3 BORDER=3 height=332 width=337>
+<p>Robot powered down and powered back up. (see <b>&lt;POR></b> indicating
+normal Power On Reset condition.
+<br><img SRC="restart_after_BOR.jpg" HSPACE=3 VSPACE=3 BORDER=3 height=486 width=338></center>
+
+<hr WIDTH="100%"></blockquote>
+</blockquote>
+
+</body>
+</html>

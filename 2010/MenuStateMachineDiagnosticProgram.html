@@ -1,0 +1,302 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=windows-1252">
+   <meta name="GENERATOR" content="Mozilla/4.79 [en] (Windows NT 5.0; U) [Netscape]">
+   <meta name="AUTHOR" content="Dan Peirce">
+   <title>Diagnostic Program Menu State Machine</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" LANG="en-US" DIR="LTR">
+
+<center>
+<h1>
+Diagnostic Program Menu State Machine</h1></center>
+
+<center>By Dan Peirce B.Sc.
+<br>&lt;link back to&nbsp; <a href="robot_diagnostic.html">Robot Diagnostic
+Page</a> ></center>
+
+<blockquote>
+<blockquote>
+<hr>April 27, 2010 --- (rev May 14, 2010) (rev Oct. 26, 2010)
+<hr></blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote>
+<h3>
+<a NAME="State transition diagram"></a>State transition diagram</h3>
+The state transition diagram for the menu system of the Robot Diagnositc
+Program (with version 2.0 of the brainboard) is shown below. To avoid having
+the diagram get too complex it has been separated into a sequence of diagrams.
+T<b>his page has been modified to reflect version 4.002 of the diagnostic
+program.</b>
+<center><img SRC="TopMenu_STD.gif" HSPACE=3 VSPACE=3 BORDER=3 height=476 width=404>
+<br><img SRC="motorMenu1_STD_J.GIF" HSPACE=3 VSPACE=3 BORDER=3 height=676 width=531></center>
+</blockquote>
+</blockquote>
+
+<center><img SRC="sensorMenu1_STD.GIF" HSPACE=3 VSPACE=3 BORDER=3 height=248 width=412></center>
+
+<blockquote>
+<blockquote>The ovals represent states of the menu system for the diagnostic
+program.
+<p>The lines with arrow heads represent a transition from one state to
+another and the reason for the transition. In most cases the reason is
+a key press. In most cases a new menu will be printed when the transition
+is made. For many keypresses the menu system stays in the same state but
+something else happens (could be text displayed in hyperterminal an/or
+an input/output change). There is not enough room on the diagram to list
+out the input output changes so I will make tables of lists of these changes.
+Rather than using hyperterminal it is also possible to use a GUI in Perl/tk
+and use mouse button clicks rather than keyboard enteries. Some screen
+shots of the GUI window are shown just to give a idea of what that option
+looks like.
+<p>The program has been changed to accommodate two independent jog sequences.
+The jog sequences differ from other pre-existing states in that they run
+an ongoing sequence of changes in motor direction until stopped and send
+a message with a jog count for each cycle in the sequence. Each jog sequence
+justified a new module so any changes in that jog sequence could be made
+independent of the other jog sequence. In the menu system the jog sequences
+can be thought of as <b>sub-states of Motor Menu 1</b>. Within the actual
+program structure the menu system has in fact become the default state
+of a <a href="robot_diagnostic.html#encompassing_state_machine">more encompassing
+state machine.</a> The jog sequences are not primarily driven by the menu
+system but by timing considerations. The new encompassing state machine
+is comprised of the following states:
+<br>&nbsp;
+<center><table BORDER CELLPADDING=4 >
+<tr>
+<td>jog1
+<br>jog2
+<br>process_command (default state)
+<br>stop_state</td>
+</tr>
+</table></center>
+</blockquote>
+
+<blockquote>
+<h3>
+<a NAME="state machine"></a>Menu system (state machine)</h3>
+When the robot is reset (by a power up or by the PICkit2) the menu state
+machine starts in the state <b>"Top Level Menu"</b>. A key press of&nbsp;
+an "<b>M</b>" (either case) causes a transition to the state <b>"Motor
+Menu 1"</b>. A new menu is displayed so that from that state one can choose
+which motor to control (left or right). If "<b>L</b>" is choosen the menu
+system will transition to the "<b>Left Motor</b>" state. A new menu is
+displayed showing the possible actions at this point. None of the transistions
+to this point have included a change in input or output (apart from the
+USART). The <b>printf()</b> statements that comprise the actual messages
+displayed can be seen at&nbsp; <a href="robot_diagnostic4002/menu.c">menu.c</a>
+.</blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote>The C functions that correspond to all the states in the state
+diagram given above are in the file&nbsp; <a href="robot_diagnostic4002/process_command.c">process_command.c</a>
+. There is a one to one corespondence between the states in the menu system
+and the following functions:</blockquote>
+</blockquote>
+
+<center><table BORDER CELLSPACING=2 CELLPADDING=5 >
+<tr>
+<td VALIGN=TOP COLSPAN="2">
+<center><a NAME="list state table"></a><b>List State Table</b></center>
+</td>
+</tr>
+
+<tr>
+<td>enum commands get_command_char1( unsigned char data );</td>
+
+<td>Top Level Menu</td>
+</tr>
+
+<tr>
+<td>enum commands get_command_Mchar2( unsigned char data );&nbsp;
+<br>enum commands get_command_MLchar3( unsigned char data ) ;&nbsp;
+<br>enum commands get_command_MRchar3( unsigned char data );&nbsp;
+<br>enum commands get_command_MLchar3_rev( unsigned char data ) ;&nbsp;
+<br>enum commands get_command_MRchar3_rev( unsigned char data );</td>
+
+<td VALIGN=TOP>Motor Menu 1&nbsp;
+<br>Left Motor&nbsp;
+<br>Right Motor&nbsp;
+<br>rev Left Motor&nbsp;
+<br>rev Right Motor</td>
+</tr>
+
+<tr>
+<td>enum commands get_command_Schar2( unsigned char data );&nbsp;
+<br>enum commands get_threshold( unsigned char data );&nbsp;
+<br>enum commands get_threshold_next( unsigned char data );&nbsp;
+<br>enum commands automatic_threshold( unsigned char data );&nbsp;
+<br>enum commands automatic_threshold_gap_right( unsigned char data );&nbsp;
+<br>enum commands automatic_threshold_gap_cright( unsigned char data );&nbsp;
+<br>enum commands automatic_threshold_gap_cleft( unsigned char data );&nbsp;
+<br>enum commands automatic_threshold_gap_left( unsigned char data );</td>
+
+<td VALIGN=TOP>Sensor Menu 1&nbsp;
+<br>promps for new threshold
+<br>(sub-state)
+<br>takes sensor readings as robot manually moved
+<br>(sub_states)</td>
+</tr>
+</table></center>
+
+<blockquote>
+<blockquote>Each of those functions is passed a character. In most cases
+the character is a character receieved from the PC (via the USART). In
+the case of the automatic_threshold** functions they are simply passed
+a null character that is ignored. That is because the transition out of
+those functions is primarily based on sensor input and not on keyboard
+input. A flag variable <b>auto_mode</b> is used to keep track if the system
+is in automatic threshold mode. This can be thought of as a parallel state
+variable which indicates if the current state is one of the automatic_theshold**
+states or not.
+<p>Each of those functions returns a value of type <b>enum commands</b>.
+The command will be either null (a zero) or a value from the list give
+in&nbsp; <a href="robot_diagnostic4002/command_list.h">command_list.h</a>
+. The <b>commands are used to set the speed and direction of one of the
+motors or to get a signal ADC value from one of the sensors</b>. The list
+is in an <b>enum declaration</b> and can be easily expanded.
+<h3>
+<a NAME="get_command"></a><b>get_command </b>variable (is a fuction pointer)</h3>
+A variable called <b>get_command</b> is used to keep track of the current
+state of the menu system. Since there is a one to one corraspondance between
+states and functions used to implement states the variable <b>get_command
+</b>contains
+the <b>address of the function</b> that will be called. This means that
+<b>get_command</b>
+is a pointer to functions. <b>It is very easy to use!
+</b>To change the
+state a simple assignement statement is used like:</blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote><b><tt>get_command = get_command_char1;</tt></b></blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote>When it is time to call the function pointed to by get_command
+any of the following can be used:</blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote><b>get_command(data_rec);</b>
+<br><b><tt>or</tt></b>
+<br><b>command = get_command(data_rec);</b>
+<br><b>or</b>
+<br><b>get_command(0);</b></blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote>The function call with a function pointer syntax looks just
+like a normal function call. The pointer name is used in place of a fuction
+name.</blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote>The declaration of the function pointer looks like this:</blockquote>
+</blockquote>
+
+<blockquote STYLE="text-align: center">
+<blockquote STYLE="text-align: center"><b><tt>static enum commands (*get_command)(unsigned
+char data) = get_command_char1; // example of a</tt></b>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<b>// pointer to a function</b></tt></blockquote>
+</blockquote>
+
+<ul>
+<blockquote >
+<blockquote >The qualifier
+<b>static</b> means the variable only has scope
+inside the current file.</blockquote>
+</blockquote>
+
+<blockquote >
+<blockquote ><b>enum commands
+</b>is the returned variable type of any
+function this pointer can point to.</blockquote>
+</blockquote>
+
+<blockquote >
+<blockquote ><b>(*get_command)
+</b>is the variable name with the indication
+that it is a pointer. The brackets indicate that the variable pointer is
+a pointer (rather than the return value being a pointer).</blockquote>
+</blockquote>
+
+<blockquote >
+<blockquote ><b>(unsigned char data) </b>these brackets indicate that this
+is a pointer to a function rather than to other variables. The type inside
+the brackets indicate the type of the variable that is passed to functions
+that this pointer can point at.</blockquote>
+</blockquote>
+
+<blockquote>
+<blockquote><b>= get_command_char1; </b>this initializes the pointer so
+that it points at the function get_command_char1 (the function for the
+top level menu).</blockquote>
+
+<h3>
+<a NAME="process_command"></a>The Function&nbsp; process_command()</h3>
+This fucntion is called from <b>main()</b> in <b>main.c</b>.&nbsp; It is
+the only function in the project that makes fuction calls using the function
+pointer <b>get_command</b>. It is in the file <a href="robot_diagnostic4002/process_command.c">process_command.c</a>&nbsp;
+Since process_commend() is short I can include the whole function here.</blockquote>
+</ul>
+
+<center><table BORDER CELLSPACING=2 CELLPADDING=5 >
+<tr>
+<td><tt>enum commands process_command(void)</tt>
+<br><tt>{</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; enum commands command=null;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; unsigned char data_rec = '\0' ;</tt>
+<p><tt>&nbsp;&nbsp;&nbsp; if( auto_mode ) get_command(0);&nbsp; // in this
+case is using sensors to find threshold</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; else</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; {</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (DataRdyUSART( ))
+data_rec = ReadUSART ();</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( data_rec != '\0'
+) command = get_command(data_rec);</tt>
+<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else command = null;</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; }</tt>
+<br><tt>&nbsp;&nbsp;&nbsp; return (command);&nbsp;</tt>
+<br><tt>}&nbsp;</tt></td>
+</tr>
+</table></center>
+
+<blockquote>
+<blockquote>Note that the automatic&nbsp; threshold feature was an afterthought
+and not part of the original concept.</blockquote>
+</blockquote>
+
+<ul>
+<blockquote >Normally <b>auto_mode</b> is <b>zero</b>. In that case a check
+is made to see if the USART has a character to interpret. If not the fuction
+returns a null as a command.
+<br>If the USART does contain a character it will be copied into <b>data_rec</b>.
+If <b>data_rec</b> contains anything but a null character then the function
+pointed to by <b>get_command</b> will be called and passed the value of
+<b>data_rec</b>.
+A command is returned and assigned to the variable <b>command</b>. The
+command is returned to <b>main()</b>.</blockquote>
+
+<blockquote>When <b>auto_mode</b> is <b>1</b> the system is in the process
+of automatically finding a good value for threshold. The states involved
+in that process primarily get input from the sensors rather than from the
+USART. In this case the function pointed to by get_command is called regardless
+of the current state of the USART. The function pointed to by get_command
+will be passed a null character which is just a dummy value. Those function
+only return a null value so the return value is ignored. The variable command
+is initialized as "null" and if not changed the <b>"null"</b> command will
+be returned to the calling function (always <b>main()</b>).
+<p>
+<hr WIDTH="100%"></blockquote>
+</ul>
+
+</body>
+</html>

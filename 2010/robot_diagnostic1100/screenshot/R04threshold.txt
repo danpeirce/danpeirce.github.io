@@ -1,0 +1,4 @@
+
+Robot R04 automatic threshold:
+
+The new threshold value is 429
