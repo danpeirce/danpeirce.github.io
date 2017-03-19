@@ -7,7 +7,7 @@ use pandoc -s -t html5 -c pandocbd.css index.md -o index.html
 
 * [My Google Sites Links to Notes Page](https://sites.google.com/site/danpeircenotes/)
 
-Some of those links are coppied here:
+Some of those links are copied here:
 
 -   [4d\_lcd.html](https://danpeirce.github.io/4d_lcd.html)
 -   [AstrophotographyI.html](https://danpeirce.github.io/ASTR1100/AstrophotographyI.html)

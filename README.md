@@ -3,7 +3,7 @@
 These pages are my notes which I share. An index can be found at 
 [https://sites.google.com/site/danpeircenotes/](https://sites.google.com/site/danpeircenotes/).
 
-Some of those links are coppied here:
+Some of those links are copied here:
 
 -   [4d\_lcd.html](https://danpeirce.github.io/4d_lcd.html)
 -   [AstrophotographyI.html](https://danpeirce.github.io/ASTR1100/AstrophotographyI.html)
