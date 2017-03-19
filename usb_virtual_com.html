@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>USB Virtual COM Port</title>
+  </head>
+
+<body>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#usb-virtual-com-port">USB Virtual COM Port</a><ul>
+<li><a href="#using-old-prototype-box">Using old ProtoType Box</a></li>
+<li><a href="#simple-cgi-interface">Simple CGI Interface</a></li>
+<li><a href="#second-variation-of-simple-cgi-interface">Second Variation of Simple CGI Interface</a></li>
+<li><a href="#perl-to-file-interface-with-php-files-for-web-interface">Perl to File interface with PHP files for Web Interface</a></li>
+<li><a href="#perl-files">Perl Files</a></li>
+<li><a href="#perl">Perl</a></li>
+<li><a href="#apache">Apache</a></li>
+</ul>
+</li>
+<li><a href="#see-also-sensor-related">See Also Sensor Related</a><ul>
+<li><a href="#html5-and-websockets">HTML5 and websockets</a></li>
+<li><a href="#polling-and-long-polling-and-other-possabilities">Polling and long polling and Other Possabilities</a></li>
+<li><a href="#writing-data-to-an-excel-file">Writing Data to an Excel File</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="usb-virtual-com-port">USB Virtual COM Port</h1>
+<div class="codehilite"><pre><span class="n">by</span> <span class="n">Dan</span> <span class="n">Peirce</span> <span class="n">B</span><span class="p">.</span><span class="n">Sc</span><span class="p">.</span>
+</pre></div>
+
+
+<p>Reformatted from <a href="http://danpeirce.net46.net/dokuwiki/doku.php?id=usb_virtual_com">Dokuwiki</a></p>
+<p>One method of getting data from a PIC into a PC is using a USB virtual com
+port.</p>
+<h2 id="using-old-prototype-box">Using old ProtoType Box</h2>
+<p><img alt="box_usb.jpg" src="usb_virtual_com/box_usb.jpg">We have used a virtual com
+port before in our <a href="http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/timer_box/"> photogate project</a>. I still have the prototype box built for
+that project so I decided to make use of it while I have new virtual com port
+boards on order. Controlling the LEDs is not that interesting but since they
+are all that are attached to the PIC that is what I started with.</p>
+<h2 id="simple-cgi-interface">Simple CGI Interface</h2>
+<p>Rather than write a GUI to a low one to interact with the prototype/demo box I
+thought it would be quicker and easier to use an existing web browser. <strong>As an
+added bonus, this method of interacting with the COM port and timer box allows
+great flexibility. One can both control and monitor the demo box from the same
+computer that it is connected to by the USB. It is no more difficult to
+monitor and control the demo box from a remote computer. It is also possible
+to control from one computer and monitor on another.</strong> If there were no
+firewall between the connected computer and the Internet it would also be
+possible to control and/or monitor the timer box from any computer on the
+Internet.<br>
+</p>
+<p>At home I have tested this setup with <strong>Mozilla Firefox</strong> and <strong>Internet
+Explorer</strong>. I have also used the <strong>Android browser</strong> to <strong>control and monitor
+the demo box remotely.</strong> No doubt the methods used could be substantially
+refined but it is actually amazing how quick and easy this was to set up in
+the present form (although I did already have <a href="http://www.apache.org/">
+Apache</a> and <a href="http://strawberryperl.com/">Perl</a>
+installed for previous projects). <strong>The fact that the interface is a web
+interface means that virtually any computer or WI-fi connected device could be
+used to control/monitor the demo box!</strong> Any one of a multitude of sensors
+could also be attached to the demo box and monitored over a LAN. This I would
+also like to demonstrate when time permits.<br>
+</p>
+<p>I already have <a href="http://www.apache.org/"> Apache</a> web server and
+<a href="http://strawberryperl.com/">Perl</a> installed. Perl was the choice for CGI
+language since there is an existing <a href="http://strawberryperl.com/">Perl</a> module
+for com port communication. In 2006 I used <strong>Tcl/tk</strong> to make a <strong>GUI</strong> to
+communicate with the demo box but at that time I had no working com port Perl
+module for the windows platform. This has changed with Strawberry
+<a href="http://strawberryperl.com/">Perl</a>. Unlike Active Perl, Strawberry Perl comes
+with a C compiler that allows one to download modules from
+<a href="http://www.cpan.org/">CPAN</a>, compile the module and install it.<br>
+</p>
+<p><img alt="" src="demo_box/demo_box_control.png"> In this screen shot you can see a
+browser window titled <strong>"Demo Box"</strong>. The file demo_box.html contains the HTML
+tags needed to set the page up and references to test.css, mobile.css and
+print.css (style sheet used before for other pages). The purpose of this page
+is simply to show the status of the demo box. In this case it displays which
+LED (if any) is on. The box that contains the information of which LED is on
+is an <strong>iframe</strong> (inline frame).<br>
+</p>
+<p>The content of the iframe is supplied by a CGI
+<a href="http://strawberryperl.com/">Perl</a> script called <strong>demo_box.pl</strong>. This script
+sends a code ="<strong>?</strong>" to the <strong>demo box</strong> over the USB virtual COM port. It
+searches the response text from the demo box for codes "r", "g" and "f"
+(<strong>r</strong>ed, <strong>g</strong>reen or of<strong>f</strong>). <strong>demo_box.pl</strong> is set to automatically
+refresh every 2 seconds to keep the content current. The <strong>?</strong> query code is
+sent to the box when the script loads.<br>
+</p>
+<p>A different window was used to control which LED will be on if any. The
+contents of this window is supplied by one of three
+<a href="http://strawberryperl.com/">Perl</a> CGI scripts. Each time a link is activated
+the corresponding script is called. Each script when loaded sends the command
+code that corresponds it what it is indented to do (r, g or f). The box
+responds by setting the correct LED and echoing the character back to the COM
+port with a carriage return, line feed and "&gt;" prompt. The extra bytes were
+included in case hyper-terminal is used rather an the scripts.</p>
+<h2 id="second-variation-of-simple-cgi-interface">Second Variation of Simple CGI Interface</h2>
+<p>The difference between this example and the older example is that here only
+demo_box.pl has access to the COM port. demo_box.pl is not actually CGI but is
+run from a console prompt. demo_box.pl interacts with the CGI Perl scripts
+through the use of two files (demo_box.txt and update.txt).
+<img alt="" src="demo_box/demo_box_control2.png"> <strong>update.txt</strong> is a file the
+<strong>demo_box.pl</strong> reads to find messages left by the CGI scripts. Presently
+there are just messages it might find:</p>
+<ol>
+<li>
+<p>green</p>
+</li>
+<li>
+<p>red</p>
+</li>
+</ol>
+<p><strong>demo_box.pl</strong> responds to a message by passing on the first letter of the message to the timer box via the COM port. It also writes to <strong>demo_box.txt</strong> with the message indicating the current status of the demo box. </p>
+<p><strong>demo_box.txt</strong> is the file read by <strong>status.pl</strong> and it uses what it finds to update demo_box.html with what is happing. demo_box.html can be used by remote computers to monitor the demo box. On the computer that the demo box is actually connected to messages appear in the console window for demo_box.pl with lower latency. </p>
+<h2 id="perl-to-file-interface-with-php-files-for-web-interface">Perl to File interface with PHP files for Web Interface</h2>
+<p>Since demo_box.pl acts as a interface between the virtual COM port and the
+file system just about any programming or scripting language capable of
+reading and writing files could be used with demo_box.pl. One could use PHP to
+interact with these two files.</p>
+<p>The status.php file for this example is quite simple.</p>
+<div class="codehilite"><pre><span class="x">&lt;html&gt;</span>
+<span class="x">&lt;head&gt;</span>
+<span class="x">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot;&gt;</span>
+<span class="x">&lt;meta http-equiv=&quot;refresh&quot; CONTENT=&quot;3;URL=&quot;status.php&quot;&gt;</span>
+<span class="x">&lt;/head&gt;</span>
+<span class="x">&lt;body&gt;</span>
+
+<span class="cp">&lt;?php</span>
+<span class="nv">$demobox</span> <span class="o">=</span> <span class="s2">&quot;demo_box.txt&quot;</span><span class="p">;</span>
+<span class="nv">$fh</span> <span class="o">=</span> <span class="p">[</span><span class="nb">fopen</span><span class="p">](</span><span class="nx">http</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">php</span><span class="o">.</span><span class="nx">net</span><span class="o">/</span><span class="nb">fopen</span><span class="p">)(</span><span class="nv">$demobox</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">);</span>
+<span class="nv">$theData</span> <span class="o">=</span> <span class="p">[</span><span class="nb">fread</span><span class="p">](</span><span class="nx">http</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">php</span><span class="o">.</span><span class="nx">net</span><span class="o">/</span><span class="nb">fread</span><span class="p">)(</span><span class="nv">$fh</span><span class="p">,</span> <span class="p">[</span><span class="nb">filesize</span><span class="p">](</span><span class="nx">http</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">php</span><span class="o">.</span><span class="nx">net</span><span class="o">/</span><span class="nb">filesize</span><span class="p">)(</span><span class="nv">$demobox</span><span class="p">));</span>
+<span class="p">[</span><span class="nb">fclose</span><span class="p">](</span><span class="nx">http</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">php</span><span class="o">.</span><span class="nx">net</span><span class="o">/</span><span class="nb">fclose</span><span class="p">)(</span><span class="nv">$fh</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">&quot;The &quot;</span><span class="p">;</span> 
+<span class="k">echo</span> <span class="nv">$theData</span><span class="p">;</span>
+<span class="k">echo</span> <span class="s2">&quot;LED is on&quot;</span><span class="p">;</span>
+
+<span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</pre></div>
+
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/313083/is-php-or-vanilla-perl-cgi-faster">http://stackoverflow.com/questions/313083/is-php-or-vanilla-perl-cgi-faster</a></li>
+</ul>
+<h2 id="perl-files">Perl Files</h2>
+<ul>
+<li><a href="demo_box/cgi.html"> Files used in the project.</a></li>
+</ul>
+<h2 id="perl">Perl</h2>
+<p>Resources for running Perl on a windows system.</p>
+<ul>
+<li><a href="http://strawberryperl.com/">http://strawberryperl.com/</a></li>
+<li><a href="http://win32.perl.org/wiki/index.php?title=Strawberry_Perl">http://win32.perl.org/wiki/index.php?title=Strawberry_Perl</a></li>
+<li><a href="http://www.cpan.org/">http://www.cpan.org/</a> -- Comprehensive Perl Archive Network</li>
+</ul>
+<p>For the current project the Win32::SerialPort module is needed from CPAN</p>
+<ul>
+<li><a href="http://search.cpan.org/~bbirth/Win32-SerialPort-0.22/lib/Win32/SerialPort.pm">http://search.cpan.org/~bbirth/Win32-SerialPort-0.22/lib/Win32/SerialPort.pm</a></li>
+</ul>
+<h2 id="apache">Apache</h2>
+<p>Resources for running Apache.</p>
+<ul>
+<li><a href="http://www.apache.org/">http://www.apache.org/</a></li>
+<li><a href="http://johnbokma.com/windows/apache-virtual-hosts-xp.html">http://johnbokma.com/windows/apache-virtual-hosts-xp.html</a></li>
+<li><a href="https://our.kwantlen.ca/personal/danp/Blog/Lists/Posts/Post.aspx?ID=7">https://our.kwantlen.ca/personal/danp/Blog/Lists/Posts/Post.aspx?ID=7</a> -- This does little but provide the link given above.</li>
+<li><a href="http://httpd.apache.org/docs/current/howto/cgi.html#writing">http://httpd.apache.org/docs/current/howto/cgi.html#writing</a> -- CGI with perl and Apache</li>
+</ul>
+<h1 id="see-also-sensor-related">See Also Sensor Related</h1>
+<ul>
+<li><a href="http://danpeirce.net46.net/notes.html#html5_canvas">http://danpeirce.net46.net/notes.html#html5_canvas</a> -- useful to display analogue data in a chart and other graphical information.</li>
+<li><a href="html5canvas.html">html5canvas</a></li>
+<li><a href="http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/envi2307/photodiode.html">http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/envi2307/photodiode.html</a></li>
+<li><a href="http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/envi2307/#sensors">http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/envi2307/#sensors</a></li>
+<li><a href="http://www.solarbotics.com/product/35180/">http://www.solarbotics.com/product/35180/</a> - HM55B Compass Module</li>
+<li><a href="https://www.parallax.com/StoreSearchResults/tabid/768/List/0/SortField/4/ProductID/585/Default.aspx?txtSearch=Accelerometer+"> MMA7455 3-Axis Accelerometer Module</a></li>
+<li><a href="http://www.solarbotics.com/product/35220/">http://www.solarbotics.com/product/35220/</a> -- H48C - 3 Axis Accelerometer</li>
+<li><a href="https://www.parallax.com/Store/Sensors/ObjectDetection/tabid/176/txtSearch/gps/List/0/SortField/4/ProductID/83/Default.aspx"> PIR Sensor (Rev B) </a></li>
+<li><a href="https://www.parallax.com/Store/Sensors/ObjectDetection/tabid/176/txtSearch/gps/List/0/SortField/4/ProductID/92/Default.aspx"> PING))) Ultrasonic Sensor </a></li>
+<li><a href="http://www.solarbotics.com/product/35060/"> Analog Infra-Red Rangefinding System (AIRRS)</a></li>
+<li><a href="http://www.solarbotics.com/product/25500/"> HXT900 9g / 1.6kg / .12sec Micro Servo</a> -- can be used with AIRRS</li>
+<li><a href="http://www.solarbotics.com/product/35192/"> PING))) Bracket Kit with Servo </a></li>
+</ul>
+<h2 id="html5-and-websockets">HTML5 and websockets</h2>
+<p>HTML5 and Websockets is something to start looking at.</p>
+<ul>
+<li><a href="http://showmetheco.de/articles/2011/2/diving-into-html5-with-websockets-and-perl.html">http://showmetheco.de/articles/2011/2/diving-into-html5-with-websockets-and-perl.html</a></li>
+<li><a href="http://css.dzone.com/articles/updating-duct-tape-html5">http://css.dzone.com/articles/updating-duct-tape-html5</a></li>
+<li><a href="http://mojolicio.us/">http://mojolicio.us/</a></li>
+</ul>
+<h2 id="polling-and-long-polling-and-other-possabilities">Polling and long polling and Other Possabilities</h2>
+<p>Unfortunately HTML5 websokets is not well supported yet. Expect this to change
+but for now it would be a good idea to look at alternatives.</p>
+<ul>
+<li><a href="http://query7.com/avoiding-long-polling">http://query7.com/avoiding-long-polling</a></li>
+<li><a href="http://meteorserver.org/">http://meteorserver.org/</a></li>
+<li><a href="http://stackoverflow.com/questions/1338123/what-is-a-safe-amount-of-time-that-i-can-wait-before-responding-to-a-browser-wi">http://stackoverflow.com/questions/1338123/what-is-a-safe-amount-of-time-that-i-can-wait-before-responding-to-a-browser-wi</a></li>
+</ul>
+<h2 id="writing-data-to-an-excel-file">Writing Data to an Excel File</h2>
+<p>As an alternative to using a CGI script to display Data in a browser the data
+could be stored to an Excel file (including a scatter chart).</p>
+<ul>
+<li><a href="perl_excel_writer.html">perl_excel_writer</a></li>
+</ul>
+<hr>
+<p>trying something newer <a href="demo_box.pl">demo_box.pl</a></p>
+
+</body>
+
+</html>

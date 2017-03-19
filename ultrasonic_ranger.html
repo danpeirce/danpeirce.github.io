@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>Utrasonic Ranger</title>
+  </head>
+
+<body>
+<h1 id="ultrasonic-ranger">Ultrasonic Ranger</h1>
+<div class="codehilite"><pre><span class="n">by</span> <span class="n">Dan</span> <span class="n">Peirce</span> <span class="n">B</span><span class="p">.</span><span class="n">Sc</span><span class="p">.</span>
+</pre></div>
+
+
+<p>reformated from <a href="http://danpeirce.net46.net/dokuwiki/doku.php?id=ultrasonic_ranger">dokuwiki</a> on July 20, 2013</p>
+<ul>
+<li><a href="http://www3.telus.net/danpeirce/sensors/sonicRanger.pdf">http://www3.telus.net/danpeirce/sensors/sonicRanger.pdf</a></li>
+<li><a href="http://www.maxbotix.com/documents/MB1010_Datasheet.pdf">http://www.maxbotix.com/documents/MB1010_Datasheet.pdf</a></li>
+</ul>
+<h2 id="python-program">Python Program</h2>
+<ul>
+<li><a href="python.html#why-use-python"> link to <strong>why use python</strong> </a></li>
+</ul>
+<p>The ultrasonic ranging module sends asynchronous serial data in the form of a
+"R" followed by three digits representing the range in inches followed by a
+carriage return. In the following program the carriage return is ignored
+(python looks for new line as a line delimiter; it does not use carriage
+return which is unfortunately what is sent by the sonic ranger).</p>
+<p>I also have C code (for a <a href="hello33.html"> PIC18LF2620</a> rather than for a PC).<br>
+See <a href="https://our.kwantlen.ca/personal/danp/Shared%20Documents/range_with_compa
+rator.zip">https://our.kwantlen.ca/personal/danp/Shared%20Documents/range_with_compa
+rator.zip</a> (requires login to obtain the zip file -- I can't post it here at
+this time because it may become part of a class assignment).</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">serial</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c"># com1 is (0) -- com3 is (2)</span>
+<span class="k">print</span> <span class="n">ser</span><span class="o">.</span><span class="n">portstr</span><span class="p">,</span>      <span class="c"># prints the actual port name used</span>
+<span class="k">print</span> <span class="s">&#39;Python range2.py&#39;</span>
+<span class="k">print</span> <span class="s">&#39; by Dan Peirce B.Sc.&#39;</span> 
+<span class="k">print</span> <span class="s">&#39; of Kwantlen Polytechnic University&#39;</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">15</span><span class="p">):</span>  <span class="c"># just a python for loop (results in 14 iterations of the loop)</span>
+    <span class="n">ser</span><span class="o">.</span><span class="n">flushInput</span><span class="p">()</span>   <span class="c"># The PC has a big buffer that could be full by now</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>   <span class="c"># pause for 10 ms to allow some time for new data to arrive -- in hindsight I don&#39;t think this was needed</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>    <span class="c"># read the serial port in putting 5 characters into a string - I believe this blocks until 5chars have been received</span>
+    <span class="k">print</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>      <span class="c"># print all but the last character of the string (the last character should be a carriage return)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>      <span class="c"># sleep for a second (don&#39;t want to update too fast as I want to have time to move the reflector)</span>
+<span class="c">#note that in python indenting creates a block like { } in c.</span>
+
+<span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">COM3</span> <span class="n">Python</span> <span class="n">range2</span><span class="o">.</span><span class="n">py</span>
+ <span class="n">by</span> <span class="n">Dan</span> <span class="n">Peirce</span> <span class="n">B</span><span class="o">.</span><span class="n">Sc</span><span class="o">.</span>
+ <span class="n">of</span> <span class="n">Kwantlen</span> <span class="n">Polytechnic</span> <span class="n">University</span>
+<span class="n">R006</span> <span class="n">R006</span> <span class="n">R007</span> <span class="n">R009</span> <span class="n">R010</span> <span class="n">R011</span> <span class="n">R011</span> <span class="n">R012</span> <span class="n">R013</span> <span class="n">R013</span> <span class="n">R015</span> <span class="n">R017</span> <span class="n">R015</span> <span class="n">R020</span>
+</pre></div>
+
+
+<h2 id="example-using-python-and-tkinter">Example Using Python and Tkinter</h2>
+<p>This example is for a different device (a three axis accelerometer) but it is
+quite easy to modify to be suitable for the MaxSonar module. It will produce a
+plot of data.</p>
+<ul>
+<li><a href="http://pagh.123abc.co.nz/?cat=4">http://pagh.123abc.co.nz/?cat=4</a> -- Accelerometer testing with Tkinter python GUI</li>
+</ul>
+<p>I may well go back a make new versions of the PIC program to use with a
+modified version of this python/tkinter program.</p>
+<h2 id="using-matplotlib">Using matplotlib</h2>
+<p>A different solution to creating plots is making use of the library
+matplotlib. This library was created to combine plotting capabilities similar
+to Matlab with the Python programming language.</p>
+<ul>
+<li>See <a href="matplotlib.html">matplotlib</a></li>
+</ul>
+
+</body>
+
+</html>
