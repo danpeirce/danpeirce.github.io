@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>Matplotlib</title>
+  </head>
+
+<body>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#matplotlib">matplotlib</a><ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#advantages-over-using-tkinter-for-plotting">Advantages over Using Tkinter for Plotting</a></li>
+<li><a href="#related-python-language-extension-scipy">Related Python Language Extension SciPy</a></li>
+<li><a href="#related-ipython-for-scientific-computing">Related IPython For Scientific Computing</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="matplotlib">matplotlib</h1>
+<div class="codehilite"><pre> <span class="n">Notes</span> <span class="n">by</span> <span class="n">Dan</span> <span class="n">Peirce</span> <span class="p">(</span><span class="n">reformated</span> <span class="n">from</span> <span class="n">my</span> <span class="n">pages</span> <span class="n">at</span> 
+           <span class="n">danpeirce</span><span class="p">.</span><span class="n">net46</span><span class="p">.</span><span class="n">net</span><span class="o">/</span><span class="n">dokuwiki</span><span class="o">/</span>
+</pre></div>
+
+
+<h2 id="introduction">Introduction</h2>
+<p>This Python language extension was created to combine plotting capabilities
+similar to Matlab (similar syntax) with the Python programming language. There
+is a introduction to matplotlib at
+<a href="http://matplotlib.sourceforge.net/users/intro.html">http://matplotlib.sourceforge.net/users/intro.html</a> . matplotlib requires
+another language extension called <a href="http://www.numpy.org/"> NumPy</a> which
+processes large arrays efficiently. NumPy is pre-installed on the <a href="raspberry_pi.html"> Raspberry
+Pi</a> Rasbian image.</p>
+<p>From that link one can also find a tutorial on how to make plots from data. As
+a simple python example that generated the plot shown down below:</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c"># evenly sampled time at 200ms intervals</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c"># red dashes, blue squares and green triangles</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="s">&#39;r--&#39;</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#39;bs&#39;</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="s">&#39;g^&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+
+<p>This little Python script generated this plot (was run on the <a href="raspberry_pi.html"> Raspberry
+Pi</a> ) <img alt="" src="matplotlib/plot03.png"></p>
+<p>The image shown above was saved as a *.png file. A screen shot of how it looks
+on the Raspberry Pi remote desktop is shown below. This is the screenshot with
+the remote Raspberry Pi desktop sitting on a windows XP desktop using the
+tightvnc viewer. This can also be viewed on an Android tablet using <a href="http://code.google.com/p/android-vnc-viewer/"> android-
+vnc-viewer</a></p>
+<p><img alt="" src="matplotlib/matplotlib_plot03.png"></p>
+<h2 id="installation">Installation</h2>
+<p>The Raspbian image has Python already installed. numpy is also installed. To
+get matplotlib running on also needs <strong>python-matplotlib</strong> . To install just
+run the following:</p>
+<div class="codehilite"><pre>sudo apt-get install python-matplotlib
+</pre></div>
+
+
+<p>You may also want to install the documentation</p>
+<div class="codehilite"><pre>sudo apt-get install python-matplotlib-doc
+</pre></div>
+
+
+<p>After the documentation install the manual will be available at</p>
+<ul>
+<li><strong>/usr/share/doc/python-matplotlib-doc/html/index.html</strong></li>
+</ul>
+<p>These packages can also be installed on windows PC's.</p>
+<ul>
+<li><a href="http://www.scipy.org/Download">http://www.scipy.org/Download</a></li>
+<li><a href="http://sourceforge.net/projects/matplotlib/files/">http://sourceforge.net/projects/matplotlib/files/</a></li>
+<li><a href="http://www.python.org/download/releases/2.7/">http://www.python.org/download/releases/2.7/</a></li>
+</ul>
+<h2 id="advantages-over-using-tkinter-for-plotting">Advantages over Using Tkinter for Plotting</h2>
+<p>Matplotlab is a library that allows one to create a graphical plot without
+worrying about the details of creating a GUI since matplotlab creates the
+graphical window transparently in the background. It also creates good quality
+plots with scales on the axis. For an alternative using Tkinter see</p>
+<ul>
+<li><a href="ultrasonic_ranger#example_using_python_and_tkinter">example_using_python_and_tkinter</a></li>
+</ul>
+<h2 id="related-python-language-extension-scipy">Related Python Language Extension SciPy</h2>
+<ul>
+<li><a href="http://www.scipy.org/">http://www.scipy.org/</a></li>
+<li><a href="http://docs.scipy.org/doc/scipy/reference/tutorial/general.html">http://docs.scipy.org/doc/scipy/reference/tutorial/general.html</a></li>
+<li>
+<p><a href="http://scipy.org/Getting_Started">http://scipy.org/Getting_Started</a> --I have started to work through some examples on the Raspberry Pi</p>
+<ol>
+<li>see <a href="scipy.html">scipy</a></li>
+</ol>
+<p>:::sh
+sudo apt-get install python-scipy</p>
+</li>
+</ul>
+<h2 id="related-ipython-for-scientific-computing">Related IPython For Scientific Computing</h2>
+<p>Python has an interactive shell. IPython was developed to provide a more
+feature rich interactive shell (by a physicist). Can install debian package
+python-ipython and python-ipython-doc.</p>
+<ul>
+<li><a href="https://www.pythonanywhere.com/try-ipython/">https://www.pythonanywhere.com/try-ipython/</a></li>
+<li><a href="http://www.youtube.com/watch?v=3Fp1zn5ao2M">http://www.youtube.com/watch?v=3Fp1zn5ao2M</a> -- introduction to NumPy and Matplotlib (examples are done in IPython) -- IPython notes <a href="ipython_notes.html">ipython_notes</a></li>
+</ul>
+
+</body>
+
+</html>
