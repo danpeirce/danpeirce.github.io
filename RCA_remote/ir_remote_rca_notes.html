@@ -1,0 +1,132 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.8 [en] (Win98; U) [Netscape]">
+   <title>IR Remote RCA Notes</title>
+</head>
+<body>
+
+<center>
+<h1>
+IR Remote RCA Notes</h1></center>
+
+<center>by Dan Peirce B.Sc.</center>
+
+<p><br>
+<center><table BORDER CELLPADDING=8 WIDTH="85%" >
+<tr>
+<td COLSPAN="2"><b>July 21, 2007</b></td>
+</tr>
+
+<tr>
+<td COLSPAN="2">These note were taken during the development of a <b>C</b>
+function for detecting transmissions from an RCA remote.
+<br>The PIC18F4525 is the target system and the C18 compiler will be used.
+<br>The function will make use of the CCP1 compare module.</td>
+</tr>
+
+<tr>
+<td COLSPAN="2"><b>From PIC18F4525 Datasheet</b>
+<center><img SRC="imageMIA.gif" VSPACE=5 BORDER=5 height=550 width=574></center>
+</td>
+</tr>
+
+<tr>
+<td>PIR1</td>
+
+<td>Eight bit register associated with interupt flags. The flag is set
+when event takes place. Must be reset to detect new event. Can be used
+with an actual interupt or can be polled.</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP>&nbsp; PIR1bits.CCP1IF = 0;</td>
+
+<td VALIGN=TOP>This line clears the capture1 event flag.
+<p><b>#define CAPTURE1_EVENT_FLAG&nbsp;&nbsp; PIR1bits.CCP1IF&nbsp;</b>
+<br><b>#define RESET&nbsp; 0</b></td>
+</tr>
+
+<tr>
+<td VALIGN=TOP>&nbsp;PIR1bits.TMR1IF = 0;</td>
+
+<td>This line clears the timer1 event flag
+<p><b>#define TIMER1_EVENT_FLAG&nbsp; PIR1bits.TMR1IF</b></td>
+</tr>
+
+<tr>
+<td VALIGN=TOP>CCP1CONbits.CCP1M0</td>
+
+<td>Contains the bit the determins if capture is on the rising rising edge
+or falling edge.
+<br>&nbsp;
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<td><b>falling edge</b></td>
+
+<td><b>0</b></td>
+</tr>
+
+<tr>
+<td><b>rising edge</b></td>
+
+<td><b>1</b></td>
+</tr>
+</table></center>
+
+<p><b>#define SET_EDGE_CAPTURE&nbsp; CCP1CONbits.CCP1M0</b>
+<br><b>#define FALLING_EDGE&nbsp; 0</b>
+<br><b>#define RISING_EDGE&nbsp; 1</b></td>
+</tr>
+
+<tr>
+<td COLSPAN="2">
+<center>
+<h1>
+RCA IR Remote protocol</h1></center>
+
+<center>based on <a href="http://www.sbprojects.com/knowledge/ir/rca.htm">http://www.sbprojects.com/knowledge/ir/rca.htm</a>
+<p>56 KHz carrier frequency</center>
+
+<center><table BORDER CELLPADDING=6 >
+<tr>
+<td>frame pulse</td>
+
+<td>code (includes 4 bit address followed by 8 bit data)</td>
+
+<td>code inverted</td>
+</tr>
+
+<tr>
+<td VALIGN=TOP>4 ms of pulses | 4 ms no pulse</td>
+
+<td VALIGN=TOP>0.5 ms of pulses | 2 ms of no pulses for 1 | 1 ms of no
+pulses for a 0</td>
+
+<td>0's sent in place of 1's and&nbsp;
+<br>1"s sent in place of zeros.</td>
+</tr>
+</table></center>
+
+<center>
+<p>fosc 3.20E+07
+<br>finst (fosc/4) 8.00E+06
+<br>Ftimer1 1.00E+06
+<br>T timer1 1.00E-06
+<p>16 bit total states 65536
+<br>max time 0.065536
+<p>So each count is one microsecond&nbsp;
+<br>Count of 4 ms 4000
+<br>Count of 8 ms 8000
+<br>Count of 2.5 ms 2500
+<br>Count of 1.5 ms 1500</center>
+
+<br>&nbsp;
+<br>&nbsp;
+<br>&nbsp;</td>
+</tr>
+</table></center>
+
+</body>
+</html>
