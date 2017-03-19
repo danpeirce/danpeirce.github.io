@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>Sound Project</title>
+  </head>
+
+<body>
+<h1 id="sound-project">Sound Project</h1>
+<div class="codehilite"><pre><span class="n">by</span> <span class="n">Dan</span> <span class="n">Peirce</span> <span class="n">B</span><span class="p">.</span><span class="n">Sc</span><span class="p">.</span>
+</pre></div>
+
+
+<p>reformatted from dokuwiki July 20, 2013</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#sound-project">Sound Project</a><ul>
+<li><a href="#bias-circuit">Bias Circuit</a></li>
+<li><a href="#pre-amp-circuit">Pre Amp Circuit</a></li>
+<li><a href="#image-of-microphonepreamplevelshifter-with-pic18lf2620">Image of microphone/preamp/levelshifter with PIC18LF2620</a></li>
+<li><a href="#image-of-signal-on-dso">Image of signal on DSO</a></li>
+<li><a href="#image-of-signal-in-excel">Image of signal in excel</a></li>
+<li><a href="#private-repository-for-code">private repository for code</a></li>
+<li><a href="#datasheets">Datasheets</a><ul>
+<li><a href="#1-mbit-spi-bus-serial-eeprom">1 Mbit SPI Bus Serial EEPROM</a></li>
+<li><a href="#12-bit-ad-converter-with-spi-serial-interface">12-Bit A/D Converter with SPI Serial Interface</a></li>
+<li><a href="#81012-bit-voltage-output-digital-to-analog-converter-with-spi-interface">8/10/12-Bit Voltage Output Digital-to-Analog Converter with SPI Interface</a></li>
+</ul>
+</li>
+<li><a href="#spi">SPI</a></li>
+<li><a href="#33-volt-lcd">3.3 Volt LCD</a></li>
+<li><a href="#notes-from-before-the-uusb-mb5-was-adopted">Notes from before the uUSB-MB5 was adopted</a></li>
+<li><a href="#public-switched-telephone-network">Public Switched Telephone Network</a></li>
+<li><a href="#better-performance-development-board">Better Performance Development Board</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>First test of preamp and level shifting circuit. I also captured about 10 msec
+of sound (soft "a" vowel sound). Have not added serial eeprom to project yet.</p>
+<p>The bias circuit looks like this (except I replaced the 33 Kohm resistor with
+a 22 Kohm resistor to bring the quiescent point down to about half the 3.3
+volt supply).</p>
+<h2 id="bias-circuit">Bias Circuit</h2>
+<p><img alt="" src="sound/bias_cct.png"></p>
+<h2 id="pre-amp-circuit">Pre Amp Circuit</h2>
+<p>A pre amp circuit was used in testing:</p>
+<ul>
+<li><a href="http://www.canakit.com/electret-microphone-pre-amp-kit-ck495-uk495.html">http://www.canakit.com/electret-microphone-pre-amp-kit-ck495-uk495.html</a></li>
+</ul>
+<h2 id="image-of-microphonepreamplevelshifter-with-pic18lf2620">Image of microphone/preamp/levelshifter with PIC18LF2620</h2>
+<p><img alt="mic preamp levelshifter PIC18LF2620" src="sound/mic_preamp_levelshift.jpg"></p>
+<h2 id="image-of-signal-on-dso">Image of signal on DSO</h2>
+<p><img alt="" src="sound/ah_scope.jpg"></p>
+<h2 id="image-of-signal-in-excel">Image of signal in excel</h2>
+<p><img alt="" src="sound/ah_excel.jpg"></p>
+<p>Application note on serial EEPROM</p>
+<p><a href="http://ww1.microchip.com/downloads/en/AppNotes/00966A.pdf">http://ww1.microchip.com/downloads/en/AppNotes/00966A.pdf</a> AN966 Interfacing
+SPI Serial EEPROMs to Microchip PICmicro Microcontrollers</p>
+<h2 id="private-repository-for-code">private repository for code</h2>
+<p>Created a private repository for branch of code for the sound project. This
+way I can have access in different locations but not sharing it since it may
+be a project for students.</p>
+<p><img alt="" src="sound/add_branch_new_repository.png"></p>
+<h2 id="datasheets">Datasheets</h2>
+<h3 id="1-mbit-spi-bus-serial-eeprom">1 Mbit SPI Bus Serial EEPROM</h3>
+<p><a href="http://ww1.microchip.com/downloads/en/DeviceDoc/21836H.pdf">http://ww1.microchip.com/downloads/en/DeviceDoc/21836H.pdf</a> 1 Mbit SPI Bus
+Serial EEPROM Sould be good for about 16 seconds of sound at 8 KS/s (8 bits
+per sample) . Cost of $3.40 each if we get 10 or more.</p>
+<h3 id="12-bit-ad-converter-with-spi-serial-interface">12-Bit A/D Converter with SPI Serial Interface</h3>
+<p><a href="http://ww1.microchip.com/downloads/en/DeviceDoc/21290F.pdf"> 12-Bit A/D Converter with SPI Serial
+Interface</a> -</p>
+<h3 id="81012-bit-voltage-output-digital-to-analog-converter-with-spi-interface">8/10/12-Bit Voltage Output Digital-to-Analog Converter with SPI Interface</h3>
+<p><a href="http://ww1.microchip.com/downloads/en/DeviceDoc/22248a.pdf">http://ww1.microchip.com/downloads/en/DeviceDoc/22248a.pdf</a></p>
+<h2 id="spi">SPI</h2>
+<p>Suggested reading</p>
+<ul>
+<li>
+<p><a href="http://ww1.microchip.com/downloads/en/devicedoc/spi.pdf">http://ww1.microchip.com/downloads/en/devicedoc/spi.pdf</a></p>
+</li>
+<li>
+<p><a href="http://ww1.microchip.com/downloads/en/AppNotes/01040A.pdf">http://ww1.microchip.com/downloads/en/AppNotes/01040A.pdf</a></p>
+</li>
+</ul>
+<p>SPI is as about a simple a serial interface as one can get. The slave devices
+only need to contain a parallel to serial device and a serial to parallel
+device. Essentially shift registers.</p>
+<h2 id="33-volt-lcd">3.3 Volt LCD</h2>
+<p>The LCD we have been using in apsc1299 runs off of 5 volts. Initially I
+believed we would need a 3.3 volt LCD for phys1600. The adoption of the uUSB-
+MB5 for physics 1600 probably makes the use of a serial LCD unnecessary
+(except possibly for stand alone projects). see
+<a href="phys1600_parts.html">phys1600_parts</a>.</p>
+<h2 id="notes-from-before-the-uusb-mb5-was-adopted">Notes from before the uUSB-MB5 was adopted</h2>
+<p>So far I have found 3.3 volt LCDs (2x16 characters as before) but not with a
+built in serial interface. Example with a parallel interface
+<a href="http://www.solarbotics.com/product/50410/">http://www.solarbotics.com/product/50410/</a> Might have to build our own SPI to
+8 bit parallel interface with the PIC18F2620.</p>
+<p>Found an alternative LCD. It is physically smaller. It runs at 3.3 volts and
+has a serial four wire input. I think it is worth a closer look. They are only
+about $11 each from Digikey.</p>
+<ul>
+<li><a href="http://www.newhavendisplay.com/specs/NHD-C0216CZ-FSW-FBW-3V3.pdf">http://www.newhavendisplay.com/specs/NHD-C0216CZ-FSW-FBW-3V3.pdf</a></li>
+<li><a href="http://www.digikey.ca/product-detail/en/NHD-C0216CZ-FSW-FBW-3V3/NHD-C0216CZ-FSW-FBW-3V3-ND/2059234">http://www.digikey.ca/product-detail/en/NHD-C0216CZ-FSW-FBW-3V3/NHD-C0216CZ-FSW-FBW-3V3-ND/2059234</a></li>
+</ul>
+<p>Note that the LCD uses a charge pump. See <a href="charge_pump.html">charge_pump</a></p>
+<h2 id="public-switched-telephone-network">Public Switched Telephone Network</h2>
+<p>The world wide <strong>public switched telephone network</strong> uses digital encoding, 8
+bit, 8 k samples/second. The sound quality for quite sounds is improved by
+using a non linear encoding scheme. Don't think I'd go into that in this
+course but just pointing out that 8 KHz sampling is adequate for voice.</p>
+<p>In the phone system an analog anti-aliasing filter is used before the signal
+is digitized by a codec in the switch station.</p>
+<blockquote>
+<p>"To carry a typical phone call from a calling party to a called party, the
+audio sound is digitized at an 8 kHz sample rate using 8-bit pulse code
+modulation."</p>
+</blockquote>
+<p>See <a href="http://www.networkdictionary.com/telecom/pstn.php">http://www.networkdictionary.com/telecom/pstn.php</a></p>
+<p><a href="http://en.wikipedia.org/wiki/Non-linear_quantization">http://en.wikipedia.org/wiki/Non-linear_quantization</a> That system is old.
+Digital cell phones have a better scheme but that makes little difference when
+connecting to analog phones through the Public Switch Telephone Network.</p>
+<p>For land lines the system is generally analog from a persons home to the
+switch station. Between switching stations the system is digital. At one time
+the whole system was analogue. Individual calls would be modulated to
+different frequencies (or "channels) so that many calls could be put on one
+pair of wires between switching stations. These days the calls are digitized
+and time division multiplexing is used.</p>
+<h2 id="better-performance-development-board">Better Performance Development Board</h2>
+<p>Microchip produces a development board specifically for audio applicatio
+ns.
+Note that a 32 bit processor is used.</p>
+<ul>
+<li><a href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=1406&amp;dDocName=en558421">http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=1406&amp;dDocName=en558421</a></li>
+</ul>
+
+</body>
+
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>Python Language</title>
+  </head>
+
+<body>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#computer-language">Computer Language</a></li>
+<li><a href="#python">Python</a><ul>
+<li><a href="#why-use-python">Why use Python?</a></li>
+<li><a href="#why-use-a-scripting-language-at-all">Why Use a Scripting Language at all?</a></li>
+<li><a href="#a-free-python-book">A Free Python Book</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#plotting-with-matplotlib">plotting with matplotlib</a></li>
+<li><a href="#controlling-gpib-rs232-and-usb-instruments">Controlling GPIB, RS232, and USB instruments</a></li>
+<li><a href="#python-socket-communication">Python Socket Communication</a></li>
+<li><a href="#python-in-education">Python in Education</a></li>
+<li><a href="#internal-representation-of-integers">Internal Representation of Integers</a></li>
+<li><a href="#general-stuff-to-look-at">General Stuff to look at</a></li>
+<li><a href="#learning-python-links">Learning Python Links</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="computer-language">Computer Language</h3>
+<div class="codehilite"><pre><span class="s">&quot;...the purpose of a higher-level programming language </span>
+<span class="n">is</span> <span class="n">usually</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">some</span> <span class="n">mediation</span> <span class="n">between</span> <span class="n">the</span> <span class="n">way</span> <span class="n">a</span> 
+<span class="n">programmer</span> <span class="n">would</span> <span class="n">like</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">instructions</span> <span class="n">and</span> <span class="n">the</span> 
+<span class="n">way</span> <span class="n">a</span> <span class="n">machine</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">have</span> <span class="n">them</span><span class="p">.</span><span class="s">&quot;</span>
+</pre></div>
+
+
+<ul>
+<li>from <a href="http://repository.upenn.edu/cgi/viewcontent.cgi?article=1330&amp;amp;context=cis_reports" title="http://repository.upenn.edu/cgi/viewcontent.cgi?article=1330&amp;amp;context=cis_reports">http://repository.upenn.edu/cgi/viewcontent.cgi?article=1330&amp;context=cis_reports</a></li>
+</ul>
+<h1 id="python">Python</h1>
+<p>It seems like Python has come a long way in recent years and has been a hotbed of development.</p>
+<ul>
+<li><a href="http://www.scipy.org/Topical_Software" title="http://www.scipy.org/Topical_Software">http://www.scipy.org/Topical_Software</a></li>
+</ul>
+<p>It is avalible for most operating systems.</p>
+<ul>
+<li><a href="http://www.python.org/" title="http://www.python.org/">http://www.python.org/</a></li>
+</ul>
+<p>It is also possible use python on line without an install</p>
+<ul>
+<li><a href="http://www.sagemath.org/" title="http://www.sagemath.org/">http://www.sagemath.org/</a></li>
+<li><a href="sage.html">sage</a></li>
+</ul>
+<p>Other links:</p>
+<ul>
+<li><a href="http://www.youtube.com/watch?v=ugqu10JV7dk" title="http://www.youtube.com/watch?v=ugqu10JV7dk">http://www.youtube.com/watch?v=ugqu10JV7dk</a>. -- History of Python told by Guido van Rossum. He points out many ideas borrowed from an earlier language called ABC.</li>
+<li><a href="http://www.cs.ubc.ca/wccce/Program03/papers/Toby.html" title="http://www.cs.ubc.ca/wccce/Program03/papers/Toby.html">http://www.cs.ubc.ca/wccce/Program03/papers/Toby.html</a>  -- much of the comparison to java could also be applied to C.</li>
+<li><a href="http://www.youtube.com/watch?v=72RKMMyLxS8" title="http://www.youtube.com/watch?v=72RKMMyLxS8">http://www.youtube.com/watch?v=72RKMMyLxS8</a>.  -- seems to have an error. He says Python is typeless but as can be seen in the UBC link Python variables are dynamically typed. The error is just in terminology since he goes on to reveal how to determine the type assigned to a variable. </li>
+</ul>
+<h2 id="why-use-python">Why use Python?</h2>
+<ul>
+<li><a href="http://www.math.harvard.edu/computing/python/index.html" title="http://www.math.harvard.edu/computing/python/index.html">http://www.math.harvard.edu/computing/python/index.html</a></li>
+<li><a href="http://stackoverflow.com/questions/585815/how-useful-is-python" title="http://stackoverflow.com/questions/585815/how-useful-is-python">http://stackoverflow.com/questions/585815/how-useful-is-python</a></li>
+<li><a href="http://msenux.redwoods.edu/math/python/index.php" title="http://msenux.redwoods.edu/math/python/index.php">http://msenux.redwoods.edu/math/python/index.php</a>
+        * "Students in mathematics, science, and engineering need to develop some sort of computer literacy to accompany their work in their area of interest. There is no denying that many current developments in mathematics, science, and engineering are driven by modern software written to facilitate study in each of these areas."</li>
+</ul>
+<hr />
+<ul>
+<li>There is an easy to use pre-compiled binary serial package for python. </li>
+<li>There is a GUI package in  the normal Python install binary. With  Perl tk is not included but must be added (big download and big compile).   </li>
+</ul>
+<h2 id="why-use-a-scripting-language-at-all">Why Use a Scripting Language at all?</h2>
+<p>Put it a different way: when to use C and when to use a scripting language? </p>
+<p>I suggest looking at <a href="http://gribblelab.org/CBootcamp/1_Why_Program_In_C.html#sec-3" title="http://gribblelab.org/CBootcamp/1_Why_Program_In_C.html#sec-3">http://gribblelab.org/CBootcamp/1_Why_Program_In_C.html#sec-3</a></p>
+<p>1.Rapid development. </p>
+<p>2.One would think that there would be a lot of free c language libraries for common tasks  like using the serial port. What one finds is actually available are free Perl and Python modules. These are generally written in c but utilized using the scripting language.. This leads to quick efficient modules for common tasks and scripting  for those things that  are custom for the current project. </p>
+<p>3.In general the scripting language handles the interface to the  underlying operating system. The programmer does not need to learn the API each operating system that the script could be used with.</p>
+<h2 id="a-free-python-book">A Free Python Book</h2>
+<ul>
+<li><a href="http://www.greenteapress.com/thinkpython/" title="http://www.greenteapress.com/thinkpython/">http://www.greenteapress.com/thinkpython/</a> -- access to downloadabble zip files (for LaTeX and HTML) and...  <a href="http://www.greenteapress.com/thinkpython/thinkpython.html" title="http://www.greenteapress.com/thinkpython/thinkpython.html">http://www.greenteapress.com/thinkpython/thinkpython.html</a>  -- This is the online HTML version</li>
+<li><a href="http://www.greenteapress.com/thinkpython/thinkpython.pdf" title="http://www.greenteapress.com/thinkpython/thinkpython.pdf">http://www.greenteapress.com/thinkpython/thinkpython.pdf</a>   -- the book in PDF format</li>
+</ul>
+<h2 id="example">Example</h2>
+<ul>
+<li><a href="ultrasonic_ranger">ultrasonic_ranger</a></li>
+</ul>
+<h2 id="plotting-with-matplotlib">plotting with matplotlib</h2>
+<p>Find an introduction to matplotlib at <a href="http://matplotlib.sourceforge.net/users/intro.html" title="http://matplotlib.sourceforge.net/users/intro.html">http://matplotlib.sourceforge.net/users/intro.html</a></p>
+<p>More at <a href="matplotlib.html">matplotlib</a></p>
+<h2 id="controlling-gpib-rs232-and-usb-instruments">Controlling GPIB, RS232, and USB instruments</h2>
+<ul>
+<li><a href="http://pyvisa.sourceforge.net/" title="http://pyvisa.sourceforge.net/">http://pyvisa.sourceforge.net/</a></li>
+</ul>
+<p>We have a USB instrument: the TBS1022 from Tektronix.</p>
+<p>The programmers manual for this instrument can be found at:</p>
+<ul>
+<li><a href="http://www.tek.com/basic-oscilloscopes/tds1000-0-manual/tbs1000-tds200-tds1000-2000-tds1000b-2000b-tds1000c-edu-tds2000" title="http://www.tek.com/basic-oscilloscopes/tds1000-0-manual/tbs1000-tds200-tds1000-2000-tds1000b-2000b-tds1000c-edu-tds2000">http://www.tek.com/basic-oscilloscopes/tds1000-0-manual/tbs1000-tds200-tds1000-2000-tds1000b-2000b-tds1000c-edu-tds2000</a></li>
+</ul>
+<p>Note that the same manual covers both the TBS1022 and the TDS1002B. We actually have some of both of these.</p>
+<p>At the  <a href="http://pyvisa.sourceforge.net/" title="http://pyvisa.sourceforge.net/">http://pyvisa.sourceforge.net/</a> link some very simple code is given for talking to a digital multimeter</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">visa</span>
+<span class="n">keithley</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">instrumen</span><span class="p">(</span><span class="s">&quot;GPIB::12&quot;</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">keithley</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s">&quot;*IDN?&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>We should also be able to talk to our scopes with this type of code. Something to try out. Found an example using usb at <a href="http://www1.tek.com/forum/viewtopic.php?f=5&amp;amp;t=5221" title="http://www1.tek.com/forum/viewtopic.php?f=5&amp;amp;t=5221">http://www1.tek.com/forum/viewtopic.php?f=5&amp;t=5221</a></p>
+<p>From that example can see the following (note the instrument name):</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">visa</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">unpack</span>
+<span class="kn">import</span> <span class="nn">pylab</span>
+
+<span class="n">scope</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">instrument</span><span class="p">(</span><span class="s">&#39;USB0::0x0699::0x0401::No_Serial::INSTR&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>In another example the python script first reads the intrument name from the attached instruments:
+<a href="http://www.home.agilent.com/owc_discussions/thread.jspa?messageID=106272&amp;amp;tstart=0" title="http://www.home.agilent.com/owc_discussions/thread.jspa?messageID=106272&amp;amp;tstart=0">http://www.home.agilent.com/owc_discussions/thread.jspa?messageID=106272&amp;tstart=0</a></p>
+<p>"Example 01 (directly with PyVisa):"</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">visa</span> <span class="nn">import</span> <span class="nn">pylab</span>
+
+<span class="c"># Get instrument VISAname</span>
+<span class="n">visaInstrList</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">get_instruments_list</span><span class="p">()</span>
+<span class="n">myScope</span> <span class="o">=</span> <span class="n">visaInstrList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s">&#39;::INSTR&#39;</span>
+
+<span class="n">scope</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">instrument</span><span class="p">(</span><span class="n">myScope</span><span class="p">)</span>
+</pre></div>
+
+
+<p>So I tried this out in a IDLE session.</p>
+<div class="codehilite"><pre><span class="n">Python</span> <span class="mf">2.7</span><span class="o">.</span><span class="mi">5</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">May</span> <span class="mi">15</span> <span class="mi">2013</span><span class="p">,</span> <span class="mi">22</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mi">36</span><span class="p">)</span> <span class="p">[</span><span class="n">MSC</span> <span class="n">v</span><span class="o">.</span><span class="mi">1500</span> <span class="mi">32</span> <span class="n">bit</span> <span class="p">(</span><span class="n">Intel</span><span class="p">)]</span> <span class="n">on</span> <span class="n">win32</span>
+<span class="n">Type</span> <span class="s">&quot;copyright&quot;</span><span class="p">,</span> <span class="s">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s">&quot;license()&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">visa</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">visaInstrList</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">get_instruments_list</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">myScope</span> <span class="o">=</span> <span class="n">visaInstrList</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">myScope</span>
+<span class="p">[</span><span class="s">&#39;USB0::0x0699::0x03AE::C011174&#39;</span><span class="p">,</span> <span class="s">&#39;COM1&#39;</span><span class="p">,</span> <span class="s">&#39;COM3&#39;</span><span class="p">,</span> <span class="s">&#39;LPT1&#39;</span><span class="p">,</span> <span class="s">&#39;ASRL11&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">myScope</span> <span class="o">=</span> <span class="n">visaInstrList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s">&#39;::INSTR&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">scope</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">instrument</span><span class="p">(</span><span class="n">myScope</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">scope</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s">&quot;*IDN?&quot;</span><span class="p">)</span>
+<span class="s">&#39;TEKTRONIX,TBS 1022,C011174,CF:91.1CT FV:v26.01&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">scope</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;CH1:VOLTS 2.0&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">scope</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;TRIG:MAIN:LEVEL 2.4&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">scope</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;HOR:MAIN:SCALE 100E-6&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>It appears to work! The TBS 1022 responded to the last three commands as expected (meaning that the vertical scale of channel one was set to 2 volts/div, the trigger level was set to 2.4 volts and the horizontal scale was set to 100 micro-seconds/div).</p>
+<p>I also tried setting and reading both the time and date.</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">scope</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;DATE &quot;2013-06-18&quot;&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">scope</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;TIME &quot;18:37:00&quot;&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">scope</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s">&#39;date?&#39;</span><span class="p">)</span>
+<span class="s">&#39;&quot;2013-06-18&quot;&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">scope</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s">&#39;time?&#39;</span><span class="p">)</span>
+<span class="s">&#39;&quot;18:38:23&quot;&#39;</span>
+</pre></div>
+
+
+<p>Using ethernet</p>
+<ul>
+<li><a href="http://alexforencich.com/wiki/en/python-vxi11/readme" title="http://alexforencich.com/wiki/en/python-vxi11/readme">http://alexforencich.com/wiki/en/python-vxi11/readme</a></li>
+<li><a href="http://optics.eee.nottingham.ac.uk/vxi11/" title="http://optics.eee.nottingham.ac.uk/vxi11/">http://optics.eee.nottingham.ac.uk/vxi11/</a></li>
+<li><a href="http://www.tmworld.com/electronics-news/4378802/Linux-controls-instruments-through-Ethernet" title="http://www.tmworld.com/electronics-news/4378802/Linux-controls-instruments-through-Ethernet">http://www.tmworld.com/electronics-news/4378802/Linux-controls-instruments-through-Ethernet</a></li>
+</ul>
+<p>Using USB</p>
+<ul>
+<li><a href="http://www.ni.com/gettingstarted/setuphardware/instrumentcontrol/usbconnect.htm" title="http://www.ni.com/gettingstarted/setuphardware/instrumentcontrol/usbconnect.htm">http://www.ni.com/gettingstarted/setuphardware/instrumentcontrol/usbconnect.htm</a></li>
+</ul>
+<p>Python control of equipment</p>
+<ul>
+<li><a href="http://gael-varoquaux.info/physics/agile_computer_control_of_a_complex_experiment.pdf" title="http://gael-varoquaux.info/physics/agile_computer_control_of_a_complex_experiment.pdf">http://gael-varoquaux.info/physics/agile_computer_control_of_a_complex_experiment.pdf</a></li>
+</ul>
+<h2 id="python-socket-communication">Python Socket Communication</h2>
+<ul>
+<li><a href="python_tcp_sockets.html">python_TCP_sockets</a></li>
+</ul>
+<h2 id="python-in-education">Python in Education</h2>
+<ul>
+<li><a href="http://www.python.org/community/sigs/current/edu-sig/" title="http://www.python.org/community/sigs/current/edu-sig/">http://www.python.org/community/sigs/current/edu-sig/</a></li>
+</ul>
+<h2 id="internal-representation-of-integers">Internal Representation of Integers</h2>
+<p>I looked this up since I was interested.</p>
+<ul>
+<li><a href="http://www.laurentluce.com/posts/python-integer-objects-implementation/" title="http://www.laurentluce.com/posts/python-integer-objects-implementation/">http://www.laurentluce.com/posts/python-integer-objects-implementation/</a></li>
+</ul>
+<h2 id="general-stuff-to-look-at">General Stuff to look at</h2>
+<ul>
+<li><a href="http://wiki.python.org/moin/TcpCommunication" title="http://wiki.python.org/moin/TcpCommunication">http://wiki.python.org/moin/TcpCommunication</a></li>
+<li><a href="http://www.pythonware.com/library/tkinter/introduction/hello-tkinter.htm" title="http://www.pythonware.com/library/tkinter/introduction/hello-tkinter.htm">http://www.pythonware.com/library/tkinter/introduction/hello-tkinter.htm</a></li>
+<li><a href="http://www.python.org/doc/essays/cp4e.html" title="http://www.python.org/doc/essays/cp4e.html">http://www.python.org/doc/essays/cp4e.html</a></li>
+<li><a href="http://reviewsindepth.com/2011/04/why-everyone-should-learn-to-program/" title="http://reviewsindepth.com/2011/04/why-everyone-should-learn-to-program/">http://reviewsindepth.com/2011/04/why-everyone-should-learn-to-program/</a></li>
+<li><a href="http://arstechnica.com/apple/2012/07/steve-jobs-on-programming-craftsmanship-software-and-the-web/" title="http://arstechnica.com/apple/2012/07/steve-jobs-on-programming-craftsmanship-software-and-the-web/">http://arstechnica.com/apple/2012/07/steve-jobs-on-programming-craftsmanship-software-and-the-web/</a></li>
+</ul>
+<h2 id="learning-python-links">Learning Python Links</h2>
+<ul>
+<li><a href="https://developers.google.com/edu/python/" title="https://developers.google.com/edu/python/">https://developers.google.com/edu/python/</a></li>
+</ul>
+
+</body>
+
+</html>

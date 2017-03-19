@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>Low Voltage PIC18 Devices Vs Standard Devices</title>
+  </head>
+
+<body>
+<h1 id="pic18lf-devices">PIC18LF Devices</h1>
+<div class="codehilite"><pre><span class="n">by</span> <span class="n">Dan</span> <span class="n">Peirce</span>
+</pre></div>
+
+
+<p>translated from <a href="danpeirce.net46.net/dokuwiki/doku.php?id=pic18lf">dokuwiki</a> format July 20, 2013</p>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#pic18lf-devices">PIC18LF Devices</a><ul>
+<li><a href="#low-voltage-pic18-devices-vs-standard-devices">Low Voltage PIC18 Devices VS Standard Devices</a></li>
+<li><a href="#28-pin-skinny-package">28 Pin Skinny Package</a></li>
+<li><a href="#hello-world-for-pic18lf2620-at-33-volts">hello world for PIC18LF2620 at 3.3 Volts</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="low-voltage-pic18-devices-vs-standard-devices">Low Voltage PIC18 Devices VS Standard Devices</h2>
+<p>from <a href="http://ww1.microchip.com/downloads/en/devicedoc/39626b.pdf"> PIC18F2525/2620/4525/4620 Data
+Sheet</a> page 8</p>
+<div class="codehilite"><pre>    <span class="n">Like</span> <span class="n">all</span> <span class="n">Microchip</span> <span class="n">PIC18</span> <span class="n">devices</span><span class="p">,</span> <span class="n">members</span> <span class="n">of</span> <span class="n">the</span>
+    <span class="n">PIC18F2525</span><span class="o">/</span>2620<span class="o">/</span>4525<span class="o">/</span>4620 <span class="n">family</span> <span class="n">are</span> <span class="n">available</span> <span class="n">as</span>
+    <span class="n">both</span> <span class="n">standard</span> <span class="n">and</span> <span class="n">low</span><span class="o">-</span><span class="n">voltage</span> <span class="n">devices</span><span class="p">.</span> <span class="n">Standard</span>
+    <span class="n">devices</span> <span class="n">with</span> <span class="n">Enhanced</span> <span class="n">Flash</span> <span class="n">memory</span><span class="p">,</span> <span class="n">designated</span> <span class="n">with</span>
+    <span class="n">an</span> &quot;<span class="n">F</span>&quot; <span class="n">in</span> <span class="n">the</span> <span class="n">part</span> <span class="n">number</span> <span class="p">(</span><span class="n">such</span> <span class="n">as</span> <span class="n">PIC18F2620</span><span class="p">),</span>
+    <span class="n">accommodate</span> <span class="n">an</span> <span class="n">operating</span> <span class="n">VDD</span> <span class="n">range</span> <span class="n">of</span> 4<span class="p">.</span>2<span class="n">V</span> <span class="n">to</span> 5<span class="p">.</span>5<span class="n">V</span><span class="p">.</span>
+    <span class="n">Low</span><span class="o">-</span><span class="n">voltage</span> <span class="n">parts</span><span class="p">,</span> <span class="n">designated</span> <span class="n">by</span> &quot;<span class="n">LF</span>&quot; <span class="p">(</span><span class="n">such</span> <span class="n">as</span>
+    <span class="n">PIC18LF2620</span><span class="p">),</span> <span class="k">function</span> <span class="n">over</span> <span class="n">an</span> <span class="n">extended</span> <span class="n">VDD</span> <span class="n">range</span>
+    <span class="n">of</span> 2<span class="p">.</span>0<span class="n">V</span> <span class="n">to</span> 5<span class="p">.</span>5<span class="n">V</span><span class="p">.</span>
+</pre></div>
+
+
+<p>Have tested <a href="testing_usb_powered_pic.html"> PIC18<strong>LF</strong>4525</a>.</p>
+<h2 id="28-pin-skinny-package">28 Pin Skinny Package</h2>
+<p>Have tested PIC18LF2620 at 3.3 volts. It comes in a 28 pin package which
+should have enough IO for us. Note that we have been using the PIC18F4525 40
+pin IC for apsc1299 but this package style is needed in that case because it
+fits on the brainboard of our robots.</p>
+<p>from <a href="http://ww1.microchip.com/downloads/en/devicedoc/39626b.pdf"> PIC18F2525/2620/4525/4620 Data
+Sheet</a> page 365.
+<img alt="" src="28pin_skinny.png"></p>
+<h2 id="hello-world-for-pic18lf2620-at-33-volts">hello world for PIC18LF2620 at 3.3 Volts</h2>
+<ul>
+<li>see <a href="hello33.html">hello33</a></li>
+</ul>
+
+</body>
+
+</html>
