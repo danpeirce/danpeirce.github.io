@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>OpenSCAD Notes</title>
+  </head>
+
+<body>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#openscad-notes">OpenSCAD Notes</a><ul>
+<li><a href="#links-to-tutorials">Links to Tutorials</a></li>
+<li><a href="#units">Units?</a></li>
+<li><a href="#found-3d-model-of-raspberry-pi">Found 3D Model of Raspberry Pi</a></li>
+<li><a href="#projects">Projects</a><ul>
+<li><a href="#fitting-for-astr1100-photometer">Fitting for ASTR1100 Photometer</a></li>
+<li><a href="#bracket-to-attach-programming-header-to-breadboard">Bracket to Attach Programming Header To Breadboard</a></li>
+</ul>
+</li>
+<li><a href="#other-links">Other Links</a><ul>
+<li><a href="#cubehero-blog">Cubehero Blog</a></li>
+<li><a href="#play-list-of-short-instructional-videos-on-openscad">Play list of Short Instructional Videos on OpenSCAD</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="openscad-notes">OpenSCAD Notes</h1>
+<pre class="codehilite"><code>by Dan Peirce B.Sc.</code></pre>
+
+
+<p>Also see <a href="printer3d.html">printer3d.html</a></p>
+<p>on <a href="http://www.openscad.org/">http://www.openscad.org/</a> they say <em>"OpenSCAD The Programmers Solid 3D CAD Modeller"</em></p>
+<h2 id="links-to-tutorials">Links to Tutorials</h2>
+<ul>
+<li><a href="http://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Print_version">http://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Print_version</a></li>
+<li><a href="http://www.makerbot.com/blog/tag/openscad-tutorial/">http://www.makerbot.com/blog/tag/openscad-tutorial/</a></li>
+<li><a href="http://edutechwiki.unige.ch/en/OpenScad_beginners_tutorial">http://edutechwiki.unige.ch/en/OpenScad_beginners_tutorial</a></li>
+</ul>
+<h2 id="units">Units?</h2>
+<p>The forums linked here point out that units in OpenSCAD are arbitrary; however when the 
+3D model is put into the slicer program the numbers are interpreted as mm.</p>
+<ul>
+<li><a href="http://forum.openscad.org/Question-about-metric-vs-imperial-units-td3912.html">http://forum.openscad.org/Question-about-metric-vs-imperial-units-td3912.html</a></li>
+<li><a href="http://rocklinux.net/pipermail/openscad/2011-August/001313.html">http://rocklinux.net/pipermail/openscad/2011-August/001313.html</a></li>
+<li><a href="http://forums.reprap.org/read.php?1,192905,192931">http://forums.reprap.org/read.php?1,192905,192931</a></li>
+<li><a href="https://groups.google.com/forum/#!topic/makerbot/5VO9tZ3ksIg">https://groups.google.com/forum/#!topic/makerbot/5VO9tZ3ksIg</a></li>
+</ul>
+<h2 id="found-3d-model-of-raspberry-pi">Found 3D Model of Raspberry Pi</h2>
+<p>I found an existing 3D model of the Raspberry Pi.</p>
+<ul>
+<li><a href="https://github.com/rewolff/Raspberry-Pi-OpenSCAD-Model">Raspberry Pi on Git Hub</a></li>
+</ul>
+<p>This looks like the newest version of the board with the two positioning holes.</p>
+<p><img alt="3D Model of Raspberry Pi B ver2" src="rpi3d01.png" title="3D Model of Raspberry Pi B ver2" /></p>
+<p>Some of the details are not present but it would not be hard to add them.</p>
+<p>Since I am new to OpenSCAD it is not too surprising that when I look at the model I 
+see things that I have not seen before but it is not hard to figure out what is happening.
+I see advantages in this method of creating a 3D model.</p>
+<ol>
+<li>Since the text is used to create the model I can follow how it was done. In other 
+   systems the "how it was done" would be hidden in menu mouse clicks and shortcuts
+   that are not visible when the file gets stored.</li>
+<li>...</li>
+</ol>
+<h2 id="projects">Projects</h2>
+<h3 id="fitting-for-astr1100-photometer">Fitting for ASTR1100 Photometer</h3>
+<p><img alt="Fitting for Photmeter" src="support_astr1100_kpu.png" title="Fitting for Photmeter" /></p>
+<p>The OpenSCAD file used to generate the 3D opject is linked here <a href="support_astr1100.scad">support_astr1100_kpu.scad</a>.</p>
+<p>OpenSCAD does not contain native text ojects but it allows 2D DXF files to be imported and extruded to make a 
+2D drawing into a 3D object. I found a project that does this and can be imported to new projects. </p>
+<ul>
+<li><a href="https://github.com/rohieb/Write.scad">https://github.com/rohieb/Write.scad</a></li>
+</ul>
+<p>This will work on different operating systems but the name should be changed to write.scad to get it working under Linux which is case sensitive on file names.</p>
+<h3 id="bracket-to-attach-programming-header-to-breadboard">Bracket to Attach Programming Header To Breadboard</h3>
+<p>My OpenSCAD file is in a github repository. An explination of the project is also given.</p>
+<ul>
+<li><a href="https://github.com/danpeirce/bracket-breadboard">https://github.com/danpeirce/bracket-breadboard</a></li>
+</ul>
+<h2 id="other-links">Other Links</h2>
+<h3 id="cubehero-blog">Cubehero Blog</h3>
+<ul>
+<li><a href="http://blog.cubehero.com/2013/11/19/know-only-10-things-to-be-dangerous-in-openscad/">http://blog.cubehero.com/2013/11/19/know-only-10-things-to-be-dangerous-in-openscad/</a></li>
+</ul>
+<h3 id="play-list-of-short-instructional-videos-on-openscad">Play list of Short Instructional Videos on OpenSCAD</h3>
+<p>This playlist seems to give a good introduction to OpenSCAD:</p>
+<ul>
+<li><a href="http://www.youtube.com/watch?v=XNghpq9sKRc&amp;list=PLA9633900ACC80BA1">Intro Play list OpenSCAD</a></li>
+</ul>
+
+</body>
+
+</html>
