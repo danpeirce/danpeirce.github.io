@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="white.css" type="text/css" rel="stylesheet" />
+    <link href="default.css" type="text/css" rel="stylesheet" />
+    <title>3D Printing</title>
+  </head>
+
+<body>
+<div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#3d-printing-notes">3D Printing Notes</a><ul>
+<li><a href="#the-tinkerines-3d-printer">The tinkerines 3D Printer</a><ul>
+<li><a href="#software-for-controlling-ditto">Software For Controlling Ditto+</a></li>
+</ul>
+</li>
+<li><a href="#3d-modeling-software">3D Modeling Software</a><ul>
+<li><a href="#proprietary-software">Proprietary Software</a></li>
+<li><a href="#free-open-source-software">Free Open Source Software</a><ul>
+<li><a href="#using-openscad-to-make-3d-solid-models-of-parts">Using OpenSCAD to Make 3D Solid Models of Parts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#old-promotional-video-for-ditto">Old Promotional Video for Ditto</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="3d-printing-notes">3D Printing Notes</h1>
+<pre class="codehilite"><code>by Dan Peirce B.Sc.</code></pre>
+
+
+<h2 id="the-tinkerines-3d-printer">The tinkerines 3D Printer</h2>
+<p>The Ditto+ </p>
+<ul>
+<li><a href="http://www.tinkerines.com/store/3d-printers/ditto-plus/">http://www.tinkerines.com/store/3d-printers/ditto-plus/</a> -- includes spec's</li>
+<li><a href="http://www.tinkerines.com/Ditto_Kit.pdf">Ditto+ Assembly Manual</a></li>
+<li><a href="http://www.tinkerines.com/Calibration.pdf">Calibration Manual</a></li>
+<li><a href="http://www.tinkerines.com/Manual_LCD.pdf">T.I.M (LCD/SD Interface) Manual</a></li>
+</ul>
+<p>It is pointed out in the Calibration Manual that there are settings for the 
+software that control things like</p>
+<ol>
+<li>The shell thickness</li>
+<li>The amount of fill</li>
+<li>the fill pattern</li>
+</ol>
+<p>These settings can be adjusted. For example the default fill is only 10%. This 
+conserves both material and the time it takes to print. It means there will be 
+voids in an otherwise solid part and that one does not need to put these voids
+in the 3D model.</p>
+<p>It is also possible to turn on a feature that will automatically create 
+supports for any parts with extreme overhang (more than 50 degrees). Presumably these
+supports can be broken off after the part is complete. I would take this to mean that
+parts can be quite arbitrary in design and easily include assembly tabs.
+for places that have extreme overhang.</p>
+<h3 id="software-for-controlling-ditto">Software For Controlling Ditto+</h3>
+<ul>
+<li><a href="http://www.tinkerines.com/coordia-ditto-control-host-beta/">Coordia: Ditto Control Host -Beta-</a></li>
+<li><a href="http://www.tinkerines.com/faq/">http://www.tinkerines.com/faq/</a></li>
+<li><a href="http://slic3r.org/">http://slic3r.org/</a></li>
+<li><a href="http://fabmetheus.crsndoo.com/">http://fabmetheus.crsndoo.com/</a></li>
+<li><a href="https://github.com/kliment/Printrun">https://github.com/kliment/Printrun</a></li>
+</ul>
+<h2 id="3d-modeling-software">3D Modeling Software</h2>
+<p>Creating 3D models to be printed requires software.</p>
+<p>Both FOSS and Proprietary Packages are Available.</p>
+<h3 id="proprietary-software">Proprietary Software</h3>
+<ol>
+<li>Solidworks</li>
+<li>others... (don't recall at the moment)</li>
+</ol>
+<h3 id="free-open-source-software">Free Open Source Software</h3>
+<p>(The software that controls the Ditto+ is also open source)</p>
+<ol>
+<li>
+<p>Blender </p>
+<ul>
+<li>This software was development for modelling scenes, sets and animations. It can be used
+  with 3D models for 3D printers but it was designed for use by artists.</li>
+<li>The minimum hardware requirements mean that it can't install this on anything
+  I have at home.</li>
+</ul>
+</li>
+<li>
+<p><a href="openscad.html">OpenSCAD</a></p>
+<ul>
+<li>This software was developed for modelling parts to be printed on a 3D printer. It 
+  is still at version 1. This will run on a netbook computer. One builds a model by 
+  writting a script that defines cubes, cylinders and other basic shapes that can be 
+  combined for the custom part.</li>
+<li>on <a href="http://www.openscad.org/">http://www.openscad.org/</a> they say <em>"OpenSCAD The Programmers Solid 3D CAD Modeller"</em></li>
+</ul>
+</li>
+</ol>
+<h4 id="using-openscad-to-make-3d-solid-models-of-parts">Using OpenSCAD to Make 3D Solid Models of Parts</h4>
+<p>There is a part we require for ASTR1100. I have put together our new photometers for Richmond. I still need a fitting to connect the sensor tube to the support rod. I decided try making a 3D solid model of the part as I envision it. Currently I have two versions.</p>
+<p><img alt="First Part" src="cylinders.png" title="First Part" /></p>
+<p>After reading more on 3D printers and thought I should change the design to make a stronger 
+part. Keep in mind that in general that to keep costs down 3D parts are most often printed as 
+a shell with less dense fill. The area interior to the shell is typically made much less dense by including voids. Also I have read that the parts tend to be weakest in the Z direction since the shell and fill are built up one layer at a time. The part essentially ends up as multiple layers laminated together. </p>
+<p>The new model looks as shown in these photos</p>
+<p><img alt="Fitting for Photometer" src="support_astr1100.png" title="Fitting for Photometer, ASTR1100" /></p>
+<p>Also, added some text to the object.</p>
+<p><img alt="Fitting with KPU Message" src="support_astr1100_kpu.png" title="Fitting with KPU Message&quot;, ASTR1100" /></p>
+<p>I also exported a cutaway view of the part which allow all the features to been seen together.
+The extra new holes should help to provide support for the shell of the support rod hole.
+These holes are sized to accept a #4-40 machine screw.</p>
+<p><img alt="Cutaway View" src="support_astr1100cut.png" title="Cutaway View of Fitting for Photometer" /></p>
+<h2 id="old-promotional-video-for-ditto">Old Promotional Video for Ditto</h2>
+<p><a href="http://www.youtube.com/watch?v=mwNpNNtUz8g&amp;feature=youtu.be">http://www.youtube.com/watch?v=mwNpNNtUz8g&amp;feature=youtu.be</a></p>
+
+</body>
+
+</html>
