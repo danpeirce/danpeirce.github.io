@@ -15,9 +15,9 @@
   part way then can cause a short. We have been using the existing adaptors for years (perhaps a couple decades) but this 
   device would be more reliable if we got new supplies and replaced the existing sockets with barrel sockets.
   
-Mono phone plug  ![](monoPhonePlug.jpg)  can cause a short if used as a power connector this can cause trouble.
+Mono phone plug  ![](monoPhonePlug.png)  can cause a short if used as a power connector this can cause trouble.
 
-Common barrel connector ![](barrelConnector)
+Common barrel connector ![](barrelConnector.jpg)
 
 I’ll try a few of the following parts and see how they work out with the existing controller.
 
