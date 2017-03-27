@@ -1,3 +1,8 @@
+<!---
+use 
+     pandoc -s -t html5 -c pandocbd.css maintenanceBlog.md -o maintenanceBlog.html
+-->
+
 # Maintenance Blog
 
 ## March 23, 2017  
@@ -6,7 +11,7 @@
 
 ## February 22, 2017
 
-* Stephanie found one of the AC to 12V DC adaptors  was intermittent. This could also cause the issue Don described last night. 
+* ----- found one of the AC to 12V DC adaptors  was intermittent. This could also cause the issue --- described last night. 
   Some of these have been opened and repaired in the past. Currently these are low cost items not worth repairing. Especially 
   if opening the box requires a dermal.  New adaptors will be CSA or cUL approved and high efficiency models. Modifying the 
   adaptors voids the approval.
