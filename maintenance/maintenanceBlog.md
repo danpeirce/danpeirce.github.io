@@ -5,6 +5,35 @@ use
 
 # Maintenance Blog
 
+## March 31, 2017
+
+I have made a simple modification to one of the motor drives to ensure better reliability.
+ 
+Parts used (digikey part numbers given)
+
+* Barrel socket EJ501A-ND
+* New AC/DC Wall Adapter PSM03A-120-R
+ 
+Note that the hole in the Motor Drive cover was made a bit bigger to 
+accommodate the barrel connector. The drive seems to work well. Some 
+students will be doing a makeup lab next week so we can have it student 
+tested before I modify the full class set.
+ 
+I should point out that the connector that I removed from the Motor Drive 
+had significant amounts of black oxide which was likely a result of arcing 
+that can occur when a phone plug is inserted into a phone jack used for 
+power. This is one of the reasons that barrel jacks are more often used 
+for power connections.
+ 
+Another advantage of the new AC/DC adaptor is that it is of the high 
+efficiency type that have been available since around 2008. The old 
+adaptors were the old low efficiency type and would remain warm when 
+plugged in even with no load!
+ 
+The modified Motor Drive looks like this:
+
+![](image005.jpg)
+
 ## March 23, 2017  
 
 * Modifed newer Learning Ladders to secure base
