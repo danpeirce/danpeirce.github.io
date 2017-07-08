@@ -51,6 +51,7 @@ Some of those links are copied here:
 -   [ultrasonic\_ranger.html](https://danpeirce.github.io/ultrasonic_ranger.html)
 -   [usb\_virtual\_com.html](https://danpeirce.github.io/usb_virtual_com.html)
 -   [vnc.html](https://danpeirce.github.io/vnc.html)
+-   [zumo-robot.html](https://danpeirce.github.io/zumo-robot.html)
 
 
 
