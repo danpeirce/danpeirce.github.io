@@ -47,9 +47,24 @@ Note the SCL and SDA lines:
 
 See [https://www.pololu.com/docs/0J63/all#3.9](https://www.pololu.com/docs/0J63/all#3.9)
 
+## Reflective Line Sensors
+
+The Zumo has five reflective line sensors like the Solarbotics Sumovore. The method of reading the sensors is 
+different on the Zumo. Rather than using a pull up resistor the Zumo uses a capacitor. The photo transistor pulls a current
+proportional to the reflected IR. The higher the current the faster the capacitor charges. The ATmega32U4 measures 
+the time it takes for the capacitor to charge. Note the line voltage approaches ground as the capacitor charges because the other 
+side of the capacitor is at V~dd~.
+
+* [https://www.pololu.com/docs/0J63/3.5](https://www.pololu.com/docs/0J63/3.5)
+* [ Sharp GP2S60 compact reflective photointerrupter](https://www.pololu.com/file/download/GP2S60_DS.pdf?file_id=0J683)
+
+![](zumo/reflective.png)
+
 ## The Quadrature Encoders
 
 * [Quadrature encoders](https://www.pololu.com/docs/0J63/3.4) -- Zumo 32U4 manual
 * Historical perspective on [development of the encoders from 2014](https://www.pololu.com/blog/414/new-products-magnetic-quadrature-encoders-for-micro-metal-gearmotors)
 
 ![](zumo/encoders.png)
+
+![Pololu magnetic encoder concept drawing -- https://a.pololu-files.com/picture/0J5839.450.jpg?574b555f52778f79260127402ca1b130](https://a.pololu-files.com/picture/0J5839.450.jpg?574b555f52778f79260127402ca1b130)

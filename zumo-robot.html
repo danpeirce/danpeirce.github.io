@@ -45,6 +45,15 @@ use
 <img src="zumo/expansion-area-right.png" />
 </figure>
 <p>See <a href="https://www.pololu.com/docs/0J63/all#3.9" class="uri">https://www.pololu.com/docs/0J63/all#3.9</a></p>
+<h2 id="reflective-line-sensors">Reflective Line Sensors</h2>
+<p>The Zumo has five reflective line sensors like the Solarbotics Sumovore. The method of reading the sensors is different on the Zumo. Rather than using a pull up resistor the Zumo uses a capacitor. The photo transistor pulls a current proportional to the reflected IR. The higher the current the faster the capacitor charges. The ATmega32U4 measures the time it takes for the capacitor to charge. Note the line voltage approaches ground as the capacitor charges because the other side of the capacitor is at V<sub>dd</sub>.</p>
+<ul>
+<li><a href="https://www.pololu.com/docs/0J63/3.5" class="uri">https://www.pololu.com/docs/0J63/3.5</a></li>
+<li><a href="https://www.pololu.com/file/download/GP2S60_DS.pdf?file_id=0J683">Sharp GP2S60 compact reflective photointerrupter</a></li>
+</ul>
+<figure>
+<img src="zumo/reflective.png" />
+</figure>
 <h2 id="the-quadrature-encoders">The Quadrature Encoders</h2>
 <ul>
 <li><a href="https://www.pololu.com/docs/0J63/3.4">Quadrature encoders</a> -- Zumo 32U4 manual</li>
@@ -52,6 +61,9 @@ use
 </ul>
 <figure>
 <img src="zumo/encoders.png" />
+</figure>
+<figure>
+<img src="https://a.pololu-files.com/picture/0J5839.450.jpg?574b555f52778f79260127402ca1b130" alt="Pololu magnetic encoder concept drawing -- https://a.pololu-files.com/picture/0J5839.450.jpg?574b555f52778f79260127402ca1b130" /><figcaption>Pololu magnetic encoder concept drawing -- https://a.pololu-files.com/picture/0J5839.450.jpg?574b555f52778f79260127402ca1b130</figcaption>
 </figure>
 </body>
 </html>
