@@ -28,7 +28,7 @@ use
 <li><a href="https://www.digikey.ca/product-detail/en/panasonic-bsg/BK-200AAB9B/P688-ND/5067197">need 4 AA - can use NiMH</a></li>
 <li><a href="https://www.pololu.com/file/download/zumo-32u4-schematic-diagram.pdf?file_id=0J862">zumo-32u4-schematic-diagram.pdf</a>
 <ul>
-<li>note expansion ports - looks like it should be possible to piggy back a MCU board. Set 32U4 MCU pins as inputs.</li>
+<li>note expansion ports - looks like it should be possible to piggy back a MCU board.</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -40,6 +40,18 @@ use
 </figure>
 <p>One big advantage of I<sup>2</sup>C is it requires just two wires on an open drain bus. Custom wiring would be minimal.</p>
 <p>One could also continue to use the existing ATmega32U4 to run the motors. The PIC could send commands to the ATmega via the I<sup>2</sup>C bus that would set the duty cycle and direction of the motors. The high level student program would go into the PIC and the lowest level code would be preprogrammed into the ATmega (saving us some development time).</p>
-<p>We can connect to the I<sup>2</sup>C bus via an expansion header on the Zumo.</p>
+<p>I have not yet tested this but I believe we can connect to the I<sup>2</sup>C bus via an expansion header on the Zumo. Note the SCL and SDA lines:</p>
+<figure>
+<img src="zumo/expansion-area-right.png" />
+</figure>
+<p>See <a href="https://www.pololu.com/docs/0J63/all#3.9" class="uri">https://www.pololu.com/docs/0J63/all#3.9</a></p>
+<h2 id="the-quadrature-encoders">The Quadrature Encoders</h2>
+<ul>
+<li><a href="https://www.pololu.com/docs/0J63/3.4">Quadrature encoders</a> -- Zumo 32U4 manual</li>
+<li>Historical perspective on <a href="https://www.pololu.com/blog/414/new-products-magnetic-quadrature-encoders-for-micro-metal-gearmotors">development of the encoders from 2014</a></li>
+</ul>
+<figure>
+<img src="zumo/encoders.png" />
+</figure>
 </body>
 </html>

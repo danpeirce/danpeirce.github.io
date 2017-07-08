@@ -16,8 +16,7 @@ use
     * The 32u4 models have encoders [Zumo 32u4 Robot](https://www.pololu.com/category/170/zumo-32u4-robot)
     * [need 4 AA - can use NiMH](https://www.digikey.ca/product-detail/en/panasonic-bsg/BK-200AAB9B/P688-ND/5067197)
     * [zumo-32u4-schematic-diagram.pdf](https://www.pololu.com/file/download/zumo-32u4-schematic-diagram.pdf?file_id=0J862)
-        * note expansion ports - looks like it should be possible to
-           piggy back a MCU board. Set 32U4 MCU pins as inputs.
+        * note expansion ports - looks like it should be possible to piggy back a MCU board. 
            
 ## Using Microstick II With Zumo
 
@@ -41,4 +40,16 @@ via the I^2^C bus that would set the duty cycle and direction of the motors. The
 would go into the PIC and the lowest level code would be preprogrammed into the ATmega (saving us some development 
 time).
 
-We can connect to the I^2^C bus via an expansion header on the Zumo.
+I have not yet tested this but I believe we can connect to the I^2^C bus via an expansion header on the Zumo. 
+Note the SCL and SDA lines:
+
+![](zumo/expansion-area-right.png)
+
+See [https://www.pololu.com/docs/0J63/all#3.9](https://www.pololu.com/docs/0J63/all#3.9)
+
+## The Quadrature Encoders
+
+* [Quadrature encoders](https://www.pololu.com/docs/0J63/3.4) -- Zumo 32U4 manual
+* Historical perspective on [development of the encoders from 2014](https://www.pololu.com/blog/414/new-products-magnetic-quadrature-encoders-for-micro-metal-gearmotors)
+
+![](zumo/encoders.png)
