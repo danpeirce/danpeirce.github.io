@@ -43,7 +43,7 @@ time).
 I have not yet tested this but I believe we can connect to the I^2^C bus via an expansion header on the Zumo. 
 Note the SCL and SDA lines:
 
-![](zumo/expansion-area-right.png)
+![Zumo Right Side Expansion Area](zumo/expansion-area-right.png)
 
 See [https://www.pololu.com/docs/0J63/all#3.9](https://www.pololu.com/docs/0J63/all#3.9)
 
@@ -68,3 +68,9 @@ side of the capacitor is at V~dd~.
 ![](zumo/encoders.png)
 
 ![Pololu magnetic encoder concept drawing -- https://a.pololu-files.com/picture/0J5839.450.jpg?574b555f52778f79260127402ca1b130](https://a.pololu-files.com/picture/0J5839.450.jpg?574b555f52778f79260127402ca1b130)
+
+## Inertial Measurement Unit (IMU)
+
+* [https://www.pololu.com/docs/0J63/3.7](https://www.pololu.com/docs/0J63/3.7)
+
+![Inertial Sensors](zumo/inertial-sensors.png)
