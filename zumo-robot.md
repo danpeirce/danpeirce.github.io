@@ -73,4 +73,7 @@ side of the capacitor is at V~dd~.
 
 * [https://www.pololu.com/docs/0J63/3.7](https://www.pololu.com/docs/0J63/3.7)
 
+    * ST [LSM303D](https://www.pololu.com/product/2127) compass module, combines a 3-axis accelerometer and 3-axis magnetometer into a single package
+	* ST [L3GD20H](https://www.pololu.com/product/2129) 3-axis gyroscope
+
 ![Inertial Sensors](zumo/inertial-sensors.png)
