@@ -22,6 +22,8 @@ use
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Jtwu7-T1a9o" frameborder="0" allowfullscreen>
 </iframe>
 <ul>
+<li><a href="https://github.com/pololu/zumo-32u4-arduino-library/tree/master/examples">Example code including code used in above demos</a></li>
+<li><p><a href="https://www.pololu.com/blog/482/video-zumo-32u4-robot-example-projects">Blog post regarding demo video</a></p></li>
 <li><a href="https://www.pololu.com/category/129/zumo-robots-and-accessories">zumo-robots-and-accessories</a>
 <ul>
 <li>The 32u4 models have encoders <a href="https://www.pololu.com/category/170/zumo-32u4-robot">Zumo 32u4 Robot</a></li>
@@ -32,7 +34,7 @@ use
 </ul></li>
 </ul></li>
 </ul>
-<h2 id="using-microstick-ii-with-zumo">Using Microstick II With Zumo</h2>
+<h2 id="using-microstick-ii-with-zumo-still-speculative">Using Microstick II With Zumo (still speculative)</h2>
 <p>The ATmega32U4 MCU has limitations so I am considering methods to use a Microstick II with a PIC32MX150F128B piggybacked on the Zumo. This perhaps will be simplified through the use of the I<sup>2</sup>C interface bus on the Zumo. Some of the sensors on the Zumo are accessed via I<sup>2</sup>C. As designed the ATmega32U4 would be the master of the bus. For use with the Microstick II the ATmega32U4 would be reprogrammed as an I<sup>2</sup>C slave and the added PIC32MX150F128B would become the new master. The ATmega32U4 could continue to be used to read the line sensors. The condition of the line sensors could be read from ATmega32U4 via I<sup>2</sup>C and sensors like the accelerometer could be read directly using the I<sup>2</sup>C.</p>
 <p>Although the PIC32MX150F128B runs at 3.3 volts some pins are 5 volt tolerant. Pins 17 and 18 used for I<sup>2</sup>C are 5 volt tolerant.</p>
 <figure>

@@ -11,6 +11,8 @@ use
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Jtwu7-T1a9o" frameborder="0" allowfullscreen></iframe>
 
+* [Example code including code used in above demos](https://github.com/pololu/zumo-32u4-arduino-library/tree/master/examples)
+* [Blog post regarding demo video](https://www.pololu.com/blog/482/video-zumo-32u4-robot-example-projects)
 
 * [zumo-robots-and-accessories](https://www.pololu.com/category/129/zumo-robots-and-accessories)
     * The 32u4 models have encoders [Zumo 32u4 Robot](https://www.pololu.com/category/170/zumo-32u4-robot)
@@ -18,7 +20,7 @@ use
     * [zumo-32u4-schematic-diagram.pdf](https://www.pololu.com/file/download/zumo-32u4-schematic-diagram.pdf?file_id=0J862)
         * note expansion ports - looks like it should be possible to piggy back a MCU board. 
            
-## Using Microstick II With Zumo
+## Using Microstick II With Zumo (still speculative)
 
 The ATmega32U4 MCU has limitations so I am considering methods to use a Microstick II with a 
 PIC32MX150F128B piggybacked on the Zumo. This perhaps will be simplified through the use of the I^2^C 
