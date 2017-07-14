@@ -13,6 +13,9 @@ use
 
 * [Example code including code used in above demos](https://github.com/pololu/zumo-32u4-arduino-library/tree/master/examples)
 * [Blog post regarding demo video](https://www.pololu.com/blog/482/video-zumo-32u4-robot-example-projects)
+* [http://pololu.github.io/zumo-32u4-arduino-library/](http://pololu.github.io/zumo-32u4-arduino-library/)
+
+-------------
 
 * [zumo-robots-and-accessories](https://www.pololu.com/category/129/zumo-robots-and-accessories)
     * The 32u4 models have encoders [Zumo 32u4 Robot](https://www.pololu.com/category/170/zumo-32u4-robot)
