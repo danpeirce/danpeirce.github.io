@@ -86,11 +86,12 @@ and the right proximity sensor, you can simply move or remove the
 corresponding jumper.
 ~~~~
 
-Quoted from[https://www.pololu.com/docs/0J63/3.5](https://www.pololu.com/docs/0J63/3.5)
+Quoted from [https://www.pololu.com/docs/0J63/3.5](https://www.pololu.com/docs/0J63/3.5)
 
 The jumpers that need to be moved are not visible on an assembled Zumo. The front sensor array board is easily 
 removed by gently pulling the board away from the main board. Once removed the jumpers become visible. 
-See [https://www.pololu.com/docs/0J63/4](https://www.pololu.com/docs/0J63/4)
+See [https://www.pololu.com/docs/0J63/4](https://www.pololu.com/docs/0J63/4) and page down to the Heading 
+*Front sensor array*
 
 ## The Quadrature Encoders
 
