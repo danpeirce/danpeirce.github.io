@@ -91,7 +91,7 @@ Quoted from [https://www.pololu.com/docs/0J63/3.5](https://www.pololu.com/docs/0
 The jumpers that need to be moved are not visible on an assembled Zumo. The front sensor array board is easily 
 removed by gently pulling the board away from the main board. Once removed the jumpers become visible. 
 See [https://www.pololu.com/docs/0J63/4](https://www.pololu.com/docs/0J63/4) and page down to the Heading 
-*Front sensor array*
+*Front sensor array* or click here [https://a.pololu-files.com/picture/0J6707.600.jpg](https://a.pololu-files.com/picture/0J6707.600.jpg)
 
 ## The Quadrature Encoders
 
