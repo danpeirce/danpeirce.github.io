@@ -71,8 +71,8 @@ side of the capacitor is at V~dd~.
 
 The assembled Zumo ships with five line sensors and three proximity sensors. Only three of the line sensors ship 
 connected to the ATmega32U4 MCU. That configuration works for sumo events and other purposes. For line following
-one would want to change the configuration to use all five reflective line sensors. The change would involve adding 
-jumpers and cutting at least one trace.
+one would want to change the configuration to use all five reflective line sensors. The change would involve moving
+jumpers that are soldered in place.
 
 ~~~~
 The signals from the sensors can be remapped by soldering in a wire from 
