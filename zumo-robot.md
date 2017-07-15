@@ -54,6 +54,8 @@ See [https://www.pololu.com/docs/0J63/all#3.9](https://www.pololu.com/docs/0J63/
 
 ## Reflective Line Sensors
 
+### Work Differently than on Sumovore
+
 The Zumo has five reflective line sensors like the Solarbotics Sumovore. The method of reading the sensors is 
 different on the Zumo. Rather than using a pull up resistor the Zumo uses a capacitor. The photo transistor pulls a current
 proportional to the reflected IR. The higher the current the faster the capacitor charges. The ATmega32U4 measures 
@@ -64,6 +66,27 @@ side of the capacitor is at V~dd~.
 * [ Sharp GP2S60 compact reflective photointerrupter](https://www.pololu.com/file/download/GP2S60_DS.pdf?file_id=0J683)
 
 ![](zumo/reflective.png)
+
+### More Sensors than Pins
+
+The assembled Zumo ships with five line sensors and three proximity sensors. Only three of the line sensors ship 
+connected to the ATmega32U4 MCU. That configuration works for sumo events and other purposes. For line following
+one would want to change the configuration to use all five reflective line sensors. The change would involve adding 
+jumpers and cutting at least one trace.
+
+~~~~
+The signals from the sensors can be remapped by soldering in a wire from 
+the signal output to the desired I/O pin. You would also want to disconnect 
+the sensor output from the standard I/O pin so that pin can be used for 
+other purposes. For line sensor 1, line sensor 3, line sensor 5, and the 
+front proximity sensor, disconnecting the sensor involves cutting a trace 
+between the signal output and the standard I/O pin, which is labeled on 
+the board. For the line sensor 2, line sensor 4, the left proximity sensor, 
+and the right proximity sensor, you can simply move or remove the 
+corresponding jumper.
+~~~~
+
+Quoted from[https://www.pololu.com/docs/0J63/3.5](https://www.pololu.com/docs/0J63/3.5)
 
 ## The Quadrature Encoders
 

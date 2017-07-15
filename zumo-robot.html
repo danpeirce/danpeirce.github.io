@@ -52,6 +52,7 @@ use
 </figure>
 <p>See <a href="https://www.pololu.com/docs/0J63/all#3.9" class="uri">https://www.pololu.com/docs/0J63/all#3.9</a></p>
 <h2 id="reflective-line-sensors">Reflective Line Sensors</h2>
+<h3 id="work-differently-than-on-sumovore">Work Differently than on Sumovore</h3>
 <p>The Zumo has five reflective line sensors like the Solarbotics Sumovore. The method of reading the sensors is different on the Zumo. Rather than using a pull up resistor the Zumo uses a capacitor. The photo transistor pulls a current proportional to the reflected IR. The higher the current the faster the capacitor charges. The ATmega32U4 measures the time it takes for the capacitor to charge. Note the line voltage approaches ground as the capacitor charges because the other side of the capacitor is at V<sub>dd</sub>.</p>
 <ul>
 <li><a href="https://www.pololu.com/docs/0J63/3.5" class="uri">https://www.pololu.com/docs/0J63/3.5</a></li>
@@ -60,6 +61,18 @@ use
 <figure>
 <img src="zumo/reflective.png" />
 </figure>
+<h3 id="more-sensors-than-pins">More Sensors than Pins</h3>
+<p>The assembled Zumo ships with five line sensors and three proximity sensors. Only three of the line sensors ship connected to the ATmega32U4 MCU. That configuration works for sumo events and other purposes. For line following one would want to change the configuration to use all five reflective line sensors. The change would involve adding jumpers and cutting at least one trace.</p>
+<pre><code>The signals from the sensors can be remapped by soldering in a wire from 
+the signal output to the desired I/O pin. You would also want to disconnect 
+the sensor output from the standard I/O pin so that pin can be used for 
+other purposes. For line sensor 1, line sensor 3, line sensor 5, and the 
+front proximity sensor, disconnecting the sensor involves cutting a trace 
+between the signal output and the standard I/O pin, which is labeled on 
+the board. For the line sensor 2, line sensor 4, the left proximity sensor, 
+and the right proximity sensor, you can simply move or remove the 
+corresponding jumper.</code></pre>
+<p>Quoted from<a href="https://www.pololu.com/docs/0J63/3.5" class="uri">https://www.pololu.com/docs/0J63/3.5</a></p>
 <h2 id="the-quadrature-encoders">The Quadrature Encoders</h2>
 <ul>
 <li><a href="https://www.pololu.com/docs/0J63/3.4">Quadrature encoders</a> -- Zumo 32U4 manual</li>
