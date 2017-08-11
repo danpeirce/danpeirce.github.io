@@ -36,6 +36,6 @@ The pinout can be found on page four of the [datasheet](http://ww1.microchip.com
 
 The Test program is here:
 
-* [hello-MX.c](https://github.com/danpeirce/danpeirce.github.io/blob/master/2017/testStarterKitII/hello-32MX.c)
+* [hello-32MX.c](https://github.com/danpeirce/danpeirce.github.io/blob/master/2017/testStarterKitII/hello-32MX.c)
 
 * Previous notes -- [testing without microstick](https://sites.google.com/site/danpeircenotes/pic32mx/worked-through-guide)
