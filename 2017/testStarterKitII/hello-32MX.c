@@ -35,8 +35,8 @@ void main(void)
    mPORTBSetPinsDigitalIn (BIT_11);      // Set PB11(Rx) as input
 
    PPSUnLock;                        // Allow PIN Mapping 
-      PPSOutput(4, RPB10, U2TX);        // MAP Tx to PB10
-      PPSInput (2, U2RX, RPB11);          // MAP Rx to PB11
+      PPSOutput(4, RPB10, U2TX);        // MAP Tx to PB10 -- pin 21
+      PPSInput (2, U2RX, RPB11);        // MAP Rx to PB11 -- pin 22
    PPSLock;                        // Prevent Accidental Mapping
 
    // Configure UART2
