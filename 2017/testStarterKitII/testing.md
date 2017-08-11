@@ -2,7 +2,7 @@
 % Dan Peirce B.Sc.
 
 <!---
-use pandoc -s -t html5 -c ../../pandocbd.css testing.md -o testing.html
+use pandoc -s --toc -t html5 -c ../../pandocbd.css testing.md -o testing.html
 -->
 
 # Microstick II with USB to Serial Adaptor
