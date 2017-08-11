@@ -54,25 +54,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1 class="title">Testing Microstick II with USB to Serial Adaptor</h1>
 <p class="author">Dan Peirce B.Sc.</p>
 </header>
-<nav id="TOC">
-<ul>
-<li><a href="#microstick-ii-with-usb-to-serial-adaptor">Microstick II with USB to Serial Adaptor</a><ul>
-<li><a href="#schematic">Schematic</a></li>
-<li><a href="#test-setup">Test Setup</a></li>
-<li><a href="#test-program">Test Program</a></li>
-</ul></li>
-</ul>
-</nav>
 <!---
 use pandoc -s --toc -t html5 -c ../../pandocbd.css testing.md -o testing.html
 -->
 <h1 id="microstick-ii-with-usb-to-serial-adaptor">Microstick II with USB to Serial Adaptor</h1>
-<p>I'm setting up a class set of Microstick II with a <a href="http://www.microchip.com/wwwproducts/en/PIC32MX150F128B">PIC32MX150F128B</a> installed in the socket. A USB to Serial adaptor is also wired to the PIC Tx and Rx lines.</p>
+<p>I'm setting up a class set of <a href="http://www.microchip.com/DevelopmentTools/ProductDetails.aspx?PartNO=DM330013-2">Microstick II</a> with a <a href="http://www.microchip.com/wwwproducts/en/PIC32MX150F128B">PIC32MX150F128B</a> installed in the socket. A USB to Serial adaptor is also wired to the PIC Tx and Rx lines.</p>
 <p>The Microstick II schematic included with the kit as shipped has Tx and Rx marked backwards! I have used the following arrangement:</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">      PPSOutput(<span class="dv">4</span>, RPB10, U2TX);        <span class="co">// MAP Tx to PB10 - pin 21</span>
       PPSInput (<span class="dv">2</span>, U2RX, RPB11);        <span class="co">// MAP Rx to PB11 - pin 22</span></code></pre></div>
 <h2 id="schematic">Schematic</h2>
-<p>A portion of the schematic is here (note interchange TxD and RxD):</p>
+<p>A portion of <a href="http://ww1.microchip.com/downloads/en/DeviceDoc/51951B.pdf">the schematic</a> is here (note interchange TxD and RxD):</p>
 <figure>
 <img src="microstickii-schamatic.png" />
 </figure>

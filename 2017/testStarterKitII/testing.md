@@ -7,7 +7,8 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css testing.md -o testing.html
 
 # Microstick II with USB to Serial Adaptor
 
-I'm setting up a class set of Microstick II with a 
+I'm setting up a class set of 
+[Microstick II](http://www.microchip.com/DevelopmentTools/ProductDetails.aspx?PartNO=DM330013-2) with a 
 [PIC32MX150F128B](http://www.microchip.com/wwwproducts/en/PIC32MX150F128B) installed in the socket. 
 A USB to Serial adaptor is also wired to the PIC Tx and Rx lines.
 
@@ -21,7 +22,8 @@ following arrangement:
 
 ## Schematic
 
-A portion of the schematic is here (note interchange TxD and RxD):
+A portion of [the schematic](http://ww1.microchip.com/downloads/en/DeviceDoc/51951B.pdf) 
+is here (note interchange TxD and RxD):
 
 ![](microstickii-schamatic.png)
 
