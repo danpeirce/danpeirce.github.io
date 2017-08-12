@@ -41,3 +41,21 @@ The Test program is here:
 * [hello-32MX.c](https://github.com/danpeirce/danpeirce.github.io/blob/master/2017/testStarterKitII/hello-32MX.c)
 
 * Previous notes -- [testing without microstick](https://sites.google.com/site/danpeircenotes/pic32mx/worked-through-guide)
+
+### XC32 Compiler Note from August 1, 2017
+
+~~~~
+I found by trial and error that with the newest version of the xc32 compiler (today it is v1.44) that one 
+must change the install folder for the peripheral library. At least with what I have downloaded the legacy 
+peripheral library installer is defaulting to install into
+
+C:\Program Files (x86)\Microchip\xc32\v1.40
+
+but it actually needed to go into 
+
+C:\Program Files (x86)\Microchip\xc32\v1.44​
+
+It seems to compile my old example fine with that change. I suspect when I tried this at home I had 
+xc32 v1.40 installed. I don't think there are different versions of the pic32 peripherals library 
+installer for different versions of the xc32 compiler.
+~~~~
