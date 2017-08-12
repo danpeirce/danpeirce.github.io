@@ -42,7 +42,7 @@ The Test program is here:
 
 * Previous notes -- [testing without microstick](https://sites.google.com/site/danpeircenotes/pic32mx/worked-through-guide)
 
-### XC32 Compiler Note from August 1, 2017
+# XC32 Compiler Note from August 1, 2017
 
 ~~~~
 I found by trial and error that with the newest version of the xc32 compiler (today it is v1.44) that one 
