@@ -3,6 +3,12 @@
 // http://www.eevblog.com/forum/microcontrollers/pic32mx-quickstart/msg113629/#msg113629
 // it was tested on Microstick II with a PIC32MX150F128B.
 // small modifications were made by Dan Peirce B.Sc. June 2016
+//   Sep 8, 2017 added loop back to program so anything typed into PuTTY and
+//               received by the PIC32 would be sent back to terminal -- thus
+//               testing both Rx and Tx on both PIC32 and on USB to serial 
+//               converter.
+//               Note that program was able to handle pasting long string into
+//               PuTTY (to paste right click mouse in PuTTY window)
 
 
 #pragma config   FNOSC       = FRCPLL
@@ -35,8 +41,8 @@ void main(void)
    mPORTBSetPinsDigitalIn (BIT_11);      // Set PB11(Rx) as input
 
    PPSUnLock;                        // Allow PIN Mapping 
-      PPSOutput(4, RPB10, U2TX);        // MAP Tx to PB10 -- pin 21
-      PPSInput (2, U2RX, RPB11);        // MAP Rx to PB11 -- pin 22
+      PPSOutput(4, RPB10, U2TX);        // MAP Tx to PB10
+      PPSInput (2, U2RX, RPB11);          // MAP Rx to PB11
    PPSLock;                        // Prevent Accidental Mapping
 
    // Configure UART2
@@ -49,13 +55,22 @@ void main(void)
    // Serial_print(Message);
 
    int j, seconds=0, minutes=0;
+   unsigned int rxchar;
    
     while(1)    
     {
         printf("KPU PHYS1600> %4im %2is\r\n", minutes, seconds);
-        j = 6400000;
+        j = 3200000;
         mPORTAToggleBits(BIT_0);      //Toggle light status. 
-        while(j--);                       //Kill time.
+        while(j--)   //Kill time and loop back received characters
+        {
+            if (DataRdyUART2())
+            {
+                rxchar = getcUART2();
+                putcUART2(rxchar);
+                if (rxchar == '\r') putcUART2('\n');
+            }
+        }                       
         seconds++;
         if (seconds>59)
         {
