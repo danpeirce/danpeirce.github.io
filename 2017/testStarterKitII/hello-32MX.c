@@ -18,6 +18,8 @@
 #pragma config   FPBDIV       = DIV_1
 #pragma config   FWDTEN = OFF             // Watchdog Timer Enable (WDT Disabled (SWDTEN Bit Controls))
 
+#define _SUPPRESS_PLIB_WARNING
+#define _DISABLE_OPENADC10_CONFIGPORT_WARNING 
 #define GetSystemClock()       (40000000ul)
 #define GetPeripheralClock()    (GetSystemClock())
 
