@@ -27,7 +27,9 @@
 #define BaudRate   115200   // Maximim Rate of PICKit2 UART Tool
 
 
-#include <plib.h>
+#include <plib.h>   // results in xc.h being included!
+                    // plib.h will include uart.h which
+                    //  will include xc.h
 #include <stdio.h>
 
 void main(void) 
