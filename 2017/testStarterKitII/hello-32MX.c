@@ -50,7 +50,8 @@ void main(void)
    PPSLock;                        // Prevent Accidental Mapping
 
    // Configure UART2
-
+   int j = 500;
+   while(j--);   //Kill time -- short delay avoids com glitch after reset 
    UARTConfigure(UART2, UART_ENABLE_PINS_TX_RX_ONLY); 
    UARTSetLineControl(UART2, UART_DATA_SIZE_8_BITS | UART_PARITY_NONE | UART_STOP_BITS_1); 
    UARTSetDataRate(UART2, GetPeripheralClock(), BaudRate); 
@@ -58,8 +59,10 @@ void main(void)
 
    // Serial_print(Message);
 
-   int j, seconds=0, minutes=0;
+   int seconds=0, minutes=0;
    unsigned int rxchar;
+   
+   printf("\r\n");
    
     while(1)    
     {
