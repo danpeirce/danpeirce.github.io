@@ -13,6 +13,8 @@ Initially it occurred to me that it could do the job of a USB to serial to adapt
 ## Helpful Links
 
 * [https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all](https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all)
+    * [UART example](https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all#circuitpython-uart-serial)
+	* [I2C example](https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all#circuitpython-i2c-scan)
 * [http://www.bc-robotics.com/shop/adafruit-trinket-m0/](http://www.bc-robotics.com/shop/adafruit-trinket-m0/)
 * [https://www.digikey.ca/products/en?keywords=trinket%20m0](https://www.digikey.ca/products/en?keywords=trinket%20m0)
 
