@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Dan Peirce B.Sc.">
+  <title>Notes on Trinket M0</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="../../pandocbd.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Notes on Trinket M0</h1>
+<p class="author">Dan Peirce B.Sc.</p>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#notes-on-testing-trinket-m0">Notes on Testing Trinket M0</a><ul>
+<li><a href="#helpful-links">Helpful Links</a></li>
+<li><a href="#using-as-shipped-with-demo-program">Using as Shipped with Demo Program</a></li>
+<li><a href="#alternate-example-program-that-generates-a-ramp">Alternate example Program that Generates a Ramp</a></li>
+</ul></li>
+<li><a href="#more-to-come...">More to come...</a></li>
+</ul>
+</nav>
+<!---
+use pandoc -s --toc -t html5 -c ../../pandocbd.css testing.md -o testing.html
+-->
+<h1 id="notes-on-testing-trinket-m0">Notes on Testing Trinket M0</h1>
+<p>Obtained first Trinket M0 on September 29, 2017. Initially impressed by low price combined with numerous features. Initially it occurred to me that it could do the job of a USB to serial to adaptor at a lower cost and much more besides.</p>
+<h2 id="helpful-links">Helpful Links</h2>
+<ul>
+<li><a href="https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all" class="uri">https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all</a></li>
+<li><a href="http://www.bc-robotics.com/shop/adafruit-trinket-m0/" class="uri">http://www.bc-robotics.com/shop/adafruit-trinket-m0/</a></li>
+<li><a href="https://www.digikey.ca/products/en?keywords=trinket%20m0">https://www.digikey.ca/products/en?keywords=trinket%20m0</a></li>
+</ul>
+<h2 id="using-as-shipped-with-demo-program">Using as Shipped with Demo Program</h2>
+<p>The Trinket M0 ships loaded with CiruitPython loaded and a demo program preloaded. The demo does a number of things. My initial focus was the voltage out on the analog output pin.</p>
+<p>The demo program loaded generates a slow ramp voltage. The output starts close to zero and ramps up close to 3.3 volts. The program does other things too. For example if one connects the analog out pin to analog in 0 the board will read the current voltage and send it via USB virtual com port to a Putty session.</p>
+<p>Note that if the USB cable is connected this board enumerates as a composite device capable of many things.</p>
+<p>Example output from board using demo program (sample from near peak voltage):</p>
+<pre><code>D0: 3.09
+D0: 3.11
+D0: 3.12
+D0: 3.13
+D0: 3.15
+D0: 3.16
+D0: 3.17
+D0: 3.18
+D0: 3.20
+D0: 3.21
+D0: 3.22
+D0: 3.24
+D0: 3.25
+D0: 3.26
+D0: 3.27
+D0: 3.29
+D0: 0.02
+D0: 0.02
+D0: 0.03
+D0: 0.04
+D0: 0.06
+D0: 0.07</code></pre>
+<h2 id="alternate-example-program-that-generates-a-ramp">Alternate example Program that Generates a Ramp</h2>
+<p>The documentation provided for the Trinket M0 contains a small program specifically made for creating a ramp without other features. Note that the preloaded demo program also does several other things. This program is specific to creating a signal out. This runs faster. It could be sped up more by incrementing <strong>i</strong> in larger steps (instead of 64 steps a smaller number of steps could be used).</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Trinket IO demo - analog output</span>
+
+<span class="im">from</span> analogio <span class="im">import</span> AnalogOut
+<span class="im">import</span> board
+<span class="im">import</span> time
+    
+aout <span class="op">=</span> AnalogOut(board.D1)
+
+<span class="cf">while</span> <span class="va">True</span>:
+  <span class="co"># Count up from 0 to 65535, with 64 increment</span>
+  <span class="co"># which ends up corresponding to the DAC&#39;s 10-bit range</span>
+  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span> (<span class="dv">0</span>,<span class="dv">65535</span>,<span class="dv">64</span>):
+    aout.value <span class="op">=</span> i</code></pre></div>
+<p>There is an example scope waveform in the Adafruit documentation.</p>
+<figure>
+<img src="adafruit_products_gemma_TEK0002.jpg" />
+</figure>
+<h1 id="more-to-come...">More to come...</h1>
+<p>These notes are still in a very early stage. More to come as time permits.</p>
+</body>
+</html>
