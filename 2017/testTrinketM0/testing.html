@@ -57,7 +57,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <nav id="TOC">
 <ul>
 <li><a href="#notes-on-testing-trinket-m0">Notes on Testing Trinket M0</a><ul>
-<li><a href="#helpful-links">Helpful Links</a></li>
+<li><a href="#helpful-links">Helpful Links</a><ul>
+<li><a href="#drivers-needed-for-windows-7.">Drivers needed for windows 7.</a></li>
+<li><a href="#usb-device-properties-windows-7">USB Device Properties windows 7</a></li>
+</ul></li>
 <li><a href="#using-as-shipped-with-demo-program">Using as Shipped with Demo Program</a></li>
 <li><a href="#alternate-example-program-that-generates-a-ramp">Alternate example Program that Generates a Ramp</a></li>
 </ul></li>
@@ -75,10 +78,24 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css testing.md -o testing.html
 <ul>
 <li><a href="https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all#circuitpython-uart-serial">UART example</a></li>
 <li><a href="https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all#circuitpython-i2c-scan">I2C example</a></li>
+<li><a href="https://cdn-learn.adafruit.com/assets/assets/000/045/723/original/adafruit_products_schem.png?1503525048">Trinket M0 Schematic</a>
+<ul>
+<li><a href="https://www.digikey.ca/product-detail/en/diodes-incorporated/AP2112K-3.3TRG1/AP2112K-3.3TRG1DICT-ND/4505257">On board 3.3 volt regulator</a></li>
+</ul></li>
 </ul></li>
 <li><a href="http://www.bc-robotics.com/shop/adafruit-trinket-m0/" class="uri">http://www.bc-robotics.com/shop/adafruit-trinket-m0/</a></li>
 <li><a href="https://www.digikey.ca/products/en?keywords=trinket%20m0">https://www.digikey.ca/products/en?keywords=trinket%20m0</a></li>
 </ul>
+<h3 id="drivers-needed-for-windows-7.">Drivers needed for windows 7.</h3>
+<p>No drivers need to be installed for windows 10, for mac or for Linux.</p>
+<ul>
+<li><a href="https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all#windows-driver-installation">Drivers needed for windows 7</a></li>
+</ul>
+<h3 id="usb-device-properties-windows-7">USB Device Properties windows 7</h3>
+<p>Note virtual com port number may be different an different systems.</p>
+<figure>
+<img src="TrinketM0-properties.png" />
+</figure>
 <h2 id="using-as-shipped-with-demo-program">Using as Shipped with Demo Program</h2>
 <p>The Trinket M0 ships loaded with CiruitPython loaded and a demo program preloaded. The demo does a number of things. My initial focus was the voltage out on the analog output pin.</p>
 <p>The demo program loaded generates a slow ramp voltage. The output starts close to zero and ramps up close to 3.3 volts. The program does other things too. For example if one connects the analog out pin to analog in 0 the board will read the current voltage and send it via USB virtual com port to a Putty session.</p>

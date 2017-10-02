@@ -15,8 +15,22 @@ Initially it occurred to me that it could do the job of a USB to serial to adapt
 * [https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all](https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all)
     * [UART example](https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all#circuitpython-uart-serial)
 	* [I2C example](https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all#circuitpython-i2c-scan)
+    * [Trinket M0 Schematic](https://cdn-learn.adafruit.com/assets/assets/000/045/723/original/adafruit_products_schem.png?1503525048)
+	    * [On board 3.3 volt regulator](https://www.digikey.ca/product-detail/en/diodes-incorporated/AP2112K-3.3TRG1/AP2112K-3.3TRG1DICT-ND/4505257)
 * [http://www.bc-robotics.com/shop/adafruit-trinket-m0/](http://www.bc-robotics.com/shop/adafruit-trinket-m0/)
 * [https://www.digikey.ca/products/en?keywords=trinket%20m0](https://www.digikey.ca/products/en?keywords=trinket%20m0)
+
+### Drivers needed for windows 7. 
+
+No drivers need to be installed for windows 10, for mac  or for Linux.
+ 
+* [Drivers needed for windows 7](https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all#windows-driver-installation)
+
+### USB Device Properties windows 7
+
+Note virtual com port number may be different an different systems.
+
+![](TrinketM0-properties.png)
 
 ## Using as Shipped with Demo Program
 
