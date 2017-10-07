@@ -34,8 +34,8 @@ Note virtual com port number may be different an different systems.
 
 ## Using as Shipped with Demo Program
 
-The Trinket M0 ships loaded with CiruitPython loaded and a demo program preloaded. The demo does a number of things. 
-My initial focus was the voltage out on the analog output pin. 
+The Trinket M0 ships loaded with **CiruitPython** loaded and a demo program preloaded. The demo does a number of 
+things. My initial focus was the voltage out on the analog output pin. 
 
 The demo program loaded generates a slow ramp voltage. The output starts close to zero and ramps up 
 close to 3.3 volts. The program does other things too. For example if one connects the analog out pin to analog in 0 
@@ -72,7 +72,7 @@ D0: 0.07
 
 ## Alternate example Program that Generates a Ramp
 
-The documentation provided for the Trinket M0 contains a small program specifically 
+The documentation provided for the Trinket M0 contains a small CircuitPython program specifically 
 made for creating a ramp without other features. Note that the preloaded demo program also does several other things.
 This program is specific to creating a signal out. This runs faster. It could be sped up more by incrementing **i**
 in larger steps (instead of 64 steps a smaller number of steps could be used).
@@ -96,6 +96,41 @@ while True:
 There is an example scope waveform in the Adafruit documentation.
 
 ![](adafruit_products_gemma_TEK0002.jpg)
+
+# Arduino IDE
+
+The Arduino IDE is not necessarily a good programming teaching tool but for some applications it has advantages.
+For example it occurred to me that the Trinket M0 could act as an USB to serial adaptor at a lower cost than a 
+FTDI based adaptor. A simple efficient Arduino example for that application exists and works with the Trinket M0. 
+This was not true of the CircuitPython interpreter. 
+See [https://forums.adafruit.com/viewtopic.php?f=52&t=124495](https://forums.adafruit.com/viewtopic.php?f=52&t=124495) 
+
+## Trinket M0 as a USB to Serial Adaptor
+
+There is an existing example program shown here. The only change I made was to the bit rate.
+
+~~~~cpp
+void setup() {
+  Serial.begin(115200);
+  Serial1.begin(115200);
+}
+ 
+void loop() {
+  if (Serial.available()) {      // If anything comes in Serial (USB),
+    Serial1.write(Serial.read());   // read it and send it out Serial1 (pins 0 & 1)
+  }
+ 
+  if (Serial1.available()) {     // If anything comes in Serial1 (pins 0 & 1)
+    Serial.write(Serial1.read());   // read it and send it out Serial (USB)
+  }
+}
+~~~~
+
+We may use the Trinket as an adapter between the Pic serial and PC USB port.
+
+<figure>
+<img style="width: 7in;" src="trinketm0-passthrough.jpg" />
+</figure>
 
 # More to come...
 

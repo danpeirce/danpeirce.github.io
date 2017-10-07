@@ -64,6 +64,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#using-as-shipped-with-demo-program">Using as Shipped with Demo Program</a></li>
 <li><a href="#alternate-example-program-that-generates-a-ramp">Alternate example Program that Generates a Ramp</a></li>
 </ul></li>
+<li><a href="#arduino-ide">Arduino IDE</a><ul>
+<li><a href="#trinket-m0-as-a-usb-to-serial-adaptor">Trinket M0 as a USB to Serial Adaptor</a></li>
+</ul></li>
 <li><a href="#more-to-come...">More to come...</a></li>
 </ul>
 </nav>
@@ -97,7 +100,7 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css testing.md -o testing.html
 <img src="TrinketM0-properties.png" />
 </figure>
 <h2 id="using-as-shipped-with-demo-program">Using as Shipped with Demo Program</h2>
-<p>The Trinket M0 ships loaded with CiruitPython loaded and a demo program preloaded. The demo does a number of things. My initial focus was the voltage out on the analog output pin.</p>
+<p>The Trinket M0 ships loaded with <strong>CiruitPython</strong> loaded and a demo program preloaded. The demo does a number of things. My initial focus was the voltage out on the analog output pin.</p>
 <p>The demo program loaded generates a slow ramp voltage. The output starts close to zero and ramps up close to 3.3 volts. The program does other things too. For example if one connects the analog out pin to analog in 0 the board will read the current voltage and send it via USB virtual com port to a Putty session.</p>
 <p>Note that if the USB cable is connected this board enumerates as a composite device capable of many things.</p>
 <p>Example output from board using demo program (sample from near peak voltage):</p>
@@ -124,7 +127,7 @@ D0: 0.04
 D0: 0.06
 D0: 0.07</code></pre>
 <h2 id="alternate-example-program-that-generates-a-ramp">Alternate example Program that Generates a Ramp</h2>
-<p>The documentation provided for the Trinket M0 contains a small program specifically made for creating a ramp without other features. Note that the preloaded demo program also does several other things. This program is specific to creating a signal out. This runs faster. It could be sped up more by incrementing <strong>i</strong> in larger steps (instead of 64 steps a smaller number of steps could be used).</p>
+<p>The documentation provided for the Trinket M0 contains a small CircuitPython program specifically made for creating a ramp without other features. Note that the preloaded demo program also does several other things. This program is specific to creating a signal out. This runs faster. It could be sped up more by incrementing <strong>i</strong> in larger steps (instead of 64 steps a smaller number of steps could be used).</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Trinket IO demo - analog output</span>
 
 <span class="im">from</span> analogio <span class="im">import</span> AnalogOut
@@ -141,6 +144,28 @@ aout <span class="op">=</span> AnalogOut(board.D1)
 <p>There is an example scope waveform in the Adafruit documentation.</p>
 <figure>
 <img src="adafruit_products_gemma_TEK0002.jpg" />
+</figure>
+<h1 id="arduino-ide">Arduino IDE</h1>
+<p>The Arduino IDE is not necessarily a good programming teaching tool but for some applications it has advantages. For example it occurred to me that the Trinket M0 could act as an USB to serial adaptor at a lower cost than a FTDI based adaptor. A simple efficient Arduino example for that application exists and works with the Trinket M0. This was not true of the CircuitPython interpreter. See <a href="https://forums.adafruit.com/viewtopic.php?f=52&amp;t=124495" class="uri">https://forums.adafruit.com/viewtopic.php?f=52&amp;t=124495</a></p>
+<h2 id="trinket-m0-as-a-usb-to-serial-adaptor">Trinket M0 as a USB to Serial Adaptor</h2>
+<p>There is an existing example program shown here. The only change I made was to the bit rate.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> setup() {
+  Serial.begin(<span class="dv">115200</span>);
+  Serial1.begin(<span class="dv">115200</span>);
+}
+ 
+<span class="dt">void</span> loop() {
+  <span class="cf">if</span> (Serial.available()) {      <span class="co">// If anything comes in Serial (USB),</span>
+    Serial1.write(Serial.read());   <span class="co">// read it and send it out Serial1 (pins 0 &amp; 1)</span>
+  }
+ 
+  <span class="cf">if</span> (Serial1.available()) {     <span class="co">// If anything comes in Serial1 (pins 0 &amp; 1)</span>
+    Serial.write(Serial1.read());   <span class="co">// read it and send it out Serial (USB)</span>
+  }
+}</code></pre></div>
+<p>We may use the Trinket as an adapter between the Pic serial and PC USB port.</p>
+<figure>
+<img style="width: 7in;" src="trinketm0-passthrough.jpg" />
 </figure>
 <h1 id="more-to-come...">More to come...</h1>
 <p>These notes are still in a very early stage. More to come as time permits.</p>
