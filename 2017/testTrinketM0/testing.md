@@ -10,6 +10,8 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css testing.md -o testing.html
 Obtained first Trinket M0 on September 29, 2017. Initially impressed by low price combined with numerous features. 
 Initially it occurred to me that it could do the job of a USB to serial to adaptor at a lower cost and much more besides.
 
+![](trinketm0-close.jpg)
+
 ## Helpful Links
 
 * [https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all](https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all)
