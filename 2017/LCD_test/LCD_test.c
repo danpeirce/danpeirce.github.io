@@ -29,7 +29,8 @@ void main(void)  // a C project can only have one main() function
 
     Delay10KTCYx(200); // wait 10 000 * 200 * TCY = 0.250 seconds 
 //    printf("%c",0x12); // reset to 9600 bps
-    
+
+//   printf("%c%c",0xFE   ,0x0C);    // turn cursor off   
     Delay10KTCYx(200); // Delay10KTCYx(num), num can only range from 1 to 255 
     Delay10KTCYx(200); 
     Delay10KTCYx(200);     
@@ -46,17 +47,18 @@ void main(void)  // a C project can only have one main() function
 //    printf("%c%c",0x7C,157); // new white on black requires some backlight       
     Delay10KTCYx(190);  
 //    Delay10KTCYx(190);                                
- //   printf("%c%c",0xFE,0x09);    // toggle splash screen
- //   printf("%c%c",0xFE,0x0E);    // turn on underline cursor
-//   printf("%c%c",0xFE   ,0x0C);    // turn cursor off
+
                               
     printf("LCD     Kwantlen"); // 16 chars wide to fill top line of LCD
     printf("test    APSC1299");
 //    printf("test    APSC129");
  
 //    printf("  Sparkfun.com  "); // 16 chars wide to fill top line of LCD
-//   printf("  SerLCD v2     "); 
-//    printf("%c%c",0x7C,0x0A);
+ //  printf("  SerLCD v2     "); 
+ //   printf("%c%c",0x7C,0x0A);
+    
+ //   printf("%c%c",0x7C,0x09);    // toggle splash screen
+//    printf("%c%c",0xFE,0x0E);    // turn on underline cursor
   
        
 	while(1)
