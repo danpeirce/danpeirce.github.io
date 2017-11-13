@@ -108,5 +108,9 @@ void draw() {
 }
 ~~~~
  
-  
+# Old Notes
+
+I looked at Processing once before. It has an advantage in being quick and easy to use.
+
+Old notes at [old Processing Notes](../../Processing/ProcessingComputerLanguage.html)
   
