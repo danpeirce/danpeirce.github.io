@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Serial LCD Configuration</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="../../pandocbd.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Serial LCD Configuration</h1>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#serial-lcd-configuration">Serial LCD Configuration</a><ul>
+<li><a href="#the-processing-code">The Processing Code</a></li>
+</ul></li>
+</ul>
+</nav>
+<!---
+use pandoc -s --toc -t html5 -c ../../pandocbd.css LCDconf.md -o LCDconf.html
+-->
+<h1 id="serial-lcd-configuration">Serial LCD Configuration</h1>
+<p>There is an image of the GUI in the screenshot. I could do some of the commands just using PuTTY but when attempting to find a way to send the 0xFE code I came across the suggestion on line to use Processing. The little application is something like a special purpose terminal program.</p>
+<figure>
+<img src="LCDcodes.png" />
+</figure>
+<p>Most printable characters are sent over the USB to serial link to the LCD just as one types them.</p>
+<ul>
+<li>The last character typed appears in the upper left corner of the GUI window.</li>
+<li>The numeric keys 0-9 and the backslash get intercepted and send special characters to configure the display. The GUI displays a menu saying what each numeric key will do. The backslash was used because the LCD shows a Japanese character rather than a backslash and I figured we don't need that.​</li>
+<li>The com port used was written into the script as a literal. One will have to check which com port the USB to serial board has been assigned and then change line 7 of the sketch to reflect that. Generally each board gets assigned a different number but a given board typically always gets assigned the same number on a given computer so one won't need to change the number if sticking with the same hardware each time. It makes no difference which LCD is connected.</li>
+<li>​There are comments in the code that explain what the menu items are for.</li>
+<li>​the code that I could not send in Putty was the 0xFE code. I was searching on line for a way to do it and noticed someone suggested using Processing. It turned out easy to use (I'm sure my code can be improved as I essentially looked at two examples and went from there. I have not read the language reference)</li>
+<li>It is easy to send the 0x7C code in Putty as it is just the &quot;|&quot; character.</li>
+<li>I think most of the other non printable codes used can be sent in PuTTy as control+character.</li>
+</ul>
+<h2 id="the-processing-code">The Processing Code</h2>
+<p><em>The code here needs to be updated to match the screenshot in the previous section.</em></p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span><span class="im"> processing.serial.*;</span>
+Serial myPort; 
+<span class="dt">int</span> code=<span class="dv">0</span>;
+
+<span class="dt">void</span> <span class="fu">setup</span>() {
+  <span class="fu">size</span>(<span class="dv">230</span>, <span class="dv">200</span>);
+  myPort = <span class="kw">new</span> <span class="fu">Serial</span>(<span class="kw">this</span>, <span class="st">&quot;COM7&quot;</span>, <span class="dv">9600</span>);
+  <span class="fu">textSize</span>(<span class="dv">10</span>);
+}
+
+<span class="dt">void</span> <span class="fu">draw</span>() {
+  <span class="fu">background</span>(<span class="dv">100</span>);
+  <span class="fu">text</span>(key, <span class="dv">10</span>, <span class="dv">20</span>); <span class="co">// Draw &quot;key&quot; at coordinate (10,20)</span>
+  <span class="fu">text</span>(<span class="st">&quot;1 - </span><span class="sc">\&quot;</span><span class="st"> Hello World </span><span class="sc">\&quot;</span><span class="st">&quot;</span>, <span class="dv">20</span>, <span class="dv">40</span>); <span class="co">// start of Menu</span>
+  <span class="fu">text</span>(<span class="st">&quot;2 - clear LCD&quot;</span>, <span class="dv">20</span>, <span class="dv">55</span>);
+  <span class="fu">text</span>(<span class="st">&quot;3 - Turn on underscore cursor&quot;</span>, <span class="dv">20</span>, <span class="dv">70</span>); 
+  <span class="fu">text</span>(<span class="st">&quot;4 - Turn visual display on - cursor off&quot;</span>, <span class="dv">20</span>, <span class="dv">85</span>); <span class="co">//</span>
+  <span class="fu">text</span>(<span class="st">&quot;5 - Turn visual display off&quot;</span>, <span class="dv">20</span>, <span class="dv">100</span>); <span class="co">//</span>
+  <span class="fu">text</span>(<span class="st">&quot;6 - Sparkfun.com SerLCD v2.5&quot;</span>, <span class="dv">20</span>, <span class="dv">115</span>);
+  <span class="fu">text</span>(<span class="st">&quot;7 - store as splash screen&quot;</span>, <span class="dv">20</span>, <span class="dv">130</span>);
+  <span class="fu">text</span>(<span class="st">&quot;8 - toggle splash screen&quot;</span>, <span class="dv">20</span>, <span class="dv">145</span>);
+  <span class="fu">text</span>(<span class="st">&quot;9 - Reset baud rate to 9600&quot;</span>, <span class="dv">20</span>, <span class="dv">160</span>);
+  <span class="fu">text</span>(<span class="st">&quot;0 - set baud rate to 2400&quot;</span>, <span class="dv">20</span>, <span class="dv">175</span>);
+  <span class="fu">text</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st"> - set baud rate to 9600&quot;</span>, <span class="dv">20</span>, <span class="dv">190</span>); <span class="co">// end of menu</span>
+  <span class="kw">if</span> (code != key)                 <span class="co">//  look for change in key</span>
+  {
+    code = key;
+    <span class="kw">if</span> (key == <span class="ch">&#39;1&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="st">&quot; Hello World &quot;</span>);
+    } <span class="kw">else</span> <span class="kw">if</span>(key == <span class="ch">&#39;2&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x01</span>); <span class="co">// clear screen</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;3&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x0E</span>); <span class="co">// Underline cursor on</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;4&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x0C</span>); <span class="co">// Underline cursor off display on</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;5&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x08</span>); <span class="co">// display off</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;6&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="st">&quot;  Sparkfun.com     SerLCD v2.5  &quot;</span>);
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;7&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x0A</span>); <span class="co">// store display as splash screen</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;8&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x09</span>); <span class="co">// toggle splash screen</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;9&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x12</span>); <span class="co">// reset to 9600 baud</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;0&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x0B</span>); <span class="co">// set to 2400 baud</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;\\&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x0D</span>); <span class="co">// set to 9600 baud</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key == <span class="ch">&#39; &#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x20</span>);
+    } <span class="kw">else</span> <span class="kw">if</span> (key == CODED) 
+    {
+          
+    } <span class="kw">else</span>
+    {
+       myPort.<span class="fu">write</span>(key);
+    }
+
+  }
+}</code></pre></div>
+</body>
+</html>
