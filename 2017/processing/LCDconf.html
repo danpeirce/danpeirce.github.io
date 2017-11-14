@@ -80,9 +80,11 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css LCDconf.md -o LCDconf.html
 </ul>
 <h2 id="the-processing-code">The Processing Code</h2>
 <p><em>The code here needs to be updated to match the screenshot in the previous section.</em></p>
+<ul>
+<li>This version includes the function keyPressed() which solves some issues of the previous version. It no longer ignores keys if the same key is repeated.</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span><span class="im"> processing.serial.*;</span>
 Serial myPort; 
-<span class="dt">int</span> code=<span class="dv">0</span>;
 
 <span class="dt">void</span> <span class="fu">setup</span>() {
   <span class="fu">size</span>(<span class="dv">230</span>, <span class="dv">200</span>);
@@ -104,9 +106,11 @@ Serial myPort;
   <span class="fu">text</span>(<span class="st">&quot;9 - Reset baud rate to 9600&quot;</span>, <span class="dv">20</span>, <span class="dv">160</span>);
   <span class="fu">text</span>(<span class="st">&quot;0 - set baud rate to 2400&quot;</span>, <span class="dv">20</span>, <span class="dv">175</span>);
   <span class="fu">text</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st"> - set baud rate to 9600&quot;</span>, <span class="dv">20</span>, <span class="dv">190</span>); <span class="co">// end of menu</span>
-  <span class="kw">if</span> (code != key)                 <span class="co">//  look for change in key</span>
-  {
-    code = key;
+
+}
+
+<span class="dt">void</span> <span class="fu">keyPressed</span>() {
+
     <span class="kw">if</span> (key == <span class="ch">&#39;1&#39;</span>) {
       myPort.<span class="fu">write</span>(<span class="st">&quot; Hello World &quot;</span>);
     } <span class="kw">else</span> <span class="kw">if</span>(key == <span class="ch">&#39;2&#39;</span>) {
@@ -148,7 +152,6 @@ Serial myPort;
        myPort.<span class="fu">write</span>(key);
     }
 
-  }
 }</code></pre></div>
 <h1 id="old-notes">Old Notes</h1>
 <p>I looked at Processing once before. It has an advantage in being quick and easy to use.</p>

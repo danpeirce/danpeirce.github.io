@@ -35,10 +35,12 @@ which LCD is connected.
 
 _The code here needs to be updated to match the screenshot in the previous section._
 
+* This version includes the function keyPressed() which solves some issues of the previous version. It no 
+longer ignores keys if the same key is repeated.
+
 ~~~~java
 import processing.serial.*;
 Serial myPort; 
-int code=0;
 
 void setup() {
   size(230, 200);
@@ -60,9 +62,11 @@ void draw() {
   text("9 - Reset baud rate to 9600", 20, 160);
   text("0 - set baud rate to 2400", 20, 175);
   text("\\ - set baud rate to 9600", 20, 190); // end of menu
-  if (code != key)                 //  look for change in key
-  {
-    code = key;
+
+}
+
+void keyPressed() {
+
     if (key == '1') {
       myPort.write(" Hello World ");
     } else if(key == '2') {
@@ -104,7 +108,6 @@ void draw() {
        myPort.write(key);
     }
 
-  }
 }
 ~~~~
  
