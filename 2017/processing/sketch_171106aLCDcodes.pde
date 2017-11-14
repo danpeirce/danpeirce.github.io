@@ -1,43 +1,3 @@
-% Serial LCD Configuration
-
-<!---
-use pandoc -s --toc -t html5 -c ../../pandocbd.css LCDconf.md -o LCDconf.html
--->
-
-# Serial LCD Configuration
-
-There is an image of the GUI in the screenshot.  I could do some of the commands just using PuTTY 
-but when attempting to find a way to send the 0xFE code I came across the suggestion on line to use Processing. 
-The little application is something like a special purpose terminal program. 
- 
-![](LCDcodes.png)
-
-Most printable characters are sent over the USB to serial link to the LCD just as one types them. 
-
-* The last character typed appears in the upper left corner of the GUI window.
-* The numeric keys 0-9 and the backslash get intercepted and send special characters to configure the display. 
-The GUI displays a menu saying what each numeric key will do. The backslash was used because the LCD shows a 
-Japanese character rather than a backslash and I figured we don't need that.​
-* The com port used was written into the script as a literal. One will have to check which com port the USB to 
-serial board has been assigned and then change line 7 of the sketch to reflect that. Generally each board gets 
-assigned a different number but a given board typically always gets assigned the same number on a given computer 
-so one won't need to change the number if sticking with the same hardware each time. It makes no difference 
-which LCD is connected.
-* ​There are comments in the code that explain what the menu items are for.
-* ​the code that I could not send in Putty was the 0xFE code. I was searching on line for a way to do it 
-  and noticed someone suggested using Processing. It turned out easy to use 
-  (I'm sure my code can be improved as I essentially looked at two examples and went from there. 
-  I have not read the language reference)
-* It is easy to send the 0x7C code in Putty as it is just the "|" character.
-* I think most of the other non printable codes used can be sent in PuTTy as control+character.
-
-## The Processing Code
-
-* This version includes the function keyPressed() which solves some issues of the previous version. It no 
-longer ignores keys if the same key is repeated.
-    * The Processing file: [sketch_171106aLCDcodes.pde](sketch_171106aLCDcodes.pde)
-
-~~~~java
 import processing.serial.*;
 Serial myPort; 
 
@@ -125,11 +85,3 @@ void keyPressed() {
        myPort.write(key);
     }
 }
-~~~~
- 
-# Old Notes
-
-I looked at Processing once before. It has an advantage in being quick and easy to use.
-
-Old notes at [old Processing Notes](../../Processing/ProcessingComputerLanguage.html)
-  
