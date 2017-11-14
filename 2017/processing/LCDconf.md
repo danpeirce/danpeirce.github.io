@@ -4,7 +4,16 @@
 use pandoc -s --toc -t html5 -c ../../pandocbd.css LCDconf.md -o LCDconf.html
 -->
 
-# Serial LCD Configuration
+# Sparkfun Serial LCD Configuration Notes
+
+## For use with Sparkfun Serial LCD Modules
+
+These notes for the configuration of Sparkfun serial LCD modules. Like the following:
+
+* [Serial Enabled 16x2 LCD - Black on Green 5V](https://www.sparkfun.com/products/9393)
+* [Sparkfun Serial LCD quickstart](https://www.sparkfun.com/tutorials/246)
+
+## Serial LCD Configuration
 
 There is an image of the GUI in the screenshot.  I could do some of the commands just using PuTTY 
 but when attempting to find a way to send the 0xFE code I came across the suggestion on line to use Processing. 
@@ -36,6 +45,7 @@ which LCD is connected.
 * This version includes the function keyPressed() which solves some issues of the previous version. It no 
 longer ignores keys if the same key is repeated.
     * The Processing file: [sketch_171106aLCDcodes.pde](sketch_171106aLCDcodes.pde)
+	* [Processing Page](https://processing.org/)
 
 ~~~~java
 import processing.serial.*;

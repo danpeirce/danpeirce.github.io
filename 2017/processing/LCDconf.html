@@ -75,7 +75,9 @@ code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Infor
 </header>
 <nav id="TOC">
 <ul>
-<li><a href="#serial-lcd-configuration">Serial LCD Configuration</a><ul>
+<li><a href="#sparkfun-serial-lcd-configuration-notes">Sparkfun Serial LCD Configuration Notes</a><ul>
+<li><a href="#for-use-with-sparkfun-serial-lcd-modules">For use with Sparkfun Serial LCD Modules</a></li>
+<li><a href="#serial-lcd-configuration">Serial LCD Configuration</a></li>
 <li><a href="#the-processing-code">The Processing Code</a></li>
 </ul></li>
 <li><a href="#old-notes">Old Notes</a></li>
@@ -84,7 +86,14 @@ code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Infor
 <!---
 use pandoc -s --toc -t html5 -c ../../pandocbd.css LCDconf.md -o LCDconf.html
 -->
-<h1 id="serial-lcd-configuration">Serial LCD Configuration</h1>
+<h1 id="sparkfun-serial-lcd-configuration-notes">Sparkfun Serial LCD Configuration Notes</h1>
+<h2 id="for-use-with-sparkfun-serial-lcd-modules">For use with Sparkfun Serial LCD Modules</h2>
+<p>These notes for the configuration of Sparkfun serial LCD modules. Like the following:</p>
+<ul>
+<li><a href="https://www.sparkfun.com/products/9393">Serial Enabled 16x2 LCD - Black on Green 5V</a></li>
+<li><a href="https://www.sparkfun.com/tutorials/246">Sparkfun Serial LCD quickstart</a></li>
+</ul>
+<h2 id="serial-lcd-configuration">Serial LCD Configuration</h2>
 <p>There is an image of the GUI in the screenshot. I could do some of the commands just using PuTTY but when attempting to find a way to send the 0xFE code I came across the suggestion on line to use Processing. The little application is something like a special purpose terminal program.</p>
 <p><img src="LCDcodes.png" /></p>
 <p>Most printable characters are sent over the USB to serial link to the LCD just as one types them.</p>
@@ -102,6 +111,7 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css LCDconf.md -o LCDconf.html
 <li>This version includes the function keyPressed() which solves some issues of the previous version. It no longer ignores keys if the same key is repeated.
 <ul>
 <li>The Processing file: <a href="sketch_171106aLCDcodes.pde" class="uri">sketch_171106aLCDcodes.pde</a></li>
+<li><a href="https://processing.org/">Processing Page</a></li>
 </ul></li>
 </ul>
 <pre class="sourceCode java" id="cb1"><code class="sourceCode java"><div class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span><span class="im"> processing.serial.*;</span></div>
