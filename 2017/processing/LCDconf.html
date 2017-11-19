@@ -1,68 +1,48 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Notes by Dan Peirce B.Sc.">
   <title>Serial LCD Configuration</title>
+  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      div.line-block{white-space: pre-line;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <style type="text/css">
-div.sourceLine, a.sourceLine { display: inline-block; min-height: 1.25em; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; }
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-div.sourceLine, a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource div.sourceLine, .numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource div.sourceLine::before, .numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em; }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; color: #aaaaaa;  padding-left: 4px; }
-@media screen {
-a.sourceLine::before { text-decoration: underline; color: initial; }
-}
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.bn { color: #40a070; } /* BaseN */
-code span.fl { color: #40a070; } /* Float */
-code span.ch { color: #4070a0; } /* Char */
-code span.st { color: #4070a0; } /* String */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.ot { color: #007020; } /* Other */
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.fu { color: #06287e; } /* Function */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code span.cn { color: #880000; } /* Constant */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.im { } /* Import */
-code span.va { color: #19177c; } /* Variable */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.op { color: #666666; } /* Operator */
-code span.bu { } /* BuiltIn */
-code span.ex { } /* Extension */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.at { color: #7d9029; } /* Attribute */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
   <link rel="stylesheet" href="../../pandocbd.css">
   <!--[if lt IE 9]>
@@ -72,6 +52,7 @@ code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Infor
 <body>
 <header>
 <h1 class="title">Serial LCD Configuration</h1>
+<p class="author">Notes by Dan Peirce B.Sc.</p>
 </header>
 <nav id="TOC">
 <ul>
@@ -95,15 +76,17 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css LCDconf.md -o LCDconf.html
 </ul>
 <h2 id="serial-lcd-configuration">Serial LCD Configuration</h2>
 <p>There is an image of the GUI in the screenshot. I could do some of the commands just using PuTTY but when attempting to find a way to send the 0xFE code I came across the suggestion on line to use Processing. The little application is something like a special purpose terminal program.</p>
-<p><img src="LCDcodes.png" /></p>
+<figure>
+<img src="LCDcodes.png" />
+</figure>
 <p>Most printable characters are sent over the USB to serial link to the LCD just as one types them.</p>
 <ul>
 <li>The last character typed appears in the upper left corner of the GUI window.</li>
-<li>The numeric keys 0-9 and the backslash get intercepted and send special characters to configure the display. The GUI displays a menu saying what each numeric key will do. The backslash was used because the LCD shows a Japanese character rather than a backslash and I figured we don’t need that.​</li>
-<li>The com port used was written into the script as a literal. One will have to check which com port the USB to serial board has been assigned and then change line 7 of the sketch to reflect that. Generally each board gets assigned a different number but a given board typically always gets assigned the same number on a given computer so one won’t need to change the number if sticking with the same hardware each time. It makes no difference which LCD is connected.</li>
+<li>The numeric keys 0-9 and the backslash get intercepted and send special characters to configure the display. The GUI displays a menu saying what each numeric key will do. The backslash was used because the LCD shows a Japanese character rather than a backslash and I figured we don't need that.​</li>
+<li>The com port used was written into the script as a literal. One will have to check which com port the USB to serial board has been assigned and then change line 7 of the sketch to reflect that. Generally each board gets assigned a different number but a given board typically always gets assigned the same number on a given computer so one won't need to change the number if sticking with the same hardware each time. It makes no difference which LCD is connected.</li>
 <li>​There are comments in the code that explain what the menu items are for.</li>
-<li>​the code that I could not send in Putty was the 0xFE code. I was searching on line for a way to do it and noticed someone suggested using Processing. It turned out easy to use (I’m sure my code can be improved as I essentially looked at two examples and went from there. I have not read the language reference)</li>
-<li>It is easy to send the 0x7C code in Putty as it is just the “|” character.</li>
+<li>​the code that I could not send in Putty was the 0xFE code. I was searching on line for a way to do it and noticed someone suggested using Processing. It turned out easy to use (I'm sure my code can be improved as I essentially looked at two examples and went from there. I have not read the language reference)</li>
+<li>It is easy to send the 0x7C code in Putty as it is just the &quot;|&quot; character.</li>
 <li>I think most of the other non printable codes used can be sent in PuTTy as control+character.</li>
 </ul>
 <h2 id="the-processing-code">The Processing Code</h2>
@@ -114,93 +97,93 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css LCDconf.md -o LCDconf.html
 <li><a href="https://processing.org/">Processing Page</a></li>
 </ul></li>
 </ul>
-<pre class="sourceCode java" id="cb1"><code class="sourceCode java"><div class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span><span class="im"> processing.serial.*;</span></div>
-<div class="sourceLine" id="cb1-2" data-line-number="2">Serial myPort; </div>
-<div class="sourceLine" id="cb1-3" data-line-number="3"></div>
-<div class="sourceLine" id="cb1-4" data-line-number="4"><span class="dt">void</span> <span class="fu">setup</span>() {</div>
-<div class="sourceLine" id="cb1-5" data-line-number="5">  <span class="fu">size</span>(<span class="dv">230</span>, <span class="dv">270</span>);</div>
-<div class="sourceLine" id="cb1-6" data-line-number="6">  myPort = <span class="kw">new</span> <span class="fu">Serial</span>(<span class="kw">this</span>, <span class="st">&quot;COM4&quot;</span>, <span class="dv">9600</span>);</div>
-<div class="sourceLine" id="cb1-7" data-line-number="7">  <span class="fu">textSize</span>(<span class="dv">10</span>);</div>
-<div class="sourceLine" id="cb1-8" data-line-number="8">}</div>
-<div class="sourceLine" id="cb1-9" data-line-number="9"></div>
-<div class="sourceLine" id="cb1-10" data-line-number="10"><span class="dt">void</span> <span class="fu">draw</span>() {</div>
-<div class="sourceLine" id="cb1-11" data-line-number="11">  <span class="fu">background</span>(<span class="dv">100</span>);</div>
-<div class="sourceLine" id="cb1-12" data-line-number="12">  <span class="fu">text</span>(key, <span class="dv">10</span>, <span class="dv">20</span>); <span class="co">// Draw &quot;key&quot; at coordinate (10,20)</span></div>
-<div class="sourceLine" id="cb1-13" data-line-number="13">  <span class="fu">text</span>(<span class="st">&quot;1 - </span><span class="sc">\&quot;</span><span class="st"> Hello World </span><span class="sc">\&quot;</span><span class="st">&quot;</span>, <span class="dv">20</span>, <span class="dv">40</span>); <span class="co">// start of Menu</span></div>
-<div class="sourceLine" id="cb1-14" data-line-number="14">  <span class="fu">text</span>(<span class="st">&quot;2 - clear LCD&quot;</span>, <span class="dv">20</span>, <span class="dv">55</span>);</div>
-<div class="sourceLine" id="cb1-15" data-line-number="15">  <span class="fu">text</span>(<span class="st">&quot;3 - Turn on underscore cursor&quot;</span>, <span class="dv">20</span>, <span class="dv">70</span>); </div>
-<div class="sourceLine" id="cb1-16" data-line-number="16">  <span class="fu">text</span>(<span class="st">&quot;4 - Turn visual display on - cursor off&quot;</span>, <span class="dv">20</span>, <span class="dv">85</span>); <span class="co">//</span></div>
-<div class="sourceLine" id="cb1-17" data-line-number="17">  <span class="fu">text</span>(<span class="st">&quot;5 - Turn visual display off&quot;</span>, <span class="dv">20</span>, <span class="dv">100</span>); <span class="co">//</span></div>
-<div class="sourceLine" id="cb1-18" data-line-number="18">  <span class="fu">text</span>(<span class="st">&quot;6 - Sparkfun.com SerLCD v2.5&quot;</span>, <span class="dv">20</span>, <span class="dv">115</span>);</div>
-<div class="sourceLine" id="cb1-19" data-line-number="19">  <span class="fu">text</span>(<span class="st">&quot;7 - store as splash screen&quot;</span>, <span class="dv">20</span>, <span class="dv">130</span>);</div>
-<div class="sourceLine" id="cb1-20" data-line-number="20">  <span class="fu">text</span>(<span class="st">&quot;8 - toggle splash screen&quot;</span>, <span class="dv">20</span>, <span class="dv">145</span>);</div>
-<div class="sourceLine" id="cb1-21" data-line-number="21">  <span class="fu">text</span>(<span class="st">&quot;9 - Reset baud rate to 9600&quot;</span>, <span class="dv">20</span>, <span class="dv">160</span>);</div>
-<div class="sourceLine" id="cb1-22" data-line-number="22">  <span class="fu">text</span>(<span class="st">&quot;0 - set baud rate to 2400&quot;</span>, <span class="dv">20</span>, <span class="dv">175</span>);</div>
-<div class="sourceLine" id="cb1-23" data-line-number="23">  <span class="fu">text</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st"> - set baud rate to 9600&quot;</span>, <span class="dv">20</span>, <span class="dv">190</span>); </div>
-<div class="sourceLine" id="cb1-24" data-line-number="24">  <span class="fu">text</span>(<span class="st">&quot;@ - Set to 16 characters wide 2 rows&quot;</span>, <span class="dv">20</span>, <span class="dv">205</span>); <span class="co">// </span></div>
-<div class="sourceLine" id="cb1-25" data-line-number="25">  <span class="fu">text</span>(<span class="st">&quot;$ - Set to 16 characters wide 4 rows&quot;</span>, <span class="dv">20</span>, <span class="dv">220</span>); <span class="co">//</span></div>
-<div class="sourceLine" id="cb1-26" data-line-number="26">  <span class="fu">text</span>(<span class="st">&quot;* - set back light on&quot;</span>, <span class="dv">20</span>, <span class="dv">235</span>); <span class="co">//</span></div>
-<div class="sourceLine" id="cb1-27" data-line-number="27">  <span class="fu">text</span>(<span class="st">&quot;! - set back light off&quot;</span>, <span class="dv">20</span>, <span class="dv">250</span>);                  <span class="co">// end of menu</span></div>
-<div class="sourceLine" id="cb1-28" data-line-number="28">}</div>
-<div class="sourceLine" id="cb1-29" data-line-number="29"></div>
-<div class="sourceLine" id="cb1-30" data-line-number="30"><span class="dt">void</span> <span class="fu">keyPressed</span>() {</div>
-<div class="sourceLine" id="cb1-31" data-line-number="31">    <span class="kw">if</span> (key == <span class="ch">&#39;1&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-32" data-line-number="32">      myPort.<span class="fu">write</span>(<span class="st">&quot; Hello World &quot;</span>);</div>
-<div class="sourceLine" id="cb1-33" data-line-number="33">    } <span class="kw">else</span> <span class="kw">if</span>(key == <span class="ch">&#39;2&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-34" data-line-number="34">      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-35" data-line-number="35">      myPort.<span class="fu">write</span>(<span class="bn">0x01</span>); <span class="co">// clear screen</span></div>
-<div class="sourceLine" id="cb1-36" data-line-number="36">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;3&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-37" data-line-number="37">      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-38" data-line-number="38">      myPort.<span class="fu">write</span>(<span class="bn">0x0E</span>); <span class="co">// Underline cursor on</span></div>
-<div class="sourceLine" id="cb1-39" data-line-number="39">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;4&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-40" data-line-number="40">      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-41" data-line-number="41">      myPort.<span class="fu">write</span>(<span class="bn">0x0C</span>); <span class="co">// Underline cursor off display on</span></div>
-<div class="sourceLine" id="cb1-42" data-line-number="42">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;5&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-43" data-line-number="43">      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-44" data-line-number="44">      myPort.<span class="fu">write</span>(<span class="bn">0x08</span>); <span class="co">// display off</span></div>
-<div class="sourceLine" id="cb1-45" data-line-number="45">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;6&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-46" data-line-number="46">      myPort.<span class="fu">write</span>(<span class="st">&quot;  Sparkfun.com     SerLCD v2.5  &quot;</span>);</div>
-<div class="sourceLine" id="cb1-47" data-line-number="47">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;7&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-48" data-line-number="48">      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-49" data-line-number="49">      myPort.<span class="fu">write</span>(<span class="bn">0x0A</span>); <span class="co">// store display as splash screen</span></div>
-<div class="sourceLine" id="cb1-50" data-line-number="50">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;8&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-51" data-line-number="51">      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-52" data-line-number="52">      myPort.<span class="fu">write</span>(<span class="bn">0x09</span>); <span class="co">// toggle splash screen</span></div>
-<div class="sourceLine" id="cb1-53" data-line-number="53">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;9&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-54" data-line-number="54">      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-55" data-line-number="55">      myPort.<span class="fu">write</span>(<span class="bn">0x12</span>); <span class="co">// reset to 9600 baud</span></div>
-<div class="sourceLine" id="cb1-56" data-line-number="56">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;0&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-57" data-line-number="57">      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-58" data-line-number="58">      myPort.<span class="fu">write</span>(<span class="bn">0x0B</span>); <span class="co">// set to 2400 baud</span></div>
-<div class="sourceLine" id="cb1-59" data-line-number="59">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;\\&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-60" data-line-number="60">      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-61" data-line-number="61">      myPort.<span class="fu">write</span>(<span class="bn">0x0D</span>); <span class="co">// set to 9600 baud</span></div>
-<div class="sourceLine" id="cb1-62" data-line-number="62">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;@&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-63" data-line-number="63">      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-64" data-line-number="64">      myPort.<span class="fu">write</span>(<span class="bn">0x04</span>); <span class="co">// set to 16 characters wide  </span></div>
-<div class="sourceLine" id="cb1-65" data-line-number="65">      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-66" data-line-number="66">      myPort.<span class="fu">write</span>(<span class="bn">0x06</span>); <span class="co">// set to 2 rows </span></div>
-<div class="sourceLine" id="cb1-67" data-line-number="67">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;$&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-68" data-line-number="68">      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-69" data-line-number="69">      myPort.<span class="fu">write</span>(<span class="bn">0x04</span>); <span class="co">// set to 16 characters wide  </span></div>
-<div class="sourceLine" id="cb1-70" data-line-number="70">      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-71" data-line-number="71">      myPort.<span class="fu">write</span>(<span class="bn">0x05</span>); <span class="co">// set to 4 rows </span></div>
-<div class="sourceLine" id="cb1-72" data-line-number="72">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;*&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-73" data-line-number="73">      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-74" data-line-number="74">      myPort.<span class="fu">write</span>(<span class="dv">157</span>); <span class="co">// set back light 1on max</span></div>
-<div class="sourceLine" id="cb1-75" data-line-number="75">    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;!&#39;</span>) {</div>
-<div class="sourceLine" id="cb1-76" data-line-number="76">      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span></div>
-<div class="sourceLine" id="cb1-77" data-line-number="77">      myPort.<span class="fu">write</span>(<span class="dv">128</span>); <span class="co">// set back light off</span></div>
-<div class="sourceLine" id="cb1-78" data-line-number="78">    } <span class="kw">else</span> <span class="kw">if</span> (key == <span class="ch">&#39; &#39;</span>) {</div>
-<div class="sourceLine" id="cb1-79" data-line-number="79">      myPort.<span class="fu">write</span>(<span class="bn">0x20</span>);</div>
-<div class="sourceLine" id="cb1-80" data-line-number="80">    } <span class="kw">else</span> <span class="kw">if</span> (key == CODED) </div>
-<div class="sourceLine" id="cb1-81" data-line-number="81">    {</div>
-<div class="sourceLine" id="cb1-82" data-line-number="82">          </div>
-<div class="sourceLine" id="cb1-83" data-line-number="83">    } <span class="kw">else</span></div>
-<div class="sourceLine" id="cb1-84" data-line-number="84">    {</div>
-<div class="sourceLine" id="cb1-85" data-line-number="85">       myPort.<span class="fu">write</span>(key);</div>
-<div class="sourceLine" id="cb1-86" data-line-number="86">    }</div>
-<div class="sourceLine" id="cb1-87" data-line-number="87">}</div></code></pre>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span><span class="im"> processing.serial.*;</span>
+Serial myPort; 
+
+<span class="dt">void</span> <span class="fu">setup</span>() {
+  <span class="fu">size</span>(<span class="dv">230</span>, <span class="dv">270</span>);
+  myPort = <span class="kw">new</span> <span class="fu">Serial</span>(<span class="kw">this</span>, <span class="st">&quot;COM4&quot;</span>, <span class="dv">9600</span>);
+  <span class="fu">textSize</span>(<span class="dv">10</span>);
+}
+
+<span class="dt">void</span> <span class="fu">draw</span>() {
+  <span class="fu">background</span>(<span class="dv">100</span>);
+  <span class="fu">text</span>(key, <span class="dv">10</span>, <span class="dv">20</span>); <span class="co">// Draw &quot;key&quot; at coordinate (10,20)</span>
+  <span class="fu">text</span>(<span class="st">&quot;1 - </span><span class="sc">\&quot;</span><span class="st"> Hello World </span><span class="sc">\&quot;</span><span class="st">&quot;</span>, <span class="dv">20</span>, <span class="dv">40</span>); <span class="co">// start of Menu</span>
+  <span class="fu">text</span>(<span class="st">&quot;2 - clear LCD&quot;</span>, <span class="dv">20</span>, <span class="dv">55</span>);
+  <span class="fu">text</span>(<span class="st">&quot;3 - Turn on underscore cursor&quot;</span>, <span class="dv">20</span>, <span class="dv">70</span>); 
+  <span class="fu">text</span>(<span class="st">&quot;4 - Turn visual display on - cursor off&quot;</span>, <span class="dv">20</span>, <span class="dv">85</span>); <span class="co">//</span>
+  <span class="fu">text</span>(<span class="st">&quot;5 - Turn visual display off&quot;</span>, <span class="dv">20</span>, <span class="dv">100</span>); <span class="co">//</span>
+  <span class="fu">text</span>(<span class="st">&quot;6 - Sparkfun.com SerLCD v2.5&quot;</span>, <span class="dv">20</span>, <span class="dv">115</span>);
+  <span class="fu">text</span>(<span class="st">&quot;7 - store as splash screen&quot;</span>, <span class="dv">20</span>, <span class="dv">130</span>);
+  <span class="fu">text</span>(<span class="st">&quot;8 - toggle splash screen&quot;</span>, <span class="dv">20</span>, <span class="dv">145</span>);
+  <span class="fu">text</span>(<span class="st">&quot;9 - Reset baud rate to 9600&quot;</span>, <span class="dv">20</span>, <span class="dv">160</span>);
+  <span class="fu">text</span>(<span class="st">&quot;0 - set baud rate to 2400&quot;</span>, <span class="dv">20</span>, <span class="dv">175</span>);
+  <span class="fu">text</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st"> - set baud rate to 9600&quot;</span>, <span class="dv">20</span>, <span class="dv">190</span>); 
+  <span class="fu">text</span>(<span class="st">&quot;@ - Set to 16 characters wide 2 rows&quot;</span>, <span class="dv">20</span>, <span class="dv">205</span>); <span class="co">// </span>
+  <span class="fu">text</span>(<span class="st">&quot;$ - Set to 16 characters wide 4 rows&quot;</span>, <span class="dv">20</span>, <span class="dv">220</span>); <span class="co">//</span>
+  <span class="fu">text</span>(<span class="st">&quot;* - set back light on&quot;</span>, <span class="dv">20</span>, <span class="dv">235</span>); <span class="co">//</span>
+  <span class="fu">text</span>(<span class="st">&quot;! - set back light off&quot;</span>, <span class="dv">20</span>, <span class="dv">250</span>);                  <span class="co">// end of menu</span>
+}
+
+<span class="dt">void</span> <span class="fu">keyPressed</span>() {
+    <span class="kw">if</span> (key == <span class="ch">&#39;1&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="st">&quot; Hello World &quot;</span>);
+    } <span class="kw">else</span> <span class="kw">if</span>(key == <span class="ch">&#39;2&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x01</span>); <span class="co">// clear screen</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;3&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x0E</span>); <span class="co">// Underline cursor on</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;4&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x0C</span>); <span class="co">// Underline cursor off display on</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;5&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0xFE</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x08</span>); <span class="co">// display off</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;6&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="st">&quot;  Sparkfun.com     SerLCD v2.5  &quot;</span>);
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;7&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x0A</span>); <span class="co">// store display as splash screen</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;8&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x09</span>); <span class="co">// toggle splash screen</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;9&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x12</span>); <span class="co">// reset to 9600 baud</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;0&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x0B</span>); <span class="co">// set to 2400 baud</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;\\&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x0D</span>); <span class="co">// set to 9600 baud</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;@&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x04</span>); <span class="co">// set to 16 characters wide  </span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x06</span>); <span class="co">// set to 2 rows </span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;$&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x04</span>); <span class="co">// set to 16 characters wide  </span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="bn">0x05</span>); <span class="co">// set to 4 rows </span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;*&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="dv">157</span>); <span class="co">// set back light 1on max</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key ==<span class="ch">&#39;!&#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x7C</span>); <span class="co">// command code</span>
+      myPort.<span class="fu">write</span>(<span class="dv">128</span>); <span class="co">// set back light off</span>
+    } <span class="kw">else</span> <span class="kw">if</span> (key == <span class="ch">&#39; &#39;</span>) {
+      myPort.<span class="fu">write</span>(<span class="bn">0x20</span>);
+    } <span class="kw">else</span> <span class="kw">if</span> (key == CODED) 
+    {
+          
+    } <span class="kw">else</span>
+    {
+       myPort.<span class="fu">write</span>(key);
+    }
+}</code></pre></div>
 <h1 id="old-notes">Old Notes</h1>
 <p>I looked at Processing once before. It has an advantage in being quick and easy to use.</p>
 <p>Old notes at <a href="../../Processing/ProcessingComputerLanguage.html">old Processing Notes</a></p>

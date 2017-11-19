@@ -1,4 +1,5 @@
 % Serial LCD Configuration
+% Notes by Dan Peirce B.Sc.
 
 <!---
 use pandoc -s --toc -t html5 -c ../../pandocbd.css LCDconf.md -o LCDconf.html
