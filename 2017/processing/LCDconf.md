@@ -46,7 +46,8 @@ which LCD is connected.
 * This version includes the function keyPressed() which solves some issues of the previous version. It no 
 longer ignores keys if the same key is repeated.
     * The Processing file: [sketch_171106aLCDcodes.pde](sketch_171106aLCDcodes.pde)
-	* [Processing Page](https://processing.org/)
+	* [Processing Page](https://processing.org/) -- Processing Development Environment and system can be 
+	  downloaded from this site.
 
 ~~~~java
 import processing.serial.*;
