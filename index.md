@@ -37,6 +37,7 @@ Some of those links are copied here:
     (some editing required as shaw site not available)
 -   [python\_markdown.html](https://danpeirce.github.io/python_markdown.html)
 -   [raspberry\_pi](https://danpeirce.github.io/raspberry_pi)
+-   [Raspberry Pi Desktop for PC and Mac - 2017](https://danpeirce.github.io/2017/Raspberry/RPi-PC-desktop.html)
 -   [RCA\_remote](https://danpeirce.github.io/RCA_remote)
 -   [reflective-module](https://github.com/danpeirce/reflective-module)
 -   [robot\_diagnostic.html](https://danpeirce.github.io/2010/robot_diagnostic.html)
