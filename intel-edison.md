@@ -1,11 +1,17 @@
-title: Intel Edison
+% Intel Edison
+
+<!---
+use pandoc -s --toc -t html5 -c pandocbd.css intel-edison.md -o intel-edison.html
+-->
 
 # Intel Edison
 
-If I get a chance to work with an Edison board I will keep notes here. 
-I don't think it will be possible before the beginning of April 2015.
+The Edison is now obsolete. Not long after it became avalable the Raspberry Pi 3 became avalable at 
+thew same price as the Raspberry 2 but also including on board Wi-Fi and Bluetooth.
 
-## Links
+* [Intel discontinues Edison](https://hackaday.com/2017/06/19/intel-discontinues-joule-galileo-and-edison-product-lines/)
+
+## Old Links
 
 * [Intel Do It Yourself Edison](http://www.intel.com/content/www/us/en/do-it-yourself/edison.html)
 * [Intel Edison Board](http://www.intel.com/support/maker/edison.htm)
