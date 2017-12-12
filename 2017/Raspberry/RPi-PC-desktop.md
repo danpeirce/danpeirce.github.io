@@ -53,7 +53,8 @@ This is something I plan to test.
 
 ### For Debugging - Log onto Zero
 
-In a terminal on the PC desktop:
+In a terminal on the PC desktop after the RPi Zero (USB OTG port not PWR port) has been attached to the PC USB port.
+This connection will also provide power. 
 
 ~~~~
 screen /dev/ttyACM0 115200
