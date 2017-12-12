@@ -21,7 +21,9 @@
 <ul>
 <li><a href="#raspberry-pi-desktop-for-pc-and-mac">Raspberry Pi Desktop for PC (and Mac)</a><ul>
 <li><a href="#initial-testing-of-raspberry-pi-desktop">Initial Testing of Raspberry Pi Desktop</a></li>
-<li><a href="#gpio-expander">GPIO Expander</a></li>
+<li><a href="#gpio-expander">GPIO Expander</a><ul>
+<li><a href="#for-debugging---log-onto-zero">For Debugging - Log onto Zero</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -51,7 +53,26 @@ computer’s processing power in your physical
 computing projects.</code></pre>
 <ul>
 <li><a href="https://www.raspberrypi.org/blog/gpio-expander/">RPi Blog - GPIO Expander</a></li>
+<li><a href="https://www.raspberrypi.org/blog/gpio-zero-update/">RPi Blog - UPDATES TO GPIO ZERO, THE PHYSICAL COMPUTING API Aug 2017</a></li>
 </ul>
 <p>This is something I plan to test.</p>
+<h3 id="for-debugging---log-onto-zero">For Debugging - Log onto Zero</h3>
+<p>In a terminal on the PC desktop:</p>
+<pre><code>screen /dev/ttyACM0 115200
+Username: root
+Password: raspberry</code></pre>
+<p>One will get a &quot;#&quot; as a prompt. There will be a limited temporary file system on a RAM drive.</p>
+<h4 id="mount-microsd">Mount microSD</h4>
+<p>A bootable microSD would need to be removed to get the Zero to boot from the USB port rather than booting from the microSD.Once the boot is complete one can reinsert the microSD and mount it (it won't mount automatically).</p>
+<p>First just to make sure the micro SD is detectable try:</p>
+<pre><code># blkid
+/dev/mmcblk0p2: UUID=&quot;202638e1-4ce4-45df-9a00-ad725c2537bb&quot;
+/dev/mmcblk0p1: LABEL=&quot;boot&quot; UUID=&quot;22E0-C711&quot;</code></pre>
+<p>I created a directory to be used as a mount point</p>
+<pre><code># mkdir /mnt/sd</code></pre>
+<p>then mounted the microSD to that directory:</p>
+<pre><code># mount -t ext4 /dev/mmcblk0p2 /mnt/sd</code></pre>
+<p>In my case I used a microSD already set up with Noobs on it. That is why it had been formatted with the ext4 file system. The disadvantage of formatting with ext4 is that only Linux systems can read it. FAT32 is more universal (but less rich in features).</p>
+<p>The file system loaded correctly indicating the USB boot for the RPi Zero had worked successfully.</p>
 </body>
 </html>
