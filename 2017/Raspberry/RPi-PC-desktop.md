@@ -98,3 +98,23 @@ rich in features).
 The file system loaded correctly indicating the USB boot for the RPi Zero had worked 
 successfully. 
 
+## New PC applications - PiServer
+
+There is a section in [https://www.raspberrypi.org/blog/stretch-pcs-macs-raspbian-update/](https://www.raspberrypi.org/blog/stretch-pcs-macs-raspbian-update/)
+called *New PC applications* and it talks about **PiServer**. If Pi server is run on the RPi PC desktop Raspberry Pi 
+3s can do a network boot. Advantages of this is that the microSD cards can easily be corrupted if the Raspberry Pi 3 
+if it looses power unexpectedly. This does not affect the operating system if a network boot is used. 
+
+Quoted from link given above:
+
+~~~~
+We have included a couple of new applications in the PC version. One is called PiServer — this allows 
+you to set up an operating system, such as Raspbian, on the PC which can then be shared by a number 
+of Pi clients networked to it. It is intended to make it easy for classrooms to have multiple Pis all 
+running exactly the same software, and for the teacher to have control over how the software is 
+installed and used. PiServer is quite a clever piece of software, and it’ll be covered in more detail 
+in another blog post in December.
+~~~~
+
+I will be watching for the new blog post. Raspberry Pi 3s are available from many sources. Raspberry Pi Zeros 
+are not as easy to get in quantity or in a reasonable time. 

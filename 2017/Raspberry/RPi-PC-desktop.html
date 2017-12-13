@@ -24,6 +24,7 @@
 <li><a href="#gpio-expander">GPIO Expander</a><ul>
 <li><a href="#for-debugging---log-onto-zero">For Debugging - Log onto Zero</a></li>
 </ul></li>
+<li><a href="#new-pc-applications---piserver">New PC applications - PiServer</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -74,5 +75,15 @@ Password: raspberry</code></pre>
 <pre><code># mount -t ext4 /dev/mmcblk0p2 /mnt/sd</code></pre>
 <p>In my case I used a microSD already set up with Noobs on it. That is why it had been formatted with the ext4 file system. The disadvantage of formatting with ext4 is that only Linux systems can read it. FAT32 is more universal (but less rich in features).</p>
 <p>The file system loaded correctly indicating the USB boot for the RPi Zero had worked successfully.</p>
+<h2 id="new-pc-applications---piserver">New PC applications - PiServer</h2>
+<p>There is a section in <a href="https://www.raspberrypi.org/blog/stretch-pcs-macs-raspbian-update/" class="uri">https://www.raspberrypi.org/blog/stretch-pcs-macs-raspbian-update/</a> called <em>New PC applications</em> and it talks about <strong>PiServer</strong>. If Pi server is run on the RPi PC desktop Raspberry Pi 3s can do a network boot. Advantages of this is that the microSD cards can easily be corrupted if the Raspberry Pi 3 if it looses power unexpectedly. This does not affect the operating system if a network boot is used.</p>
+<p>Quoted from link given above:</p>
+<pre><code>We have included a couple of new applications in the PC version. One is called PiServer — this allows 
+you to set up an operating system, such as Raspbian, on the PC which can then be shared by a number 
+of Pi clients networked to it. It is intended to make it easy for classrooms to have multiple Pis all 
+running exactly the same software, and for the teacher to have control over how the software is 
+installed and used. PiServer is quite a clever piece of software, and it’ll be covered in more detail 
+in another blog post in December.</code></pre>
+<p>I will be watching for the new blog post. Raspberry Pi 3s are available from many sources. Raspberry Pi Zeros are not as easy to get in quantity or in a reasonable time.</p>
 </body>
 </html>
