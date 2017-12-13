@@ -101,9 +101,16 @@ successfully.
 ## New PC applications - PiServer
 
 There is a section in [https://www.raspberrypi.org/blog/stretch-pcs-macs-raspbian-update/](https://www.raspberrypi.org/blog/stretch-pcs-macs-raspbian-update/)
-called *New PC applications* and it talks about **PiServer**. If Pi server is run on the RPi PC desktop Raspberry Pi 
-3s can do a network boot. Advantages of this is that the microSD cards can easily be corrupted if the Raspberry Pi 3 
-if it looses power unexpectedly. This does not affect the operating system if a network boot is used. 
+called *New PC applications* and it talks about **PiServer**. If PiServer is run on the RPi PC desktop, 
+PiServer enables up to three Raspberry Pi 3s to do a network boot (over Ethernet). 
+
+I expect the following advantages over booting from a microSD:
+
+* The microSD cards can easily be corrupted if the Raspberry Pi 3 if it looses power unexpectedly. 
+  This would not affect the operating system if a network boot is used. One could pull power on 
+  the Raspberry Pi 3 without worry.
+* It will likely make the setup of headless operation and control of the Raspberry Pi 3 from a PC more 
+  straightforward.
 
 Quoted from link given above:
 

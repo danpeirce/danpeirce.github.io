@@ -76,7 +76,12 @@ Password: raspberry</code></pre>
 <p>In my case I used a microSD already set up with Noobs on it. That is why it had been formatted with the ext4 file system. The disadvantage of formatting with ext4 is that only Linux systems can read it. FAT32 is more universal (but less rich in features).</p>
 <p>The file system loaded correctly indicating the USB boot for the RPi Zero had worked successfully.</p>
 <h2 id="new-pc-applications---piserver">New PC applications - PiServer</h2>
-<p>There is a section in <a href="https://www.raspberrypi.org/blog/stretch-pcs-macs-raspbian-update/" class="uri">https://www.raspberrypi.org/blog/stretch-pcs-macs-raspbian-update/</a> called <em>New PC applications</em> and it talks about <strong>PiServer</strong>. If Pi server is run on the RPi PC desktop Raspberry Pi 3s can do a network boot. Advantages of this is that the microSD cards can easily be corrupted if the Raspberry Pi 3 if it looses power unexpectedly. This does not affect the operating system if a network boot is used.</p>
+<p>There is a section in <a href="https://www.raspberrypi.org/blog/stretch-pcs-macs-raspbian-update/" class="uri">https://www.raspberrypi.org/blog/stretch-pcs-macs-raspbian-update/</a> called <em>New PC applications</em> and it talks about <strong>PiServer</strong>. If PiServer is run on the RPi PC desktop, PiServer enables up to three Raspberry Pi 3s to do a network boot (over Ethernet).</p>
+<p>I expect the following advantages over booting from a microSD:</p>
+<ul>
+<li>The microSD cards can easily be corrupted if the Raspberry Pi 3 if it looses power unexpectedly. This would not affect the operating system if a network boot is used. One could pull power on the Raspberry Pi 3 without worry.</li>
+<li>It will likely make the setup of headless operation and control of the Raspberry Pi 3 from a PC more straightforward.</li>
+</ul>
 <p>Quoted from link given above:</p>
 <pre><code>We have included a couple of new applications in the PC version. One is called PiServer — this allows 
 you to set up an operating system, such as Raspbian, on the PC which can then be shared by a number 
