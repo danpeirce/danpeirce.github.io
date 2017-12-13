@@ -29,7 +29,12 @@ flash drive from the Linux environment rather than making it with the win7 utili
 *[forum - desktop persistence not working](https://www.raspberrypi.org/forums/viewtopic.php?f=116&t=188113&p=1244020#p1244020)
 
 This will have to be resolved as for most people in the department booting from a flash drive will be more convenient 
-than overwriting the hard drive.
+than overwriting the hard drive. 
+
+This page might provide a clue:
+
+* [http://www.fabbnet.net/Live_Persistent.htm](http://www.fabbnet.net/Live_Persistent.htm)
+* [old - https://www.linux.com/blog/creating-debian-live-usb-flash-drive-persistence-non-techies](https://www.linux.com/blog/creating-debian-live-usb-flash-drive-persistence-non-techies)
 
 ## GPIO Expander
 
@@ -50,6 +55,8 @@ computing projects.
 * [RPi Blog - UPDATES TO GPIO ZERO, THE PHYSICAL COMPUTING API Aug 2017](https://www.raspberrypi.org/blog/gpio-zero-update/)
 
 This is something I plan to test.
+
+
 
 ### For Debugging - Log onto Zero
 
@@ -125,3 +132,8 @@ in another blog post in December.
 
 I will be watching for the new blog post. Raspberry Pi 3s are available from many sources. Raspberry Pi Zeros 
 are not as easy to get in quantity or in a reasonable time. 
+
+## Debian Stretch Comments from zdnet.com
+
+* [raspberry-pi-hands-on-with-raspbian-stretch-plus-debian-stretch-pi-desktop-for-pc-and-mac](http://www.zdnet.com/article/raspberry-pi-hands-on-with-raspbian-stretch-plus-debian-stretch-pi-desktop-for-pc-and-mac/)
+
