@@ -23,18 +23,11 @@ LXDE which was not the default for the distribution. This typically resulted in 
 everything working just as it should. It seems with this version of Debian Stretch the RPi Foundation has done
 the tweaking and gotten it all right.
 
-I am still having an issue when I boot directly from a flash drive but perhaps loading a 
-flash drive from the Linux environment rather than making it with the win7 utility will solve that issue. 
+The ISO image was loaded onto the flash drive using **rufus-2.18p.exe** on a windows 7 computer. To ensure the 
+persistence option will work it is important to choose the **dd** (entire disk image) option rather than the 
+**ISO** (file by file) option. 
 
-*[forum - desktop persistence not working](https://www.raspberrypi.org/forums/viewtopic.php?f=116&t=188113&p=1244020#p1244020)
-
-This will have to be resolved as for most people in the department booting from a flash drive will be more convenient 
-than overwriting the hard drive. 
-
-This page might provide a clue:
-
-* [http://www.fabbnet.net/Live_Persistent.htm](http://www.fabbnet.net/Live_Persistent.htm)
-* [old - https://www.linux.com/blog/creating-debian-live-usb-flash-drive-persistence-non-techies](https://www.linux.com/blog/creating-debian-live-usb-flash-drive-persistence-non-techies)
+Very nice the way it all works without needed to do a lot of configuration.
 
 ## GPIO Expander
 

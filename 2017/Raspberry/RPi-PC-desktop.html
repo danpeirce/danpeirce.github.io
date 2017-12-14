@@ -40,14 +40,8 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css RPi-PC-desktop.md -o RPi-PC-d
 </ul>
 <h2 id="initial-testing-of-raspberry-pi-desktop">Initial Testing of Raspberry Pi Desktop</h2>
 <p>I have the Raspberry Pi up and running on a PC desktop. I believe this was the easiest install of a Linux desktop I have done. Often I have used Linux on older machines and chosen a light desktop like LXDE which was not the default for the distribution. This typically resulted in hours tweaking and not getting everything working just as it should. It seems with this version of Debian Stretch the RPi Foundation has done the tweaking and gotten it all right.</p>
-<p>I am still having an issue when I boot directly from a flash drive but perhaps loading a flash drive from the Linux environment rather than making it with the win7 utility will solve that issue.</p>
-<p>*<a href="https://www.raspberrypi.org/forums/viewtopic.php?f=116&amp;t=188113&amp;p=1244020#p1244020">forum - desktop persistence not working</a></p>
-<p>This will have to be resolved as for most people in the department booting from a flash drive will be more convenient than overwriting the hard drive.</p>
-<p>This page might provide a clue:</p>
-<ul>
-<li><a href="http://www.fabbnet.net/Live_Persistent.htm" class="uri">http://www.fabbnet.net/Live_Persistent.htm</a></li>
-<li><a href="https://www.linux.com/blog/creating-debian-live-usb-flash-drive-persistence-non-techies">old - https://www.linux.com/blog/creating-debian-live-usb-flash-drive-persistence-non-techies</a></li>
-</ul>
+<p>The ISO image was loaded onto the flash drive using <strong>rufus-2.18p.exe</strong> on a windows 7 computer. To ensure the persistence option will work it is important to choose the <strong>dd</strong> (entire disk image) option rather than the <strong>ISO</strong> (file by file) option.</p>
+<p>Very nice the way it all works without needed to do a lot of configuration.</p>
 <h2 id="gpio-expander">GPIO Expander</h2>
 <p>Quoting from the Raspberry Pi Blog:</p>
 <pre><code>Use the GPIO pins of a Raspberry Pi Zero while 
