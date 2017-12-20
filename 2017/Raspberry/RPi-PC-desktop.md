@@ -150,6 +150,41 @@ One advantage of using a Debian desktop on the Laptop (PC) rather than the Windo
 can find each other by computer name. That does not work out of the box with the Windows laptop connecting to 
 the Debian RPi. In that case one needs to know the IP address of the Raspberry Pi.
 
+At the moment I do not have a RPi 3 handy for testing so I am testing with two netbooks running the RPi version of 
+Debian Stretch.
+
+* I canged the hostname of one to **proton** and the other **elecron**. This can be done wirh a GUI
+  under **Preferences -> Raspberry Pi Configuration**. On the first tab the hostname can be changed.
+* The the second tab SSH needs to be enabled on the remote. This means one session with a 
+  Keboard, monitor and mouse.
+ 
+See example session below. 
+
+* The first time one logs on a computer remotly the user is given an alert.
+  The purpose is to let the user know if the OS has not seen that remote machine
+  befor. If this is a surprise there may be a hacker luring on the network.
+* the last line indicates one os now controlling the other machine from the
+  command line. Note the user host name of the prompt has changed. 
+
+~~~~bash
+pi@proton:~ $ ssh electron.local
+The authenticity of host 'electron.local (192.168.0.19)' can't be established.
+ECDSA key fingerprint is SHA256:GZzJbOpMgXTSWbKvH7s6kTkZcFrcVpAheQid8TqJVho.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'electron.local,192.168.0.19' (ECDSA) to the list of known hosts.
+pi@electron.local's password: 
+Linux electron 4.9.0-4-686-pae #1 SMP Debian 4.9.51-1 (2017-09-28) i686
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Wed Dec 20 14:26:05 2017 from 192.168.0.19
+pi@electron:~ $ 
+~~~~
+
 ## Debian Stretch Comments from zdnet.com
 
 * [raspberry-pi-hands-on-with-raspbian-stretch-plus-debian-stretch-pi-desktop-for-pc-and-mac](http://www.zdnet.com/article/raspberry-pi-hands-on-with-raspbian-stretch-plus-debian-stretch-pi-desktop-for-pc-and-mac/)
