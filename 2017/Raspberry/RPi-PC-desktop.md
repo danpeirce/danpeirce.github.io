@@ -134,7 +134,7 @@ a laptop connected to the same Ethernet router. In the past (2012) I did this wi
 I have not taken the time to try it with a new Raspberry Pi three but it would work much the same.
 
 Here is an example of a Raspberry Pi desktop sitting on a windows XP desktop. This example used both a 
-Virtual Private Networking (VPN) session and a Secure shell (SSH).
+Virtual Network Computing (VNC) session and a Secure shell (SSH).
 
 ![](../../rpi/remote_desktop.png)
 
