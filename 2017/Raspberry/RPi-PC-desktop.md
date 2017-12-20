@@ -126,6 +126,30 @@ in another blog post in December.
 I will be watching for the new blog post. Raspberry Pi 3s are available from many sources. Raspberry Pi Zeros 
 are not as easy to get in quantity or in a reasonable time. 
 
+## Running a Raspberry 3 Headless
+
+In some cases it would be advantageous to run a Raspberry Pi 3 headless. That is without a monitor, keyboard and mouse.
+On example is if one has access to a laptop. It is not hard to log into a Raspberry Pi remotely from 
+a laptop connected to the same Ethernet router. In the past (2012) I did this with an original Raspberry Pi. 
+I have not taken the time to try it with a new Raspberry Pi three but it would work much the same.
+
+Here is an example of a Raspberry Pi desktop sitting on a windows XP desktop. This example used both a 
+Virtual Private Networking (VPN) session and a Secure shell (SSH).
+
+![](../../rpi/remote_desktop.png)
+
+More on remote access on this old page from 2012:
+
+* [raspberry_pi.html#remote-login](../../raspberry_pi.html#remote-login)
+* [ssh.html](../../ssh.html)
+* [vnc.html](../../vnc.html)
+
+### Advantage of booting Laptop with the Debian Desktop
+
+One advantage of using a Debian desktop on the Laptop (PC) rather than the Windows boot is that Debian computers 
+can find each other by computer name. That does not work out of the box with the Windows laptop connecting to 
+the Debian RPi. In that case one needs to know the IP address of the Raspberry Pi.
+
 ## Debian Stretch Comments from zdnet.com
 
 * [raspberry-pi-hands-on-with-raspbian-stretch-plus-debian-stretch-pi-desktop-for-pc-and-mac](http://www.zdnet.com/article/raspberry-pi-hands-on-with-raspbian-stretch-plus-debian-stretch-pi-desktop-for-pc-and-mac/)
