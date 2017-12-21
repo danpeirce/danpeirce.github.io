@@ -52,7 +52,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <body>
 <header>
 <h1 class="title">Raspberry Pi Desktop for PC and Mac</h1>
-<h2 class="author">Notes by Dan Peirce B.Sc.</h2>
+<p class="author">Notes by Dan Peirce B.Sc.</p>
 </header>
 <nav id="TOC">
 <ul>
@@ -65,7 +65,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#running-a-raspberry-3-headless">Running a Raspberry 3 Headless</a><ul>
 <li><a href="#advantage-of-booting-laptop-with-the-debian-desktop">Advantage of booting Laptop with the Debian Desktop</a></li>
 </ul></li>
-<li><a href="#debian-stretch-comments-from-zdnet.com">Debian Stretch Comments from zdnet.com</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -146,12 +145,12 @@ in another blog post in December.</code></pre>
 <p>One advantage of using a Debian desktop on the Laptop (PC) rather than the Windows boot is that Debian computers can find each other by computer name. That does not work out of the box with the Windows laptop connecting to the Debian RPi. In that case one needs to know the IP address of the Raspberry Pi.</p>
 <p>At the moment I do not have a RPi 3 handy for testing so I am testing with two netbooks running the RPi version of Debian Stretch.</p>
 <ul>
-<li>I canged the hostname of one to <strong>proton</strong> and the other <strong>elecron</strong>. This can be done wirh a GUI under <strong>Preferences -&gt; Raspberry Pi Configuration</strong>. On the first tab the hostname can be changed.</li>
-<li>The the second tab SSH needs to be enabled on the remote. This means one session with a Keboard, monitor and mouse.</li>
+<li>I changed the hostname of one to <strong>proton</strong> and the other <strong>electron</strong>. This can be done with a GUI under <strong>Preferences -&gt; Raspberry Pi Configuration</strong>. On the first tab the hostname can be changed.</li>
+<li>The the second tab SSH needs to be enabled on the remote. This means one session with a keyboard, monitor and mouse.</li>
 </ul>
 <p>See example session below.</p>
 <ul>
-<li>The first time one logs on a computer remotly the user is given an alert. The purpose is to let the user know if the OS has not seen that remote machine befor. If this is a surprise there may be a hacker luring on the network.</li>
+<li>The first time one logs on a computer remotly the user is given an alert. The purpose is to let the user know if the OS has not seen that remote machine before. If this is a surprise there may be a hacker luring on the network.</li>
 <li>the last line indicates one os now controlling the other machine from the command line. Note the user host name of the prompt has changed.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ ssh electron.local
@@ -170,9 +169,5 @@ in another blog post in December.</code></pre>
 <span class="ex">permitted</span> by applicable law.
 <span class="ex">Last</span> login: Wed Dec 20 14:26:05 2017 from 192.168.0.19
 <span class="ex">pi@electron</span>:~ $ </code></pre></div>
-<h2 id="debian-stretch-comments-from-zdnet.com">Debian Stretch Comments from zdnet.com</h2>
-<ul>
-<li><a href="http://www.zdnet.com/article/raspberry-pi-hands-on-with-raspbian-stretch-plus-debian-stretch-pi-desktop-for-pc-and-mac/">raspberry-pi-hands-on-with-raspbian-stretch-plus-debian-stretch-pi-desktop-for-pc-and-mac</a></li>
-</ul>
 </body>
 </html>

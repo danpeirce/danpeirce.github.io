@@ -153,16 +153,16 @@ the Debian RPi. In that case one needs to know the IP address of the Raspberry P
 At the moment I do not have a RPi 3 handy for testing so I am testing with two netbooks running the RPi version of 
 Debian Stretch.
 
-* I canged the hostname of one to **proton** and the other **elecron**. This can be done wirh a GUI
+* I changed the hostname of one to **proton** and the other **electron**. This can be done with a GUI
   under **Preferences -> Raspberry Pi Configuration**. On the first tab the hostname can be changed.
 * The the second tab SSH needs to be enabled on the remote. This means one session with a 
-  Keboard, monitor and mouse.
+  keyboard, monitor and mouse.
  
 See example session below. 
 
 * The first time one logs on a computer remotly the user is given an alert.
   The purpose is to let the user know if the OS has not seen that remote machine
-  befor. If this is a surprise there may be a hacker luring on the network.
+  before. If this is a surprise there may be a hacker luring on the network.
 * the last line indicates one os now controlling the other machine from the
   command line. Note the user host name of the prompt has changed. 
 
@@ -184,8 +184,4 @@ permitted by applicable law.
 Last login: Wed Dec 20 14:26:05 2017 from 192.168.0.19
 pi@electron:~ $ 
 ~~~~
-
-## Debian Stretch Comments from zdnet.com
-
-* [raspberry-pi-hands-on-with-raspbian-stretch-plus-debian-stretch-pi-desktop-for-pc-and-mac](http://www.zdnet.com/article/raspberry-pi-hands-on-with-raspbian-stretch-plus-debian-stretch-pi-desktop-for-pc-and-mac/)
 
