@@ -224,8 +224,11 @@ electron.local	192.168.0.19
 
 ## Finding Hosts on the Local Network
 
-Often it is handy to be able to find hosts on the local network. This can be done 
-with **arp-scan** if it has been installed. It can be installed with:
+Often it is handy to be able to find hosts on the local network. Perhaps one has 
+a headless RPi and does not remember the hostname or IP address. The IP address cand be found from 
+another Linux computer on the same local network with **arp-scan** if it has been installed. 
+
+It can be installed with:
 
 ~~~~bash
 pi@proton:~ $ sudo apt-get install arp-scan

@@ -188,7 +188,8 @@ in another blog post in December.</code></pre>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ avahi-resolve -n4 electron.local
 <span class="ex">electron.local</span>  192.168.0.19</code></pre></div>
 <h2 id="finding-hosts-on-the-local-network">Finding Hosts on the Local Network</h2>
-<p>Often it is handy to be able to find hosts on the local network. This can be done with <strong>arp-scan</strong> if it has been installed. It can be installed with:</p>
+<p>Often it is handy to be able to find hosts on the local network. Perhaps one has a headless RPi and does not remember the hostname or IP address. The IP address cand be found from another Linux computer on the same local network with <strong>arp-scan</strong> if it has been installed.</p>
+<p>It can be installed with:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ sudo apt-get install arp-scan
 <span class="ex">Reading</span> package lists... Done
 <span class="ex">Building</span> dependency tree       
