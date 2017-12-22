@@ -126,7 +126,7 @@ in another blog post in December.
 I will be watching for the new blog post. Raspberry Pi 3s are available from many sources. Raspberry Pi Zeros 
 are not as easy to get in quantity or in a reasonable time. 
 
-## Running a Raspberry 3 Headless
+# Running a Raspberry 3 Headless
 
 In some cases it would be advantageous to run a Raspberry Pi 3 headless. That is without a monitor, keyboard and mouse.
 On example is if one has access to a laptop. It is not hard to log into a Raspberry Pi remotely from 
@@ -144,7 +144,7 @@ More on remote access on this old page from 2012:
 * [ssh.html](../../ssh.html)
 * [vnc.html](../../vnc.html)
 
-### Advantage of booting Laptop with the Debian Desktop
+## Advantage of booting Laptop with the Debian Desktop
 
 One advantage of using a Debian desktop on the Laptop (PC) rather than the Windows boot is that Debian computers 
 can find each other by computer name. That does not work out of the box with the Windows laptop connecting to 
@@ -156,7 +156,7 @@ Debian Stretch.
 * I changed the hostname of one to **proton** and the other **electron**. This can be done with a GUI
   under **Preferences -> Raspberry Pi Configuration**. On the first tab the hostname can be changed.
 * The the second tab SSH needs to be enabled on the remote. This means one session with a 
-  keyboard, monitor and mouse.
+  keyboard, monitor and mouse will be needed because the in the latest version SSH is not enabled by default.
  
 See example session below. 
 
@@ -185,3 +185,69 @@ Last login: Wed Dec 20 14:26:05 2017 from 192.168.0.19
 pi@electron:~ $ 
 ~~~~
 
+## Avahi Provides the Hostname Resolution
+
+Avahi is already installed on RPi and Debian Stretch x86. This is
+what allows one to enter **{hostname}.local** on a Linux system rather than
+the IP address. Windows computers use a different protocol to allow the 
+use of windows hostnames.
+
+* [https://en.wikipedia.org/wiki/Avahi_\(software\)](https://en.wikipedia.org/wiki/Avahi_\(software\))
+
+As shown in at [Advantage of booting Laptop with the Debian Desktop](#advantage-of-booting-laptop-with-the-debian-desktop)
+one can use the hostname as an argument to the SSH command. The same could be done in the address bar
+of a web browser on Linux if the remote RPi is running a [web service](http://www.pythonforbeginners.com/modules-in-python/how-to-use-simplehttpserver/).
+
+ 
+### avahi-resolution 
+
+The Avahi service is running by default on the Debian x86 and RPi systems but there is an 
+additional utility that can be useful if the avahi-utils package is added to the system using:
+
+~~~bash
+pi@proton:~ $ sudo apt-get install avahi-utils
+~~~~
+
+Once that instalation is done (internet access is needed) it will be possible to run 
+**avahi-resolution** to find the IP address from the hostename or the hostname from the IP
+address.
+
+~~~~bash
+pi@proton:~ $ avahi-resolve -a  192.168.0.19
+192.168.0.19	electron.local
+~~~~
+
+~~~~bash
+pi@proton:~ $ avahi-resolve -n4 electron.local
+electron.local	192.168.0.19
+~~~~
+
+## Finding Hosts on the Local Network
+
+Often it is handy to be able to find hosts on the local network. This can be done 
+with **arp-scan** if it has been installed. It can be installed with:
+
+~~~~bash
+pi@proton:~ $ sudo apt-get install arp-scan
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+[snip]
+~~~~
+
+Once installed it can be used as shown in this example:
+
+~~~~bash
+pi@proton:~ $ sudo arp-scan --localnet
+Interface: wlan0, datalink type: EN10MB (Ethernet)
+Starting arp-scan 1.9 with 256 hosts (http://www.nta-monitor.com/tools/arp-scan/)
+192.168.0.1	50:39:55:5c:8a:43	Cisco SPVTG
+192.168.0.12	00:90:a9:35:e4:75	WESTERN DIGITAL
+192.168.0.18	b4:99:ba:c3:40:e8	Hewlett-Packard Company
+192.168.0.19	00:23:4e:8b:47:d5	Hon Hai Precision Ind. Co., Ltd.
+192.168.0.13	d0:87:e2:c9:88:5c	(Unknown)
+
+5 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.9: 256 hosts scanned in 3.018 seconds (84.82 hosts/sec). 5 responded
+~~~~

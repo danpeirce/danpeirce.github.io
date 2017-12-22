@@ -52,7 +52,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <body>
 <header>
 <h1 class="title">Raspberry Pi Desktop for PC and Mac</h1>
-<p class="author">Notes by Dan Peirce B.Sc.</p>
+<h2 class="author">Notes by Dan Peirce B.Sc.</h2>
 </header>
 <nav id="TOC">
 <ul>
@@ -62,9 +62,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#for-debugging---log-onto-zero">For Debugging - Log onto Zero</a></li>
 </ul></li>
 <li><a href="#new-pc-applications---piserver">New PC applications - PiServer</a></li>
+</ul></li>
 <li><a href="#running-a-raspberry-3-headless">Running a Raspberry 3 Headless</a><ul>
 <li><a href="#advantage-of-booting-laptop-with-the-debian-desktop">Advantage of booting Laptop with the Debian Desktop</a></li>
+<li><a href="#avahi-provides-the-hostname-resolution">Avahi Provides the Hostname Resolution</a><ul>
+<li><a href="#avahi-resolution">avahi-resolution</a></li>
 </ul></li>
+<li><a href="#finding-hosts-on-the-local-network">Finding Hosts on the Local Network</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -129,7 +133,7 @@ running exactly the same software, and for the teacher to have control over how 
 installed and used. PiServer is quite a clever piece of software, and it’ll be covered in more detail 
 in another blog post in December.</code></pre>
 <p>I will be watching for the new blog post. Raspberry Pi 3s are available from many sources. Raspberry Pi Zeros are not as easy to get in quantity or in a reasonable time.</p>
-<h2 id="running-a-raspberry-3-headless">Running a Raspberry 3 Headless</h2>
+<h1 id="running-a-raspberry-3-headless">Running a Raspberry 3 Headless</h1>
 <p>In some cases it would be advantageous to run a Raspberry Pi 3 headless. That is without a monitor, keyboard and mouse. On example is if one has access to a laptop. It is not hard to log into a Raspberry Pi remotely from a laptop connected to the same Ethernet router. In the past (2012) I did this with an original Raspberry Pi. I have not taken the time to try it with a new Raspberry Pi three but it would work much the same.</p>
 <p>Here is an example of a Raspberry Pi desktop sitting on a windows XP desktop. This example used both a Virtual Network Computing (VNC) session and a Secure shell (SSH).</p>
 <figure>
@@ -141,12 +145,12 @@ in another blog post in December.</code></pre>
 <li><a href="../../ssh.html">ssh.html</a></li>
 <li><a href="../../vnc.html">vnc.html</a></li>
 </ul>
-<h3 id="advantage-of-booting-laptop-with-the-debian-desktop">Advantage of booting Laptop with the Debian Desktop</h3>
+<h2 id="advantage-of-booting-laptop-with-the-debian-desktop">Advantage of booting Laptop with the Debian Desktop</h2>
 <p>One advantage of using a Debian desktop on the Laptop (PC) rather than the Windows boot is that Debian computers can find each other by computer name. That does not work out of the box with the Windows laptop connecting to the Debian RPi. In that case one needs to know the IP address of the Raspberry Pi.</p>
 <p>At the moment I do not have a RPi 3 handy for testing so I am testing with two netbooks running the RPi version of Debian Stretch.</p>
 <ul>
 <li>I changed the hostname of one to <strong>proton</strong> and the other <strong>electron</strong>. This can be done with a GUI under <strong>Preferences -&gt; Raspberry Pi Configuration</strong>. On the first tab the hostname can be changed.</li>
-<li>The the second tab SSH needs to be enabled on the remote. This means one session with a keyboard, monitor and mouse.</li>
+<li>The the second tab SSH needs to be enabled on the remote. This means one session with a keyboard, monitor and mouse will be needed because the in the latest version SSH is not enabled by default.</li>
 </ul>
 <p>See example session below.</p>
 <ul>
@@ -169,5 +173,39 @@ in another blog post in December.</code></pre>
 <span class="ex">permitted</span> by applicable law.
 <span class="ex">Last</span> login: Wed Dec 20 14:26:05 2017 from 192.168.0.19
 <span class="ex">pi@electron</span>:~ $ </code></pre></div>
+<h2 id="avahi-provides-the-hostname-resolution">Avahi Provides the Hostname Resolution</h2>
+<p>Avahi is already installed on RPi and Debian Stretch x86. This is what allows one to enter <strong>{hostname}.local</strong> on a Linux system rather than the IP address. Windows computers use a different protocol to allow the use of windows hostnames.</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Avahi_(software)" class="uri">https://en.wikipedia.org/wiki/Avahi_(software)</a></li>
+</ul>
+<p>As shown in at <a href="#advantage-of-booting-laptop-with-the-debian-desktop">Advantage of booting Laptop with the Debian Desktop</a> one can use the hostname as an argument to the SSH command. The same could be done in the address bar of a web browser on Linux if the remote RPi is running a <a href="http://www.pythonforbeginners.com/modules-in-python/how-to-use-simplehttpserver/">web service</a>.</p>
+<h3 id="avahi-resolution">avahi-resolution</h3>
+<p>The Avahi service is running by default on the Debian x86 and RPi systems but there is an additional utility that can be useful if the avahi-utils package is added to the system using:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ sudo apt-get install avahi-utils</code></pre></div>
+<p>Once that instalation is done (internet access is needed) it will be possible to run <strong>avahi-resolution</strong> to find the IP address from the hostename or the hostname from the IP address.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ avahi-resolve -a  192.168.0.19
+<span class="ex">192.168.0.19</span>    electron.local</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ avahi-resolve -n4 electron.local
+<span class="ex">electron.local</span>  192.168.0.19</code></pre></div>
+<h2 id="finding-hosts-on-the-local-network">Finding Hosts on the Local Network</h2>
+<p>Often it is handy to be able to find hosts on the local network. This can be done with <strong>arp-scan</strong> if it has been installed. It can be installed with:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ sudo apt-get install arp-scan
+<span class="ex">Reading</span> package lists... Done
+<span class="ex">Building</span> dependency tree       
+<span class="ex">Reading</span> state information... Done
+<span class="ex">The</span> following additional packages will be installed:
+[<span class="ex">snip</span>]</code></pre></div>
+<p>Once installed it can be used as shown in this example:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ sudo arp-scan --localnet
+<span class="ex">Interface</span>: wlan0, datalink type: EN10MB (Ethernet)
+<span class="ex">Starting</span> arp-scan 1.9 with 256 hosts (http://www.nta-monitor.com/tools/arp-scan/)
+<span class="ex">192.168.0.1</span> 50:39:55:5c:8a:43   Cisco SPVTG
+<span class="ex">192.168.0.12</span>    00:90:a9:35:e4:75   WESTERN DIGITAL
+<span class="ex">192.168.0.18</span>    b4:99:ba:c3:40:e8   Hewlett-Packard Company
+<span class="ex">192.168.0.19</span>    00:23:4e:8b:47:d5   Hon Hai Precision Ind. Co., Ltd.
+<span class="ex">192.168.0.13</span>    d0:87:e2:c9:88:5c   (Unknown)
+
+<span class="ex">5</span> packets received by filter, 0 packets dropped by kernel
+<span class="ex">Ending</span> arp-scan 1.9: 256 hosts scanned in 3.018 seconds (84.82 hosts/sec)<span class="bu">.</span> <span class="ex">5</span> responded</code></pre></div>
 </body>
 </html>
