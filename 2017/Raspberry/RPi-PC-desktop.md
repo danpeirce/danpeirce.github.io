@@ -254,3 +254,30 @@ Starting arp-scan 1.9 with 256 hosts (http://www.nta-monitor.com/tools/arp-scan/
 5 packets received by filter, 0 packets dropped by kernel
 Ending arp-scan 1.9: 256 hosts scanned in 3.018 seconds (84.82 hosts/sec). 5 responded
 ~~~~
+
+Is a vendor comes up as unknow one can search google based on the first three hex numbers 
+in the MAC hardware address. In the previous example I did a google search for **d0:87:e2 Vendor**
+and found the following page:
+
+* [https://www.adminsub.net/mac-address-finder/d087e2](https://www.adminsub.net/mac-address-finder/d087e2)
+
+That page shows:
+
+~~~~
+Search results for "d087e2"
+MAC     Vendor
+D087E2  Samsung Electronics Co.,Ltd
+
+About MAC addressMAC address - Media Access Control address. 
+MAC addresses - hardware addresses that uniquely identifies each 
+node of a network. It is assigned by the vendor or manufacturer 
+and saved to the device memory. 
+According to the OSI model it is a second-level address. In 
+IEEE 802 networks Data Link Control (DLC) layer is divided into two 
+sub-layers: 
+    the Logical Link Control (LLC) layer 
+    and the Media Access Control (MAC) layer. 
+First 3 bytes (or 24 bits) of MAC addresses are known as the 
+Organizationally Unique Identifier (OUI) and usually encodes the 
+manufacturer.
+~~~~
