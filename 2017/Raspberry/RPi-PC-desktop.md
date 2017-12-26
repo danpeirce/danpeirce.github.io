@@ -126,6 +126,11 @@ in another blog post in December.
 I will be watching for the new blog post. Raspberry Pi 3s are available from many sources. Raspberry Pi Zeros 
 are not as easy to get in quantity or in a reasonable time. 
 
+I have not yet seen the promised Blog entry on the PiServer but there is an introduction given if one 
+goes to **Preferences -> PiServer**
+
+![](pref-piserver.png) 
+
 # Running a Raspberry 3 Headless
 
 In some cases it would be advantageous to run a Raspberry Pi 3 headless. That is without a monitor, keyboard and mouse.
