@@ -286,3 +286,10 @@ First 3 bytes (or 24 bits) of MAC addresses are known as the
 Organizationally Unique Identifier (OUI) and usually encodes the 
 manufacturer.
 ~~~~
+
+# Booting Raspberry Pi 3 from USB Device 
+
+It is possible to enable a USB bootmode on the Raspberry Pi 3.
+
+* [https://www.raspberrypi.org/blog/pi-3-booting-part-i-usb-mass-storage-boot/](https://www.raspberrypi.org/blog/pi-3-booting-part-i-usb-mass-storage-boot/)
+* [https://www.raspberrypi.org/documentation/hardware/raspberrypi/bootmodes/msd.md](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bootmodes/msd.md)
