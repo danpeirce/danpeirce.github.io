@@ -70,7 +70,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#finding-hosts-on-the-local-network">Finding Hosts on the Local Network</a></li>
 </ul></li>
-<li><a href="#raspbian-light-on-a-raspberry-pi-b">Raspbian Light on a Raspberry Pi B</a></li>
+<li><a href="#raspbian-light-on-a-raspberry-pi-b">Raspbian Light on a Raspberry Pi B</a><ul>
+<li><a href="#rpi-b-headless">RPi B Headless</a></li>
+</ul></li>
 <li><a href="#booting-raspberry-pi-3-from-usb-device">Booting Raspberry Pi 3 from USB Device</a></li>
 </ul>
 </nav>
@@ -243,6 +245,7 @@ manufacturer.</code></pre>
 <li>Used Rufus in windows 7 to copy image file to 8 GB SD card (DD option -- defaults otherwise). Note that the original Raspberry Pi B used a SD card rather than a microSD.</li>
 <li>Had keyboard and TV connected to RPi B for first boot. The RPi automatically expanded the image to fill the full space available on the SD card. Logged in and ran <a href="https://www.raspberrypi.org/documentation/configuration/raspi-config.md">raspi-config</a>.</li>
 </ol>
+<h2 id="rpi-b-headless">RPi B Headless</h2>
 <p>After the initial set-up was complete I ran the RPi B headless. On windows one can use PuTTY to obtain a secure shell. I find it more convenient to boot a netbook with a Debian Stretch USB boot.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ sudo arp-scan --localnet
 <span class="ex">Interface</span>: wlan0, datalink type: EN10MB (Ethernet)

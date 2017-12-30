@@ -302,6 +302,8 @@ it with the new Raspbian Stretch Light.
    expanded the image to fill the full space available on the SD card. Logged in
    and ran [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md). 
 
+## RPi B Headless
+
 After the initial set-up was complete I ran the RPi B headless. On windows one can use
 PuTTY to obtain a secure shell. I find it more convenient to boot a netbook with a Debian 
 Stretch USB boot.  
