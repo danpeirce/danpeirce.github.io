@@ -304,6 +304,8 @@ it with the new Raspbian Stretch Light.
 
 ## RPi B Headless
 
+### SSH
+
 After the initial set-up was complete I ran the RPi B headless. On windows one can use
 PuTTY to obtain a secure shell. I find it more convenient to boot a netbook with a Debian 
 Stretch USB boot.  
@@ -339,6 +341,30 @@ permitted by applicable law.
 Last login: Sat Dec 30 00:55:16 2017 from 192.168.0.15
 pi@electron1:~ $ 
 
+~~~~
+
+### sftp
+
+An example of transphering a file with sftp.
+
+~~~~bash
+pi@proton:~ $ sftp pi@electron1.local
+pi@electron1.local's password: 
+Connected to electron1.local.
+sftp> ls
+sftp> lls
+2017-12-26-010425_1024x600_scrot.png  Documents		   Public
+2017-12-29-160212_1024x600_scrot.png  Downloads		   python_games
+arp-scan-before.txt		      gparted-resized.png  Templates
+arp-scan-rpi.txt		      Music		   Videos
+danpeirce.github.io		      Pictures
+Desktop				      pref-piserver.png
+sftp> put arp-scan-rpi.txt
+Uploading arp-scan-rpi.txt to /home/pi/arp-scan-rpi.txt
+arp-scan-rpi.txt                              100%  499     5.7KB/s   00:00    
+sftp> ls
+arp-scan-rpi.txt    
+sftp> 
 ~~~~
 
 # Booting Raspberry Pi 3 from USB Device 

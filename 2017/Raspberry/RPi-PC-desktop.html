@@ -71,7 +71,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#finding-hosts-on-the-local-network">Finding Hosts on the Local Network</a></li>
 </ul></li>
 <li><a href="#raspbian-light-on-a-raspberry-pi-b">Raspbian Light on a Raspberry Pi B</a><ul>
-<li><a href="#rpi-b-headless">RPi B Headless</a></li>
+<li><a href="#rpi-b-headless">RPi B Headless</a><ul>
+<li><a href="#ssh">SSH</a></li>
+<li><a href="#sftp">sftp</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#booting-raspberry-pi-3-from-usb-device">Booting Raspberry Pi 3 from USB Device</a></li>
 </ul>
@@ -246,6 +249,7 @@ manufacturer.</code></pre>
 <li>Had keyboard and TV connected to RPi B for first boot. The RPi automatically expanded the image to fill the full space available on the SD card. Logged in and ran <a href="https://www.raspberrypi.org/documentation/configuration/raspi-config.md">raspi-config</a>.</li>
 </ol>
 <h2 id="rpi-b-headless">RPi B Headless</h2>
+<h3 id="ssh">SSH</h3>
 <p>After the initial set-up was complete I ran the RPi B headless. On windows one can use PuTTY to obtain a secure shell. I find it more convenient to boot a netbook with a Debian Stretch USB boot.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ sudo arp-scan --localnet
 <span class="ex">Interface</span>: wlan0, datalink type: EN10MB (Ethernet)
@@ -276,6 +280,25 @@ manufacturer.</code></pre>
 <span class="ex">permitted</span> by applicable law.
 <span class="ex">Last</span> login: Sat Dec 30 00:55:16 2017 from 192.168.0.15
 <span class="ex">pi@electron1</span>:~ $ </code></pre></div>
+<h3 id="sftp">sftp</h3>
+<p>An example of transphering a file with sftp.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ sftp pi@electron1.local
+<span class="ex">pi@electron1.local</span><span class="st">&#39;s password: </span>
+<span class="st">Connected to electron1.local.</span>
+<span class="st">sftp&gt; ls</span>
+<span class="st">sftp&gt; lls</span>
+<span class="st">2017-12-26-010425_1024x600_scrot.png  Documents        Public</span>
+<span class="st">2017-12-29-160212_1024x600_scrot.png  Downloads        python_games</span>
+<span class="st">arp-scan-before.txt           gparted-resized.png  Templates</span>
+<span class="st">arp-scan-rpi.txt              Music        Videos</span>
+<span class="st">danpeirce.github.io           Pictures</span>
+<span class="st">Desktop                   pref-piserver.png</span>
+<span class="st">sftp&gt; put arp-scan-rpi.txt</span>
+<span class="st">Uploading arp-scan-rpi.txt to /home/pi/arp-scan-rpi.txt</span>
+<span class="st">arp-scan-rpi.txt                              100%  499     5.7KB/s   00:00    </span>
+<span class="st">sftp&gt; ls</span>
+<span class="st">arp-scan-rpi.txt    </span>
+<span class="st">sftp&gt; </span></code></pre></div>
 <h1 id="booting-raspberry-pi-3-from-usb-device">Booting Raspberry Pi 3 from USB Device</h1>
 <p>It is possible to enable a USB bootmode on the Raspberry Pi 3.</p>
 <ul>
