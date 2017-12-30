@@ -287,7 +287,7 @@ Organizationally Unique Identifier (OUI) and usually encodes the
 manufacturer.
 ~~~~
 
-# Raspbian Light on a Raspberry Pi B Original
+# Raspbian Light on a Raspberry Pi B
 
 I still have a Original Rasperry Pi B from 2012 and thought I would try 
 it with the new Raspbian Stretch Light.
