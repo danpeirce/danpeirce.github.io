@@ -287,6 +287,58 @@ Organizationally Unique Identifier (OUI) and usually encodes the
 manufacturer.
 ~~~~
 
+# Raspbian Light on a Raspberry Pi B Original
+
+I still have a Original Rasperry Pi B from 2012 and thought I would try 
+it with the new Raspbian Stretch Light.
+
+1. Downloaded Raspbian Light image in 7zip file from 
+   [https://www.raspberrypi.org/downloads/raspbian/](https://www.raspberrypi.org/downloads/raspbian/)
+2. Unzipped file with 7zip in windows.
+3. Used Rufus in windows 7 to copy image file to 8 GB SD card (DD option -- 
+   defaults otherwise). Note that
+   the original Raspberry Pi B used a SD card rather than a microSD. 
+4. Had keyboard and TV connected to RPi B for first boot. The RPi automatically 
+   expanded the image to fill the full space available on the SD card. Logged in
+   and ran [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md). 
+
+After the initial set-up was complete I ran the RPi B headless. On windows one can use
+PuTTY to obtain a secure shell. I find it more convenient to boot a netbook with a Debian 
+Stretch USB boot.  
+
+~~~~bash
+pi@proton:~ $ sudo arp-scan --localnet
+Interface: wlan0, datalink type: EN10MB (Ethernet)
+Starting arp-scan 1.9 with 256 hosts (http://www.nta-monitor.com/tools/arp-scan/)
+192.168.0.1	50:39:55:5c:8a:43	Cisco SPVTG
+192.168.0.18	b4:99:ba:c3:40:e8	Hewlett-Packard Company
+192.168.0.23	b8:27:eb:fc:b8:d1	Raspberry Pi Foundation
+  [snip]
+
+8 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.9: 256 hosts scanned in 4.085 seconds (62.67 hosts/sec). 8 responded
+pi@proton:~ $ avahi-resolve -a  192.168.0.23
+192.168.0.23	electron1.local
+pi@proton:~ $ 
+pi@proton:~ $ ssh pi@electron1.local
+The authenticity of host 'electron1.local (192.168.0.23)' can't be established.
+ECDSA key fingerprint is SHA256:U3yD1M6/l1AniyZmnytlmMwcS0k03fJzQnU5VAE/N+k.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'electron1.local,192.168.0.23' (ECDSA) to the list of known hosts.
+pi@electron1.local's password: 
+Linux electron1 4.9.59+ #1047 Sun Oct 29 11:47:10 GMT 2017 armv6l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Dec 30 00:55:16 2017 from 192.168.0.15
+pi@electron1:~ $ 
+
+~~~~
+
 # Booting Raspberry Pi 3 from USB Device 
 
 It is possible to enable a USB bootmode on the Raspberry Pi 3.
