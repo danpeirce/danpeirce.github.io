@@ -165,10 +165,10 @@ Debian Stretch.
  
 See example session below. 
 
-* The first time one logs on a computer remotly the user is given an alert.
+* The first time one logs on a computer remotely the user is given an alert.
   The purpose is to let the user know if the OS has not seen that remote machine
   before. If this is a surprise there may be a hacker luring on the network.
-* the last line indicates one os now controlling the other machine from the
+* the last line indicates one is now controlling the other machine from the
   command line. Note the user host name of the prompt has changed. 
 
 ~~~~bash
@@ -260,7 +260,7 @@ Starting arp-scan 1.9 with 256 hosts (http://www.nta-monitor.com/tools/arp-scan/
 Ending arp-scan 1.9: 256 hosts scanned in 3.018 seconds (84.82 hosts/sec). 5 responded
 ~~~~
 
-Is a vendor comes up as unknow one can search google based on the first three hex numbers 
+Is a vendor comes up as unknown one can search google based on the first three hex numbers 
 in the MAC hardware address. In the previous example I did a google search for **d0:87:e2 Vendor**
 and found the following page:
 
@@ -345,7 +345,7 @@ pi@electron1:~ $
 
 ### sftp
 
-An example of transphering a file with sftp.
+An example of transferring a file with sftp.
 
 ~~~~bash
 pi@proton:~ $ sftp pi@electron1.local
