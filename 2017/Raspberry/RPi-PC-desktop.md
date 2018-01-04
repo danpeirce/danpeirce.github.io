@@ -287,6 +287,75 @@ Organizationally Unique Identifier (OUI) and usually encodes the
 manufacturer.
 ~~~~
 
+# Raspberry Pi 3 Headless and Lab PC Using Debian Desktop
+
+Today I set up a Raspberry Pi 3 headless using a lab computer. In the lab there are 
+a limited number of ethernet drops available so I: 
+
+* **connected the Raspberry Pi 3 to the eth0 port of the lab PC.** 
+* The **KPU network is connected to eth1 of the PC.**
+
+1. The latest version of Raspbian Stretch was copied onto the microSD card 
+    using **Rufus**.
+2. An empty file was copied onto the boot partition called **ssh**
+3. I booted the PC using the Debian Stretch bootable Flash drive
+4. I used a terminal on the PC to get a secure shell into the Raspberry Pi.
+5. **raspi-config** was run on the command line to configure the Raspberry Pi.
+   This included changing the name of the Raspberry pi to physics3 and the password
+   of the **pi** login to physics. VNC was also enabled.
+6. On the host PC a VNC client was [downloaded](https://www.realvnc.com/en/connect/download/vnc/) and installed. 
+
+![](download-vnc-viewer.png)
+
+7. Right click on the downloaded deb file and choose install.
+8. The new VNC client can now be found in the start menu under Internet
+
+![](vnc-window.png)
+
+After step 8. one has a desktop from the Raspberry Pi 3 in a window on the PC.
+Connections between the Raspberry Pi and the Debian PC are working and the Debian PC
+can connect to the internet but other steps are needed to also get the Raspberry Pi to 
+connect to the internet by having packets forwarded by PC (internet sharing).
+
+## Internet Sharing from the PC to the Raspberry Pi
+
+This is needed in the case where the Raspberry Pi is connected directly to 
+a PC via a crossover ethernet cable and the PC has a second ethernet port connecting it to 
+the internet.
+
+In a terminal on the PC one can use a secure shell into the Raspberry Pi and tell the Raspberry Pi
+the **route to the gateway**.
+
+~~~~bash
+pi@proton:~ $ ssh physics3.local
+pi@physics3.local's password: 
+Linux physics3 4.9.59-v7+ #1047 SMP Sun Oct 29 12:19:23 GMT 2017 armv7l
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Jan  4 09:47:58 2018 from 169.254.180.28
+pi@physics3:~ $ sudo ip route add default via 169.254.180.28
+pi@physics3:~ $ 
+~~~~
+
+Then in a second terminal in the PC one can setup ip forwarding and a 
+MASQUERADE to eth1 (assuming the Raspberry Pi is on eth0).
+
+~~~~bash
+pi@proton:~ $ avahi-resolve -n4 physics3.local
+physics3.local	169.254.4.162
+pi@proton:~ $ sudo sysctl net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
+pi@proton:~ $ sudo iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
+~~~~
+
+Once this has been done the Raspberry Pi will be able to find hosts on the 
+internet.
+
 # Raspbian Light on a Raspberry Pi B
 
 I still have a Original Rasperry Pi B from 2012 and thought I would try 
@@ -301,6 +370,7 @@ it with the new Raspbian Stretch Light.
 4. Had keyboard and TV connected to RPi B for first boot. The RPi automatically 
    expanded the image to fill the full space available on the SD card. Logged in
    and ran [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md). 
+
 
 ## RPi B Headless
 

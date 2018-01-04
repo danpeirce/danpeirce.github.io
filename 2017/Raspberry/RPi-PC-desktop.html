@@ -70,6 +70,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#finding-hosts-on-the-local-network">Finding Hosts on the Local Network</a></li>
 </ul></li>
+<li><a href="#raspberry-pi-3-headless-and-lab-pc-using-debian-desktop">Raspberry Pi 3 Headless and Lab PC Using Debian Desktop</a><ul>
+<li><a href="#internet-sharing-from-the-pc-to-the-raspberry-pi">Internet Sharing from the PC to the Raspberry Pi</a></li>
+</ul></li>
 <li><a href="#raspbian-light-on-a-raspberry-pi-b">Raspbian Light on a Raspberry Pi B</a><ul>
 <li><a href="#rpi-b-headless">RPi B Headless</a><ul>
 <li><a href="#ssh">SSH</a></li>
@@ -240,6 +243,54 @@ sub-layers:
 First 3 bytes (or 24 bits) of MAC addresses are known as the 
 Organizationally Unique Identifier (OUI) and usually encodes the 
 manufacturer.</code></pre>
+<h1 id="raspberry-pi-3-headless-and-lab-pc-using-debian-desktop">Raspberry Pi 3 Headless and Lab PC Using Debian Desktop</h1>
+<p>Today I set up a Raspberry Pi 3 headless using a lab computer. In the lab there are a limited number of ethernet drops available so I:</p>
+<ul>
+<li><strong>connected the Raspberry Pi 3 to the eth0 port of the lab PC.</strong></li>
+<li>The <strong>KPU network is connected to eth1 of the PC.</strong></li>
+</ul>
+<ol type="1">
+<li>The latest version of Raspbian Stretch was copied onto the microSD card using <strong>Rufus</strong>.</li>
+<li>An empty file was copied onto the boot partition called <strong>ssh</strong></li>
+<li>I booted the PC using the Debian Stretch bootable Flash drive</li>
+<li>I used a terminal on the PC to get a secure shell into the Raspberry Pi.</li>
+<li><strong>raspi-config</strong> was run on the command line to configure the Raspberry Pi. This included changing the name of the Raspberry pi to physics3 and the password of the <strong>pi</strong> login to physics. VNC was also enabled.</li>
+<li>On the host PC a VNC client was <a href="https://www.realvnc.com/en/connect/download/vnc/">downloaded</a> and installed.</li>
+</ol>
+<figure>
+<img src="download-vnc-viewer.png" />
+</figure>
+<ol start="7" type="1">
+<li>Right click on the downloaded deb file and choose install.</li>
+<li>The new VNC client can now be found in the start menu under Internet</li>
+</ol>
+<figure>
+<img src="vnc-window.png" />
+</figure>
+<p>After step 8. one has a desktop from the Raspberry Pi 3 in a window on the PC. Connections between the Raspberry Pi and the Debian PC are working and the Debian PC can connect to the internet but other steps are needed to also get the Raspberry Pi to connect to the internet by having packets forwarded by PC (internet sharing).</p>
+<h2 id="internet-sharing-from-the-pc-to-the-raspberry-pi">Internet Sharing from the PC to the Raspberry Pi</h2>
+<p>This is needed in the case where the Raspberry Pi is connected directly to a PC via a crossover ethernet cable and the PC has a second ethernet port connecting it to the internet.</p>
+<p>In a terminal on the PC one can use a secure shell into the Raspberry Pi and tell the Raspberry Pi the <strong>route to the gateway</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ ssh physics3.local
+<span class="ex">pi@physics3.local</span><span class="st">&#39;s password: </span>
+<span class="st">Linux physics3 4.9.59-v7+ #1047 SMP Sun Oct 29 12:19:23 GMT 2017 armv7l</span>
+
+<span class="st">The programs included with the Debian GNU/Linux system are free software;</span>
+<span class="st">the exact distribution terms for each program are described in the</span>
+<span class="st">individual files in /usr/share/doc/*/copyright.</span>
+
+<span class="st">Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent</span>
+<span class="st">permitted by applicable law.</span>
+<span class="st">Last login: Thu Jan  4 09:47:58 2018 from 169.254.180.28</span>
+<span class="st">pi@physics3:~ $ sudo ip route add default via 169.254.180.28</span>
+<span class="st">pi@physics3:~ $ </span></code></pre></div>
+<p>Then in a second terminal in the PC one can setup ip forwarding and a MASQUERADE to eth1 (assuming the Raspberry Pi is on eth0).</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">pi@proton</span>:~ $ avahi-resolve -n4 physics3.local
+<span class="ex">physics3.local</span>  169.254.4.162
+<span class="ex">pi@proton</span>:~ $ sudo sysctl net.ipv4.ip_forward=1
+<span class="ex">net.ipv4.ip_forward</span> = 1
+<span class="ex">pi@proton</span>:~ $ sudo iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE</code></pre></div>
+<p>Once this has been done the Raspberry Pi will be able to find hosts on the internet.</p>
 <h1 id="raspbian-light-on-a-raspberry-pi-b">Raspbian Light on a Raspberry Pi B</h1>
 <p>I still have a Original Rasperry Pi B from 2012 and thought I would try it with the new Raspbian Stretch Light.</p>
 <ol type="1">
