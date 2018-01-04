@@ -356,6 +356,8 @@ pi@proton:~ $ sudo iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
 Once this has been done the Raspberry Pi will be able to find hosts on the 
 internet.
 
+![](vnc-and-ssh.png)
+
 # Raspbian Light on a Raspberry Pi B
 
 I still have a Original Rasperry Pi B from 2012 and thought I would try 
