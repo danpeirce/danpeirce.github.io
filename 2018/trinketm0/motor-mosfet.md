@@ -16,12 +16,47 @@ Simple example of Trinket M0 controlling a motor with a power MOSFET. The trinke
 * [https://www.digikey.ca/product-detail/en/IRLD024PBF/IRLD024PBF-ND/812492](https://www.digikey.ca/product-detail/en/IRLD024PBF/IRLD024PBF-ND/812492)
 
 The MOSFET is used in much the same way as in [https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit](https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit)
-exceot the gate circuit is replaced with a Trinket M0 and D2 is not required.
+exceot the gate circuit is replaced with a Trinket M0 and D2 is not required. In this case 
+
+* DIO pin 1 of the Trinket M0 is connected directly to the MOSFET gate. 
+* The MOSFET source is connected to ground
+* A bench power supply is used to power the Motor/Drain circuit.
+    * The positive terminal of the bench power supply will go to one terminal of the motor
+	* The other terminal of the motor is connected to the MOSFET drain
+	* A reversed biased diode wired across the motor terminals provides a short path for any negative 
+	  voltage spikes from the motor.
+* USB from a computer will power the Trinket M0
+* A connection from the Trinket M0 / USB ground is connected to the bench power supply negative terminal 
+  in only one polace to avoid ground loops (the ground terminal on the power supply is left open). One
+  should take care with the circuit layout to avoid inadvertent resets of the Trinket M0 board that would
+  interfere with proper running of the program.
+
 
 ![](mosfet-pins.png)
 
 ## Trinket M0
 
-see [https://danpeirce.github.io/2017/testTrinketM0/testing.html](https://danpeirce.github.io/2017/testTrinketM0/testing.html)
+Another page lists some significant links for the Trinket M0 and testing that was done in 2017:
 
+* [https://danpeirce.github.io/2017/testTrinketM0/testing.html](https://danpeirce.github.io/2017/testTrinketM0/testing.html)
 
+### CircuitPython Code
+
+Sample CircuitPython 
+[code is provided by Adafruit for blinking an LED](https://learn.adafruit.com/welcome-to-circuitpython/creating-and-editing-code). 
+I have modified the code to cycle a motor on and off continuously.
+
+~~~~python
+import board
+import digitalio
+import time
+ 
+motor = digitalio.DigitalInOut(board.D1)
+motor.direction = digitalio.Direction.OUTPUT
+ 
+while True:
+    motor.value = True
+    time.sleep(0.25)
+    motor.value = False
+    time.sleep(0.5)
+~~~~

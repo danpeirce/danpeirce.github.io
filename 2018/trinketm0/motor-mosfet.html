@@ -12,6 +12,59 @@
       div.line-block{white-space: pre-line;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
+  <style type="text/css">
+div.sourceLine, a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; }
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+div.sourceLine, a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource div.sourceLine, .numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource div.sourceLine::before, .numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; color: #aaaaaa;  padding-left: 4px; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; color: initial; }
+}
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.bn { color: #40a070; } /* BaseN */
+code span.fl { color: #40a070; } /* Float */
+code span.ch { color: #4070a0; } /* Char */
+code span.st { color: #4070a0; } /* String */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.ot { color: #007020; } /* Other */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.fu { color: #06287e; } /* Function */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code span.cn { color: #880000; } /* Constant */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.im { } /* Import */
+code span.va { color: #19177c; } /* Variable */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.op { color: #666666; } /* Operator */
+code span.bu { } /* BuiltIn */
+code span.ex { } /* Extension */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.at { color: #7d9029; } /* Attribute */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
   <link rel="stylesheet" href="../../pandocbd.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
@@ -26,7 +79,9 @@
 <ul>
 <li><a href="#motor-mosfet-and-trinket-m0">Motor MOSFET and Trinket M0</a><ul>
 <li><a href="#power-mosfet">Power MOSFET</a></li>
-<li><a href="#trinket-m0">Trinket M0</a></li>
+<li><a href="#trinket-m0">Trinket M0</a><ul>
+<li><a href="#circuitpython-code">CircuitPython Code</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -40,9 +95,38 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css motor-mosfet.md -o motor-mosf
 <li><a href="http://www.vishay.com/docs/91308/sihld24.pdf" class="uri">http://www.vishay.com/docs/91308/sihld24.pdf</a></li>
 <li><a href="https://www.digikey.ca/product-detail/en/IRLD024PBF/IRLD024PBF-ND/812492" class="uri">https://www.digikey.ca/product-detail/en/IRLD024PBF/IRLD024PBF-ND/812492</a></li>
 </ul>
-<p>The MOSFET is used in much the same way as in <a href="https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit" class="uri">https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit</a> exceot the gate circuit is replaced with a Trinket M0 and D2 is not required.</p>
+<p>The MOSFET is used in much the same way as in <a href="https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit" class="uri">https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit</a> exceot the gate circuit is replaced with a Trinket M0 and D2 is not required. In this case</p>
+<ul>
+<li>DIO pin 1 of the Trinket M0 is connected directly to the MOSFET gate.</li>
+<li>The MOSFET source is connected to ground</li>
+<li>A bench power supply is used to power the Motor/Drain circuit.
+<ul>
+<li>The positive terminal of the bench power supply will go to one terminal of the motor</li>
+<li>The other terminal of the motor is connected to the MOSFET drain</li>
+<li>A reversed biased diode wired across the motor terminals provides a short path for any negative voltage spikes from the motor.</li>
+</ul></li>
+<li>USB from a computer will power the Trinket M0</li>
+<li>A connection from the Trinket M0 / USB ground is connected to the bench power supply negative terminal in only one polace to avoid ground loops (the ground terminal on the power supply is left open). One should take care with the circuit layout to avoid inadvertent resets of the Trinket M0 board that would interfere with proper running of the program.</li>
+</ul>
 <p><img src="mosfet-pins.png" /></p>
 <h2 id="trinket-m0">Trinket M0</h2>
-<p>see <a href="https://danpeirce.github.io/2017/testTrinketM0/testing.html" class="uri">https://danpeirce.github.io/2017/testTrinketM0/testing.html</a></p>
+<p>Another page lists some significant links for the Trinket M0 and testing that was done in 2017:</p>
+<ul>
+<li><a href="https://danpeirce.github.io/2017/testTrinketM0/testing.html" class="uri">https://danpeirce.github.io/2017/testTrinketM0/testing.html</a></li>
+</ul>
+<h3 id="circuitpython-code">CircuitPython Code</h3>
+<p>Sample CircuitPython <a href="https://learn.adafruit.com/welcome-to-circuitpython/creating-and-editing-code">code is provided by Adafruit for blinking an LED</a>. I have modified the code to cycle a motor on and off continuously.</p>
+<pre class="sourceCode python" id="cb1"><code class="sourceCode python"><div class="sourceLine" id="cb1-1" data-line-number="1"><span class="im">import</span> board</div>
+<div class="sourceLine" id="cb1-2" data-line-number="2"><span class="im">import</span> digitalio</div>
+<div class="sourceLine" id="cb1-3" data-line-number="3"><span class="im">import</span> time</div>
+<div class="sourceLine" id="cb1-4" data-line-number="4"> </div>
+<div class="sourceLine" id="cb1-5" data-line-number="5">motor <span class="op">=</span> digitalio.DigitalInOut(board.D1)</div>
+<div class="sourceLine" id="cb1-6" data-line-number="6">motor.direction <span class="op">=</span> digitalio.Direction.OUTPUT</div>
+<div class="sourceLine" id="cb1-7" data-line-number="7"> </div>
+<div class="sourceLine" id="cb1-8" data-line-number="8"><span class="cf">while</span> <span class="va">True</span>:</div>
+<div class="sourceLine" id="cb1-9" data-line-number="9">    motor.value <span class="op">=</span> <span class="va">True</span></div>
+<div class="sourceLine" id="cb1-10" data-line-number="10">    time.sleep(<span class="fl">0.25</span>)</div>
+<div class="sourceLine" id="cb1-11" data-line-number="11">    motor.value <span class="op">=</span> <span class="va">False</span></div>
+<div class="sourceLine" id="cb1-12" data-line-number="12">    time.sleep(<span class="fl">0.5</span>)</div></code></pre>
 </body>
 </html>
