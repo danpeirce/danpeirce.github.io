@@ -1,11 +1,12 @@
 % Motor MOSFET and Trinket M0
 % by Dan Peirce B.Sc.
+% 
+
+# Motor MOSFET and Trinket M0
 
 <!---
 use pandoc -s --toc -t html5 -c ../../pandocbd.css motor-mosfet.md -o motor-mosfet.html
 -->
-
-# Motor MOSFET and Trinket M0
 
 Simple example of Trinket M0 controlling a motor with a power MOSFET. The trinket M0 digital output can only source 7 mA. The motot in this example has a stall current of 500 mA so the trinket M0 can not drive the motor directly.
 
