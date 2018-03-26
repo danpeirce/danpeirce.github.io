@@ -1,6 +1,6 @@
 # Trinket M0 MOSFET and Motor
 
-Simple example of Trinket M0 controlling a motor with a power MOSFET.
+Simple example of Trinket M0 controlling a motor with a power MOSFET. The trinket M0 digital output can only sourse 7 mA. The motot in this example has a stall current of 500 mA so the trinket M0 can not drive the motor directly.
 
 ## Power MOSFET
 
