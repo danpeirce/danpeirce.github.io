@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="by Dan Peirce B.Sc." />
+  <title>Motor MOSFET and Trinket M0</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../../pandocbd.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Motor MOSFET and Trinket M0</h1>
+<p class="author">by Dan Peirce B.Sc.</p>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#motor-mosfet-and-trinket-m0">Motor MOSFET and Trinket M0</a><ul>
+<li><a href="#power-mosfet">Power MOSFET</a></li>
+<li><a href="#trinket-m0">Trinket M0</a></li>
+</ul></li>
+</ul>
+</nav>
+<!---
+use pandoc -s --toc -t html5 -c ../../pandocbd.css motor-mosfet.md -o motor-mosfet.html
+-->
+<h1 id="motor-mosfet-and-trinket-m0">Motor MOSFET and Trinket M0</h1>
+<p>Simple example of Trinket M0 controlling a motor with a power MOSFET. The trinket M0 digital output can only source 7 mA. The motot in this example has a stall current of 500 mA so the trinket M0 can not drive the motor directly.</p>
+<h2 id="power-mosfet">Power MOSFET</h2>
+<ul>
+<li><a href="http://www.vishay.com/docs/91308/sihld24.pdf" class="uri">http://www.vishay.com/docs/91308/sihld24.pdf</a></li>
+<li><a href="https://www.digikey.ca/product-detail/en/IRLD024PBF/IRLD024PBF-ND/812492" class="uri">https://www.digikey.ca/product-detail/en/IRLD024PBF/IRLD024PBF-ND/812492</a></li>
+</ul>
+<p>The MOSFET is used in much the same way as in <a href="https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit" class="uri">https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit</a> exceot the gate circuit is replaced with a Trinket M0 and D2 is not required.</p>
+<p><img src="mosfet-pins.png" /></p>
+<h2 id="trinket-m0">Trinket M0</h2>
+<p>see <a href="https://danpeirce.github.io/2017/testTrinketM0/testing.html" class="uri">https://danpeirce.github.io/2017/testTrinketM0/testing.html</a></p>
+</body>
+</html>
