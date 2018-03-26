@@ -1,48 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="pandoc">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <meta name="author" content="Dan Peirce B.Sc.">
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Dan Peirce B.Sc." />
   <title>Notes on Trinket M0</title>
-  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+div.sourceLine, a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; }
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+div.sourceLine, a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource div.sourceLine, .numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource div.sourceLine::before, .numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; color: #aaaaaa;  padding-left: 4px; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; color: initial; }
+}
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.bn { color: #40a070; } /* BaseN */
+code span.fl { color: #40a070; } /* Float */
+code span.ch { color: #4070a0; } /* Char */
+code span.st { color: #4070a0; } /* String */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.ot { color: #007020; } /* Other */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.fu { color: #06287e; } /* Function */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code span.cn { color: #880000; } /* Constant */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.im { } /* Import */
+code span.va { color: #19177c; } /* Variable */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.op { color: #666666; } /* Operator */
+code span.bu { } /* BuiltIn */
+code span.ex { } /* Extension */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.at { color: #7d9029; } /* Attribute */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
   <link rel="stylesheet" href="../../pandocbd.css">
   <!--[if lt IE 9]>
@@ -67,7 +88,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#arduino-ide">Arduino IDE</a><ul>
 <li><a href="#trinket-m0-as-a-usb-to-serial-adaptor">Trinket M0 as a USB to Serial Adaptor</a></li>
 </ul></li>
-<li><a href="#more-to-come...">More to come...</a></li>
+<li><a href="#more-to-come">More to come…</a></li>
 </ul>
 </nav>
 <!---
@@ -75,9 +96,7 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css testing.md -o testing.html
 -->
 <h1 id="notes-on-testing-trinket-m0">Notes on Testing Trinket M0</h1>
 <p>Obtained first Trinket M0 on September 29, 2017. Initially impressed by low price combined with numerous features. Initially it occurred to me that it could do the job of a USB to serial to adaptor at a lower cost and much more besides.</p>
-<figure>
-<img src="trinketm0-close.jpg" />
-</figure>
+<p><img src="trinketm0-close.jpg" /></p>
 <h2 id="helpful-links">Helpful Links</h2>
 <ul>
 <li><a href="https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all" class="uri">https://learn.adafruit.com/adafruit-trinket-m0-circuitpython-arduino?view=all</a>
@@ -99,9 +118,7 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css testing.md -o testing.html
 </ul>
 <h3 id="usb-device-properties-windows-7">USB Device Properties windows 7</h3>
 <p>Note virtual com port number may be different an different systems.</p>
-<figure>
-<img src="TrinketM0-properties.png" />
-</figure>
+<p><img src="TrinketM0-properties.png" /></p>
 <h2 id="using-as-shipped-with-demo-program">Using as Shipped with Demo Program</h2>
 <p>The Trinket M0 ships loaded with <strong>CiruitPython</strong> loaded and a demo program preloaded. The demo does a number of things. My initial focus was the voltage out on the analog output pin.</p>
 <p>The demo program loaded generates a slow ramp voltage. The output starts close to zero and ramps up close to 3.3 volts. The program does other things too. For example if one connects the analog out pin to analog in 0 the board will read the current voltage and send it via USB virtual com port to a Putty session.</p>
@@ -131,46 +148,45 @@ D0: 0.06
 D0: 0.07</code></pre>
 <h2 id="alternate-example-program-that-generates-a-ramp">Alternate example Program that Generates a Ramp</h2>
 <p>The documentation provided for the Trinket M0 contains a small CircuitPython program specifically made for creating a ramp without other features. Note that the preloaded demo program also does several other things. This program is specific to creating a signal out. This runs faster. It could be sped up more by incrementing <strong>i</strong> in larger steps (instead of 64 steps a smaller number of steps could be used).</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Trinket IO demo - analog output</span>
-
-<span class="im">from</span> analogio <span class="im">import</span> AnalogOut
-<span class="im">import</span> board
-<span class="im">import</span> time
-    
-aout <span class="op">=</span> AnalogOut(board.D1)
-
-<span class="cf">while</span> <span class="va">True</span>:
-  <span class="co"># Count up from 0 to 65535, with 64 increment</span>
-  <span class="co"># which ends up corresponding to the DAC&#39;s 10-bit range</span>
-  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span> (<span class="dv">0</span>,<span class="dv">65535</span>,<span class="dv">64</span>):
-    aout.value <span class="op">=</span> i</code></pre></div>
+<pre class="sourceCode python" id="cb2"><code class="sourceCode python"><div class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Trinket IO demo - analog output</span></div>
+<div class="sourceLine" id="cb2-2" data-line-number="2"></div>
+<div class="sourceLine" id="cb2-3" data-line-number="3"><span class="im">from</span> analogio <span class="im">import</span> AnalogOut</div>
+<div class="sourceLine" id="cb2-4" data-line-number="4"><span class="im">import</span> board</div>
+<div class="sourceLine" id="cb2-5" data-line-number="5"><span class="im">import</span> time</div>
+<div class="sourceLine" id="cb2-6" data-line-number="6">    </div>
+<div class="sourceLine" id="cb2-7" data-line-number="7">aout <span class="op">=</span> AnalogOut(board.D1)</div>
+<div class="sourceLine" id="cb2-8" data-line-number="8"></div>
+<div class="sourceLine" id="cb2-9" data-line-number="9"><span class="cf">while</span> <span class="va">True</span>:</div>
+<div class="sourceLine" id="cb2-10" data-line-number="10">  <span class="co"># Count up from 0 to 65535, with 64 increment</span></div>
+<div class="sourceLine" id="cb2-11" data-line-number="11">  <span class="co"># which ends up corresponding to the DAC&#39;s 10-bit range</span></div>
+<div class="sourceLine" id="cb2-12" data-line-number="12">  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span> (<span class="dv">0</span>,<span class="dv">65535</span>,<span class="dv">64</span>):</div>
+<div class="sourceLine" id="cb2-13" data-line-number="13">    aout.value <span class="op">=</span> i</div></code></pre>
 <p>There is an example scope waveform in the Adafruit documentation.</p>
-<figure>
-<img src="adafruit_products_gemma_TEK0002.jpg" />
-</figure>
+<p><img src="adafruit_products_gemma_TEK0002.jpg" /></p>
 <h1 id="arduino-ide">Arduino IDE</h1>
 <p>The Arduino IDE is not necessarily a good programming teaching tool but for some applications it has advantages. For example it occurred to me that the Trinket M0 could act as an USB to serial adaptor at a lower cost than a FTDI based adaptor. A simple efficient Arduino example for that application exists and works with the Trinket M0. This was not true of the CircuitPython interpreter. See <a href="https://forums.adafruit.com/viewtopic.php?f=52&amp;t=124495" class="uri">https://forums.adafruit.com/viewtopic.php?f=52&amp;t=124495</a></p>
 <h2 id="trinket-m0-as-a-usb-to-serial-adaptor">Trinket M0 as a USB to Serial Adaptor</h2>
 <p>There is an existing example program shown here. The only change I made was to the bit rate.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> setup() {
-  Serial.begin(<span class="dv">115200</span>);
-  Serial1.begin(<span class="dv">115200</span>);
-}
- 
-<span class="dt">void</span> loop() {
-  <span class="cf">if</span> (Serial.available()) {      <span class="co">// If anything comes in Serial (USB),</span>
-    Serial1.write(Serial.read());   <span class="co">// read it and send it out Serial1 (pins 0 &amp; 1)</span>
-  }
- 
-  <span class="cf">if</span> (Serial1.available()) {     <span class="co">// If anything comes in Serial1 (pins 0 &amp; 1)</span>
-    Serial.write(Serial1.read());   <span class="co">// read it and send it out Serial (USB)</span>
-  }
-}</code></pre></div>
+<pre class="sourceCode cpp" id="cb3"><code class="sourceCode cpp"><div class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">void</span> setup() {</div>
+<div class="sourceLine" id="cb3-2" data-line-number="2">  Serial.begin(<span class="dv">115200</span>);</div>
+<div class="sourceLine" id="cb3-3" data-line-number="3">  Serial1.begin(<span class="dv">115200</span>);</div>
+<div class="sourceLine" id="cb3-4" data-line-number="4">}</div>
+<div class="sourceLine" id="cb3-5" data-line-number="5"> </div>
+<div class="sourceLine" id="cb3-6" data-line-number="6"><span class="dt">void</span> loop() {</div>
+<div class="sourceLine" id="cb3-7" data-line-number="7">  <span class="cf">if</span> (Serial.available()) {      <span class="co">// If anything comes in Serial (USB),</span></div>
+<div class="sourceLine" id="cb3-8" data-line-number="8">    Serial1.write(Serial.read());   <span class="co">// read it and send it out Serial1 (pins 0 &amp; 1)</span></div>
+<div class="sourceLine" id="cb3-9" data-line-number="9">  }</div>
+<div class="sourceLine" id="cb3-10" data-line-number="10"> </div>
+<div class="sourceLine" id="cb3-11" data-line-number="11">  <span class="cf">if</span> (Serial1.available()) {     <span class="co">// If anything comes in Serial1 (pins 0 &amp; 1)</span></div>
+<div class="sourceLine" id="cb3-12" data-line-number="12">    Serial.write(Serial1.read());   <span class="co">// read it and send it out Serial (USB)</span></div>
+<div class="sourceLine" id="cb3-13" data-line-number="13">  }</div>
+<div class="sourceLine" id="cb3-14" data-line-number="14">}</div></code></pre>
 <p>We may use the Trinket as an adapter between the Pic serial and PC USB port.</p>
 <figure>
 <img style="width: 7in;" src="trinketm0-passthrough.jpg" />
 </figure>
-<h1 id="more-to-come...">More to come...</h1>
+<h1 id="more-to-come">More to come…</h1>
+<p>see <a href="../../2018/trinketm0/motor-mosfet.html">2018/trinketm0/motor-mosfet.html</a></p>
 <p>These notes are still in a very early stage. More to come as time permits.</p>
 </body>
 </html>

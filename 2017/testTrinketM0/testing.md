@@ -136,4 +136,6 @@ We may use the Trinket as an adapter between the Pic serial and PC USB port.
 
 # More to come...
 
+see [2018/trinketm0/motor-mosfet.html](../../2018/trinketm0/motor-mosfet.html)
+
 These notes are still in a very early stage. More to come as time permits.
