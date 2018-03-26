@@ -10,6 +10,8 @@ Simple example of Trinket M0 controlling a motor with a power MOSFET.
 The MOSFET is used in much the same way as in [https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit](https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit)
 exceot the gat circuit is replaced with a Trinket M0 and D2 is not required.
 
+![](mosfet-pins.png)
+
 ## Trinket M0
 
 see [https://danpeirce.github.io/2017/testTrinketM0/testing.html](https://danpeirce.github.io/2017/testTrinketM0/testing.html)
