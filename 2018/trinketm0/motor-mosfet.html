@@ -83,6 +83,7 @@ code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Infor
 </ul></li>
 <li><a href="#trinket-m0">Trinket M0</a><ul>
 <li><a href="#circuitpython-code">CircuitPython Code</a></li>
+<li><a href="#mu-editor">Mu Editor</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -108,7 +109,10 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css motor-mosfet.md -o motor-mosf
 <li>The positive terminal of the bench power supply will go to one terminal of the motor</li>
 <li>The other terminal of the motor is connected to the MOSFET drain</li>
 <li>A reversed biased diode wired across the motor terminals provides a short path for any negative voltage spikes from the motor.</li>
-<li>The current limit on the power supply is set it 1 amp.</li>
+<li>The current limit on the power supply is set it 1 amp.
+<ul>
+<li>Warning: If the current limit is set too low the Tricket M0 will not be able to contend with the noise on the ground line and will have random resets causing reset issues, output glitches and USB enumeration issues.</li>
+</ul></li>
 </ul></li>
 <li>USB from a computer will power the Trinket M0</li>
 <li>A connection from the Trinket M0 / USB ground is connected to the bench power supply negative terminal in only one polace to avoid ground loops (the ground terminal on the power supply is left open). One should take care with the circuit layout to avoid inadvertent resets of the Trinket M0 board that would interfere with proper running of the program.</li>
@@ -133,5 +137,11 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css motor-mosfet.md -o motor-mosf
 <div class="sourceLine" id="cb1-10" data-line-number="10">    time.sleep(<span class="fl">0.25</span>)</div>
 <div class="sourceLine" id="cb1-11" data-line-number="11">    motor.value <span class="op">=</span> <span class="va">False</span></div>
 <div class="sourceLine" id="cb1-12" data-line-number="12">    time.sleep(<span class="fl">0.5</span>)</div></code></pre>
+<h3 id="mu-editor">Mu Editor</h3>
+<p>Adafruit recommends using the Mu editor.</p>
+<ul>
+<li><a href="https://learn.adafruit.com/welcome-to-circuitpython/installing-mu-editor" class="uri">https://learn.adafruit.com/welcome-to-circuitpython/installing-mu-editor</a></li>
+</ul>
+<p><img src="mu-editor.png" /></p>
 </body>
 </html>

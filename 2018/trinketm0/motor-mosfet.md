@@ -31,7 +31,11 @@ except the gate circuit is replaced with a Trinket M0 and D2 is not required.
 	* The other terminal of the motor is connected to the MOSFET drain
 	* A reversed biased diode wired across the motor terminals provides a short path for any negative 
 	  voltage spikes from the motor.
-	* The current limit on the power supply is set it 1 amp.
+	* The current limit on the power supply is set it 1 amp. 
+	    * Warning: If the current limit is set too low the Tricket M0 will not be able to contend with the 
+		           noise on the ground line and will have random resets causing reset issues, output glitches 
+				   and USB enumeration issues.
+	
 * USB from a computer will power the Trinket M0
 * A connection from the Trinket M0 / USB ground is connected to the bench power supply negative terminal 
   in only one polace to avoid ground loops (the ground terminal on the power supply is left open). One
@@ -67,3 +71,11 @@ while True:
     motor.value = False
     time.sleep(0.5)
 ~~~~
+
+### Mu Editor
+
+Adafruit recommends using the Mu editor.
+
+* [https://learn.adafruit.com/welcome-to-circuitpython/installing-mu-editor](https://learn.adafruit.com/welcome-to-circuitpython/installing-mu-editor)
+
+![](mu-editor.png)
