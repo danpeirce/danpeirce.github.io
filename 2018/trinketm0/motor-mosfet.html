@@ -78,7 +78,9 @@ code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Infor
 <nav id="TOC">
 <ul>
 <li><a href="#motor-mosfet-and-trinket-m0">Motor MOSFET and Trinket M0</a><ul>
-<li><a href="#power-mosfet">Power MOSFET</a></li>
+<li><a href="#power-mosfet">Power MOSFET</a><ul>
+<li><a href="#the-circuit">The Circuit</a></li>
+</ul></li>
 <li><a href="#trinket-m0">Trinket M0</a><ul>
 <li><a href="#circuitpython-code">CircuitPython Code</a></li>
 </ul></li>
@@ -89,13 +91,15 @@ code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Infor
 <!---
 use pandoc -s --toc -t html5 -c ../../pandocbd.css motor-mosfet.md -o motor-mosfet.html
 -->
-<p>Simple example of Trinket M0 controlling a motor with a power MOSFET. The trinket M0 digital output can only source 7 mA. The motot in this example has a stall current of 500 mA so the trinket M0 can not drive the motor directly.</p>
+<p>Simple example of Trinket M0 controlling a motor with a power MOSFET. The trinket M0 digital output can only source 7 mA. The motor in this example has a stall current of 500 mA so the trinket M0 can not drive the motor directly.</p>
 <h2 id="power-mosfet">Power MOSFET</h2>
 <ul>
 <li><a href="http://www.vishay.com/docs/91308/sihld24.pdf" class="uri">http://www.vishay.com/docs/91308/sihld24.pdf</a></li>
 <li><a href="https://www.digikey.ca/product-detail/en/IRLD024PBF/IRLD024PBF-ND/812492" class="uri">https://www.digikey.ca/product-detail/en/IRLD024PBF/IRLD024PBF-ND/812492</a></li>
 </ul>
-<p>The MOSFET is used in much the same way as in <a href="https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit" class="uri">https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit</a> exceot the gate circuit is replaced with a Trinket M0 and D2 is not required. In this case</p>
+<h3 id="the-circuit">The Circuit</h3>
+<p>The MOSFET is used in much the same way as in <a href="https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit" class="uri">https://danpeirce.github.io/remote-actuator.html#schematic-of-circuit</a> except the gate circuit is replaced with a Trinket M0 and D2 is not required.</p>
+<p><img src="cct-motor-mosfet.jpg" /></p>
 <ul>
 <li>DIO pin 1 of the Trinket M0 is connected directly to the MOSFET gate.</li>
 <li>The MOSFET source is connected to ground</li>
@@ -104,6 +108,7 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css motor-mosfet.md -o motor-mosf
 <li>The positive terminal of the bench power supply will go to one terminal of the motor</li>
 <li>The other terminal of the motor is connected to the MOSFET drain</li>
 <li>A reversed biased diode wired across the motor terminals provides a short path for any negative voltage spikes from the motor.</li>
+<li>The current limit on the power supply is set it 1 amp.</li>
 </ul></li>
 <li>USB from a computer will power the Trinket M0</li>
 <li>A connection from the Trinket M0 / USB ground is connected to the bench power supply negative terminal in only one polace to avoid ground loops (the ground terminal on the power supply is left open). One should take care with the circuit layout to avoid inadvertent resets of the Trinket M0 board that would interfere with proper running of the program.</li>
