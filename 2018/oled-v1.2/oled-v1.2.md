@@ -50,9 +50,9 @@ No ext4ernal pull ups were added!
 	
 5. A new example became available in the IDE
 
-![](adafruit_ssd1306_example.png)
+    ![](adafruit_ssd1306_example.png)
 
-The example was copied and pasted into a new sketch.
+    The example was copied and pasted into a new sketch.
 
 6. Initially the sketch would not compile. The compiler error indicated that a variable needed to be a constant to be placed in program memory.
    The following line was changed (line appears just after macro definitions near beginning of file).
@@ -60,14 +60,21 @@ The example was copied and pasted into a new sketch.
     * *was        --* static unsigned char PROGMEM logo16_glcd_bmp[] =
 	* *changed to --* static const unsigned char PROGMEM logo16_glcd_bmp[] =
 	
-   Once the **const** reserved word was added the sketch compiled.
+    Once the **const** reserved word was added the sketch compiled.
    
-7. The display still remained blank. An I2C scanner Arduino sketch was used to find that the board responded to the address **0x3C**. A line in the example was changed 
+7. The display still remained blank. An I<sup>2</sup>C scanner Arduino sketch was used to find that the board responded to the address **0x3C**. A line in the example was changed 
    to include this address. Once this was done the display showed the example code.
 	
     * display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 
 8. Other modifications were made as I was interested in concentrating on the display of text rather than graphics.
+
+### Demo Video
+
+This was recorded at the end of the day in a rush. I expect to get a better quality video soon -- it looks better
+in person. Also I will do some testing of different text sizes.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nSQjUFMyLBs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### Code Used on First Day	
 

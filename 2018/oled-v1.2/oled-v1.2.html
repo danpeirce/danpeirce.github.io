@@ -60,6 +60,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#initial-testing-of-display">Initial Testing of Display</a><ul>
 <li><a href="#wiring">Wiring</a></li>
 <li><a href="#arduino-ide-setup">Arduino IDE Setup</a></li>
+<li><a href="#demo-video">Demo Video</a></li>
 <li><a href="#code-used-on-first-day">Code Used on First Day</a></li>
 </ul></li>
 </ul></li>
@@ -101,27 +102,27 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <pre><code>  C:\Users\Student\Downloads\EF03155-Paintcode\Code\Arduino_UNO_DEOM\Hardware I2C\Adafruit_GFX
   C:\Users\Student\Downloads\EF03155-Paintcode\Code\Arduino_UNO_DEOM\Hardware I2C\Adafruit_SSD1306</code></pre>
 <ol start="5" type="1">
-<li>A new example became available in the IDE</li>
-</ol>
+<li><p>A new example became available in the IDE</p>
 <figure>
 <img src="adafruit_ssd1306_example.png" />
 </figure>
-<p>The example was copied and pasted into a new sketch.</p>
-<ol start="6" type="1">
+<p>The example was copied and pasted into a new sketch.</p></li>
 <li><p>Initially the sketch would not compile. The compiler error indicated that a variable needed to be a constant to be placed in program memory. The following line was changed (line appears just after macro definitions near beginning of file).</p>
 <ul>
 <li><em>was --</em> static unsigned char PROGMEM logo16_glcd_bmp[] =</li>
 <li><em>changed to --</em> static const unsigned char PROGMEM logo16_glcd_bmp[] =</li>
-</ul></li>
-</ol>
-<p>Once the <strong>const</strong> reserved word was added the sketch compiled.</p>
-<ol start="7" type="1">
-<li><p>The display still remained blank. An I2C scanner Arduino sketch was used to find that the board responded to the address <strong>0x3C</strong>. A line in the example was changed to include this address. Once this was done the display showed the example code.</p>
+</ul>
+<p>Once the <strong>const</strong> reserved word was added the sketch compiled.</p></li>
+<li><p>The display still remained blank. An I<sup>2</sup>C scanner Arduino sketch was used to find that the board responded to the address <strong>0x3C</strong>. A line in the example was changed to include this address. Once this was done the display showed the example code.</p>
 <ul>
 <li>display.begin(SSD1306_SWITCHCAPVCC, 0x3C);</li>
 </ul></li>
 <li><p>Other modifications were made as I was interested in concentrating on the display of text rather than graphics.</p></li>
 </ol>
+<h3 id="demo-video">Demo Video</h3>
+<p>This was recorded at the end of the day in a rush. I expect to get a better quality video soon -- it looks better in person. Also I will do some testing of different text sizes.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nSQjUFMyLBs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
 <h3 id="code-used-on-first-day">Code Used on First Day</h3>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">/*********************************************************************</span>
 <span class="co">This is an example for our Monochrome OLEDs based on SSD1306 drivers</span>
