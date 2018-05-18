@@ -41,10 +41,12 @@ No ext4ernal pull ups were added!
     * [https://www.elecfreaks.com/estore/iic-oled.html](https://www.elecfreaks.com/estore/iic-oled.html)
 
 3. Extracted files/folders from zip file.
-4. Two folders containing files were copied to c:/arduino/libraries
+4. Two folders containing files were copied to c:\\arduino\\libraries
 
-    * C:\Users\Student\Downloads\EF03155-Paintcode\Code\Arduino_UNO_DEOM\Hardware I2C\Adafruit_GFX
-	* C:\Users\Student\Downloads\EF03155-Paintcode4\Code\Arduino_UNO_DEOM\Hardware I2C\Adafruit_SSD1306
+~~~~
+  C:\Users\Student\Downloads\EF03155-Paintcode\Code\Arduino_UNO_DEOM\Hardware I2C\Adafruit_GFX
+  C:\Users\Student\Downloads\EF03155-Paintcode\Code\Arduino_UNO_DEOM\Hardware I2C\Adafruit_SSD1306
+~~~~
 	
 5. A new example became available in the IDE
 
@@ -55,12 +57,12 @@ The example was copied and pasted into a new sketch.
 6. Initially the sketch would not compile. The compiler error indicated that a variable needed to be a constant to be placed in program memory.
    The following line was changed (line appears just after macro definitions near beginning of file).
    
-    * static unsigned char PROGMEM logo16_glcd_bmp[] =
-	* static const unsigned char PROGMEM logo16_glcd_bmp[] =
+    * *was        --* static unsigned char PROGMEM logo16_glcd_bmp[] =
+	* *changed to --* static const unsigned char PROGMEM logo16_glcd_bmp[] =
 	
    Once the **const** reserved word was added the sketch compiled.
    
-7. The display still remained blank. An I2C scanner Arduino sketch was used to find that the board responsed to the address **0x3C**. A line in the example was changed 
+7. The display still remained blank. An I2C scanner Arduino sketch was used to find that the board responded to the address **0x3C**. A line in the example was changed 
    to include this address. Once this was done the display showed the example code.
 	
     * display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -131,7 +133,7 @@ void setup()   {
   Serial.begin(9600);
 
   // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x64)
   // init done
   
   display.display(); // show splashscreen

@@ -1,69 +1,48 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="Notes by Dan Peirce B.Sc." />
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Notes by Dan Peirce B.Sc.">
   <title>IIC OLED V1.2</title>
+  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      div.line-block{white-space: pre-line;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <style type="text/css">
-div.sourceLine, a.sourceLine { display: inline-block; min-height: 1.25em; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; }
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-div.sourceLine, a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource div.sourceLine, .numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource div.sourceLine::before, .numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em; }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; color: #aaaaaa;  padding-left: 4px; }
-@media screen {
-a.sourceLine::before { text-decoration: underline; color: initial; }
-}
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.bn { color: #40a070; } /* BaseN */
-code span.fl { color: #40a070; } /* Float */
-code span.ch { color: #4070a0; } /* Char */
-code span.st { color: #4070a0; } /* String */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.ot { color: #007020; } /* Other */
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.fu { color: #06287e; } /* Function */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code span.cn { color: #880000; } /* Constant */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.im { } /* Import */
-code span.va { color: #19177c; } /* Variable */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.op { color: #666666; } /* Operator */
-code span.bu { } /* BuiltIn */
-code span.ex { } /* Extension */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.at { color: #7d9029; } /* Attribute */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
   <link rel="stylesheet" href="../../pandocbd.css">
   <!--[if lt IE 9]>
@@ -94,7 +73,7 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <ul>
 <li><a href="https://www.robotshop.com/ca/en/iic-128-64-oled-module-blue.html" class="uri">https://www.robotshop.com/ca/en/iic-128-64-oled-module-blue.html</a></li>
 </ul>
-<p>Unfortunately they don’t provide up to date information for the OLED module. The datasheet is for a previous version. The Libraries supplied for the display are written by Adafruit.</p>
+<p>Unfortunately they don't provide up to date information for the OLED module. The datasheet is for a previous version. The Libraries supplied for the display are written by Adafruit.</p>
 <h2 id="initial-testing-of-display">Initial Testing of Display</h2>
 <h3 id="wiring">Wiring</h3>
 <p>Initial testing was done with an Ardunino Uno as this was what was shown in the datasheet. Note the silkscreen on the v1.2 board does not match the v1.1 datasheet with regard to the pinout. I followed the silkscreen.</p>
@@ -117,384 +96,388 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <li><a href="https://www.elecfreaks.com/estore/iic-oled.html" class="uri">https://www.elecfreaks.com/estore/iic-oled.html</a></li>
 </ul></li>
 <li>Extracted files/folders from zip file.</li>
-<li><p>Two folders containing files were copied to c:/arduino/libraries</p>
-<ul>
-<li>C:03155-Paintcode_UNO_DEOMI2C_GFX</li>
-<li>C:03155-Paintcode4_UNO_DEOMI2C_SSD1306</li>
-</ul></li>
-<li><p>A new example became available in the IDE</p></li>
+<li><p>Two folders containing files were copied to c:\arduino\libraries</p></li>
 </ol>
-<p><img src="adafruit_ssd1306_example.png" /></p>
+<pre><code>  C:\Users\Student\Downloads\EF03155-Paintcode\Code\Arduino_UNO_DEOM\Hardware I2C\Adafruit_GFX
+  C:\Users\Student\Downloads\EF03155-Paintcode\Code\Arduino_UNO_DEOM\Hardware I2C\Adafruit_SSD1306</code></pre>
+<ol start="5" type="1">
+<li>A new example became available in the IDE</li>
+</ol>
+<figure>
+<img src="adafruit_ssd1306_example.png" />
+</figure>
 <p>The example was copied and pasted into a new sketch.</p>
 <ol start="6" type="1">
 <li><p>Initially the sketch would not compile. The compiler error indicated that a variable needed to be a constant to be placed in program memory. The following line was changed (line appears just after macro definitions near beginning of file).</p>
 <ul>
-<li>static unsigned char PROGMEM logo16_glcd_bmp[] =</li>
-<li>static const unsigned char PROGMEM logo16_glcd_bmp[] =</li>
-</ul>
-<p>Once the <strong>const</strong> reserved word was added the sketch compiled.</p></li>
-<li><p>The display still remained blank. An I2C scanner Arduino sketch was used to find that the board responsed to the address <strong>0x3C</strong>. A line in the example was changed to include this address. Once this was done the display showed the example code.</p>
+<li><em>was --</em> static unsigned char PROGMEM logo16_glcd_bmp[] =</li>
+<li><em>changed to --</em> static const unsigned char PROGMEM logo16_glcd_bmp[] =</li>
+</ul></li>
+</ol>
+<p>Once the <strong>const</strong> reserved word was added the sketch compiled.</p>
+<ol start="7" type="1">
+<li><p>The display still remained blank. An I2C scanner Arduino sketch was used to find that the board responded to the address <strong>0x3C</strong>. A line in the example was changed to include this address. Once this was done the display showed the example code.</p>
 <ul>
 <li>display.begin(SSD1306_SWITCHCAPVCC, 0x3C);</li>
 </ul></li>
 <li><p>Other modifications were made as I was interested in concentrating on the display of text rather than graphics.</p></li>
 </ol>
 <h3 id="code-used-on-first-day">Code Used on First Day</h3>
-<pre class="sourceCode cpp" id="cb1"><code class="sourceCode cpp"><div class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">/*********************************************************************</span></div>
-<div class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">This is an example for our Monochrome OLEDs based on SSD1306 drivers</span></div>
-<div class="sourceLine" id="cb1-3" data-line-number="3"></div>
-<div class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">  Pick one up today in the adafruit shop!</span></div>
-<div class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">  ------&gt; http://www.adafruit.com/category/63_98</span></div>
-<div class="sourceLine" id="cb1-6" data-line-number="6"></div>
-<div class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">This example is for a 128x64 size display using I2C to communicate</span></div>
-<div class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">3 pins are required to interface (2 I2C and one reset)</span></div>
-<div class="sourceLine" id="cb1-9" data-line-number="9"></div>
-<div class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">Adafruit invests time and resources providing this open source code, </span></div>
-<div class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">please support Adafruit and open-source hardware by purchasing </span></div>
-<div class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">products from Adafruit!</span></div>
-<div class="sourceLine" id="cb1-13" data-line-number="13"></div>
-<div class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">Written by Limor Fried/Ladyada  for Adafruit Industries.  </span></div>
-<div class="sourceLine" id="cb1-15" data-line-number="15"><span class="co">BSD license, check license.txt for more information</span></div>
-<div class="sourceLine" id="cb1-16" data-line-number="16"><span class="co">All text above, and the splash screen must be included in any redistribution</span></div>
-<div class="sourceLine" id="cb1-17" data-line-number="17"></div>
-<div class="sourceLine" id="cb1-18" data-line-number="18"><span class="co">-modified by Dan Peirce B.Sc. May 2018</span></div>
-<div class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">*********************************************************************/</span></div>
-<div class="sourceLine" id="cb1-20" data-line-number="20"></div>
-<div class="sourceLine" id="cb1-21" data-line-number="21"><span class="pp">#include </span><span class="im">&lt;Wire.h&gt;</span></div>
-<div class="sourceLine" id="cb1-22" data-line-number="22"><span class="pp">#include </span><span class="im">&lt;Adafruit_GFX.h&gt;</span></div>
-<div class="sourceLine" id="cb1-23" data-line-number="23"><span class="pp">#include </span><span class="im">&lt;Adafruit_SSD1306.h&gt;</span></div>
-<div class="sourceLine" id="cb1-24" data-line-number="24"></div>
-<div class="sourceLine" id="cb1-25" data-line-number="25"><span class="pp">#define OLED_RESET 4</span></div>
-<div class="sourceLine" id="cb1-26" data-line-number="26">Adafruit_SSD1306 display(OLED_RESET);</div>
-<div class="sourceLine" id="cb1-27" data-line-number="27"></div>
-<div class="sourceLine" id="cb1-28" data-line-number="28"><span class="pp">#define NUMFLAKES 10</span></div>
-<div class="sourceLine" id="cb1-29" data-line-number="29"><span class="pp">#define XPOS 0</span></div>
-<div class="sourceLine" id="cb1-30" data-line-number="30"><span class="pp">#define YPOS 1</span></div>
-<div class="sourceLine" id="cb1-31" data-line-number="31"><span class="pp">#define DELTAY 2</span></div>
-<div class="sourceLine" id="cb1-32" data-line-number="32"></div>
-<div class="sourceLine" id="cb1-33" data-line-number="33"></div>
-<div class="sourceLine" id="cb1-34" data-line-number="34"><span class="pp">#define LOGO16_GLCD_HEIGHT 16 </span></div>
-<div class="sourceLine" id="cb1-35" data-line-number="35"><span class="pp">#define LOGO16_GLCD_WIDTH  16 </span></div>
-<div class="sourceLine" id="cb1-36" data-line-number="36"><span class="at">static</span> <span class="at">const</span> <span class="dt">unsigned</span> <span class="dt">char</span> PROGMEM logo16_glcd_bmp[] =</div>
-<div class="sourceLine" id="cb1-37" data-line-number="37">{ B00000000, B11000000,</div>
-<div class="sourceLine" id="cb1-38" data-line-number="38">  B00000001, B11000000,</div>
-<div class="sourceLine" id="cb1-39" data-line-number="39">  B00000001, B11000000,</div>
-<div class="sourceLine" id="cb1-40" data-line-number="40">  B00000011, B11100000,</div>
-<div class="sourceLine" id="cb1-41" data-line-number="41">  B11110011, B11100000,</div>
-<div class="sourceLine" id="cb1-42" data-line-number="42">  B11111110, B11111000,</div>
-<div class="sourceLine" id="cb1-43" data-line-number="43">  B01111110, B11111111,</div>
-<div class="sourceLine" id="cb1-44" data-line-number="44">  B00110011, B10011111,</div>
-<div class="sourceLine" id="cb1-45" data-line-number="45">  B00011111, B11111100,</div>
-<div class="sourceLine" id="cb1-46" data-line-number="46">  B00001101, B01110000,</div>
-<div class="sourceLine" id="cb1-47" data-line-number="47">  B00011011, B10100000,</div>
-<div class="sourceLine" id="cb1-48" data-line-number="48">  B00111111, B11100000,</div>
-<div class="sourceLine" id="cb1-49" data-line-number="49">  B00111111, B11110000,</div>
-<div class="sourceLine" id="cb1-50" data-line-number="50">  B01111100, B11110000,</div>
-<div class="sourceLine" id="cb1-51" data-line-number="51">  B01110000, B01110000,</div>
-<div class="sourceLine" id="cb1-52" data-line-number="52">  B00000000, B00110000 };</div>
-<div class="sourceLine" id="cb1-53" data-line-number="53"></div>
-<div class="sourceLine" id="cb1-54" data-line-number="54"><span class="pp">#if (SSD1306_LCDHEIGHT != 64)</span></div>
-<div class="sourceLine" id="cb1-55" data-line-number="55"><span class="pp">#error(&quot;Height incorrect, please fix Adafruit_SSD1306.h!&quot;);</span></div>
-<div class="sourceLine" id="cb1-56" data-line-number="56"><span class="pp">#endif</span></div>
-<div class="sourceLine" id="cb1-57" data-line-number="57"></div>
-<div class="sourceLine" id="cb1-58" data-line-number="58"><span class="dt">void</span> setup()   {                </div>
-<div class="sourceLine" id="cb1-59" data-line-number="59">  Serial.begin(<span class="dv">9600</span>);</div>
-<div class="sourceLine" id="cb1-60" data-line-number="60"></div>
-<div class="sourceLine" id="cb1-61" data-line-number="61">  <span class="co">// by default, we&#39;ll generate the high voltage from the 3.3v line internally! (neat!)</span></div>
-<div class="sourceLine" id="cb1-62" data-line-number="62">  display.begin(SSD1306_SWITCHCAPVCC, <span class="bn">0x3C</span>);  <span class="co">// initialize with the I2C addr 0x3D (for the 128x64)</span></div>
-<div class="sourceLine" id="cb1-63" data-line-number="63">  <span class="co">// init done</span></div>
-<div class="sourceLine" id="cb1-64" data-line-number="64">  </div>
-<div class="sourceLine" id="cb1-65" data-line-number="65">  display.display(); <span class="co">// show splashscreen</span></div>
-<div class="sourceLine" id="cb1-66" data-line-number="66">  delay(<span class="dv">2000</span>);</div>
-<div class="sourceLine" id="cb1-67" data-line-number="67">  display.clearDisplay();   <span class="co">// clears the screen and buffer</span></div>
-<div class="sourceLine" id="cb1-68" data-line-number="68"></div>
-<div class="sourceLine" id="cb1-69" data-line-number="69">  <span class="co">// draw a single pixel</span></div>
-<div class="sourceLine" id="cb1-70" data-line-number="70">  display.drawPixel(<span class="dv">10</span>, <span class="dv">10</span>, WHITE);</div>
-<div class="sourceLine" id="cb1-71" data-line-number="71">  display.display();</div>
-<div class="sourceLine" id="cb1-72" data-line-number="72">  delay(<span class="dv">2000</span>);</div>
-<div class="sourceLine" id="cb1-73" data-line-number="73">  display.clearDisplay();</div>
-<div class="sourceLine" id="cb1-74" data-line-number="74"></div>
-<div class="sourceLine" id="cb1-75" data-line-number="75">  <span class="co">// draw many lines</span></div>
-<div class="sourceLine" id="cb1-76" data-line-number="76">  <span class="co">//testdrawline();</span></div>
-<div class="sourceLine" id="cb1-77" data-line-number="77">  <span class="co">//display.display();</span></div>
-<div class="sourceLine" id="cb1-78" data-line-number="78">  <span class="co">//delay(2000);</span></div>
-<div class="sourceLine" id="cb1-79" data-line-number="79">  <span class="co">//display.clearDisplay();</span></div>
-<div class="sourceLine" id="cb1-80" data-line-number="80"></div>
-<div class="sourceLine" id="cb1-81" data-line-number="81">  <span class="co">// draw rectangles</span></div>
-<div class="sourceLine" id="cb1-82" data-line-number="82">  <span class="co">//testdrawrect();</span></div>
-<div class="sourceLine" id="cb1-83" data-line-number="83">  <span class="co">//display.display();</span></div>
-<div class="sourceLine" id="cb1-84" data-line-number="84">  <span class="co">//delay(2000);</span></div>
-<div class="sourceLine" id="cb1-85" data-line-number="85">  <span class="co">//display.clearDisplay();</span></div>
-<div class="sourceLine" id="cb1-86" data-line-number="86"></div>
-<div class="sourceLine" id="cb1-87" data-line-number="87">  <span class="co">// draw multiple rectangles</span></div>
-<div class="sourceLine" id="cb1-88" data-line-number="88">  <span class="co">//testfillrect();</span></div>
-<div class="sourceLine" id="cb1-89" data-line-number="89">  <span class="co">//display.display();</span></div>
-<div class="sourceLine" id="cb1-90" data-line-number="90">  <span class="co">//delay(2000);</span></div>
-<div class="sourceLine" id="cb1-91" data-line-number="91">  <span class="co">//display.clearDisplay();</span></div>
-<div class="sourceLine" id="cb1-92" data-line-number="92"></div>
-<div class="sourceLine" id="cb1-93" data-line-number="93">  <span class="co">// draw mulitple circles</span></div>
-<div class="sourceLine" id="cb1-94" data-line-number="94">  <span class="co">//testdrawcircle();</span></div>
-<div class="sourceLine" id="cb1-95" data-line-number="95">  <span class="co">//display.display();</span></div>
-<div class="sourceLine" id="cb1-96" data-line-number="96">  <span class="co">//delay(2000);</span></div>
-<div class="sourceLine" id="cb1-97" data-line-number="97">  <span class="co">//display.clearDisplay();</span></div>
-<div class="sourceLine" id="cb1-98" data-line-number="98"></div>
-<div class="sourceLine" id="cb1-99" data-line-number="99">  <span class="co">// draw a white circle, 10 pixel radius</span></div>
-<div class="sourceLine" id="cb1-100" data-line-number="100">  <span class="co">//display.fillCircle(display.width()/2, display.height()/2, 10, WHITE);</span></div>
-<div class="sourceLine" id="cb1-101" data-line-number="101">  <span class="co">//display.display();</span></div>
-<div class="sourceLine" id="cb1-102" data-line-number="102">  <span class="co">//delay(2000);</span></div>
-<div class="sourceLine" id="cb1-103" data-line-number="103">  <span class="co">//display.clearDisplay();</span></div>
-<div class="sourceLine" id="cb1-104" data-line-number="104"></div>
-<div class="sourceLine" id="cb1-105" data-line-number="105">  <span class="co">//testdrawroundrect();</span></div>
-<div class="sourceLine" id="cb1-106" data-line-number="106">  <span class="co">//delay(2000);</span></div>
-<div class="sourceLine" id="cb1-107" data-line-number="107">  <span class="co">//display.clearDisplay();</span></div>
-<div class="sourceLine" id="cb1-108" data-line-number="108"></div>
-<div class="sourceLine" id="cb1-109" data-line-number="109">  <span class="co">//testfillroundrect();</span></div>
-<div class="sourceLine" id="cb1-110" data-line-number="110">  <span class="co">//delay(2000);</span></div>
-<div class="sourceLine" id="cb1-111" data-line-number="111">  <span class="co">//display.clearDisplay();</span></div>
-<div class="sourceLine" id="cb1-112" data-line-number="112"></div>
-<div class="sourceLine" id="cb1-113" data-line-number="113">  <span class="co">//testdrawtriangle();</span></div>
-<div class="sourceLine" id="cb1-114" data-line-number="114">  <span class="co">//delay(2000);</span></div>
-<div class="sourceLine" id="cb1-115" data-line-number="115">  <span class="co">//display.clearDisplay();</span></div>
-<div class="sourceLine" id="cb1-116" data-line-number="116">   </div>
-<div class="sourceLine" id="cb1-117" data-line-number="117">  <span class="co">//testfilltriangle();</span></div>
-<div class="sourceLine" id="cb1-118" data-line-number="118">  <span class="co">//delay(2000);</span></div>
-<div class="sourceLine" id="cb1-119" data-line-number="119">  <span class="co">//display.clearDisplay();</span></div>
-<div class="sourceLine" id="cb1-120" data-line-number="120"></div>
-<div class="sourceLine" id="cb1-121" data-line-number="121">  <span class="co">// draw the first ~12 characters in the font</span></div>
-<div class="sourceLine" id="cb1-122" data-line-number="122">  testdrawchar();</div>
-<div class="sourceLine" id="cb1-123" data-line-number="123">  display.display();</div>
-<div class="sourceLine" id="cb1-124" data-line-number="124">  delay(<span class="dv">2000</span>);</div>
-<div class="sourceLine" id="cb1-125" data-line-number="125">  delay(<span class="dv">2000</span>);</div>
-<div class="sourceLine" id="cb1-126" data-line-number="126">  delay(<span class="dv">2000</span>);</div>
-<div class="sourceLine" id="cb1-127" data-line-number="127">  display.clearDisplay();</div>
-<div class="sourceLine" id="cb1-128" data-line-number="128"></div>
-<div class="sourceLine" id="cb1-129" data-line-number="129">  <span class="co">// draw scrolling text</span></div>
-<div class="sourceLine" id="cb1-130" data-line-number="130">  testscrolltext();</div>
-<div class="sourceLine" id="cb1-131" data-line-number="131">  <span class="co">//delay(500);</span></div>
-<div class="sourceLine" id="cb1-132" data-line-number="132">  display.clearDisplay();</div>
-<div class="sourceLine" id="cb1-133" data-line-number="133"></div>
-<div class="sourceLine" id="cb1-134" data-line-number="134">  <span class="co">// text display tests</span></div>
-<div class="sourceLine" id="cb1-135" data-line-number="135">  display.setTextSize(<span class="dv">1</span>);</div>
-<div class="sourceLine" id="cb1-136" data-line-number="136">  display.setTextColor(WHITE);</div>
-<div class="sourceLine" id="cb1-137" data-line-number="137">  display.setCursor(<span class="dv">0</span>,<span class="dv">0</span>);</div>
-<div class="sourceLine" id="cb1-138" data-line-number="138">  display.println(<span class="st">&quot;Hello, world!&quot;</span>);</div>
-<div class="sourceLine" id="cb1-139" data-line-number="139">  <span class="co">//display.setTextColor(BLACK, WHITE); // &#39;inverted&#39; text</span></div>
-<div class="sourceLine" id="cb1-140" data-line-number="140">  display.println(<span class="fl">3.141592</span>);</div>
-<div class="sourceLine" id="cb1-141" data-line-number="141">  display.setTextSize(<span class="dv">2</span>);</div>
-<div class="sourceLine" id="cb1-142" data-line-number="142">  display.setTextColor(WHITE);</div>
-<div class="sourceLine" id="cb1-143" data-line-number="143">  display.print(<span class="st">&quot;0x&quot;</span>); display.println(<span class="bn">0xDEADBEEF</span>, HEX);</div>
-<div class="sourceLine" id="cb1-144" data-line-number="144">  display.display();</div>
-<div class="sourceLine" id="cb1-145" data-line-number="145">  delay(<span class="dv">2000</span>);</div>
-<div class="sourceLine" id="cb1-146" data-line-number="146">  delay(<span class="dv">2000</span>);</div>
-<div class="sourceLine" id="cb1-147" data-line-number="147"></div>
-<div class="sourceLine" id="cb1-148" data-line-number="148">  <span class="co">// miniature bitmap display</span></div>
-<div class="sourceLine" id="cb1-149" data-line-number="149">  display.clearDisplay();</div>
-<div class="sourceLine" id="cb1-150" data-line-number="150">  display.drawBitmap(<span class="dv">30</span>, <span class="dv">16</span>,  logo16_glcd_bmp, <span class="dv">16</span>, <span class="dv">16</span>, <span class="dv">1</span>);</div>
-<div class="sourceLine" id="cb1-151" data-line-number="151">  display.display();</div>
-<div class="sourceLine" id="cb1-152" data-line-number="152"></div>
-<div class="sourceLine" id="cb1-153" data-line-number="153">  <span class="co">// invert the display</span></div>
-<div class="sourceLine" id="cb1-154" data-line-number="154">  delay(<span class="dv">1000</span>);</div>
-<div class="sourceLine" id="cb1-155" data-line-number="155">  display.invertDisplay(<span class="kw">true</span>);</div>
-<div class="sourceLine" id="cb1-156" data-line-number="156">  delay(<span class="dv">1000</span>); </div>
-<div class="sourceLine" id="cb1-157" data-line-number="157">  display.invertDisplay(<span class="kw">false</span>);</div>
-<div class="sourceLine" id="cb1-158" data-line-number="158">  delay(<span class="dv">1000</span>); </div>
-<div class="sourceLine" id="cb1-159" data-line-number="159">  display.clearDisplay();</div>
-<div class="sourceLine" id="cb1-160" data-line-number="160">  display.display();</div>
-<div class="sourceLine" id="cb1-161" data-line-number="161">  <span class="cf">while</span>(<span class="dv">1</span>){};</div>
-<div class="sourceLine" id="cb1-162" data-line-number="162">  <span class="co">// draw a bitmap icon and &#39;animate&#39; movement</span></div>
-<div class="sourceLine" id="cb1-163" data-line-number="163">  testdrawbitmap(logo16_glcd_bmp, LOGO16_GLCD_HEIGHT, LOGO16_GLCD_WIDTH);</div>
-<div class="sourceLine" id="cb1-164" data-line-number="164">}</div>
-<div class="sourceLine" id="cb1-165" data-line-number="165"></div>
-<div class="sourceLine" id="cb1-166" data-line-number="166"></div>
-<div class="sourceLine" id="cb1-167" data-line-number="167"><span class="dt">void</span> loop() {</div>
-<div class="sourceLine" id="cb1-168" data-line-number="168">  </div>
-<div class="sourceLine" id="cb1-169" data-line-number="169">}</div>
-<div class="sourceLine" id="cb1-170" data-line-number="170"></div>
-<div class="sourceLine" id="cb1-171" data-line-number="171"></div>
-<div class="sourceLine" id="cb1-172" data-line-number="172"><span class="dt">void</span> testdrawbitmap(<span class="at">const</span> <span class="dt">uint8_t</span> *bitmap, <span class="dt">uint8_t</span> w, <span class="dt">uint8_t</span> h) {</div>
-<div class="sourceLine" id="cb1-173" data-line-number="173">  <span class="dt">uint8_t</span> icons[NUMFLAKES][<span class="dv">3</span>];</div>
-<div class="sourceLine" id="cb1-174" data-line-number="174">  srandom(<span class="dv">666</span>);     <span class="co">// whatever seed</span></div>
-<div class="sourceLine" id="cb1-175" data-line-number="175"> </div>
-<div class="sourceLine" id="cb1-176" data-line-number="176">  <span class="co">// initialize</span></div>
-<div class="sourceLine" id="cb1-177" data-line-number="177">  <span class="cf">for</span> (<span class="dt">uint8_t</span> f=<span class="dv">0</span>; f&lt; NUMFLAKES; f++) {</div>
-<div class="sourceLine" id="cb1-178" data-line-number="178">    icons[f][XPOS] = random() % display.width();</div>
-<div class="sourceLine" id="cb1-179" data-line-number="179">    icons[f][YPOS] = <span class="dv">0</span>;</div>
-<div class="sourceLine" id="cb1-180" data-line-number="180">    icons[f][DELTAY] = random() % <span class="dv">5</span> + <span class="dv">1</span>;</div>
-<div class="sourceLine" id="cb1-181" data-line-number="181">    </div>
-<div class="sourceLine" id="cb1-182" data-line-number="182">    Serial.print(<span class="st">&quot;x: &quot;</span>);</div>
-<div class="sourceLine" id="cb1-183" data-line-number="183">    Serial.print(icons[f][XPOS], DEC);</div>
-<div class="sourceLine" id="cb1-184" data-line-number="184">    Serial.print(<span class="st">&quot; y: &quot;</span>);</div>
-<div class="sourceLine" id="cb1-185" data-line-number="185">    Serial.print(icons[f][YPOS], DEC);</div>
-<div class="sourceLine" id="cb1-186" data-line-number="186">    Serial.print(<span class="st">&quot; dy: &quot;</span>);</div>
-<div class="sourceLine" id="cb1-187" data-line-number="187">    Serial.println(icons[f][DELTAY], DEC);</div>
-<div class="sourceLine" id="cb1-188" data-line-number="188">  }</div>
-<div class="sourceLine" id="cb1-189" data-line-number="189"></div>
-<div class="sourceLine" id="cb1-190" data-line-number="190">  <span class="cf">while</span> (<span class="dv">1</span>) {</div>
-<div class="sourceLine" id="cb1-191" data-line-number="191">    <span class="co">// draw each icon</span></div>
-<div class="sourceLine" id="cb1-192" data-line-number="192">    <span class="cf">for</span> (<span class="dt">uint8_t</span> f=<span class="dv">0</span>; f&lt; NUMFLAKES; f++) {</div>
-<div class="sourceLine" id="cb1-193" data-line-number="193">      display.drawBitmap(icons[f][XPOS], icons[f][YPOS], logo16_glcd_bmp, w, h, WHITE);</div>
-<div class="sourceLine" id="cb1-194" data-line-number="194">    }</div>
-<div class="sourceLine" id="cb1-195" data-line-number="195">    display.display();</div>
-<div class="sourceLine" id="cb1-196" data-line-number="196">    delay(<span class="dv">200</span>);</div>
-<div class="sourceLine" id="cb1-197" data-line-number="197">    </div>
-<div class="sourceLine" id="cb1-198" data-line-number="198">    <span class="co">// then erase it + move it</span></div>
-<div class="sourceLine" id="cb1-199" data-line-number="199">    <span class="cf">for</span> (<span class="dt">uint8_t</span> f=<span class="dv">0</span>; f&lt; NUMFLAKES; f++) {</div>
-<div class="sourceLine" id="cb1-200" data-line-number="200">      display.drawBitmap(icons[f][XPOS], icons[f][YPOS],  logo16_glcd_bmp, w, h, BLACK);</div>
-<div class="sourceLine" id="cb1-201" data-line-number="201">      <span class="co">// move it</span></div>
-<div class="sourceLine" id="cb1-202" data-line-number="202">      icons[f][YPOS] += icons[f][DELTAY];</div>
-<div class="sourceLine" id="cb1-203" data-line-number="203">      <span class="co">// if its gone, reinit</span></div>
-<div class="sourceLine" id="cb1-204" data-line-number="204">      <span class="cf">if</span> (icons[f][YPOS] &gt; display.height()) {</div>
-<div class="sourceLine" id="cb1-205" data-line-number="205">  icons[f][XPOS] = random() % display.width();</div>
-<div class="sourceLine" id="cb1-206" data-line-number="206">  icons[f][YPOS] = <span class="dv">0</span>;</div>
-<div class="sourceLine" id="cb1-207" data-line-number="207">  icons[f][DELTAY] = random() % <span class="dv">5</span> + <span class="dv">1</span>;</div>
-<div class="sourceLine" id="cb1-208" data-line-number="208">      }</div>
-<div class="sourceLine" id="cb1-209" data-line-number="209">    }</div>
-<div class="sourceLine" id="cb1-210" data-line-number="210">   }</div>
-<div class="sourceLine" id="cb1-211" data-line-number="211">}</div>
-<div class="sourceLine" id="cb1-212" data-line-number="212"></div>
-<div class="sourceLine" id="cb1-213" data-line-number="213"></div>
-<div class="sourceLine" id="cb1-214" data-line-number="214"><span class="dt">void</span> testdrawchar(<span class="dt">void</span>) {</div>
-<div class="sourceLine" id="cb1-215" data-line-number="215">  display.setTextSize(<span class="dv">1</span>);</div>
-<div class="sourceLine" id="cb1-216" data-line-number="216">  display.setTextColor(WHITE);</div>
-<div class="sourceLine" id="cb1-217" data-line-number="217">  display.setCursor(<span class="dv">0</span>,<span class="dv">0</span>);</div>
-<div class="sourceLine" id="cb1-218" data-line-number="218"></div>
-<div class="sourceLine" id="cb1-219" data-line-number="219">  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">0</span>; i &lt; <span class="dv">168</span>; i++) {</div>
-<div class="sourceLine" id="cb1-220" data-line-number="220">    <span class="cf">if</span> (i == <span class="ch">&#39;</span><span class="sc">\n</span><span class="ch">&#39;</span>) <span class="cf">continue</span>;</div>
-<div class="sourceLine" id="cb1-221" data-line-number="221">    display.write(i);</div>
-<div class="sourceLine" id="cb1-222" data-line-number="222">    <span class="cf">if</span> ((i &gt; <span class="dv">0</span>) &amp;&amp; (i % <span class="dv">21</span> == <span class="dv">0</span>))</div>
-<div class="sourceLine" id="cb1-223" data-line-number="223">      display.println();</div>
-<div class="sourceLine" id="cb1-224" data-line-number="224">  }    </div>
-<div class="sourceLine" id="cb1-225" data-line-number="225">  display.display();</div>
-<div class="sourceLine" id="cb1-226" data-line-number="226">}</div>
-<div class="sourceLine" id="cb1-227" data-line-number="227"></div>
-<div class="sourceLine" id="cb1-228" data-line-number="228"><span class="dt">void</span> testdrawcircle(<span class="dt">void</span>) {</div>
-<div class="sourceLine" id="cb1-229" data-line-number="229">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height(); i+=<span class="dv">2</span>) {</div>
-<div class="sourceLine" id="cb1-230" data-line-number="230">    display.drawCircle(display.width()/<span class="dv">2</span>, display.height()/<span class="dv">2</span>, i, WHITE);</div>
-<div class="sourceLine" id="cb1-231" data-line-number="231">    display.display();</div>
-<div class="sourceLine" id="cb1-232" data-line-number="232">  }</div>
-<div class="sourceLine" id="cb1-233" data-line-number="233">}</div>
-<div class="sourceLine" id="cb1-234" data-line-number="234"></div>
-<div class="sourceLine" id="cb1-235" data-line-number="235"><span class="dt">void</span> testfillrect(<span class="dt">void</span>) {</div>
-<div class="sourceLine" id="cb1-236" data-line-number="236">  <span class="dt">uint8_t</span> color = <span class="dv">1</span>;</div>
-<div class="sourceLine" id="cb1-237" data-line-number="237">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2</span>; i+=<span class="dv">3</span>) {</div>
-<div class="sourceLine" id="cb1-238" data-line-number="238">    <span class="co">// alternate colors</span></div>
-<div class="sourceLine" id="cb1-239" data-line-number="239">    display.fillRect(i, i, display.width()-i*<span class="dv">2</span>, display.height()-i*<span class="dv">2</span>, color%<span class="dv">2</span>);</div>
-<div class="sourceLine" id="cb1-240" data-line-number="240">    display.display();</div>
-<div class="sourceLine" id="cb1-241" data-line-number="241">    color++;</div>
-<div class="sourceLine" id="cb1-242" data-line-number="242">  }</div>
-<div class="sourceLine" id="cb1-243" data-line-number="243">}</div>
-<div class="sourceLine" id="cb1-244" data-line-number="244"></div>
-<div class="sourceLine" id="cb1-245" data-line-number="245"><span class="dt">void</span> testdrawtriangle(<span class="dt">void</span>) {</div>
-<div class="sourceLine" id="cb1-246" data-line-number="246">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;min(display.width(),display.height())/<span class="dv">2</span>; i+=<span class="dv">5</span>) {</div>
-<div class="sourceLine" id="cb1-247" data-line-number="247">    display.drawTriangle(display.width()/<span class="dv">2</span>, display.height()/<span class="dv">2</span>-i,</div>
-<div class="sourceLine" id="cb1-248" data-line-number="248">                     display.width()/<span class="dv">2</span>-i, display.height()/<span class="dv">2</span>+i,</div>
-<div class="sourceLine" id="cb1-249" data-line-number="249">                     display.width()/<span class="dv">2</span>+i, display.height()/<span class="dv">2</span>+i, WHITE);</div>
-<div class="sourceLine" id="cb1-250" data-line-number="250">    display.display();</div>
-<div class="sourceLine" id="cb1-251" data-line-number="251">  }</div>
-<div class="sourceLine" id="cb1-252" data-line-number="252">}</div>
-<div class="sourceLine" id="cb1-253" data-line-number="253"></div>
-<div class="sourceLine" id="cb1-254" data-line-number="254"><span class="dt">void</span> testfilltriangle(<span class="dt">void</span>) {</div>
-<div class="sourceLine" id="cb1-255" data-line-number="255">  <span class="dt">uint8_t</span> color = WHITE;</div>
-<div class="sourceLine" id="cb1-256" data-line-number="256">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=min(display.width(),display.height())/<span class="dv">2</span>; i&gt;<span class="dv">0</span>; i-=<span class="dv">5</span>) {</div>
-<div class="sourceLine" id="cb1-257" data-line-number="257">    display.fillTriangle(display.width()/<span class="dv">2</span>, display.height()/<span class="dv">2</span>-i,</div>
-<div class="sourceLine" id="cb1-258" data-line-number="258">                     display.width()/<span class="dv">2</span>-i, display.height()/<span class="dv">2</span>+i,</div>
-<div class="sourceLine" id="cb1-259" data-line-number="259">                     display.width()/<span class="dv">2</span>+i, display.height()/<span class="dv">2</span>+i, WHITE);</div>
-<div class="sourceLine" id="cb1-260" data-line-number="260">    <span class="cf">if</span> (color == WHITE) color = BLACK;</div>
-<div class="sourceLine" id="cb1-261" data-line-number="261">    <span class="cf">else</span> color = WHITE;</div>
-<div class="sourceLine" id="cb1-262" data-line-number="262">    display.display();</div>
-<div class="sourceLine" id="cb1-263" data-line-number="263">  }</div>
-<div class="sourceLine" id="cb1-264" data-line-number="264">}</div>
-<div class="sourceLine" id="cb1-265" data-line-number="265"></div>
-<div class="sourceLine" id="cb1-266" data-line-number="266"><span class="dt">void</span> testdrawroundrect(<span class="dt">void</span>) {</div>
-<div class="sourceLine" id="cb1-267" data-line-number="267">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2-2</span>; i+=<span class="dv">2</span>) {</div>
-<div class="sourceLine" id="cb1-268" data-line-number="268">    display.drawRoundRect(i, i, display.width()<span class="dv">-2</span>*i, display.height()<span class="dv">-2</span>*i, display.height()/<span class="dv">4</span>, WHITE);</div>
-<div class="sourceLine" id="cb1-269" data-line-number="269">    display.display();</div>
-<div class="sourceLine" id="cb1-270" data-line-number="270">  }</div>
-<div class="sourceLine" id="cb1-271" data-line-number="271">}</div>
-<div class="sourceLine" id="cb1-272" data-line-number="272"></div>
-<div class="sourceLine" id="cb1-273" data-line-number="273"><span class="dt">void</span> testfillroundrect(<span class="dt">void</span>) {</div>
-<div class="sourceLine" id="cb1-274" data-line-number="274">  <span class="dt">uint8_t</span> color = WHITE;</div>
-<div class="sourceLine" id="cb1-275" data-line-number="275">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2-2</span>; i+=<span class="dv">2</span>) {</div>
-<div class="sourceLine" id="cb1-276" data-line-number="276">    display.fillRoundRect(i, i, display.width()<span class="dv">-2</span>*i, display.height()<span class="dv">-2</span>*i, display.height()/<span class="dv">4</span>, color);</div>
-<div class="sourceLine" id="cb1-277" data-line-number="277">    <span class="cf">if</span> (color == WHITE) color = BLACK;</div>
-<div class="sourceLine" id="cb1-278" data-line-number="278">    <span class="cf">else</span> color = WHITE;</div>
-<div class="sourceLine" id="cb1-279" data-line-number="279">    display.display();</div>
-<div class="sourceLine" id="cb1-280" data-line-number="280">  }</div>
-<div class="sourceLine" id="cb1-281" data-line-number="281">}</div>
-<div class="sourceLine" id="cb1-282" data-line-number="282">   </div>
-<div class="sourceLine" id="cb1-283" data-line-number="283"><span class="dt">void</span> testdrawrect(<span class="dt">void</span>) {</div>
-<div class="sourceLine" id="cb1-284" data-line-number="284">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2</span>; i+=<span class="dv">2</span>) {</div>
-<div class="sourceLine" id="cb1-285" data-line-number="285">    display.drawRect(i, i, display.width()<span class="dv">-2</span>*i, display.height()<span class="dv">-2</span>*i, WHITE);</div>
-<div class="sourceLine" id="cb1-286" data-line-number="286">    display.display();</div>
-<div class="sourceLine" id="cb1-287" data-line-number="287">  }</div>
-<div class="sourceLine" id="cb1-288" data-line-number="288">}</div>
-<div class="sourceLine" id="cb1-289" data-line-number="289"></div>
-<div class="sourceLine" id="cb1-290" data-line-number="290"><span class="dt">void</span> testdrawline() {  </div>
-<div class="sourceLine" id="cb1-291" data-line-number="291">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.width(); i+=<span class="dv">4</span>) {</div>
-<div class="sourceLine" id="cb1-292" data-line-number="292">    display.drawLine(<span class="dv">0</span>, <span class="dv">0</span>, i, display.height()<span class="dv">-1</span>, WHITE);</div>
-<div class="sourceLine" id="cb1-293" data-line-number="293">    display.display();</div>
-<div class="sourceLine" id="cb1-294" data-line-number="294">  }</div>
-<div class="sourceLine" id="cb1-295" data-line-number="295">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height(); i+=<span class="dv">4</span>) {</div>
-<div class="sourceLine" id="cb1-296" data-line-number="296">    display.drawLine(<span class="dv">0</span>, <span class="dv">0</span>, display.width()<span class="dv">-1</span>, i, WHITE);</div>
-<div class="sourceLine" id="cb1-297" data-line-number="297">    display.display();</div>
-<div class="sourceLine" id="cb1-298" data-line-number="298">  }</div>
-<div class="sourceLine" id="cb1-299" data-line-number="299">  delay(<span class="dv">250</span>);</div>
-<div class="sourceLine" id="cb1-300" data-line-number="300">  </div>
-<div class="sourceLine" id="cb1-301" data-line-number="301">  display.clearDisplay();</div>
-<div class="sourceLine" id="cb1-302" data-line-number="302">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.width(); i+=<span class="dv">4</span>) {</div>
-<div class="sourceLine" id="cb1-303" data-line-number="303">    display.drawLine(<span class="dv">0</span>, display.height()<span class="dv">-1</span>, i, <span class="dv">0</span>, WHITE);</div>
-<div class="sourceLine" id="cb1-304" data-line-number="304">    display.display();</div>
-<div class="sourceLine" id="cb1-305" data-line-number="305">  }</div>
-<div class="sourceLine" id="cb1-306" data-line-number="306">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=display.height()<span class="dv">-1</span>; i&gt;=<span class="dv">0</span>; i-=<span class="dv">4</span>) {</div>
-<div class="sourceLine" id="cb1-307" data-line-number="307">    display.drawLine(<span class="dv">0</span>, display.height()<span class="dv">-1</span>, display.width()<span class="dv">-1</span>, i, WHITE);</div>
-<div class="sourceLine" id="cb1-308" data-line-number="308">    display.display();</div>
-<div class="sourceLine" id="cb1-309" data-line-number="309">  }</div>
-<div class="sourceLine" id="cb1-310" data-line-number="310">  delay(<span class="dv">250</span>);</div>
-<div class="sourceLine" id="cb1-311" data-line-number="311">  </div>
-<div class="sourceLine" id="cb1-312" data-line-number="312">  display.clearDisplay();</div>
-<div class="sourceLine" id="cb1-313" data-line-number="313">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=display.width()<span class="dv">-1</span>; i&gt;=<span class="dv">0</span>; i-=<span class="dv">4</span>) {</div>
-<div class="sourceLine" id="cb1-314" data-line-number="314">    display.drawLine(display.width()<span class="dv">-1</span>, display.height()<span class="dv">-1</span>, i, <span class="dv">0</span>, WHITE);</div>
-<div class="sourceLine" id="cb1-315" data-line-number="315">    display.display();</div>
-<div class="sourceLine" id="cb1-316" data-line-number="316">  }</div>
-<div class="sourceLine" id="cb1-317" data-line-number="317">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=display.height()<span class="dv">-1</span>; i&gt;=<span class="dv">0</span>; i-=<span class="dv">4</span>) {</div>
-<div class="sourceLine" id="cb1-318" data-line-number="318">    display.drawLine(display.width()<span class="dv">-1</span>, display.height()<span class="dv">-1</span>, <span class="dv">0</span>, i, WHITE);</div>
-<div class="sourceLine" id="cb1-319" data-line-number="319">    display.display();</div>
-<div class="sourceLine" id="cb1-320" data-line-number="320">  }</div>
-<div class="sourceLine" id="cb1-321" data-line-number="321">  delay(<span class="dv">250</span>);</div>
-<div class="sourceLine" id="cb1-322" data-line-number="322"></div>
-<div class="sourceLine" id="cb1-323" data-line-number="323">  display.clearDisplay();</div>
-<div class="sourceLine" id="cb1-324" data-line-number="324">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height(); i+=<span class="dv">4</span>) {</div>
-<div class="sourceLine" id="cb1-325" data-line-number="325">    display.drawLine(display.width()<span class="dv">-1</span>, <span class="dv">0</span>, <span class="dv">0</span>, i, WHITE);</div>
-<div class="sourceLine" id="cb1-326" data-line-number="326">    display.display();</div>
-<div class="sourceLine" id="cb1-327" data-line-number="327">  }</div>
-<div class="sourceLine" id="cb1-328" data-line-number="328">  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.width(); i+=<span class="dv">4</span>) {</div>
-<div class="sourceLine" id="cb1-329" data-line-number="329">    display.drawLine(display.width()<span class="dv">-1</span>, <span class="dv">0</span>, i, display.height()<span class="dv">-1</span>, WHITE); </div>
-<div class="sourceLine" id="cb1-330" data-line-number="330">    display.display();</div>
-<div class="sourceLine" id="cb1-331" data-line-number="331">  }</div>
-<div class="sourceLine" id="cb1-332" data-line-number="332">  delay(<span class="dv">250</span>);</div>
-<div class="sourceLine" id="cb1-333" data-line-number="333">}</div>
-<div class="sourceLine" id="cb1-334" data-line-number="334"></div>
-<div class="sourceLine" id="cb1-335" data-line-number="335"><span class="dt">void</span> testscrolltext(<span class="dt">void</span>) {</div>
-<div class="sourceLine" id="cb1-336" data-line-number="336">  display.setTextSize(<span class="dv">2</span>);</div>
-<div class="sourceLine" id="cb1-337" data-line-number="337">  display.setTextColor(WHITE);</div>
-<div class="sourceLine" id="cb1-338" data-line-number="338">  display.setCursor(<span class="dv">10</span>,<span class="dv">0</span>);</div>
-<div class="sourceLine" id="cb1-339" data-line-number="339">  display.clearDisplay();</div>
-<div class="sourceLine" id="cb1-340" data-line-number="340">  display.println(<span class="st">&quot;scroll&quot;</span>);</div>
-<div class="sourceLine" id="cb1-341" data-line-number="341">  display.display();</div>
-<div class="sourceLine" id="cb1-342" data-line-number="342"> </div>
-<div class="sourceLine" id="cb1-343" data-line-number="343">  display.startscrollright(<span class="bn">0x00</span>, <span class="bn">0x0F</span>);</div>
-<div class="sourceLine" id="cb1-344" data-line-number="344">  delay(<span class="dv">2000</span>);</div>
-<div class="sourceLine" id="cb1-345" data-line-number="345">  display.stopscroll();</div>
-<div class="sourceLine" id="cb1-346" data-line-number="346">  delay(<span class="dv">1000</span>);</div>
-<div class="sourceLine" id="cb1-347" data-line-number="347">  display.startscrollleft(<span class="bn">0x00</span>, <span class="bn">0x0F</span>);</div>
-<div class="sourceLine" id="cb1-348" data-line-number="348">  delay(<span class="dv">2000</span>);</div>
-<div class="sourceLine" id="cb1-349" data-line-number="349">  display.stopscroll();</div>
-<div class="sourceLine" id="cb1-350" data-line-number="350">  delay(<span class="dv">1000</span>);    </div>
-<div class="sourceLine" id="cb1-351" data-line-number="351">  display.startscrolldiagright(<span class="bn">0x00</span>, <span class="bn">0x07</span>);</div>
-<div class="sourceLine" id="cb1-352" data-line-number="352">  delay(<span class="dv">2000</span>);</div>
-<div class="sourceLine" id="cb1-353" data-line-number="353">  display.startscrolldiagleft(<span class="bn">0x00</span>, <span class="bn">0x07</span>);</div>
-<div class="sourceLine" id="cb1-354" data-line-number="354">  <span class="co">//delay(2000);</span></div>
-<div class="sourceLine" id="cb1-355" data-line-number="355">  display.stopscroll();</div>
-<div class="sourceLine" id="cb1-356" data-line-number="356">}</div></code></pre>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">/*********************************************************************</span>
+<span class="co">This is an example for our Monochrome OLEDs based on SSD1306 drivers</span>
+
+<span class="co">  Pick one up today in the adafruit shop!</span>
+<span class="co">  ------&gt; http://www.adafruit.com/category/63_98</span>
+
+<span class="co">This example is for a 128x64 size display using I2C to communicate</span>
+<span class="co">3 pins are required to interface (2 I2C and one reset)</span>
+
+<span class="co">Adafruit invests time and resources providing this open source code, </span>
+<span class="co">please support Adafruit and open-source hardware by purchasing </span>
+<span class="co">products from Adafruit!</span>
+
+<span class="co">Written by Limor Fried/Ladyada  for Adafruit Industries.  </span>
+<span class="co">BSD license, check license.txt for more information</span>
+<span class="co">All text above, and the splash screen must be included in any redistribution</span>
+
+<span class="co">-modified by Dan Peirce B.Sc. May 2018</span>
+<span class="co">*********************************************************************/</span>
+
+<span class="pp">#include </span><span class="im">&lt;Wire.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;Adafruit_GFX.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;Adafruit_SSD1306.h&gt;</span>
+
+<span class="pp">#define OLED_RESET 4</span>
+Adafruit_SSD1306 display(OLED_RESET);
+
+<span class="pp">#define NUMFLAKES 10</span>
+<span class="pp">#define XPOS 0</span>
+<span class="pp">#define YPOS 1</span>
+<span class="pp">#define DELTAY 2</span>
+
+
+<span class="pp">#define LOGO16_GLCD_HEIGHT 16 </span>
+<span class="pp">#define LOGO16_GLCD_WIDTH  16 </span>
+<span class="at">static</span> <span class="at">const</span> <span class="dt">unsigned</span> <span class="dt">char</span> PROGMEM logo16_glcd_bmp[] =
+{ B00000000, B11000000,
+  B00000001, B11000000,
+  B00000001, B11000000,
+  B00000011, B11100000,
+  B11110011, B11100000,
+  B11111110, B11111000,
+  B01111110, B11111111,
+  B00110011, B10011111,
+  B00011111, B11111100,
+  B00001101, B01110000,
+  B00011011, B10100000,
+  B00111111, B11100000,
+  B00111111, B11110000,
+  B01111100, B11110000,
+  B01110000, B01110000,
+  B00000000, B00110000 };
+
+<span class="pp">#if (SSD1306_LCDHEIGHT != 64)</span>
+<span class="pp">#error(&quot;Height incorrect, please fix Adafruit_SSD1306.h!&quot;);</span>
+<span class="pp">#endif</span>
+
+<span class="dt">void</span> setup()   {                
+  Serial.begin(<span class="dv">9600</span>);
+
+  <span class="co">// by default, we&#39;ll generate the high voltage from the 3.3v line internally! (neat!)</span>
+  display.begin(SSD1306_SWITCHCAPVCC, <span class="bn">0x3C</span>);  <span class="co">// initialize with the I2C addr 0x3C (for the 128x64)</span>
+  <span class="co">// init done</span>
+  
+  display.display(); <span class="co">// show splashscreen</span>
+  delay(<span class="dv">2000</span>);
+  display.clearDisplay();   <span class="co">// clears the screen and buffer</span>
+
+  <span class="co">// draw a single pixel</span>
+  display.drawPixel(<span class="dv">10</span>, <span class="dv">10</span>, WHITE);
+  display.display();
+  delay(<span class="dv">2000</span>);
+  display.clearDisplay();
+
+  <span class="co">// draw many lines</span>
+  <span class="co">//testdrawline();</span>
+  <span class="co">//display.display();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">// draw rectangles</span>
+  <span class="co">//testdrawrect();</span>
+  <span class="co">//display.display();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">// draw multiple rectangles</span>
+  <span class="co">//testfillrect();</span>
+  <span class="co">//display.display();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">// draw mulitple circles</span>
+  <span class="co">//testdrawcircle();</span>
+  <span class="co">//display.display();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">// draw a white circle, 10 pixel radius</span>
+  <span class="co">//display.fillCircle(display.width()/2, display.height()/2, 10, WHITE);</span>
+  <span class="co">//display.display();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">//testdrawroundrect();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">//testfillroundrect();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">//testdrawtriangle();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+   
+  <span class="co">//testfilltriangle();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">// draw the first ~12 characters in the font</span>
+  testdrawchar();
+  display.display();
+  delay(<span class="dv">2000</span>);
+  delay(<span class="dv">2000</span>);
+  delay(<span class="dv">2000</span>);
+  display.clearDisplay();
+
+  <span class="co">// draw scrolling text</span>
+  testscrolltext();
+  <span class="co">//delay(500);</span>
+  display.clearDisplay();
+
+  <span class="co">// text display tests</span>
+  display.setTextSize(<span class="dv">1</span>);
+  display.setTextColor(WHITE);
+  display.setCursor(<span class="dv">0</span>,<span class="dv">0</span>);
+  display.println(<span class="st">&quot;Hello, world!&quot;</span>);
+  <span class="co">//display.setTextColor(BLACK, WHITE); // &#39;inverted&#39; text</span>
+  display.println(<span class="fl">3.141592</span>);
+  display.setTextSize(<span class="dv">2</span>);
+  display.setTextColor(WHITE);
+  display.print(<span class="st">&quot;0x&quot;</span>); display.println(<span class="bn">0xDEADBEEF</span>, HEX);
+  display.display();
+  delay(<span class="dv">2000</span>);
+  delay(<span class="dv">2000</span>);
+
+  <span class="co">// miniature bitmap display</span>
+  display.clearDisplay();
+  display.drawBitmap(<span class="dv">30</span>, <span class="dv">16</span>,  logo16_glcd_bmp, <span class="dv">16</span>, <span class="dv">16</span>, <span class="dv">1</span>);
+  display.display();
+
+  <span class="co">// invert the display</span>
+  delay(<span class="dv">1000</span>);
+  display.invertDisplay(<span class="kw">true</span>);
+  delay(<span class="dv">1000</span>); 
+  display.invertDisplay(<span class="kw">false</span>);
+  delay(<span class="dv">1000</span>); 
+  display.clearDisplay();
+  display.display();
+  <span class="cf">while</span>(<span class="dv">1</span>){};
+  <span class="co">// draw a bitmap icon and &#39;animate&#39; movement</span>
+  testdrawbitmap(logo16_glcd_bmp, LOGO16_GLCD_HEIGHT, LOGO16_GLCD_WIDTH);
+}
+
+
+<span class="dt">void</span> loop() {
+  
+}
+
+
+<span class="dt">void</span> testdrawbitmap(<span class="at">const</span> <span class="dt">uint8_t</span> *bitmap, <span class="dt">uint8_t</span> w, <span class="dt">uint8_t</span> h) {
+  <span class="dt">uint8_t</span> icons[NUMFLAKES][<span class="dv">3</span>];
+  srandom(<span class="dv">666</span>);     <span class="co">// whatever seed</span>
+ 
+  <span class="co">// initialize</span>
+  <span class="cf">for</span> (<span class="dt">uint8_t</span> f=<span class="dv">0</span>; f&lt; NUMFLAKES; f++) {
+    icons[f][XPOS] = random() % display.width();
+    icons[f][YPOS] = <span class="dv">0</span>;
+    icons[f][DELTAY] = random() % <span class="dv">5</span> + <span class="dv">1</span>;
+    
+    Serial.print(<span class="st">&quot;x: &quot;</span>);
+    Serial.print(icons[f][XPOS], DEC);
+    Serial.print(<span class="st">&quot; y: &quot;</span>);
+    Serial.print(icons[f][YPOS], DEC);
+    Serial.print(<span class="st">&quot; dy: &quot;</span>);
+    Serial.println(icons[f][DELTAY], DEC);
+  }
+
+  <span class="cf">while</span> (<span class="dv">1</span>) {
+    <span class="co">// draw each icon</span>
+    <span class="cf">for</span> (<span class="dt">uint8_t</span> f=<span class="dv">0</span>; f&lt; NUMFLAKES; f++) {
+      display.drawBitmap(icons[f][XPOS], icons[f][YPOS], logo16_glcd_bmp, w, h, WHITE);
+    }
+    display.display();
+    delay(<span class="dv">200</span>);
+    
+    <span class="co">// then erase it + move it</span>
+    <span class="cf">for</span> (<span class="dt">uint8_t</span> f=<span class="dv">0</span>; f&lt; NUMFLAKES; f++) {
+      display.drawBitmap(icons[f][XPOS], icons[f][YPOS],  logo16_glcd_bmp, w, h, BLACK);
+      <span class="co">// move it</span>
+      icons[f][YPOS] += icons[f][DELTAY];
+      <span class="co">// if its gone, reinit</span>
+      <span class="cf">if</span> (icons[f][YPOS] &gt; display.height()) {
+  icons[f][XPOS] = random() % display.width();
+  icons[f][YPOS] = <span class="dv">0</span>;
+  icons[f][DELTAY] = random() % <span class="dv">5</span> + <span class="dv">1</span>;
+      }
+    }
+   }
+}
+
+
+<span class="dt">void</span> testdrawchar(<span class="dt">void</span>) {
+  display.setTextSize(<span class="dv">1</span>);
+  display.setTextColor(WHITE);
+  display.setCursor(<span class="dv">0</span>,<span class="dv">0</span>);
+
+  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">0</span>; i &lt; <span class="dv">168</span>; i++) {
+    <span class="cf">if</span> (i == <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>) <span class="cf">continue</span>;
+    display.write(i);
+    <span class="cf">if</span> ((i &gt; <span class="dv">0</span>) &amp;&amp; (i % <span class="dv">21</span> == <span class="dv">0</span>))
+      display.println();
+  }    
+  display.display();
+}
+
+<span class="dt">void</span> testdrawcircle(<span class="dt">void</span>) {
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height(); i+=<span class="dv">2</span>) {
+    display.drawCircle(display.width()/<span class="dv">2</span>, display.height()/<span class="dv">2</span>, i, WHITE);
+    display.display();
+  }
+}
+
+<span class="dt">void</span> testfillrect(<span class="dt">void</span>) {
+  <span class="dt">uint8_t</span> color = <span class="dv">1</span>;
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2</span>; i+=<span class="dv">3</span>) {
+    <span class="co">// alternate colors</span>
+    display.fillRect(i, i, display.width()-i*<span class="dv">2</span>, display.height()-i*<span class="dv">2</span>, color%<span class="dv">2</span>);
+    display.display();
+    color++;
+  }
+}
+
+<span class="dt">void</span> testdrawtriangle(<span class="dt">void</span>) {
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;min(display.width(),display.height())/<span class="dv">2</span>; i+=<span class="dv">5</span>) {
+    display.drawTriangle(display.width()/<span class="dv">2</span>, display.height()/<span class="dv">2</span>-i,
+                     display.width()/<span class="dv">2</span>-i, display.height()/<span class="dv">2</span>+i,
+                     display.width()/<span class="dv">2</span>+i, display.height()/<span class="dv">2</span>+i, WHITE);
+    display.display();
+  }
+}
+
+<span class="dt">void</span> testfilltriangle(<span class="dt">void</span>) {
+  <span class="dt">uint8_t</span> color = WHITE;
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=min(display.width(),display.height())/<span class="dv">2</span>; i&gt;<span class="dv">0</span>; i-=<span class="dv">5</span>) {
+    display.fillTriangle(display.width()/<span class="dv">2</span>, display.height()/<span class="dv">2</span>-i,
+                     display.width()/<span class="dv">2</span>-i, display.height()/<span class="dv">2</span>+i,
+                     display.width()/<span class="dv">2</span>+i, display.height()/<span class="dv">2</span>+i, WHITE);
+    <span class="cf">if</span> (color == WHITE) color = BLACK;
+    <span class="cf">else</span> color = WHITE;
+    display.display();
+  }
+}
+
+<span class="dt">void</span> testdrawroundrect(<span class="dt">void</span>) {
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2-2</span>; i+=<span class="dv">2</span>) {
+    display.drawRoundRect(i, i, display.width()<span class="dv">-2</span>*i, display.height()<span class="dv">-2</span>*i, display.height()/<span class="dv">4</span>, WHITE);
+    display.display();
+  }
+}
+
+<span class="dt">void</span> testfillroundrect(<span class="dt">void</span>) {
+  <span class="dt">uint8_t</span> color = WHITE;
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2-2</span>; i+=<span class="dv">2</span>) {
+    display.fillRoundRect(i, i, display.width()<span class="dv">-2</span>*i, display.height()<span class="dv">-2</span>*i, display.height()/<span class="dv">4</span>, color);
+    <span class="cf">if</span> (color == WHITE) color = BLACK;
+    <span class="cf">else</span> color = WHITE;
+    display.display();
+  }
+}
+   
+<span class="dt">void</span> testdrawrect(<span class="dt">void</span>) {
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2</span>; i+=<span class="dv">2</span>) {
+    display.drawRect(i, i, display.width()<span class="dv">-2</span>*i, display.height()<span class="dv">-2</span>*i, WHITE);
+    display.display();
+  }
+}
+
+<span class="dt">void</span> testdrawline() {  
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.width(); i+=<span class="dv">4</span>) {
+    display.drawLine(<span class="dv">0</span>, <span class="dv">0</span>, i, display.height()<span class="dv">-1</span>, WHITE);
+    display.display();
+  }
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height(); i+=<span class="dv">4</span>) {
+    display.drawLine(<span class="dv">0</span>, <span class="dv">0</span>, display.width()<span class="dv">-1</span>, i, WHITE);
+    display.display();
+  }
+  delay(<span class="dv">250</span>);
+  
+  display.clearDisplay();
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.width(); i+=<span class="dv">4</span>) {
+    display.drawLine(<span class="dv">0</span>, display.height()<span class="dv">-1</span>, i, <span class="dv">0</span>, WHITE);
+    display.display();
+  }
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=display.height()<span class="dv">-1</span>; i&gt;=<span class="dv">0</span>; i-=<span class="dv">4</span>) {
+    display.drawLine(<span class="dv">0</span>, display.height()<span class="dv">-1</span>, display.width()<span class="dv">-1</span>, i, WHITE);
+    display.display();
+  }
+  delay(<span class="dv">250</span>);
+  
+  display.clearDisplay();
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=display.width()<span class="dv">-1</span>; i&gt;=<span class="dv">0</span>; i-=<span class="dv">4</span>) {
+    display.drawLine(display.width()<span class="dv">-1</span>, display.height()<span class="dv">-1</span>, i, <span class="dv">0</span>, WHITE);
+    display.display();
+  }
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=display.height()<span class="dv">-1</span>; i&gt;=<span class="dv">0</span>; i-=<span class="dv">4</span>) {
+    display.drawLine(display.width()<span class="dv">-1</span>, display.height()<span class="dv">-1</span>, <span class="dv">0</span>, i, WHITE);
+    display.display();
+  }
+  delay(<span class="dv">250</span>);
+
+  display.clearDisplay();
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height(); i+=<span class="dv">4</span>) {
+    display.drawLine(display.width()<span class="dv">-1</span>, <span class="dv">0</span>, <span class="dv">0</span>, i, WHITE);
+    display.display();
+  }
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.width(); i+=<span class="dv">4</span>) {
+    display.drawLine(display.width()<span class="dv">-1</span>, <span class="dv">0</span>, i, display.height()<span class="dv">-1</span>, WHITE); 
+    display.display();
+  }
+  delay(<span class="dv">250</span>);
+}
+
+<span class="dt">void</span> testscrolltext(<span class="dt">void</span>) {
+  display.setTextSize(<span class="dv">2</span>);
+  display.setTextColor(WHITE);
+  display.setCursor(<span class="dv">10</span>,<span class="dv">0</span>);
+  display.clearDisplay();
+  display.println(<span class="st">&quot;scroll&quot;</span>);
+  display.display();
+ 
+  display.startscrollright(<span class="bn">0x00</span>, <span class="bn">0x0F</span>);
+  delay(<span class="dv">2000</span>);
+  display.stopscroll();
+  delay(<span class="dv">1000</span>);
+  display.startscrollleft(<span class="bn">0x00</span>, <span class="bn">0x0F</span>);
+  delay(<span class="dv">2000</span>);
+  display.stopscroll();
+  delay(<span class="dv">1000</span>);    
+  display.startscrolldiagright(<span class="bn">0x00</span>, <span class="bn">0x07</span>);
+  delay(<span class="dv">2000</span>);
+  display.startscrolldiagleft(<span class="bn">0x00</span>, <span class="bn">0x07</span>);
+  <span class="co">//delay(2000);</span>
+  display.stopscroll();
+}</code></pre></div>
 </body>
 </html>
