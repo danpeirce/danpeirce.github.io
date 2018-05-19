@@ -39,6 +39,10 @@ No ext4ernal pull ups were added!
 
     * [https://elecfreaks.com/estore/download/EF03155-Paintcode.zip](https://elecfreaks.com/estore/download/EF03155-Paintcode.zip)
     * [https://www.elecfreaks.com/estore/iic-oled.html](https://www.elecfreaks.com/estore/iic-oled.html)
+	
+    The libraries are actually from Adafruit. One can learn more about them here:
+
+    * [https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples)
 
 3. Extracted files/folders from zip file.
 4. Two folders containing files were copied to c:\\arduino\\libraries
