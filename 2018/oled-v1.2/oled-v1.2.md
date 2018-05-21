@@ -118,7 +118,7 @@ I forked the project on Github and made a new branch called 3rdparty.
 * [https://github.com/danpeirce/Adafruit_SSD1306/tree/3rdparty](https://github.com/danpeirce/Adafruit_SSD1306/tree/3rdparty)
 * [https://github.com/adafruit/Adafruit_SSD1306/compare/master...danpeirce:3rdparty](https://github.com/adafruit/Adafruit_SSD1306/compare/master...danpeirce:3rdparty)
 
-### Exploring Text Branch
+### Explore Text Branch
 
 Added a new branch to fork of Adafruit_SSD1306 repository Called exploring_text.
 
