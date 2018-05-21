@@ -66,6 +66,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#switching-to-current-adafruit-libraries-may-20-2018">Switching to Current Adafruit Libraries (May 20, 2018)</a><ul>
 <li><a href="#adjustments-for-3rd-party-display.">Adjustments for 3rd Party Display.</a></li>
 <li><a href="#forked-on-github">Forked on Github</a></li>
+<li><a href="#exploring-text-branch">Exploring Text Branch</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -79,6 +80,9 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <li><a href="https://www.robotshop.com/ca/en/iic-128-64-oled-module-blue.html" class="uri">https://www.robotshop.com/ca/en/iic-128-64-oled-module-blue.html</a></li>
 </ul>
 <p>Unfortunately they don't provide up to date information for the OLED module. The datasheet is for a previous version. The Libraries supplied for the display are written by Adafruit.</p>
+<figure>
+<img src="explore_text.png" />
+</figure>
 <h2 id="initial-testing-of-display">Initial Testing of Display</h2>
 <h3 id="wiring">Wiring</h3>
 <p>Initial testing was done with an Ardunino Uno as this was what was shown in the datasheet. Note the silkscreen on the v1.2 board does not match the v1.1 datasheet with regard to the pinout. I followed the silkscreen.</p>
@@ -157,5 +161,13 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/tree/3rdparty" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/tree/3rdparty</a></li>
 <li><a href="https://github.com/adafruit/Adafruit_SSD1306/compare/master...danpeirce:3rdparty" class="uri">https://github.com/adafruit/Adafruit_SSD1306/compare/master...danpeirce:3rdparty</a></li>
 </ul>
+<h3 id="exploring-text-branch">Exploring Text Branch</h3>
+<p>Added a new branch to fork of Adafruit_SSD1306 repository Called exploring_text.</p>
+<ul>
+<li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/explore_text/examples/explore_text/explore_text.ino" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/explore_text/examples/explore_text/explore_text.ino</a></li>
+</ul>
+<figure>
+<img src="explore_text.png" />
+</figure>
 </body>
 </html>

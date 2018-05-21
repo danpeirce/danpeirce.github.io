@@ -15,6 +15,8 @@ The display was purchased from the Canadian version of the RobotShop website:
 Unfortunately they don't provide up to date information for the OLED module. The datasheet is for a previous version.
 The Libraries supplied for the display are written by Adafruit. 
 
+![](explore_text.png)
+
 ## Initial Testing of Display
 
 ### Wiring
@@ -115,3 +117,11 @@ I forked the project on Github and made a new branch called 3rdparty.
 
 * [https://github.com/danpeirce/Adafruit_SSD1306/tree/3rdparty](https://github.com/danpeirce/Adafruit_SSD1306/tree/3rdparty)
 * [https://github.com/adafruit/Adafruit_SSD1306/compare/master...danpeirce:3rdparty](https://github.com/adafruit/Adafruit_SSD1306/compare/master...danpeirce:3rdparty)
+
+### Exploring Text Branch
+
+Added a new branch to fork of Adafruit_SSD1306 repository Called exploring_text.
+
+* [https://github.com/danpeirce/Adafruit_SSD1306/blob/explore_text/examples/explore_text/explore_text.ino](https://github.com/danpeirce/Adafruit_SSD1306/blob/explore_text/examples/explore_text/explore_text.ino)
+
+![](explore_text.png)
