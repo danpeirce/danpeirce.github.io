@@ -7,6 +7,43 @@
   <meta name="author" content="Notes by Dan Peirce B.Sc.">
   <title>IIC OLED V1.2</title>
   <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
   <link rel="stylesheet" href="../../pandocbd.css">
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
@@ -26,7 +63,9 @@
 <li><a href="#demo-video">Demo Video</a></li>
 <li><a href="#code-used-on-first-day">Code Used on First Day</a></li>
 </ul></li>
-<li><a href="#switching-to-current-adafruit-libraries-may-20-2018">Switching to Current Adafruit Libraries (May 20, 2018)</a></li>
+<li><a href="#switching-to-current-adafruit-libraries-may-20-2018">Switching to Current Adafruit Libraries (May 20, 2018)</a><ul>
+<li><a href="#adjustments-for-3rd-party-display.">Adjustments for 3rd Party Display.</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -98,5 +137,18 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 </ul>
 <h2 id="switching-to-current-adafruit-libraries-may-20-2018">Switching to Current Adafruit Libraries (May 20, 2018)</h2>
 <p>It became apparent that the elecfreaks.com site provided an old version of the libraries and it seemed expedient to test the current version of the files.</p>
+<p>It worked with a minor adjustment for the electfreak display.</p>
+<h3 id="adjustments-for-3rd-party-display.">Adjustments for 3rd Party Display.</h3>
+<ol type="1">
+<li><p>As before the address of the display had to be adjusted.</p>
+<ul>
+<li>display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // was 0x3D</li>
+</ul></li>
+<li><p>Had to make a change to Adafruit_SSD1306.had</p>
+<p>At line 73 changed which line was commented out.</p></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">   <span class="pp">#define SSD1306_128_64</span>
+<span class="co">//   #define SSD1306_128_32</span>
+<span class="co">//   #define SSD1306_96_16</span></code></pre></div>
 </body>
 </html>

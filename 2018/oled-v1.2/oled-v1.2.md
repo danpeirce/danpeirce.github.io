@@ -90,3 +90,21 @@ Code moved to new file to avoid clutter on this page.
 
 It became apparent that the elecfreaks.com site provided an old version of the libraries and it seemed
 expedient to test the current version of the files. 
+
+It worked with a minor adjustment for the electfreak display.
+
+### Adjustments for 3rd Party Display.
+
+1. As before the address of the display had to be adjusted.
+
+    *  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // was 0x3D
+	
+2. Had to make a change to Adafruit_SSD1306.had
+
+    At line 73 changed which line was commented out.
+	
+~~~~c
+   #define SSD1306_128_64
+//   #define SSD1306_128_32
+//   #define SSD1306_96_16
+~~~~
