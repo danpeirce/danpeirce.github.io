@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="notes by Dan Peirce B.Sc.">
+  <title>First Modified Code of Example ssd1306_128x64_i2c.ino</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="../../pandocbd.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">First Modified Code of Example ssd1306_128x64_i2c.ino</h1>
+<p class="author">notes by Dan Peirce B.Sc.</p>
+</header>
+<h1 id="first-modified-code-of-example-ssd1306_128x64_i2c.ino">First Modified Code of Example ssd1306_128x64_i2c.ino</h1>
+<!---
+use pandoc -s -t html5 -c ../../pandocbd.css ssd1306_128x64_i2c.ino.md -o ssd1306_128x64_i2c.ino.html
+-->
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">/*********************************************************************</span>
+<span class="co">This is an example for our Monochrome OLEDs based on SSD1306 drivers</span>
+
+<span class="co">  Pick one up today in the adafruit shop!</span>
+<span class="co">  ------&gt; http://www.adafruit.com/category/63_98</span>
+
+<span class="co">This example is for a 128x64 size display using I2C to communicate</span>
+<span class="co">3 pins are required to interface (2 I2C and one reset)</span>
+
+<span class="co">Adafruit invests time and resources providing this open source code, </span>
+<span class="co">please support Adafruit and open-source hardware by purchasing </span>
+<span class="co">products from Adafruit!</span>
+
+<span class="co">Written by Limor Fried/Ladyada  for Adafruit Industries.  </span>
+<span class="co">BSD license, check license.txt for more information</span>
+<span class="co">All text above, and the splash screen must be included in any redistribution</span>
+
+<span class="co">-modified by Dan Peirce B.Sc. May 2018</span>
+<span class="co">*********************************************************************/</span>
+
+<span class="pp">#include </span><span class="im">&lt;Wire.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;Adafruit_GFX.h&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;Adafruit_SSD1306.h&gt;</span>
+
+<span class="pp">#define OLED_RESET 4</span>
+Adafruit_SSD1306 display(OLED_RESET);
+
+<span class="pp">#define NUMFLAKES 10</span>
+<span class="pp">#define XPOS 0</span>
+<span class="pp">#define YPOS 1</span>
+<span class="pp">#define DELTAY 2</span>
+
+
+<span class="pp">#define LOGO16_GLCD_HEIGHT 16 </span>
+<span class="pp">#define LOGO16_GLCD_WIDTH  16 </span>
+<span class="at">static</span> <span class="at">const</span> <span class="dt">unsigned</span> <span class="dt">char</span> PROGMEM logo16_glcd_bmp[] =
+{ B00000000, B11000000,
+  B00000001, B11000000,
+  B00000001, B11000000,
+  B00000011, B11100000,
+  B11110011, B11100000,
+  B11111110, B11111000,
+  B01111110, B11111111,
+  B00110011, B10011111,
+  B00011111, B11111100,
+  B00001101, B01110000,
+  B00011011, B10100000,
+  B00111111, B11100000,
+  B00111111, B11110000,
+  B01111100, B11110000,
+  B01110000, B01110000,
+  B00000000, B00110000 };
+
+<span class="pp">#if (SSD1306_LCDHEIGHT != 64)</span>
+<span class="pp">#error(&quot;Height incorrect, please fix Adafruit_SSD1306.h!&quot;);</span>
+<span class="pp">#endif</span>
+
+<span class="dt">void</span> setup()   {                
+  Serial.begin(<span class="dv">9600</span>);
+
+  <span class="co">// by default, we&#39;ll generate the high voltage from the 3.3v line internally! (neat!)</span>
+  display.begin(SSD1306_SWITCHCAPVCC, <span class="bn">0x3C</span>);  <span class="co">// initialize with the I2C addr 0x3C (for the 128x64)</span>
+  <span class="co">// init done</span>
+  
+  display.display(); <span class="co">// show splashscreen</span>
+  delay(<span class="dv">2000</span>);
+  display.clearDisplay();   <span class="co">// clears the screen and buffer</span>
+
+  <span class="co">// draw a single pixel</span>
+  display.drawPixel(<span class="dv">10</span>, <span class="dv">10</span>, WHITE);
+  display.display();
+  delay(<span class="dv">2000</span>);
+  display.clearDisplay();
+
+  <span class="co">// draw many lines</span>
+  <span class="co">//testdrawline();</span>
+  <span class="co">//display.display();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">// draw rectangles</span>
+  <span class="co">//testdrawrect();</span>
+  <span class="co">//display.display();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">// draw multiple rectangles</span>
+  <span class="co">//testfillrect();</span>
+  <span class="co">//display.display();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">// draw mulitple circles</span>
+  <span class="co">//testdrawcircle();</span>
+  <span class="co">//display.display();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">// draw a white circle, 10 pixel radius</span>
+  <span class="co">//display.fillCircle(display.width()/2, display.height()/2, 10, WHITE);</span>
+  <span class="co">//display.display();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">//testdrawroundrect();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">//testfillroundrect();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">//testdrawtriangle();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+   
+  <span class="co">//testfilltriangle();</span>
+  <span class="co">//delay(2000);</span>
+  <span class="co">//display.clearDisplay();</span>
+
+  <span class="co">// draw the first ~12 characters in the font</span>
+  testdrawchar();
+  display.display();
+  delay(<span class="dv">2000</span>);
+  delay(<span class="dv">2000</span>);
+  delay(<span class="dv">2000</span>);
+  display.clearDisplay();
+
+  <span class="co">// draw scrolling text</span>
+  testscrolltext();
+  <span class="co">//delay(500);</span>
+  display.clearDisplay();
+
+  <span class="co">// text display tests</span>
+  display.setTextSize(<span class="dv">1</span>);
+  display.setTextColor(WHITE);
+  display.setCursor(<span class="dv">0</span>,<span class="dv">0</span>);
+  display.println(<span class="st">&quot;Hello, world!&quot;</span>);
+  <span class="co">//display.setTextColor(BLACK, WHITE); // &#39;inverted&#39; text</span>
+  display.println(<span class="fl">3.141592</span>);
+  display.setTextSize(<span class="dv">2</span>);
+  display.setTextColor(WHITE);
+  display.print(<span class="st">&quot;0x&quot;</span>); display.println(<span class="bn">0xDEADBEEF</span>, HEX);
+  display.display();
+  delay(<span class="dv">2000</span>);
+  delay(<span class="dv">2000</span>);
+
+  <span class="co">// miniature bitmap display</span>
+  display.clearDisplay();
+  display.drawBitmap(<span class="dv">30</span>, <span class="dv">16</span>,  logo16_glcd_bmp, <span class="dv">16</span>, <span class="dv">16</span>, <span class="dv">1</span>);
+  display.display();
+
+  <span class="co">// invert the display</span>
+  delay(<span class="dv">1000</span>);
+  display.invertDisplay(<span class="kw">true</span>);
+  delay(<span class="dv">1000</span>); 
+  display.invertDisplay(<span class="kw">false</span>);
+  delay(<span class="dv">1000</span>); 
+  display.clearDisplay();
+  display.display();
+  <span class="cf">while</span>(<span class="dv">1</span>){};
+  <span class="co">// draw a bitmap icon and &#39;animate&#39; movement</span>
+  testdrawbitmap(logo16_glcd_bmp, LOGO16_GLCD_HEIGHT, LOGO16_GLCD_WIDTH);
+}
+
+
+<span class="dt">void</span> loop() {
+  
+}
+
+
+<span class="dt">void</span> testdrawbitmap(<span class="at">const</span> <span class="dt">uint8_t</span> *bitmap, <span class="dt">uint8_t</span> w, <span class="dt">uint8_t</span> h) {
+  <span class="dt">uint8_t</span> icons[NUMFLAKES][<span class="dv">3</span>];
+  srandom(<span class="dv">666</span>);     <span class="co">// whatever seed</span>
+ 
+  <span class="co">// initialize</span>
+  <span class="cf">for</span> (<span class="dt">uint8_t</span> f=<span class="dv">0</span>; f&lt; NUMFLAKES; f++) {
+    icons[f][XPOS] = random() % display.width();
+    icons[f][YPOS] = <span class="dv">0</span>;
+    icons[f][DELTAY] = random() % <span class="dv">5</span> + <span class="dv">1</span>;
+    
+    Serial.print(<span class="st">&quot;x: &quot;</span>);
+    Serial.print(icons[f][XPOS], DEC);
+    Serial.print(<span class="st">&quot; y: &quot;</span>);
+    Serial.print(icons[f][YPOS], DEC);
+    Serial.print(<span class="st">&quot; dy: &quot;</span>);
+    Serial.println(icons[f][DELTAY], DEC);
+  }
+
+  <span class="cf">while</span> (<span class="dv">1</span>) {
+    <span class="co">// draw each icon</span>
+    <span class="cf">for</span> (<span class="dt">uint8_t</span> f=<span class="dv">0</span>; f&lt; NUMFLAKES; f++) {
+      display.drawBitmap(icons[f][XPOS], icons[f][YPOS], logo16_glcd_bmp, w, h, WHITE);
+    }
+    display.display();
+    delay(<span class="dv">200</span>);
+    
+    <span class="co">// then erase it + move it</span>
+    <span class="cf">for</span> (<span class="dt">uint8_t</span> f=<span class="dv">0</span>; f&lt; NUMFLAKES; f++) {
+      display.drawBitmap(icons[f][XPOS], icons[f][YPOS],  logo16_glcd_bmp, w, h, BLACK);
+      <span class="co">// move it</span>
+      icons[f][YPOS] += icons[f][DELTAY];
+      <span class="co">// if its gone, reinit</span>
+      <span class="cf">if</span> (icons[f][YPOS] &gt; display.height()) {
+  icons[f][XPOS] = random() % display.width();
+  icons[f][YPOS] = <span class="dv">0</span>;
+  icons[f][DELTAY] = random() % <span class="dv">5</span> + <span class="dv">1</span>;
+      }
+    }
+   }
+}
+
+
+<span class="dt">void</span> testdrawchar(<span class="dt">void</span>) {
+  display.setTextSize(<span class="dv">1</span>);
+  display.setTextColor(WHITE);
+  display.setCursor(<span class="dv">0</span>,<span class="dv">0</span>);
+
+  <span class="cf">for</span> (<span class="dt">uint8_t</span> i=<span class="dv">0</span>; i &lt; <span class="dv">168</span>; i++) {
+    <span class="cf">if</span> (i == <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>) <span class="cf">continue</span>;
+    display.write(i);
+    <span class="cf">if</span> ((i &gt; <span class="dv">0</span>) &amp;&amp; (i % <span class="dv">21</span> == <span class="dv">0</span>))
+      display.println();
+  }    
+  display.display();
+}
+
+<span class="dt">void</span> testdrawcircle(<span class="dt">void</span>) {
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height(); i+=<span class="dv">2</span>) {
+    display.drawCircle(display.width()/<span class="dv">2</span>, display.height()/<span class="dv">2</span>, i, WHITE);
+    display.display();
+  }
+}
+
+<span class="dt">void</span> testfillrect(<span class="dt">void</span>) {
+  <span class="dt">uint8_t</span> color = <span class="dv">1</span>;
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2</span>; i+=<span class="dv">3</span>) {
+    <span class="co">// alternate colors</span>
+    display.fillRect(i, i, display.width()-i*<span class="dv">2</span>, display.height()-i*<span class="dv">2</span>, color%<span class="dv">2</span>);
+    display.display();
+    color++;
+  }
+}
+
+<span class="dt">void</span> testdrawtriangle(<span class="dt">void</span>) {
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;min(display.width(),display.height())/<span class="dv">2</span>; i+=<span class="dv">5</span>) {
+    display.drawTriangle(display.width()/<span class="dv">2</span>, display.height()/<span class="dv">2</span>-i,
+                     display.width()/<span class="dv">2</span>-i, display.height()/<span class="dv">2</span>+i,
+                     display.width()/<span class="dv">2</span>+i, display.height()/<span class="dv">2</span>+i, WHITE);
+    display.display();
+  }
+}
+
+<span class="dt">void</span> testfilltriangle(<span class="dt">void</span>) {
+  <span class="dt">uint8_t</span> color = WHITE;
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=min(display.width(),display.height())/<span class="dv">2</span>; i&gt;<span class="dv">0</span>; i-=<span class="dv">5</span>) {
+    display.fillTriangle(display.width()/<span class="dv">2</span>, display.height()/<span class="dv">2</span>-i,
+                     display.width()/<span class="dv">2</span>-i, display.height()/<span class="dv">2</span>+i,
+                     display.width()/<span class="dv">2</span>+i, display.height()/<span class="dv">2</span>+i, WHITE);
+    <span class="cf">if</span> (color == WHITE) color = BLACK;
+    <span class="cf">else</span> color = WHITE;
+    display.display();
+  }
+}
+
+<span class="dt">void</span> testdrawroundrect(<span class="dt">void</span>) {
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2-2</span>; i+=<span class="dv">2</span>) {
+    display.drawRoundRect(i, i, display.width()<span class="dv">-2</span>*i, display.height()<span class="dv">-2</span>*i, display.height()/<span class="dv">4</span>, WHITE);
+    display.display();
+  }
+}
+
+<span class="dt">void</span> testfillroundrect(<span class="dt">void</span>) {
+  <span class="dt">uint8_t</span> color = WHITE;
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2-2</span>; i+=<span class="dv">2</span>) {
+    display.fillRoundRect(i, i, display.width()<span class="dv">-2</span>*i, display.height()<span class="dv">-2</span>*i, display.height()/<span class="dv">4</span>, color);
+    <span class="cf">if</span> (color == WHITE) color = BLACK;
+    <span class="cf">else</span> color = WHITE;
+    display.display();
+  }
+}
+   
+<span class="dt">void</span> testdrawrect(<span class="dt">void</span>) {
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height()/<span class="dv">2</span>; i+=<span class="dv">2</span>) {
+    display.drawRect(i, i, display.width()<span class="dv">-2</span>*i, display.height()<span class="dv">-2</span>*i, WHITE);
+    display.display();
+  }
+}
+
+<span class="dt">void</span> testdrawline() {  
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.width(); i+=<span class="dv">4</span>) {
+    display.drawLine(<span class="dv">0</span>, <span class="dv">0</span>, i, display.height()<span class="dv">-1</span>, WHITE);
+    display.display();
+  }
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height(); i+=<span class="dv">4</span>) {
+    display.drawLine(<span class="dv">0</span>, <span class="dv">0</span>, display.width()<span class="dv">-1</span>, i, WHITE);
+    display.display();
+  }
+  delay(<span class="dv">250</span>);
+  
+  display.clearDisplay();
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.width(); i+=<span class="dv">4</span>) {
+    display.drawLine(<span class="dv">0</span>, display.height()<span class="dv">-1</span>, i, <span class="dv">0</span>, WHITE);
+    display.display();
+  }
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=display.height()<span class="dv">-1</span>; i&gt;=<span class="dv">0</span>; i-=<span class="dv">4</span>) {
+    display.drawLine(<span class="dv">0</span>, display.height()<span class="dv">-1</span>, display.width()<span class="dv">-1</span>, i, WHITE);
+    display.display();
+  }
+  delay(<span class="dv">250</span>);
+  
+  display.clearDisplay();
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=display.width()<span class="dv">-1</span>; i&gt;=<span class="dv">0</span>; i-=<span class="dv">4</span>) {
+    display.drawLine(display.width()<span class="dv">-1</span>, display.height()<span class="dv">-1</span>, i, <span class="dv">0</span>, WHITE);
+    display.display();
+  }
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=display.height()<span class="dv">-1</span>; i&gt;=<span class="dv">0</span>; i-=<span class="dv">4</span>) {
+    display.drawLine(display.width()<span class="dv">-1</span>, display.height()<span class="dv">-1</span>, <span class="dv">0</span>, i, WHITE);
+    display.display();
+  }
+  delay(<span class="dv">250</span>);
+
+  display.clearDisplay();
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.height(); i+=<span class="dv">4</span>) {
+    display.drawLine(display.width()<span class="dv">-1</span>, <span class="dv">0</span>, <span class="dv">0</span>, i, WHITE);
+    display.display();
+  }
+  <span class="cf">for</span> (<span class="dt">int16_t</span> i=<span class="dv">0</span>; i&lt;display.width(); i+=<span class="dv">4</span>) {
+    display.drawLine(display.width()<span class="dv">-1</span>, <span class="dv">0</span>, i, display.height()<span class="dv">-1</span>, WHITE); 
+    display.display();
+  }
+  delay(<span class="dv">250</span>);
+}
+
+<span class="dt">void</span> testscrolltext(<span class="dt">void</span>) {
+  display.setTextSize(<span class="dv">2</span>);
+  display.setTextColor(WHITE);
+  display.setCursor(<span class="dv">10</span>,<span class="dv">0</span>);
+  display.clearDisplay();
+  display.println(<span class="st">&quot;scroll&quot;</span>);
+  display.display();
+ 
+  display.startscrollright(<span class="bn">0x00</span>, <span class="bn">0x0F</span>);
+  delay(<span class="dv">2000</span>);
+  display.stopscroll();
+  delay(<span class="dv">1000</span>);
+  display.startscrollleft(<span class="bn">0x00</span>, <span class="bn">0x0F</span>);
+  delay(<span class="dv">2000</span>);
+  display.stopscroll();
+  delay(<span class="dv">1000</span>);    
+  display.startscrolldiagright(<span class="bn">0x00</span>, <span class="bn">0x07</span>);
+  delay(<span class="dv">2000</span>);
+  display.startscrolldiagleft(<span class="bn">0x00</span>, <span class="bn">0x07</span>);
+  <span class="co">//delay(2000);</span>
+  display.stopscroll();
+}</code></pre></div>
+</body>
+</html>
