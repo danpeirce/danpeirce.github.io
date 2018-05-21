@@ -108,3 +108,10 @@ It worked with a minor adjustment for the electfreak display.
 //   #define SSD1306_128_32
 //   #define SSD1306_96_16
 ~~~~
+
+### Forked on Github
+
+I forked the project on Github and made a new branch called 3rdparty.
+
+* [https://github.com/danpeirce/Adafruit_SSD1306/tree/3rdparty](https://github.com/danpeirce/Adafruit_SSD1306/tree/3rdparty)
+* [https://github.com/adafruit/Adafruit_SSD1306/compare/master...danpeirce:3rdparty](https://github.com/adafruit/Adafruit_SSD1306/compare/master...danpeirce:3rdparty)
