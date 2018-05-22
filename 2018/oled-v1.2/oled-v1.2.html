@@ -67,6 +67,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#adjustments-for-3rd-party-display.">Adjustments for 3rd Party Display.</a></li>
 <li><a href="#forked-on-github">Forked on Github</a></li>
 <li><a href="#explore-text-branch">Explore Text Branch</a></li>
+<li><a href="#terminal-branch">Terminal Branch</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -169,5 +170,17 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <figure>
 <img src="explore_text.png" />
 </figure>
+<h3 id="terminal-branch">Terminal Branch</h3>
+<p>Added a new branch to fork of Adafruit_SSD1306 called terminal. The intent is to be able to send serial strings to the Arduino that will act as a controller for the display. The stream of characters could come from any MCU which would not need the graphics library ported. Current testing is being done with Arduino serial monitor but will follow up with project MCU.</p>
+<ol type="1">
+<li>Runs Adafruit splash screen followed by Hello World KPU PHYS1600. It then waits for input and blanks the screen when input received, then shows text in top left of screen.</li>
+<li>Display wraps to start of next line if it runs out of room on current line. A newline character will send it to beginning of next line.</li>
+<li>If too much text is received new text is not visible.</li>
+<li>Looks for a delimiter to clear screen and start at top left. Currently using &quot;~&quot; (tilde) as delimiter. Expect to change this to &quot;FF&quot;.</li>
+<li>Thinking of adding codes to change font size. Using size 1 as default.</li>
+</ol>
+<ul>
+<li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino</a></li>
+</ul>
 </body>
 </html>

@@ -125,3 +125,20 @@ Added a new branch to fork of Adafruit_SSD1306 repository Called exploring_text.
 * [https://github.com/danpeirce/Adafruit_SSD1306/blob/explore_text/examples/explore_text/explore_text.ino](https://github.com/danpeirce/Adafruit_SSD1306/blob/explore_text/examples/explore_text/explore_text.ino)
 
 ![](explore_text.png)
+
+### Terminal Branch
+
+Added a new branch to fork of Adafruit_SSD1306 called terminal. The intent is to be able to send serial strings to
+the Arduino that will act as a controller for the display. The stream of characters could come from any MCU which 
+would not need the graphics library ported. Current testing is being done with Arduino serial monitor but will follow up with project MCU.
+
+1. Runs Adafruit splash screen followed by Hello World KPU PHYS1600. It then waits for input and blanks the screen 
+   when input received, then shows text in top left of screen. 
+2. Display wraps to start of next line if it runs out of room on current line. A newline character will send 
+   it to beginning of next line.
+3. If too much text is received new text is not visible.
+3. Looks for a delimiter to clear screen and start at top left. Currently using "~" (tilde) as delimiter. 
+   Expect to change this to "FF".
+4. Thinking of adding codes to change font size. Using size 1 as default.
+
+* [https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino](https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino)
