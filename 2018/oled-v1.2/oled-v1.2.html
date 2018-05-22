@@ -178,9 +178,14 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <li>If too much text is received new text is not visible.</li>
 <li>Looks for a delimiter to clear screen and start at top left. Currently using &quot;~&quot; (tilde) as delimiter. Expect to change this to &quot;FF&quot;.</li>
 <li>Thinking of adding codes to change font size. Using size 1 as default.</li>
+<li>Discovered their is support to print both in landscape and portrait modes using a rotate method.</li>
 </ol>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"> display.setRotation(<span class="dv">1</span>); <span class="co">// results in a portrait orientation for text on the screen</span></code></pre></div>
 <ul>
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino</a></li>
 </ul>
+<figure>
+<img src="rotate-display.png" />
+</figure>
 </body>
 </html>

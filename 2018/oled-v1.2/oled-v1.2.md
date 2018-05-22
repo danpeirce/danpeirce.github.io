@@ -140,5 +140,12 @@ would not need the graphics library ported. Current testing is being done with A
 3. Looks for a delimiter to clear screen and start at top left. Currently using "~" (tilde) as delimiter. 
    Expect to change this to "FF".
 4. Thinking of adding codes to change font size. Using size 1 as default.
+5. Discovered their is support to print both in landscape and portrait modes using a rotate method. 
 
+~~~~cpp
+ display.setRotation(1); // results in a portrait orientation for text on the screen
+~~~~
+ 
 * [https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino](https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino)
+
+![](rotate-display.png)
