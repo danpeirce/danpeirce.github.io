@@ -174,12 +174,14 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <p>Added a new branch to fork of Adafruit_SSD1306 called terminal. The intent is to be able to send serial strings to the Arduino that will act as a controller for the display. The stream of characters could come from any MCU which would not need the graphics library ported. Current testing is being done with Arduino serial monitor but will follow up with project MCU.</p>
 <ol type="1">
 <li>Runs Adafruit splash screen followed by Hello World KPU PHYS1600. It then waits for input and blanks the screen when input received, then shows text in top left of screen.</li>
-<li>Display wraps to start of next line if it runs out of room on current line. A newline character will send it to beginning of next line.</li>
-<li>If too much text is received new text is not visible.</li>
-<li>Looks for a delimiter to clear screen and start at top left. Currently using &quot;~&quot; (tilde) as delimiter. Expect to change this to &quot;FF&quot;.</li>
-<li>Thinking of adding codes to change font size. Using size 1 as default.</li>
-<li>Discovered their is support to print both in landscape and portrait modes using a rotate method.</li>
+<li>Display wraps to start of next line if it runs out of room on current line. In addition a newline character will also send the cursor to beginning of next line.</li>
+<li>If too many rows of text are received new text is not visible.</li>
+<li>Intercepts a number of ASCII control codes and calls a corresponding library function. The number of codes may be expanded.</li>
+<li>To facilitate testing a Processing sketch has been written that is capable of both sending regular text and generating the control characters when select non-alphanumeric characters are used.</li>
 </ol>
+<figure>
+<img src="test-oled.png" />
+</figure>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"> display.setRotation(<span class="dv">1</span>); <span class="co">// results in a portrait orientation for text on the screen</span></code></pre></div>
 <ul>
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino</a></li>

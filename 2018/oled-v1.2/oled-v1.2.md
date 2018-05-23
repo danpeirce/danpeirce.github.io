@@ -134,13 +134,15 @@ would not need the graphics library ported. Current testing is being done with A
 
 1. Runs Adafruit splash screen followed by Hello World KPU PHYS1600. It then waits for input and blanks the screen 
    when input received, then shows text in top left of screen. 
-2. Display wraps to start of next line if it runs out of room on current line. A newline character will send 
-   it to beginning of next line.
-3. If too much text is received new text is not visible.
-3. Looks for a delimiter to clear screen and start at top left. Currently using "~" (tilde) as delimiter. 
-   Expect to change this to "FF".
-4. Thinking of adding codes to change font size. Using size 1 as default.
-5. Discovered their is support to print both in landscape and portrait modes using a rotate method. 
+2. Display wraps to start of next line if it runs out of room on current line. In addition a newline character will 
+   also send the cursor to beginning of next line.
+3. If too many rows of text are received new text is not visible.
+4. Intercepts a number of ASCII control codes and calls a corresponding library function. The number of codes may 
+   be expanded.
+5. To facilitate testing a Processing sketch has been written that is capable of both sending regular text and 
+   generating the control characters when select non-alphanumeric characters are used.
+
+![](test-oled.png)
 
 ~~~~cpp
  display.setRotation(1); // results in a portrait orientation for text on the screen
