@@ -159,4 +159,6 @@ The Arduino IDE sees the combination as the same as a Arduino Uno. The Pro Trink
 need the USB to serial adaptor board attached which will further reduce cost when we make a class set. I will continue to use the USB to serial baord for programming 
 and testing only.
 
+* [https://www.digikey.ca/product-detail/en/adafruit-industries-llc/2000/1528-1039-ND/4990788](https://www.digikey.ca/product-detail/en/adafruit-industries-llc/2000/1528-1039-ND/4990788)
+
 ![](proTrinket5-oled.jpg)
