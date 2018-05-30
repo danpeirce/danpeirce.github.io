@@ -29,7 +29,7 @@ the v1.1 datasheet with regard to the pinout. I followed the silkscreen.
 * cl to Arduino Uno A5
 * data to Arduiono Uno A4
 
-No ext4ernal pull ups were added!
+No external pull ups were added!
 
 ### Arduino IDE Setup
 
@@ -151,3 +151,12 @@ would not need the graphics library ported. Current testing is being done with A
 * [https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino](https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino)
 
 ![](rotate-display.png)
+
+## New Target Pro Trinket 5v
+
+On May 28, 2018 moved testing from Arduino Uno to Adafruit Pro Trinket 5 volts. This board is much like the Uno when combined with a USB to serial adaptor board.
+The Arduino IDE sees the combination as the same as a Arduino Uno. The Pro Trinket will shrink the size of the project and reduce cost. The final project will not
+need the USB to serial adaptor board attached which will further reduce cost when we make a class set. I will continue to use the USB to serial baord for programming 
+and testing only.
+
+![](proTrinket5-oled.jpg)

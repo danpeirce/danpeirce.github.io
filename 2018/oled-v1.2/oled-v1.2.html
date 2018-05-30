@@ -1,48 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="pandoc">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <meta name="author" content="Notes by Dan Peirce B.Sc.">
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Notes by Dan Peirce B.Sc." />
   <title>IIC OLED V1.2</title>
-  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+div.sourceLine, a.sourceLine { display: inline-block; min-height: 1.25em; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; }
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+div.sourceLine, a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource div.sourceLine, .numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource div.sourceLine::before, .numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; color: #aaaaaa;  padding-left: 4px; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; color: initial; }
+}
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.bn { color: #40a070; } /* BaseN */
+code span.fl { color: #40a070; } /* Float */
+code span.ch { color: #4070a0; } /* Char */
+code span.st { color: #4070a0; } /* String */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.ot { color: #007020; } /* Other */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.fu { color: #06287e; } /* Function */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code span.cn { color: #880000; } /* Constant */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.im { } /* Import */
+code span.va { color: #19177c; } /* Variable */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.op { color: #666666; } /* Operator */
+code span.bu { } /* BuiltIn */
+code span.ex { } /* Extension */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.at { color: #7d9029; } /* Attribute */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
   <link rel="stylesheet" href="../../pandocbd.css">
   <!--[if lt IE 9]>
@@ -69,6 +90,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#explore-text-branch">Explore Text Branch</a></li>
 <li><a href="#terminal-branch">Terminal Branch</a></li>
 </ul></li>
+<li><a href="#new-target-pro-trinket-5v">New Target Pro Trinket 5v</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -80,10 +102,8 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <ul>
 <li><a href="https://www.robotshop.com/ca/en/iic-128-64-oled-module-blue.html" class="uri">https://www.robotshop.com/ca/en/iic-128-64-oled-module-blue.html</a></li>
 </ul>
-<p>Unfortunately they don't provide up to date information for the OLED module. The datasheet is for a previous version. The Libraries supplied for the display are written by Adafruit.</p>
-<figure>
-<img src="explore_text.png" />
-</figure>
+<p>Unfortunately they don’t provide up to date information for the OLED module. The datasheet is for a previous version. The Libraries supplied for the display are written by Adafruit.</p>
+<p><img src="explore_text.png" /></p>
 <h2 id="initial-testing-of-display">Initial Testing of Display</h2>
 <h3 id="wiring">Wiring</h3>
 <p>Initial testing was done with an Ardunino Uno as this was what was shown in the datasheet. Note the silkscreen on the v1.2 board does not match the v1.1 datasheet with regard to the pinout. I followed the silkscreen.</p>
@@ -93,7 +113,7 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <li>cl to Arduino Uno A5</li>
 <li>data to Arduiono Uno A4</li>
 </ul>
-<p>No ext4ernal pull ups were added!</p>
+<p>No external pull ups were added!</p>
 <h3 id="arduino-ide-setup">Arduino IDE Setup</h3>
 <ol type="1">
 <li><p>Downloaded and installed Arduino IDE for windows 7. (used installer for XP and up)</p>
@@ -116,14 +136,12 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
   C:\Users\Student\Downloads\EF03155-Paintcode\Code\Arduino_UNO_DEOM\Hardware I2C\Adafruit_SSD1306</code></pre>
 <ol start="5" type="1">
 <li><p>A new example became available in the IDE</p>
-<figure>
-<img src="adafruit_ssd1306_example.png" />
-</figure>
+<p><img src="adafruit_ssd1306_example.png" /></p>
 <p>The example was copied and pasted into a new sketch.</p></li>
 <li><p>Initially the sketch would not compile. The compiler error indicated that a variable needed to be a constant to be placed in program memory. The following line was changed (line appears just after macro definitions near beginning of file).</p>
 <ul>
-<li><em>was --</em> static unsigned char PROGMEM logo16_glcd_bmp[] =</li>
-<li><em>changed to --</em> static const unsigned char PROGMEM logo16_glcd_bmp[] =</li>
+<li><em>was –</em> static unsigned char PROGMEM logo16_glcd_bmp[] =</li>
+<li><em>changed to –</em> static const unsigned char PROGMEM logo16_glcd_bmp[] =</li>
 </ul>
 <p>Once the <strong>const</strong> reserved word was added the sketch compiled.</p></li>
 <li><p>The display still remained blank. An I<sup>2</sup>C scanner Arduino sketch was used to find that the board responded to the address <strong>0x3C</strong>. A line in the example was changed to include this address. Once this was done the display showed the example code.</p>
@@ -133,7 +151,7 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <li><p>Other modifications were made as I was interested in concentrating on the display of text rather than graphics.</p></li>
 </ol>
 <h3 id="demo-video">Demo Video</h3>
-<p>This was recorded at the end of the day in a rush. I expect to get a better quality video soon -- it looks better in person. Also I will do some testing of different text sizes.</p>
+<p>This was recorded at the end of the day in a rush. I expect to get a better quality video soon – it looks better in person. Also I will do some testing of different text sizes.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nSQjUFMyLBs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 </iframe>
 <h3 id="code-used-on-first-day">Code Used on First Day</h3>
@@ -153,23 +171,21 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <li><p>Had to make a change to Adafruit_SSD1306.had</p>
 <p>At line 73 changed which line was commented out.</p></li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">   <span class="pp">#define SSD1306_128_64</span>
-<span class="co">//   #define SSD1306_128_32</span>
-<span class="co">//   #define SSD1306_96_16</span></code></pre></div>
+<pre class="sourceCode c" id="cb2"><code class="sourceCode c"><div class="sourceLine" id="cb2-1" data-line-number="1">   <span class="pp">#define SSD1306_128_64</span></div>
+<div class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">//   #define SSD1306_128_32</span></div>
+<div class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">//   #define SSD1306_96_16</span></div></code></pre>
 <h3 id="forked-on-github">Forked on Github</h3>
 <p>I forked the project on Github and made a new branch called 3rdparty.</p>
 <ul>
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/tree/3rdparty" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/tree/3rdparty</a></li>
-<li><a href="https://github.com/adafruit/Adafruit_SSD1306/compare/master...danpeirce:3rdparty" class="uri">https://github.com/adafruit/Adafruit_SSD1306/compare/master...danpeirce:3rdparty</a></li>
+<li><a href="https://github.com/adafruit/Adafruit_SSD1306/compare/master...danpeirce:3rdparty">https://github.com/adafruit/Adafruit_SSD1306/compare/master…danpeirce:3rdparty</a></li>
 </ul>
 <h3 id="explore-text-branch">Explore Text Branch</h3>
 <p>Added a new branch to fork of Adafruit_SSD1306 repository Called exploring_text.</p>
 <ul>
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/explore_text/examples/explore_text/explore_text.ino" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/explore_text/examples/explore_text/explore_text.ino</a></li>
 </ul>
-<figure>
-<img src="explore_text.png" />
-</figure>
+<p><img src="explore_text.png" /></p>
 <h3 id="terminal-branch">Terminal Branch</h3>
 <p>Added a new branch to fork of Adafruit_SSD1306 called terminal. The intent is to be able to send serial strings to the Arduino that will act as a controller for the display. The stream of characters could come from any MCU which would not need the graphics library ported. Current testing is being done with Arduino serial monitor but will follow up with project MCU.</p>
 <ol type="1">
@@ -179,15 +195,14 @@ use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.htm
 <li>Intercepts a number of ASCII control codes and calls a corresponding library function. The number of codes may be expanded.</li>
 <li>To facilitate testing a Processing sketch has been written that is capable of both sending regular text and generating the control characters when select non-alphanumeric characters are used.</li>
 </ol>
-<figure>
-<img src="test-oled.png" />
-</figure>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"> display.setRotation(<span class="dv">1</span>); <span class="co">// results in a portrait orientation for text on the screen</span></code></pre></div>
+<p><img src="test-oled.png" /></p>
+<pre class="sourceCode cpp" id="cb3"><code class="sourceCode cpp"><div class="sourceLine" id="cb3-1" data-line-number="1"> display.setRotation(<span class="dv">1</span>); <span class="co">// results in a portrait orientation for text on the screen</span></div></code></pre>
 <ul>
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal/examples/explore_text/explore_text.ino</a></li>
 </ul>
-<figure>
-<img src="rotate-display.png" />
-</figure>
+<p><img src="rotate-display.png" /></p>
+<h2 id="new-target-pro-trinket-5v">New Target Pro Trinket 5v</h2>
+<p>On May 28, 2018 moved testing from Arduino Uno to Adafruit Pro Trinket 5 volts. This board is much like the Uno when combined with a USB to serial adaptor board. The Arduino IDE sees the combination as the same as a Arduino Uno. The Pro Trinket will shrink the size of the project and reduce cost. The final project will not need the USB to serial adaptor board attached which will further reduce cost when we make a class set. I will continue to use the USB to serial baord for programming and testing only.</p>
+<p><img src="proTrinket5-oled.jpg" /></p>
 </body>
 </html>
