@@ -152,6 +152,20 @@ would not need the graphics library ported. Current testing is being done with A
 
 ![](rotate-display.png)
 
+### Terminal Branch with SO
+
+Added a new branch with SO (shift out) support. To facilitate multiple SO commands the sketch/program was converted to a state machine structure. This permits the 
+ability to add parameters to a command. The set position command for example requires X and Y coordinates as parameters for setting the cursor position.
+
+#### Code for this branch:
+
+* [https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/explore_text.ino](https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/explore_text.ino)
+* [https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde](https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde)
+
+As of the time of this entry (June 6, 2018) The fount has been changed to the 9 point Serif font. This fount is easier to read than the built in font.
+
+* *an image of display with serif font will be added when time permits*.
+
 ## New Target Pro Trinket 5v
 
 On May 28, 2018 moved testing from Arduino Uno to Adafruit Pro Trinket 5 volts. This board is much like the Uno when combined with a USB to serial adaptor board.
