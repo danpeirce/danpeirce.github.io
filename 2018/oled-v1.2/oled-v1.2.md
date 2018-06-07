@@ -162,7 +162,7 @@ ability to add parameters to a command. The set position command for example req
 * [https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/explore_text.ino](https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/explore_text.ino)
 * [https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde](https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde)
 
-As of the time of this entry (June 6, 2018) The fount has been changed to the 9 point Serif font. This fount is easier to read than the built in font.
+As of the time of this entry (June 6, 2018) The font has been changed to the 9 point Serif font. This fount is easier to read than the built in font.
 
 * *an image of display with serif font will be added when time permits*.
 
