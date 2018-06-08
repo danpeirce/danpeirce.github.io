@@ -2,9 +2,6 @@
 % Notes by Dan Peirce B.Sc.
 %
 
-<!---
-use pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
--->
 
 # IIC OLED V1.2 Notes
 
@@ -176,3 +173,9 @@ and testing only.
 * [https://www.digikey.ca/product-detail/en/adafruit-industries-llc/2000/1528-1039-ND/4990788](https://www.digikey.ca/product-detail/en/adafruit-industries-llc/2000/1528-1039-ND/4990788)
 
 ![](proTrinket5-oled.jpg)
+
+<!---
+use 
+  pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
+  pandoc -t markdown_github -s --toc -o readme.md oled-v1.2.md
+-->
