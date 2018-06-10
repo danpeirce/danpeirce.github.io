@@ -152,7 +152,9 @@ would not need the graphics library ported. Current testing is being done with A
 ### Terminal Branch with SO
 
 Added a new branch with SO (shift out) support. To facilitate multiple SO commands the sketch/program was converted to a state machine structure. This permits the 
-ability to add parameters to a command. The set position command for example requires X and Y coordinates as parameters for setting the cursor position.
+ability to add parameters to a command. The set text position command for example requires X and Y coordinates as parameters for setting the cursor position.
+
+![test-oled-so.png](test-oled-so.png)
 
 #### Code for this branch:
 
@@ -162,6 +164,12 @@ ability to add parameters to a command. The set position command for example req
 As of the time of this entry (June 6, 2018) The font has been changed to the 9 point Serif font. This fount is easier to read than the built in font.
 
 * *an image of display with serif font will be added when time permits*.
+
+### Timer Branch
+
+A new branch was added which differs from terminal_so primarily in the look of the start screen.
+
+* [https://github.com/danpeirce/Adafruit_SSD1306/blob/timer/examples/explore_text/explore_text.ino](https://github.com/danpeirce/Adafruit_SSD1306/blob/timer/examples/explore_text/explore_text.ino)
 
 ## New Target Pro Trinket 5v
 

@@ -10,6 +10,7 @@
         -   [Explore Text Branch](#explore-text-branch)
         -   [Terminal Branch](#terminal-branch)
         -   [Terminal Branch with SO](#terminal-branch-with-so)
+        -   [Timer Branch](#timer-branch)
     -   [New Target Pro Trinket 5v](#new-target-pro-trinket-5v)
 
 IIC OLED V1.2 Notes
@@ -151,7 +152,9 @@ Added a new branch to fork of Adafruit\_SSD1306 called terminal. The intent is t
 
 ### Terminal Branch with SO
 
-Added a new branch with SO (shift out) support. To facilitate multiple SO commands the sketch/program was converted to a state machine structure. This permits the ability to add parameters to a command. The set position command for example requires X and Y coordinates as parameters for setting the cursor position.
+Added a new branch with SO (shift out) support. To facilitate multiple SO commands the sketch/program was converted to a state machine structure. This permits the ability to add parameters to a command. The set text position command for example requires X and Y coordinates as parameters for setting the cursor position.
+
+![](test-oled-so.png)
 
 #### Code for this branch:
 
@@ -161,6 +164,12 @@ Added a new branch with SO (shift out) support. To facilitate multiple SO comman
 As of the time of this entry (June 6, 2018) The font has been changed to the 9 point Serif font. This fount is easier to read than the built in font.
 
 -   *an image of display with serif font will be added when time permits*.
+
+### Timer Branch
+
+A new branch was added which differs from terminal\_so primarily in the look of the start screen.
+
+-   <https://github.com/danpeirce/Adafruit_SSD1306/blob/timer/examples/explore_text/explore_text.ino>
 
 New Target Pro Trinket 5v
 -------------------------
