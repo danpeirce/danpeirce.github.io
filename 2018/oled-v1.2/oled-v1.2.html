@@ -199,7 +199,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/explore_text.ino" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/explore_text.ino</a></li>
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde</a></li>
 </ul>
-<p>As of the time of this entry (June 6, 2018) The font has been changed to the 9 point Serif font. This fount is easier to read than the built in font.</p>
+<p>As of the time of this entry (June 6, 2018) The font has been changed to the 9 point Serif font. This font is easier to read than the built in font.</p>
 <ul>
 <li><em>an image of display with serif font will be added when time permits</em>.</li>
 </ul>
@@ -208,6 +208,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/timer/examples/explore_text/explore_text.ino" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/timer/examples/explore_text/explore_text.ino</a></li>
 </ul>
+<p>The code in the <strong>setup()</strong> function was simplified by breaking out lines responsible for the start screen into a separate function. A SO command was added so that this function can be called again after the screen is cleared. This refactoring will be merged back into the timer_so branch.</p>
+<figure>
+<img src="test-oled-timer.png" />
+</figure>
 <h2 id="new-target-pro-trinket-5v">New Target Pro Trinket 5v</h2>
 <p>On May 28, 2018 moved testing from Arduino Uno to Adafruit Pro Trinket 5 volts. This board is much like the Uno when combined with a USB to serial adaptor board. The Arduino IDE sees the combination as the same as a Arduino Uno. The Pro Trinket will shrink the size of the project and reduce cost. The final project will not need the USB to serial adaptor board attached which will further reduce cost when we make a class set. I will continue to use the USB to serial baord for programming and testing only.</p>
 <ul>

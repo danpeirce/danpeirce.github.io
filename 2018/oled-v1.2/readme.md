@@ -161,7 +161,7 @@ Added a new branch with SO (shift out) support. To facilitate multiple SO comman
 -   <https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/explore_text.ino>
 -   <https://github.com/danpeirce/Adafruit_SSD1306/blob/terminal_so/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde>
 
-As of the time of this entry (June 6, 2018) The font has been changed to the 9 point Serif font. This fount is easier to read than the built in font.
+As of the time of this entry (June 6, 2018) The font has been changed to the 9 point Serif font. This font is easier to read than the built in font.
 
 -   *an image of display with serif font will be added when time permits*.
 
@@ -170,6 +170,10 @@ As of the time of this entry (June 6, 2018) The font has been changed to the 9 p
 A new branch was added which differs from terminal\_so primarily in the look of the start screen.
 
 -   <https://github.com/danpeirce/Adafruit_SSD1306/blob/timer/examples/explore_text/explore_text.ino>
+
+The code in the **setup()** function was simplified by breaking out lines responsible for the start screen into a separate function. A SO command was added so that this function can be called again after the screen is cleared. This refactoring will be merged back into the timer\_so branch.
+
+![](test-oled-timer.png)
 
 New Target Pro Trinket 5v
 -------------------------
