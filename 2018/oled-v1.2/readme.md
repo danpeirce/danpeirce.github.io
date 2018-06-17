@@ -165,6 +165,10 @@ As of the time of this entry (June 6, 2018) The font has been changed to the 9 p
 
 -   *an image of display with serif font will be added when time permits*.
 
+##### Moving String Literals to Flash
+
+To save RAM space the F() macro is being used with string literals. This conserves RAM. (June 17, 2018)
+
 ### Timer Branch
 
 A new branch was added which differs from terminal\_so primarily in the look of the start screen.

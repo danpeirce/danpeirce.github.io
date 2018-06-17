@@ -166,6 +166,10 @@ easier to read than the built in font.
 
 * *an image of display with serif font will be added when time permits*.
 
+##### Moving String Literals to Flash
+
+To save RAM space the F() macro is being used with string literals. This conserves RAM. (June 17, 2018)
+
 ### Timer Branch
 
 A new branch was added which differs from terminal_so primarily in the look of the start screen.
