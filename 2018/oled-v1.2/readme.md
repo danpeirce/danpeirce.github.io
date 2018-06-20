@@ -5,6 +5,7 @@
         -   [Demo Video](#demo-video)
         -   [Code Used on First Day](#code-used-on-first-day)
     -   [Switching to Current Adafruit Libraries (May 20, 2018)](#switching-to-current-adafruit-libraries-may-20-2018)
+        -   [Documentation of Adafruit Graphics Library](#documentation-of-adafruit-graphics-library)
         -   [Adjustments for 3rd Party Display.](#adjustments-for-3rd-party-display.)
         -   [Forked on Github](#forked-on-github)
         -   [Explore Text Branch](#explore-text-branch)
@@ -98,6 +99,10 @@ Switching to Current Adafruit Libraries (May 20, 2018)
 It became apparent that the elecfreaks.com site provided an old version of the libraries and it seemed expedient to test the current version of the files.
 
 It worked with a minor adjustment for the electfreak display.
+
+### Documentation of Adafruit Graphics Library
+
+-   <https://learn.adafruit.com/adafruit-gfx-graphics-library?view=all>
 
 ### Adjustments for 3rd Party Display.
 

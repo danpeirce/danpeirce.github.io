@@ -92,6 +92,10 @@ expedient to test the current version of the files.
 
 It worked with a minor adjustment for the electfreak display.
 
+### Documentation of Adafruit Graphics Library
+
+* [https://learn.adafruit.com/adafruit-gfx-graphics-library?view=all](https://learn.adafruit.com/adafruit-gfx-graphics-library?view=all)
+
 ### Adjustments for 3rd Party Display.
 
 1. As before the address of the display had to be adjusted.
