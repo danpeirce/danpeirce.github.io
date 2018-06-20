@@ -12,6 +12,7 @@
         -   [Terminal Branch](#terminal-branch)
         -   [Terminal Branch with SO](#terminal-branch-with-so)
         -   [Timer Branch](#timer-branch)
+        -   [Tic Tac Toe Branch](#tic-tac-toe-branch)
     -   [New Target Pro Trinket 5v](#new-target-pro-trinket-5v)
 
 IIC OLED V1.2 Notes
@@ -178,11 +179,23 @@ To save RAM space the F() macro is being used with string literals. This conserv
 
 A new branch was added which differs from terminal\_so primarily in the look of the start screen.
 
+![](photogateTimer.jpg)
+
 -   <https://github.com/danpeirce/Adafruit_SSD1306/blob/timer/examples/explore_text/explore_text.ino>
 
 The code in the **setup()** function was simplified by breaking out lines responsible for the start screen into a separate function. A SO command was added so that this function can be called again after the screen is cleared. This refactoring will be merged back into the timer\_so branch.
 
 ![](test-oled-timer.png)
+
+### Tic Tac Toe Branch
+
+Tic tac toe branch allows easy setup of Tic Tac Toe screens for play.
+
+![](tictactoe.jpg)
+
+![](tictactoepos.jpg)
+
+![](tictactoeXO.jpg)
 
 New Target Pro Trinket 5v
 -------------------------

@@ -71,6 +71,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#terminal-branch">Terminal Branch</a></li>
 <li><a href="#terminal-branch-with-so">Terminal Branch with SO</a></li>
 <li><a href="#timer-branch">Timer Branch</a></li>
+<li><a href="#tic-tac-toe-branch">Tic Tac Toe Branch</a></li>
 </ul></li>
 <li><a href="#new-target-pro-trinket-5v">New Target Pro Trinket 5v</a></li>
 </ul></li>
@@ -212,12 +213,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>To save RAM space the F() macro is being used with string literals. This conserves RAM. (June 17, 2018)</p>
 <h3 id="timer-branch">Timer Branch</h3>
 <p>A new branch was added which differs from terminal_so primarily in the look of the start screen.</p>
+<figure>
+<img src="photogateTimer.jpg" />
+</figure>
 <ul>
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/timer/examples/explore_text/explore_text.ino" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/timer/examples/explore_text/explore_text.ino</a></li>
 </ul>
 <p>The code in the <strong>setup()</strong> function was simplified by breaking out lines responsible for the start screen into a separate function. A SO command was added so that this function can be called again after the screen is cleared. This refactoring will be merged back into the timer_so branch.</p>
 <figure>
 <img src="test-oled-timer.png" />
+</figure>
+<h3 id="tic-tac-toe-branch">Tic Tac Toe Branch</h3>
+<p>Tic tac toe branch allows easy setup of Tic Tac Toe screens for play.</p>
+<figure>
+<img src="tictactoe.jpg" />
+</figure>
+<figure>
+<img src="tictactoepos.jpg" />
+</figure>
+<figure>
+<img src="tictactoeXO.jpg" />
 </figure>
 <h2 id="new-target-pro-trinket-5v">New Target Pro Trinket 5v</h2>
 <p>On May 28, 2018 moved testing from Arduino Uno to Adafruit Pro Trinket 5 volts. This board is much like the Uno when combined with a USB to serial adaptor board. The Arduino IDE sees the combination as the same as a Arduino Uno. The Pro Trinket will shrink the size of the project and reduce cost. The final project will not need the USB to serial adaptor board attached which will further reduce cost when we make a class set. I will continue to use the USB to serial baord for programming and testing only.</p>

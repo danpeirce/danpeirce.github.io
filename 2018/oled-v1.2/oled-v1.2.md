@@ -178,6 +178,8 @@ To save RAM space the F() macro is being used with string literals. This conserv
 
 A new branch was added which differs from terminal_so primarily in the look of the start screen.
 
+![](photogateTimer.jpg)
+
 * [https://github.com/danpeirce/Adafruit_SSD1306/blob/timer/examples/explore_text/explore_text.ino](https://github.com/danpeirce/Adafruit_SSD1306/blob/timer/examples/explore_text/explore_text.ino)
 
 The code in the **setup()** function was simplified by breaking out lines responsible for the 
@@ -185,6 +187,16 @@ start screen into a separate function. A SO command was added so that this funct
 again after the screen is cleared. This refactoring will be merged back into the timer_so branch.
 
 ![](test-oled-timer.png) 
+
+### Tic Tac Toe Branch
+
+Tic tac toe branch allows easy setup of Tic Tac Toe screens for play.
+
+![](tictactoe.jpg)
+
+![](tictactoepos.jpg)
+
+![](tictactoeXO.jpg)
 
 ## New Target Pro Trinket 5v
 
