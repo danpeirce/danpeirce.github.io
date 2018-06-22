@@ -193,9 +193,17 @@ Tic tac toe branch allows easy setup of Tic Tac Toe screens for play.
 
 ![](tictactoe.jpg)
 
+The next image shows the numbered positions corresponding to the nine positions that an X or and O can be placed. The numbers are added with the sequence: **"&ts"**
+
 ![](tictactoepos.jpg)
 
+The next image shows an example. An X is put in position "1" with the sequence: **"&t1X" enter** The O is placed with the sequence: **"&t9O"**
+
 ![](tictactoeXO.jpg)
+
+Menu items for Tic Tac Toe have been added for testing.
+
+![](test-oled-tictactoe.png)
 
 New Target Pro Trinket 5v
 -------------------------

@@ -204,6 +204,10 @@ The O is placed with the sequence: **"&t9O"**
 
 ![](tictactoeXO.jpg)
 
+Menu items for Tic Tac Toe have been added for testing.
+
+![](test-oled-tictactoe.png)
+
 ## New Target Pro Trinket 5v
 
 On May 28, 2018 moved testing from Arduino Uno to Adafruit Pro Trinket 5 volts. This board is much like the Uno when combined with a USB to serial adaptor board.
