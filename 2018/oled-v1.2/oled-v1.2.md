@@ -206,7 +206,12 @@ The O is placed with the sequence: **"&t9O"**
 
 Menu items for Tic Tac Toe have been added for testing.
 
-![](test-oled-tictactoe.png)
+![](test-oled-tictactoe.png) 
+
+#### Code for this branch
+
+* [https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/explore_text.ino](https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/explore_text.ino)
+* [https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde](https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde)
 
 ## New Target Pro Trinket 5v
 
