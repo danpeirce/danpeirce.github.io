@@ -199,8 +199,11 @@ The numbers are added with the sequence: **"&ts"**
 
 ![](tictactoepos.jpg)
 
-The next image shows an example. An X is put in position "1" with the sequence: **"&t1X" enter**
-The O is placed with the sequence: **"&t9O" enter**
+The next image shows an example. 
+
+* An X is put in position "1" with the sequence: **"&t1X" enter**
+* The O is placed with the sequence: **"&t9O" enter**
+
 The sequence shown above was typed into the Processing sketch. Note that the "&" is not sent as is to the 
 "terminal" but is used in the sketch as it is easy to type. If one were writing a PIC program 
 a 0x0E would be sent for the Shift Out command.
