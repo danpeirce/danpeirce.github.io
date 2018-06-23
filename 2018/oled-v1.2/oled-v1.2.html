@@ -69,9 +69,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#forked-on-github">Forked on Github</a></li>
 <li><a href="#explore-text-branch">Explore Text Branch</a></li>
 <li><a href="#terminal-branch">Terminal Branch</a></li>
-<li><a href="#terminal-branch-with-so">Terminal Branch with SO</a></li>
+<li><a href="#terminal-branch-with-so">Terminal Branch with SO</a><ul>
+<li><a href="#code-for-this-branch">Code for this branch:</a><ul>
+<li><a href="#moving-string-literals-to-flash">Moving String Literals to Flash</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#timer-branch">Timer Branch</a></li>
-<li><a href="#tic-tac-toe-branch">Tic Tac Toe Branch</a></li>
+<li><a href="#tic-tac-toe-branch">Tic Tac Toe Branch</a><ul>
+<li><a href="#code-for-this-branch-1">Code for this branch</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#new-target-pro-trinket-5v">New Target Pro Trinket 5v</a></li>
 </ul></li>
@@ -232,7 +238,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <figure>
 <img src="tictactoepos.jpg" />
 </figure>
-<p>The next image shows an example. An X is put in position &quot;1&quot; with the sequence: <strong>&quot;&amp;t1X&quot; enter</strong> The O is placed with the sequence: <strong>&quot;&amp;t9O&quot;</strong></p>
+<p>The next image shows an example. An X is put in position &quot;1&quot; with the sequence: <strong>&quot;&amp;t1X&quot; enter</strong> The O is placed with the sequence: <strong>&quot;&amp;t9O&quot; enter</strong> The sequence shown above was typed into the Processing sketch. Note that the &quot;&amp;&quot; is not sent as is to the &quot;terminal&quot; but is used in the sketch as it is easy to type. If one were writing a PIC program a 0x0E would be sent for the Shift Out command.</p>
 <figure>
 <img src="tictactoeXO.jpg" />
 </figure>
@@ -255,8 +261,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </figure>
 <!---
 use 
-  pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
-  pandoc -t markdown_github -s --toc -o readme.md oled-v1.2.md
+  pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
+  pandoc -t markdown_github -s --toc --toc-depth=5 -o readme.md oled-v1.2.md
 -->
 </body>
 </html>

@@ -11,8 +11,11 @@
         -   [Explore Text Branch](#explore-text-branch)
         -   [Terminal Branch](#terminal-branch)
         -   [Terminal Branch with SO](#terminal-branch-with-so)
+            -   [Code for this branch:](#code-for-this-branch)
+                -   [Moving String Literals to Flash](#moving-string-literals-to-flash)
         -   [Timer Branch](#timer-branch)
         -   [Tic Tac Toe Branch](#tic-tac-toe-branch)
+            -   [Code for this branch](#code-for-this-branch-1)
     -   [New Target Pro Trinket 5v](#new-target-pro-trinket-5v)
 
 IIC OLED V1.2 Notes
@@ -197,7 +200,7 @@ The next image shows the numbered positions corresponding to the nine positions 
 
 ![](tictactoepos.jpg)
 
-The next image shows an example. An X is put in position "1" with the sequence: **"&t1X" enter** The O is placed with the sequence: **"&t9O"**
+The next image shows an example. An X is put in position "1" with the sequence: **"&t1X" enter** The O is placed with the sequence: **"&t9O" enter** The sequence shown above was typed into the Processing sketch. Note that the "&" is not sent as is to the "terminal" but is used in the sketch as it is easy to type. If one were writing a PIC program a 0x0E would be sent for the Shift Out command.
 
 ![](tictactoeXO.jpg)
 
@@ -221,6 +224,6 @@ On May 28, 2018 moved testing from Arduino Uno to Adafruit Pro Trinket 5 volts. 
 
 <!---
 use 
-  pandoc -s --toc -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
-  pandoc -t markdown_github -s --toc -o readme.md oled-v1.2.md
+  pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
+  pandoc -t markdown_github -s --toc --toc-depth=5 -o readme.md oled-v1.2.md
 -->
