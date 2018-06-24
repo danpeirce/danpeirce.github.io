@@ -219,12 +219,59 @@ Menu items for Tic Tac Toe have been added for testing.
 * [https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/explore_text.ino](https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/explore_text.ino)
 * [https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde](https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde)
 
+#### Command Codes to control the Display Terminal
+
+In the default state most ASCII characters sent will be printed if printable but do not appear on display until
+a newline/linefeed "\n" is sent (0x0A).
+
+* Default state
+    * **0x0C** is an ASCII Form Feed and will be used for **Clear Screen**
+	    * if using Processing sketch use "~" to send 0x0C
+	* **0x11** is an ASCII Device Control 1 and will be used for **Text Size 1**
+	    * if using Processing sketch use "!" to send 0x11
+	* **0x12** is an ASCII Device Control 2 and will be used for **Text Size 2**
+	    * if using Processing sketch use "@" to send 0x12
+	* **0x13** is an ASCII Device Control 3 and will be used for **Text Size 3**
+	    * if using Processing sketch use "#" to send 0x13
+    * **0x14** is an ASCII Device Control 4 and will be used for **Text Size 4**
+	    * if using Processing sketch use "$" to send 0x14
+    * **0x09** is an ASCII Horizontal Tab and will be used for **Landscape Mode**
+	    * if using Processing sketch use "%" to send 0x09
+    * **0x0B** is an ASCII Vertical Tab and will be used for **Portrait Mode**
+	    * if using Processing sketch use "^" to send 0x0B
+    * **0x0E** is an ASCII Shift Out and will be used for **Control Mode**
+	    * if using Processing sketch use "&" to send 0x0E
+		* do not add newline
+* Shift Out state **Control Mode**
+    * A **Back Tick** "`" is used for **Set Text Position Mode**
+	    * expects a byte for X position and a byte for Y position for text insertion position
+		    * decimal 0x20 will be subtracted if the value is greater 0x20 or greater so that
+			  any binary value can be typed from a terminal
+			* do not add newline
+	* A **Hyphen** "-" is used for **Draw Line Mode**
+	    * expects four bytes for two endpoints
+   		    * byte order x1,y1,x2,y2 
+		    * decimal 0x20 will be subtracted if the value is greater 0x20 or greater so that
+			  any binary value can be typed from a terminal
+			* do not add newline
+	* A **'f'** is used for **Set Font**
+	    * **'0'** internal font
+		* **'1'** 9pnt Serif font
+		    * do not add newline
+    * A **'p'** is used for **Show Photogate Timer** start screen
+	* A **'t'** is used for **Tic Tac Toe**
+	    * **'1' to '9'** is used to set area for entry
+		* **'s'** is used for **Show Position** used to show position codes/labels
+		* **'d'** is used for **Delete Entry** 
+		    * **'1' to '9'** is used to set area for deletion 
+	* A **'r'** is used for **Revert to Start Screen**  
+
 ## New Target Pro Trinket 5v
 
 On May 28, 2018 moved testing from Arduino Uno to Adafruit Pro Trinket 5 volts. This board is much like the Uno when combined with a USB to serial adaptor board.
 The Arduino IDE sees the combination as the same as a Arduino Uno. The Pro Trinket will shrink the size of the project and reduce cost. The final project will not
-need the USB to serial adaptor board attached which will further reduce cost when we make a class set. I will continue to use the USB to serial baord for programming 
-and testing only.
+need the USB to serial adaptor board attached which will further reduce cost when we make a class set. I will continue
+ to use the USB to serial board for programming and testing only.
 
 * [https://www.digikey.ca/product-detail/en/adafruit-industries-llc/2000/1528-1039-ND/4990788](https://www.digikey.ca/product-detail/en/adafruit-industries-llc/2000/1528-1039-ND/4990788)
 

@@ -77,6 +77,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#timer-branch">Timer Branch</a></li>
 <li><a href="#tic-tac-toe-branch">Tic Tac Toe Branch</a><ul>
 <li><a href="#code-for-this-branch-1">Code for this branch</a></li>
+<li><a href="#command-codes-to-control-the-display-terminal">Command Codes to control the Display Terminal</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#new-target-pro-trinket-5v">New Target Pro Trinket 5v</a></li>
@@ -256,8 +257,87 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/explore_text.ino" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/explore_text.ino</a></li>
 <li><a href="https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde" class="uri">https://github.com/danpeirce/Adafruit_SSD1306/blob/tictactoe/examples/explore_text/sketch_180522a_test_oled/sketch_180522a_test_oled.pde</a></li>
 </ul>
+<h4 id="command-codes-to-control-the-display-terminal">Command Codes to control the Display Terminal</h4>
+<p>In the default state most ASCII characters sent will be printed if printable but do not appear on display until a newline/linefeed &quot;&quot; is sent (0x0A).</p>
+<ul>
+<li>Default state
+<ul>
+<li><strong>0x0C</strong> is an ASCII Form Feed and will be used for <strong>Clear Screen</strong>
+<ul>
+<li>if using Processing sketch use &quot;~&quot; to send 0x0C</li>
+</ul></li>
+<li><strong>0x11</strong> is an ASCII Device Control 1 and will be used for <strong>Text Size 1</strong>
+<ul>
+<li>if using Processing sketch use &quot;!&quot; to send 0x11</li>
+</ul></li>
+<li><strong>0x12</strong> is an ASCII Device Control 2 and will be used for <strong>Text Size 2</strong>
+<ul>
+<li>if using Processing sketch use &quot;@&quot; to send 0x12</li>
+</ul></li>
+<li><strong>0x13</strong> is an ASCII Device Control 3 and will be used for <strong>Text Size 3</strong>
+<ul>
+<li>if using Processing sketch use &quot;#&quot; to send 0x13</li>
+</ul></li>
+<li><strong>0x14</strong> is an ASCII Device Control 4 and will be used for <strong>Text Size 4</strong>
+<ul>
+<li>if using Processing sketch use &quot;$&quot; to send 0x14</li>
+</ul></li>
+<li><strong>0x09</strong> is an ASCII Horizontal Tab and will be used for <strong>Landscape Mode</strong>
+<ul>
+<li>if using Processing sketch use &quot;%&quot; to send 0x09</li>
+</ul></li>
+<li><strong>0x0B</strong> is an ASCII Vertical Tab and will be used for <strong>Portrait Mode</strong>
+<ul>
+<li>if using Processing sketch use &quot;^&quot; to send 0x0B</li>
+</ul></li>
+<li><strong>0x0E</strong> is an ASCII Shift Out and will be used for <strong>Control Mode</strong>
+<ul>
+<li>if using Processing sketch use &quot;&amp;&quot; to send 0x0E</li>
+<li>do not add newline</li>
+</ul></li>
+</ul></li>
+<li>Shift Out state <strong>Control Mode</strong>
+<ul>
+<li>A <strong>Back Tick</strong> &quot;`&quot; is used for <strong>Set Text Position Mode</strong>
+<ul>
+<li>expects a byte for X position and a byte for Y position for text insertion position
+<ul>
+<li>decimal 0x20 will be subtracted if the value is greater 0x20 or greater so that any binary value can be typed from a terminal</li>
+<li>do not add newline</li>
+</ul></li>
+</ul></li>
+<li>A <strong>Hyphen</strong> &quot;-&quot; is used for <strong>Draw Line Mode</strong>
+<ul>
+<li>expects four bytes for two endpoints
+<ul>
+<li>byte order x1,y1,x2,y2</li>
+<li>decimal 0x20 will be subtracted if the value is greater 0x20 or greater so that any binary value can be typed from a terminal</li>
+<li>do not add newline</li>
+</ul></li>
+</ul></li>
+<li>A <strong>'f'</strong> is used for <strong>Set Font</strong>
+<ul>
+<li><strong>'0'</strong> internal font</li>
+<li><strong>'1'</strong> 9pnt Serif font
+<ul>
+<li>do not add newline</li>
+</ul></li>
+</ul></li>
+<li>A <strong>'p'</strong> is used for <strong>Show Photogate Timer</strong> start screen</li>
+<li>A <strong>'t'</strong> is used for <strong>Tic Tac Toe</strong>
+<ul>
+<li><strong>'1' to '9'</strong> is used to set area for entry</li>
+<li><strong>'s'</strong> is used for <strong>Show Position</strong> used to show position codes/labels</li>
+<li><strong>'d'</strong> is used for <strong>Delete Entry</strong>
+<ul>
+<li><strong>'1' to '9'</strong> is used to set area for deletion</li>
+</ul></li>
+</ul></li>
+<li>A <strong>'r'</strong> is used for <strong>Revert to Start Screen</strong></li>
+</ul></li>
+</ul>
 <h2 id="new-target-pro-trinket-5v">New Target Pro Trinket 5v</h2>
-<p>On May 28, 2018 moved testing from Arduino Uno to Adafruit Pro Trinket 5 volts. This board is much like the Uno when combined with a USB to serial adaptor board. The Arduino IDE sees the combination as the same as a Arduino Uno. The Pro Trinket will shrink the size of the project and reduce cost. The final project will not need the USB to serial adaptor board attached which will further reduce cost when we make a class set. I will continue to use the USB to serial baord for programming and testing only.</p>
+<p>On May 28, 2018 moved testing from Arduino Uno to Adafruit Pro Trinket 5 volts. This board is much like the Uno when combined with a USB to serial adaptor board. The Arduino IDE sees the combination as the same as a Arduino Uno. The Pro Trinket will shrink the size of the project and reduce cost. The final project will not need the USB to serial adaptor board attached which will further reduce cost when we make a class set. I will continue to use the USB to serial board for programming and testing only.</p>
 <ul>
 <li><a href="https://www.digikey.ca/product-detail/en/adafruit-industries-llc/2000/1528-1039-ND/4990788" class="uri">https://www.digikey.ca/product-detail/en/adafruit-industries-llc/2000/1528-1039-ND/4990788</a></li>
 </ul>
