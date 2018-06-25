@@ -188,6 +188,13 @@ again after the screen is cleared. This refactoring will be merged back into the
 
 ![](test-oled-timer.png) 
 
+#### Photogate Timer Repository
+
+The old photogate box repository was imported into a new repository and will be modified to 
+make use of the graphics display terminal.
+
+* [https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box](https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box)
+
 ### Tic Tac Toe Branch
 
 Tic tac toe branch allows easy setup of Tic Tac Toe screens for play.

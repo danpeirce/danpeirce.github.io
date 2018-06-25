@@ -14,6 +14,7 @@
             -   [Code for this branch:](#code-for-this-branch)
                 -   [Moving String Literals to Flash](#moving-string-literals-to-flash)
         -   [Timer Branch](#timer-branch)
+            -   [Photogate Timer Repository](#photogate-timer-repository)
         -   [Tic Tac Toe Branch](#tic-tac-toe-branch)
             -   [Code for this branch](#code-for-this-branch-1)
             -   [Command Codes to control the Display Terminal](#command-codes-to-control-the-display-terminal)
@@ -190,6 +191,12 @@ A new branch was added which differs from terminal\_so primarily in the look of 
 The code in the **setup()** function was simplified by breaking out lines responsible for the start screen into a separate function. A SO command was added so that this function can be called again after the screen is cleared. This refactoring will be merged back into the timer\_so branch.
 
 ![](test-oled-timer.png)
+
+#### Photogate Timer Repository
+
+The old photogate box repository was imported into a new repository and will be modified to make use of the graphics display terminal.
+
+-   <https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box>
 
 ### Tic Tac Toe Branch
 
