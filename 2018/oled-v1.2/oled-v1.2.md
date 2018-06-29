@@ -197,7 +197,8 @@ make use of the graphics display terminal.
 
 ##### justcount
 
-A simple exploratory project that combines a PIC MCU with the OLED terminal. 
+A simple exploratory project that combines a PIC MCU with the OLED terminal. This is essentially my first experiment
+in using the **Pro 5+ Volt Trinket -- OLED graphics display** combo as a **display terminal** for a **PIC project**.
 
 * [https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount](https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount)
 

@@ -201,7 +201,7 @@ The old photogate box repository was imported into a new repository and will be 
 
 ##### justcount
 
-A simple exploratory project that combines a PIC MCU with the OLED terminal.
+A simple exploratory project that combines a PIC MCU with the OLED terminal. This is essentially my first experiment in using the **Pro 5+ Volt Trinket -- OLED graphics display** combo as a **display terminal** for a **PIC project**.
 
 -   <https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount>
 
