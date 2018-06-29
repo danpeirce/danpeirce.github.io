@@ -75,9 +75,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li><a href="#timer-branch">Timer Branch</a><ul>
-<li><a href="#photogate-timer-repository">Photogate Timer Repository</a><ul>
-<li><a href="#justcount">justcount</a></li>
-</ul></li>
+<li><a href="#tic-tac-toe-branch-merged-in">tic tac toe branch Merged in</a></li>
 </ul></li>
 <li><a href="#tic-tac-toe-branch">Tic Tac Toe Branch</a><ul>
 <li><a href="#code-for-this-branch-1">Code for this branch</a></li>
@@ -85,6 +83,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li><a href="#new-target-pro-trinket-5v">New Target Pro Trinket 5v</a></li>
+</ul></li>
+<li><a href="#applications">Applications</a><ul>
+<li><a href="#photogate-timer-repository">Photogate Timer Repository</a><ul>
+<li><a href="#justcount">justcount</a><ul>
+<li><a href="#power-source">Power Source</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -234,16 +239,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <figure>
 <img src="test-oled-timer.png" />
 </figure>
-<h4 id="photogate-timer-repository">Photogate Timer Repository</h4>
-<p>The old photogate box repository was imported into a new repository and will be modified to make use of the graphics display terminal.</p>
-<ul>
-<li><a href="https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box" class="uri">https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box</a></li>
-</ul>
-<h5 id="justcount">justcount</h5>
-<p>A simple exploratory project that combines a PIC MCU with the OLED terminal. This is essentially my first experiment in using the <strong>Pro 5+ Volt Trinket -- OLED graphics display</strong> combo as a <strong>display terminal</strong> for a <strong>PIC project</strong>.</p>
-<ul>
-<li><a href="https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount" class="uri">https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount</a></li>
-</ul>
+<h4 id="tic-tac-toe-branch-merged-in">tic tac toe branch Merged in</h4>
+<p>The tictactoe branch was merged into the timer branch to take advantage of new features. The essential difference now is in the default screen.</p>
 <h3 id="tic-tac-toe-branch">Tic Tac Toe Branch</h3>
 <p>Tic tac toe branch allows easy setup of Tic Tac Toe screens for play.</p>
 <figure>
@@ -363,5 +360,20 @@ use
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
   pandoc -t markdown_github -s --toc --toc-depth=5 -o readme.md oled-v1.2.md
 -->
+<h1 id="applications">Applications</h1>
+<h2 id="photogate-timer-repository">Photogate Timer Repository</h2>
+<p>The old Git PIC MCU photogate box repository was imported into a new repository and will be modified to make use of the graphics display terminal.</p>
+<ul>
+<li><a href="https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box" class="uri">https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box</a></li>
+</ul>
+<h3 id="justcount">justcount</h3>
+<p>A simple exploratory project that combines a PIC MCU with the OLED terminal. This is essentially my first experiment in using the <strong>Pro 5+ Volt Trinket -- OLED graphics display</strong> combo as a <strong>display terminal</strong> for a <strong>PIC project</strong>.</p>
+<ul>
+<li><a href="https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount" class="uri">https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount</a></li>
+</ul>
+<p><em>need photo</em></p>
+<h4 id="power-source">Power Source</h4>
+<p>Up until now the Pro 5+Volt Trinket board was powered from a USB to serial adaptor board that was also used to program the Trinket. The adaptor has been removed and power is now coming through a Micro B USB connector in the Trinket. +5 volts and ground is being distributed to the PIC MCU and the OLED display from the Trinket.</p>
+<p>There is a jumper from the PIC Tx pin to the Trinket board Rx.</p>
 </body>
 </html>

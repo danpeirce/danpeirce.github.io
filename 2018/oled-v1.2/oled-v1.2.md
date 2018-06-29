@@ -188,19 +188,11 @@ again after the screen is cleared. This refactoring will be merged back into the
 
 ![](test-oled-timer.png) 
 
-#### Photogate Timer Repository
+#### tic tac toe branch Merged in
 
-The old photogate box repository was imported into a new repository and will be modified to 
-make use of the graphics display terminal.
+The tictactoe branch was merged into the timer branch to take advantage of new features. The essential difference 
+now is in the default screen.
 
-* [https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box](https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box)
-
-##### justcount
-
-A simple exploratory project that combines a PIC MCU with the OLED terminal. This is essentially my first experiment
-in using the **Pro 5+ Volt Trinket -- OLED graphics display** combo as a **display terminal** for a **PIC project**.
-
-* [https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount](https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount)
 
 ### Tic Tac Toe Branch
 
@@ -296,3 +288,29 @@ use
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
   pandoc -t markdown_github -s --toc --toc-depth=5 -o readme.md oled-v1.2.md
 -->
+
+# Applications
+
+## Photogate Timer Repository
+
+The old Git PIC MCU photogate box repository was imported into a new repository and will be modified to 
+make use of the graphics display terminal.
+
+* [https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box](https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box)
+
+### justcount
+
+A simple exploratory project that combines a PIC MCU with the OLED terminal. This is essentially my first experiment
+in using the **Pro 5+ Volt Trinket -- OLED graphics display** combo as a **display terminal** for a **PIC project**.
+
+* [https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount](https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount)
+
+  *need photo*
+
+#### Power Source
+
+Up until now the Pro 5+Volt Trinket board was powered from a USB to serial adaptor board that was also used to
+program the Trinket. The adaptor has been removed and power is now coming through a Micro B USB connector in the 
+Trinket. +5 volts and ground is being distributed to the PIC MCU and the OLED display from the Trinket.
+
+There is a jumper from the PIC Tx pin to the Trinket board Rx.
