@@ -195,6 +195,12 @@ make use of the graphics display terminal.
 
 * [https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box](https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box)
 
+##### justcount
+
+A simple exploratory project that combines a PIC MCU with the OLED terminal. 
+
+* [https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount](https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount)
+
 ### Tic Tac Toe Branch
 
 Tic tac toe branch allows easy setup of Tic Tac Toe screens for play.

@@ -15,6 +15,7 @@
                 -   [Moving String Literals to Flash](#moving-string-literals-to-flash)
         -   [Timer Branch](#timer-branch)
             -   [Photogate Timer Repository](#photogate-timer-repository)
+                -   [justcount](#justcount)
         -   [Tic Tac Toe Branch](#tic-tac-toe-branch)
             -   [Code for this branch](#code-for-this-branch-1)
             -   [Command Codes to control the Display Terminal](#command-codes-to-control-the-display-terminal)
@@ -197,6 +198,12 @@ The code in the **setup()** function was simplified by breaking out lines respon
 The old photogate box repository was imported into a new repository and will be modified to make use of the graphics display terminal.
 
 -   <https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box>
+
+##### justcount
+
+A simple exploratory project that combines a PIC MCU with the OLED terminal.
+
+-   <https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount>
 
 ### Tic Tac Toe Branch
 
