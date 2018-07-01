@@ -355,11 +355,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <figure>
 <img src="proTrinket5-oled.jpg" />
 </figure>
-<!---
-use 
-  pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
-  pandoc -t markdown_github -s --toc --toc-depth=5 -o readme.md oled-v1.2.md
--->
 <h1 id="applications">Applications</h1>
 <h2 id="photogate-timer-repository">Photogate Timer Repository</h2>
 <p>The old Git PIC MCU photogate box repository was imported into a new repository and will be modified to make use of the graphics display terminal.</p>
@@ -371,14 +366,17 @@ use
 <ul>
 <li><a href="https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount" class="uri">https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount</a></li>
 </ul>
-<figure>
-<img src="justcountcct.jpg" />
-</figure>
+<p>The Circuit with the PIC18F4525 and Display Terminal <img src="justcountcct.jpg" alt="The Circuit with the PIC18F4525 and Display Terminal" /></p>
 <figure>
 <img src="justcount.jpg" />
 </figure>
 <h4 id="power-source">Power Source</h4>
 <p>Up until now the Pro 5+Volt Trinket board was powered from a USB to serial adaptor board that was also used to program the Trinket. The adaptor has been removed and power is now coming through a Micro B USB connector in the Trinket. +5 volts and ground is being distributed to the PIC MCU and the OLED display from the Trinket.</p>
 <p>There is a jumper from the PIC Tx pin to the Trinket board Rx.</p>
+<!---
+use 
+  pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
+  pandoc -t markdown_github -s --toc --toc-depth=5 -o readme.md oled-v1.2.md
+-->
 </body>
 </html>

@@ -283,12 +283,6 @@ need the USB to serial adaptor board attached which will further reduce cost whe
 
 ![](proTrinket5-oled.jpg)
 
-<!---
-use 
-  pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
-  pandoc -t markdown_github -s --toc --toc-depth=5 -o readme.md oled-v1.2.md
--->
-
 # Applications
 
 ## Photogate Timer Repository
@@ -305,7 +299,8 @@ in using the **Pro 5+ Volt Trinket -- OLED graphics display** combo as a **displ
 
 * [https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount](https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount)
 
-![](justcountcct.jpg)
+The Circuit with the PIC18F4525 and Display Terminal
+![The Circuit with the PIC18F4525 and Display Terminal](justcountcct.jpg)
 
 ![](justcount.jpg)
 
@@ -316,3 +311,9 @@ program the Trinket. The adaptor has been removed and power is now coming throug
 Trinket. +5 volts and ground is being distributed to the PIC MCU and the OLED display from the Trinket.
 
 There is a jumper from the PIC Tx pin to the Trinket board Rx.
+
+<!---
+use 
+  pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
+  pandoc -t markdown_github -s --toc --toc-depth=5 -o readme.md oled-v1.2.md
+-->
