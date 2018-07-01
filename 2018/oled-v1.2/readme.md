@@ -23,6 +23,9 @@
     -   [Photogate Timer Repository](#photogate-timer-repository)
         -   [justcount](#justcount)
             -   [Power Source](#power-source)
+                -   [When Programming the Trinket](#when-programming-the-trinket)
+                -   [When Receiving Serial Data from a PIC MCU](#when-receiving-serial-data-from-a-pic-mcu)
+            -   [Added a Window State to Terminal](#added-a-window-state-to-terminal)
 
 IIC OLED V1.2 Notes
 ===================
@@ -303,9 +306,43 @@ The Circuit with the PIC18F4525 and Display Terminal ![The Circuit with the PIC1
 
 #### Power Source
 
-Up until now the Pro 5+Volt Trinket board was powered from a USB to serial adaptor board that was also used to program the Trinket. The adaptor has been removed and power is now coming through a Micro B USB connector in the Trinket. +5 volts and ground is being distributed to the PIC MCU and the OLED display from the Trinket.
+There are several possible methods of powering the Pro Trinket board which distributes power to the rest of the project.
+
+##### When Programming the Trinket
+
+The Pro 5+Volt Trinket board was powered from a USB to serial adaptor board that was also used to program the Trinket.
+
+##### When Receiving Serial Data from a PIC MCU
+
+The adaptor is removed and power comes through a Micro B USB connector in the Trinket. V<sub>DD</sub> and ground is being distributed to the PIC MCU and the OLED display from the Trinket.
 
 There is a jumper from the PIC Tx pin to the Trinket board Rx.
+
+#### Added a Window State to Terminal
+
+In an effort to eliminate flicker that was evident in the count line on the display a window state was created. There is no call to **display.display()** until a newline is received.
+
+-   The window state looks for a numeral input indicating which window to clear and print into. So far only one window has been defined and named '2'.
+-   **window2** is the area below the lower line of the Photogate Timer heading.
+    -   There is an intent to define window1 as the area of the heading.
+    -   There is an intent to define window3 as the space to the right that includes KPU.
+
+The main while loop running in the PIC for **justcount** is very simple. The count is free running and the time per cycle is not a prime consideration.
+
+``` c
+    while(1)
+    { 
+        count++;
+        if (count > 500000)
+        {
+            static unsigned int cycle = 0; 
+            static const char code[] = {SHIFTOUT, 'w', '2', 0};
+            count = 0;
+            printf("%s> %d\n", code, cycle);
+            cycle++;
+        }
+    }
+```
 
 <!---
 use 

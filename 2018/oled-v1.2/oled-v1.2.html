@@ -87,7 +87,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#applications">Applications</a><ul>
 <li><a href="#photogate-timer-repository">Photogate Timer Repository</a><ul>
 <li><a href="#justcount">justcount</a><ul>
-<li><a href="#power-source">Power Source</a></li>
+<li><a href="#power-source">Power Source</a><ul>
+<li><a href="#when-programming-the-trinket">When Programming the Trinket</a></li>
+<li><a href="#when-receiving-serial-data-from-a-pic-mcu">When Receiving Serial Data from a PIC MCU</a></li>
+</ul></li>
+<li><a href="#added-a-window-state-to-terminal">Added a Window State to Terminal</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -371,8 +375,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <img src="justcount.jpg" />
 </figure>
 <h4 id="power-source">Power Source</h4>
-<p>Up until now the Pro 5+Volt Trinket board was powered from a USB to serial adaptor board that was also used to program the Trinket. The adaptor has been removed and power is now coming through a Micro B USB connector in the Trinket. +5 volts and ground is being distributed to the PIC MCU and the OLED display from the Trinket.</p>
+<p>There are several possible methods of powering the Pro Trinket board which distributes power to the rest of the project.</p>
+<h5 id="when-programming-the-trinket">When Programming the Trinket</h5>
+<p>The Pro 5+Volt Trinket board was powered from a USB to serial adaptor board that was also used to program the Trinket.</p>
+<h5 id="when-receiving-serial-data-from-a-pic-mcu">When Receiving Serial Data from a PIC MCU</h5>
+<p>The adaptor is removed and power comes through a Micro B USB connector in the Trinket. V<sub>DD</sub> and ground is being distributed to the PIC MCU and the OLED display from the Trinket.</p>
 <p>There is a jumper from the PIC Tx pin to the Trinket board Rx.</p>
+<h4 id="added-a-window-state-to-terminal">Added a Window State to Terminal</h4>
+<p>In an effort to eliminate flicker that was evident in the count line on the display a window state was created. There is no call to <strong>display.display()</strong> until a newline is received.</p>
+<ul>
+<li>The window state looks for a numeral input indicating which window to clear and print into. So far only one window has been defined and named '2'.</li>
+<li><strong>window2</strong> is the area below the lower line of the Photogate Timer heading.
+<ul>
+<li>There is an intent to define window1 as the area of the heading.</li>
+<li>There is an intent to define window3 as the space to the right that includes KPU.</li>
+</ul></li>
+</ul>
+<p>The main while loop running in the PIC for <strong>justcount</strong> is very simple. The count is free running and the time per cycle is not a prime consideration.</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">    <span class="cf">while</span>(<span class="dv">1</span>)
+    { 
+        count++;
+        <span class="cf">if</span> (count &gt; <span class="dv">500000</span>)
+        {
+            <span class="dt">static</span> <span class="dt">unsigned</span> <span class="dt">int</span> cycle = <span class="dv">0</span>; 
+            <span class="dt">static</span> <span class="dt">const</span> <span class="dt">char</span> code[] = {SHIFTOUT, <span class="ch">&#39;w&#39;</span>, <span class="ch">&#39;2&#39;</span>, <span class="dv">0</span>};
+            count = <span class="dv">0</span>;
+            printf(<span class="st">&quot;%s&gt; %d</span><span class="sc">\n</span><span class="st">&quot;</span>, code, cycle);
+            cycle++;
+        }
+    }</code></pre></div>
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
