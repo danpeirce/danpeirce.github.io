@@ -305,7 +305,9 @@ in using the **Pro 5+ Volt Trinket -- OLED graphics display** combo as a **displ
 
 * [https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount](https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount)
 
-  *need photo*
+![](justcountcct.jpg)
+
+![](justcount.jpg)
 
 #### Power Source
 

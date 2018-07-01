@@ -302,7 +302,9 @@ A simple exploratory project that combines a PIC MCU with the OLED terminal. Thi
 
 -   <https://github.com/danpeirce/photogate-box-ssd1306term/tree/justcount>
 
-*need photo*
+![](justcountcct.jpg)
+
+![](justcount.jpg)
 
 #### Power Source
 
