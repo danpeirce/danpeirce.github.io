@@ -26,6 +26,8 @@
                 -   [When Programming the Trinket](#when-programming-the-trinket)
                 -   [When Receiving Serial Data from a PIC MCU](#when-receiving-serial-data-from-a-pic-mcu)
             -   [Added a Window State to Terminal](#added-a-window-state-to-terminal)
+        -   [keypress](#keypress)
+            -   [Use of sprintf and a char buffer](#use-of-sprintf-and-a-char-buffer)
 
 IIC OLED V1.2 Notes
 ===================
@@ -342,6 +344,50 @@ The main while loop running in the PIC for **justcount** is very simple. The cou
             cycle++;
         }
     }
+```
+
+### keypress
+
+This branch explores posting a message to the display that indicates if a pushbutton switch has been pressed or released.
+
+![](https://raw.githubusercontent.com/danpeirce/photogate-box-ssd1306term/keypress/image/keypress.jpg)
+
+![](https://raw.githubusercontent.com/danpeirce/photogate-box-ssd1306term/keypress/image/keyrelease.jpg)
+
+#### Use of sprintf and a char buffer
+
+Since printf() does not return until all but the last two characters are sent it generally causes delays. Those delays could result in missed key presses. To avoid that issue sprintf() is being used rather than printf().
+
+``` c
+        keyp = PORTDbits.RD2;
+        if (keyp != keyplast)
+        {
+            if (keyp == 1) 
+            {
+                inIndexBuff = inIndexBuff + sprintf( buffer+inIndexBuff, "%sKey Press\n", code);
+                
+            }
+            else 
+            {
+                inIndexBuff = inIndexBuff + sprintf( buffer+inIndexBuff,"%sKey Release\n", code);
+            }
+        }
+        keyplast = keyp;
+```
+
+There is also a task to send a byte to the USART whenever it is ready for one if the buffer is not empty..
+
+``` c
+        if(TXIF && (inIndexBuff > 0))
+        {
+            TXREG = buffer[outIndexBuff];
+            outIndexBuff++;
+            if (inIndexBuff == outIndexBuff) 
+            {
+                inIndexBuff = 0;
+                outIndexBuff= 0;
+            }
+        }
 ```
 
 <!---

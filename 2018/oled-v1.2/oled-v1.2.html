@@ -93,6 +93,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#added-a-window-state-to-terminal">Added a Window State to Terminal</a></li>
 </ul></li>
+<li><a href="#keypress">keypress</a><ul>
+<li><a href="#use-of-sprintf-and-a-char-buffer">Use of sprintf and a char buffer</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -404,6 +407,41 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             cycle++;
         }
     }</code></pre></div>
+<h3 id="keypress">keypress</h3>
+<p>This branch explores posting a message to the display that indicates if a pushbutton switch has been pressed or released.</p>
+<figure>
+<img src="https://raw.githubusercontent.com/danpeirce/photogate-box-ssd1306term/keypress/image/keypress.jpg" />
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/danpeirce/photogate-box-ssd1306term/keypress/image/keyrelease.jpg" />
+</figure>
+<h4 id="use-of-sprintf-and-a-char-buffer">Use of sprintf and a char buffer</h4>
+<p>Since printf() does not return until all but the last two characters are sent it generally causes delays. Those delays could result in missed key presses. To avoid that issue sprintf() is being used rather than printf().</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">        keyp = PORTDbits.RD2;
+        <span class="cf">if</span> (keyp != keyplast)
+        {
+            <span class="cf">if</span> (keyp == <span class="dv">1</span>) 
+            {
+                inIndexBuff = inIndexBuff + sprintf( buffer+inIndexBuff, <span class="st">&quot;%sKey Press</span><span class="sc">\n</span><span class="st">&quot;</span>, code);
+                
+            }
+            <span class="cf">else</span> 
+            {
+                inIndexBuff = inIndexBuff + sprintf( buffer+inIndexBuff,<span class="st">&quot;%sKey Release</span><span class="sc">\n</span><span class="st">&quot;</span>, code);
+            }
+        }
+        keyplast = keyp;</code></pre></div>
+<p>There is also a task to send a byte to the USART whenever it is ready for one if the buffer is not empty..</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">        <span class="cf">if</span>(TXIF &amp;&amp; (inIndexBuff &gt; <span class="dv">0</span>))
+        {
+            TXREG = buffer[outIndexBuff];
+            outIndexBuff++;
+            <span class="cf">if</span> (inIndexBuff == outIndexBuff) 
+            {
+                inIndexBuff = <span class="dv">0</span>;
+                outIndexBuff= <span class="dv">0</span>;
+            }
+        }</code></pre></div>
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
