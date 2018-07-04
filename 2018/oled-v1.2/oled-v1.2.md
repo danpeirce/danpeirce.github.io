@@ -396,6 +396,27 @@ There is also a task to send a byte to the USART whenever it is ready for one if
         }
 ~~~~
 
+After speeding up the loop significant switch bounce became apparent. This was mitigated by reducing the frequency 
+of checking the switch condition.
+
+~~~~c
+    while(1)
+    {  
+        static int loopcount=0;
+        if (loopcount > 500)
+        {
+            keypresstask();
+            loopcount=0;
+        }
+        loopcount++;
+        txbuffertask();
+    } 
+~~~~
+
+#### oledterminal.ino has been moved to PhotogateLV.c Repository
+
+It seemed more practical to have a copy of the terminal sketch in the PhotogateLC.c repository.
+
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html

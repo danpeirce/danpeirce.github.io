@@ -95,6 +95,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#keypress">keypress</a><ul>
 <li><a href="#use-of-sprintf-and-a-char-buffer">Use of sprintf and a char buffer</a></li>
+<li><a href="#oledterminal.ino-has-been-moved-to-photogatelv.c-repository">oledterminal.ino has been moved to PhotogateLV.c Repository</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -442,6 +443,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
                 outIndexBuff= <span class="dv">0</span>;
             }
         }</code></pre></div>
+<p>After speeding up the loop significant switch bounce became apparent. This was mitigated by reducing the frequency of checking the switch condition.</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">    <span class="cf">while</span>(<span class="dv">1</span>)
+    {  
+        <span class="dt">static</span> <span class="dt">int</span> loopcount=<span class="dv">0</span>;
+        <span class="cf">if</span> (loopcount &gt; <span class="dv">500</span>)
+        {
+            keypresstask();
+            loopcount=<span class="dv">0</span>;
+        }
+        loopcount++;
+        txbuffertask();
+    } </code></pre></div>
+<h4 id="oledterminal.ino-has-been-moved-to-photogatelv.c-repository">oledterminal.ino has been moved to PhotogateLV.c Repository</h4>
+<p>It seemed more practical to have a copy of the terminal sketch in the PhotogateLC.c repository.</p>
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
