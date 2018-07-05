@@ -417,6 +417,13 @@ of checking the switch condition.
 
 It seemed more practical to have a copy of the terminal sketch in the PhotogateLC.c repository.
 
+### swtchpresscount
+
+This branch counts the number of times a button switch has been pressed. This could be useful to ensure switch 
+bounce has been deal with adequately.
+
+  *place image*
+
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html

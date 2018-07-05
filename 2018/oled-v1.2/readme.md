@@ -29,6 +29,7 @@
         -   [keypress](#keypress)
             -   [Use of sprintf and a char buffer](#use-of-sprintf-and-a-char-buffer)
             -   [oledterminal.ino has been moved to PhotogateLV.c Repository](#oledterminal.ino-has-been-moved-to-photogatelv.c-repository)
+        -   [swtchpresscount](#swtchpresscount)
 
 IIC OLED V1.2 Notes
 ===================
@@ -410,6 +411,12 @@ After speeding up the loop significant switch bounce became apparent. This was m
 #### oledterminal.ino has been moved to PhotogateLV.c Repository
 
 It seemed more practical to have a copy of the terminal sketch in the PhotogateLC.c repository.
+
+### swtchpresscount
+
+This branch counts the number of times a button switch has been pressed. This could be useful to ensure switch bounce has been deal with adequately.
+
+*place image*
 
 <!---
 use 
