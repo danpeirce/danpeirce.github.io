@@ -30,6 +30,7 @@
             -   [Use of sprintf and a char buffer](#use-of-sprintf-and-a-char-buffer)
             -   [oledterminal.ino has been moved to PhotogateLV.c Repository](#oledterminal.ino-has-been-moved-to-photogatelv.c-repository)
         -   [swtchpresscount](#swtchpresscount)
+        -   [timeswitch](#timeswitch)
 
 IIC OLED V1.2 Notes
 ===================
@@ -417,6 +418,16 @@ It seemed more practical to have a copy of the terminal sketch in the PhotogateL
 This branch counts the number of times a button switch has been pressed. This could be useful to ensure switch bounce has been deal with adequately.
 
 *place image*
+
+### timeswitch
+
+This branch is intended to time the interval between key presses.
+
+It was decided to rename the main file of the project and move unused functions to a different file. This change may be cherry picked into other branches. The hash to cherry pick from is given below:
+
+-   &lt;3962c9e44e09b1ef240829ac2531e926d5549208&gt;
+
+this branch is still in the early modification stage.
 
 <!---
 use 

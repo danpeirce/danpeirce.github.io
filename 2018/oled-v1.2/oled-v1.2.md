@@ -424,6 +424,17 @@ bounce has been deal with adequately.
 
   *place image*
 
+### timeswitch 
+
+This branch is intended to time the interval between key presses.  
+
+It was decided to rename the main file of the project and move unused functions to a different file. This
+change may be cherry picked into other branches. The hash to cherry pick from is given below:
+
+* <3962c9e44e09b1ef240829ac2531e926d5549208>
+  
+this branch is still in the early modification stage.
+  
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html

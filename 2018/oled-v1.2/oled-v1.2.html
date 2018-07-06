@@ -98,6 +98,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#oledterminal.ino-has-been-moved-to-photogatelv.c-repository">oledterminal.ino has been moved to PhotogateLV.c Repository</a></li>
 </ul></li>
 <li><a href="#swtchpresscount">swtchpresscount</a></li>
+<li><a href="#timeswitch">timeswitch</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -461,6 +462,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3 id="swtchpresscount">swtchpresscount</h3>
 <p>This branch counts the number of times a button switch has been pressed. This could be useful to ensure switch bounce has been deal with adequately.</p>
 <p><em>place image</em></p>
+<h3 id="timeswitch">timeswitch</h3>
+<p>This branch is intended to time the interval between key presses.</p>
+<p>It was decided to rename the main file of the project and move unused functions to a different file. This change may be cherry picked into other branches. The hash to cherry pick from is given below:</p>
+<ul>
+<li>&lt;3962c9e44e09b1ef240829ac2531e926d5549208&gt;</li>
+</ul>
+<p>this branch is still in the early modification stage.</p>
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
