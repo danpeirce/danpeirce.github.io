@@ -453,6 +453,12 @@ void loop() {
 }
 ~~~~
 
+##### Notes on the Trinket M0
+
+Notes on the Trinket M0 at link:
+
+* [https://danpeirce.github.io/2017/testTrinketM0/testing.html](https://danpeirce.github.io/2017/testTrinketM0/testing.html)
+
 #### Renamed main File
 
 It was decided to rename the main file of the project and move unused functions to a different file. This

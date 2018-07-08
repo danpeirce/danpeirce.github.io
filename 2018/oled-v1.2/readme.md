@@ -32,6 +32,7 @@
         -   [swtchpresscount](#swtchpresscount)
         -   [timeswitch](#timeswitch)
             -   [Simple Simulation of Photogate](#simple-simulation-of-photogate)
+                -   [Notes on the Trinket M0](#notes-on-the-trinket-m0)
             -   [Renamed main File](#renamed-main-file)
 
 IIC OLED V1.2 Notes
@@ -447,6 +448,12 @@ void loop() {
   delay(10000);              // wait for 10 seconds
 }
 ```
+
+##### Notes on the Trinket M0
+
+Notes on the Trinket M0 at link:
+
+-   <https://danpeirce.github.io/2017/testTrinketM0/testing.html>
 
 #### Renamed main File
 
