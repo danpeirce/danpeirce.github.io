@@ -31,6 +31,8 @@
             -   [oledterminal.ino has been moved to PhotogateLV.c Repository](#oledterminal.ino-has-been-moved-to-photogatelv.c-repository)
         -   [swtchpresscount](#swtchpresscount)
         -   [timeswitch](#timeswitch)
+            -   [Simple Simulation of Photogate](#simple-simulation-of-photogate)
+            -   [Renamed main File](#renamed-main-file)
 
 IIC OLED V1.2 Notes
 ===================
@@ -421,13 +423,38 @@ This branch counts the number of times a button switch has been pressed. This co
 
 ### timeswitch
 
-This branch is intended to time the interval between key presses.
+This branch was initially intended to time the interval between key presses. It became apparent testing would be more consistent if a photogate were simulated with a digital signal from another MCU. A **Trinket M0** was available and used for this purpose.
 
-It was decided to rename the main file of the project and move unused functions to a different file. This change may be cherry picked into other branches. The hash to cherry pick from is given below:
+#### Simple Simulation of Photogate
 
--   &lt;3962c9e44e09b1ef240829ac2531e926d5549208&gt;
+The Trinket M0 code used to generate a period of about 20 seconds.
 
-this branch is still in the early modification stage.
+``` cpp
+// the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize digital pin 13 as an output.
+  pinMode(13, OUTPUT);
+  pinMode(0, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(0, HIGH);
+  delay(10000);              // wait for 10 seconds
+  digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
+  digitalWrite(0, LOW);
+  delay(10000);              // wait for 10 seconds
+}
+```
+
+#### Renamed main File
+
+It was decided to rename the main file of the project and move unused functions to a different file. This change may be cherry picked into other branches.
+
+-   The hash to cherry pick from is given below:
+
+    -   &lt;3962c9e44e09b1ef240829ac2531e926d5549208&gt;
 
 <!---
 use 

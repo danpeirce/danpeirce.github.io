@@ -98,7 +98,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#oledterminal.ino-has-been-moved-to-photogatelv.c-repository">oledterminal.ino has been moved to PhotogateLV.c Repository</a></li>
 </ul></li>
 <li><a href="#swtchpresscount">swtchpresscount</a></li>
-<li><a href="#timeswitch">timeswitch</a></li>
+<li><a href="#timeswitch">timeswitch</a><ul>
+<li><a href="#simple-simulation-of-photogate">Simple Simulation of Photogate</a></li>
+<li><a href="#renamed-main-file">Renamed main File</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -463,12 +466,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>This branch counts the number of times a button switch has been pressed. This could be useful to ensure switch bounce has been deal with adequately.</p>
 <p><em>place image</em></p>
 <h3 id="timeswitch">timeswitch</h3>
-<p>This branch is intended to time the interval between key presses.</p>
-<p>It was decided to rename the main file of the project and move unused functions to a different file. This change may be cherry picked into other branches. The hash to cherry pick from is given below:</p>
+<p>This branch was initially intended to time the interval between key presses. It became apparent testing would be more consistent if a photogate were simulated with a digital signal from another MCU. A <strong>Trinket M0</strong> was available and used for this purpose.</p>
+<h4 id="simple-simulation-of-photogate">Simple Simulation of Photogate</h4>
+<p>The Trinket M0 code used to generate a period of about 20 seconds.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// the setup function runs once when you press reset or power the board</span>
+<span class="dt">void</span> setup() {
+  <span class="co">// initialize digital pin 13 as an output.</span>
+  pinMode(<span class="dv">13</span>, OUTPUT);
+  pinMode(<span class="dv">0</span>, OUTPUT);
+}
+
+<span class="co">// the loop function runs over and over again forever</span>
+<span class="dt">void</span> loop() {
+  digitalWrite(<span class="dv">13</span>, HIGH);   <span class="co">// turn the LED on (HIGH is the voltage level)</span>
+  digitalWrite(<span class="dv">0</span>, HIGH);
+  delay(<span class="dv">10000</span>);              <span class="co">// wait for 10 seconds</span>
+  digitalWrite(<span class="dv">13</span>, LOW);    <span class="co">// turn the LED off by making the voltage LOW</span>
+  digitalWrite(<span class="dv">0</span>, LOW);
+  delay(<span class="dv">10000</span>);              <span class="co">// wait for 10 seconds</span>
+}</code></pre></div>
+<h4 id="renamed-main-file">Renamed main File</h4>
+<p>It was decided to rename the main file of the project and move unused functions to a different file. This change may be cherry picked into other branches.</p>
+<ul>
+<li><p>The hash to cherry pick from is given below:</p>
 <ul>
 <li>&lt;3962c9e44e09b1ef240829ac2531e926d5549208&gt;</li>
+</ul></li>
 </ul>
-<p>this branch is still in the early modification stage.</p>
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
