@@ -424,7 +424,11 @@ This branch counts the number of times a button switch has been pressed. This co
 
 ### timeswitch
 
+![](https://raw.githubusercontent.com/danpeirce/photogate-box-ssd1306term/timeswitch/image/timeswitchsec.jpg)
+
 This branch was initially intended to time the interval between key presses. It became apparent testing would be more consistent if a photogate were simulated with a digital signal from another MCU. A **Trinket M0** was available and used for this purpose.
+
+![](https://raw.githubusercontent.com/danpeirce/photogate-box-ssd1306term/timeswitch/image/timeswitchcct.jpg)
 
 #### Simple Simulation of Photogate
 
