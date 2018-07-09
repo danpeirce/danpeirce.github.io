@@ -434,6 +434,12 @@ available and used for this purpose.
 
 ![](https://raw.githubusercontent.com/danpeirce/photogate-box-ssd1306term/timeswitch/image/timeswitchcct.jpg)
 
+#### Code for timewswitch
+
+The code for this branch is on Github.
+
+* [https://github.com/danpeirce/photogate-box-ssd1306term/tree/timeswitch](https://github.com/danpeirce/photogate-box-ssd1306term/tree/timeswitch)
+
 #### Simple Simulation of Photogate
 
 The Trinket M0 code used to generate a period of about 20 seconds.

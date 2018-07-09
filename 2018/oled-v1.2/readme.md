@@ -31,6 +31,7 @@
             -   [oledterminal.ino has been moved to PhotogateLV.c Repository](#oledterminal.ino-has-been-moved-to-photogatelv.c-repository)
         -   [swtchpresscount](#swtchpresscount)
         -   [timeswitch](#timeswitch)
+            -   [Code for timewswitch](#code-for-timewswitch)
             -   [Simple Simulation of Photogate](#simple-simulation-of-photogate)
                 -   [Notes on the Trinket M0](#notes-on-the-trinket-m0)
             -   [Renamed main File](#renamed-main-file)
@@ -429,6 +430,12 @@ This branch counts the number of times a button switch has been pressed. This co
 This branch was initially intended to time the interval between key presses. It became apparent testing would be more consistent if a photogate were simulated with a digital signal from another MCU. A **Trinket M0** was available and used for this purpose.
 
 ![](https://raw.githubusercontent.com/danpeirce/photogate-box-ssd1306term/timeswitch/image/timeswitchcct.jpg)
+
+#### Code for timewswitch
+
+The code for this branch is on Github.
+
+-   <https://github.com/danpeirce/photogate-box-ssd1306term/tree/timeswitch>
 
 #### Simple Simulation of Photogate
 
