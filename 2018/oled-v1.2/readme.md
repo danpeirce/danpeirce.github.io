@@ -469,9 +469,9 @@ Notes on the Trinket M0 at link:
 
 #### Renamed main File
 
-It was decided to rename the main file of the project and move unused functions to a different file. This change may be cherry picked into other branches.
+It was decided to rename the main file of the project and move unused functions to a different file. This change has now been cherry picked and merged into older branches.
 
--   The hash to cherry pick from is given below:
+-   The hash that was cherry picked from is given below:
 
     -   &lt;3962c9e44e09b1ef240829ac2531e926d5549208&gt;
 
