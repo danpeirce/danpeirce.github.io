@@ -35,6 +35,7 @@
             -   [Simple Simulation of Photogate](#simple-simulation-of-photogate)
                 -   [Notes on the Trinket M0](#notes-on-the-trinket-m0)
             -   [Renamed main File](#renamed-main-file)
+        -   [timegateosc](#timegateosc)
 
 IIC OLED V1.2 Notes
 ===================
@@ -473,6 +474,10 @@ It was decided to rename the main file of the project and move unused functions 
 -   The hash to cherry pick from is given below:
 
     -   &lt;3962c9e44e09b1ef240829ac2531e926d5549208&gt;
+
+### timegateosc
+
+This branch was derived from [timeswitch](#timeswitch). The code was altered to work with an external 32 MHz rather than the internal oscillator used initially.
 
 <!---
 use 
