@@ -491,7 +491,7 @@ Watch for updates to this page.
  
 ### stopwatch
 
-This branch was derived from [timegateosc](#timegateosce). The code was altered to time between start and stop button 
+This branch was derived from [timegateosc](#timegateosc). The code was altered to time between start and stop button 
 presses. This branch ignores the simulated photogate on the CCP1 input. The follow up branch will create a mode 
 select to allow one to choose either mode of operation.
 
