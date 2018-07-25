@@ -474,6 +474,8 @@ Notes on the Trinket M0 at link:
 It was decided to rename the main file of the project and move unused functions to a different file. This
 change has now been cherry picked and merged into older branches. 
 
+##### Branches Graphic
+
 ![](branches01.png)
 
 * The hash that was cherry picked from is given below:
@@ -482,9 +484,90 @@ change has now been cherry picked and merged into older branches.
   
 ### timegateosc
 
-This branch was derived from [timeswitch](#timeswitch). The code was altered to work with an external 32 MHz rather than the 
-internal oscillator used initially.  
+This branch was derived from [timeswitch](#timeswitch). The code was altered to work with an external 32 MHz rather 
+than the internal oscillator used initially.  
+
+Watch for updates to this page.
  
+### stopwatch
+
+This branch was derived from [timegateosc](#timegateosce). The code was altered to time between start and stop button 
+presses. This branch ignores the simulated photogate on the CCP1 input. The follow up branch will create a mode 
+select to allow one to choose either mode of operation.
+
+The function main() looks like this now:
+
+~~~~c
+void main(void)
+{
+    char gate_mode = 0;
+    Delay10KTCYx(20); 
+  
+    initialization();
+    debounceSW.a_byte = 0;
+    inputSW.a_byte = 0;
+    
+    while(1)
+    { 
+        static unsigned int listTmr[] = {0,0,0,0,0,0};
+        static unsigned int indexTmr = 0;
+        static unsigned int cyclecount = 0;
+        
+        if(TXIF && (inIndexBuff > 0)) txbuffertask();
+        if (PIR1bits.TMR1IF) // Timer1 clock has overflowed
+        {
+            PIR1bits.TMR1IF = 0; // reset Timer1 clock interrupt flag
+            timerCountOvrF++;
+        }
+        inputSW.bit0 = PORTDbits.RD2;
+        if (!debounceSW.bit0)
+        {
+            if (!inputSW.bit0 && (cyclecount>2)) cyclecount--;
+            if (inputSW.bit0) 
+            {
+                cyclecount++;
+                if (cyclecount == 1)
+                {
+                    listTmr[indexTmr] = ReadTimer1();
+                    indexTmr++;
+                    listTmr[indexTmr] = timerCountOvrF;
+                    indexTmr++;
+                    running();
+                }
+            }
+            if (cyclecount > 100)
+            {
+                cyclecount = 0;
+                debounceSW.bit0 = 1;
+            }
+        }
+        else
+        {
+            if (inputSW.bit0 && (cyclecount>2)) cyclecount--;
+            if (!inputSW.bit0) cyclecount++;
+            if (cyclecount > 100) 
+            {
+                cyclecount = 0;
+                debounceSW.bit0 =0;
+            }
+        }
+        /* if (PIR1bits.CCP1IF)
+        {
+            listTmr[indexTmr] = ReadCapture1();
+            indexTmr++;
+            listTmr[indexTmr] = timerCountOvrF;
+            indexTmr++;
+            PIR1bits.CCP1IF = 0; //clear flag for next event
+        } */
+        if (indexTmr == 4) 
+        {    
+            sendTime(listTmr);
+            indexTmr = 0;
+            timerCountOvrF = 0;
+        }
+    } 
+}
+~~~~
  
 <!---
 use 
