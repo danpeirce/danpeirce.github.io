@@ -109,6 +109,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#timegateosc">timegateosc</a></li>
 <li><a href="#stopwatch">stopwatch</a></li>
+<li><a href="#pickmode">pickmode</a><ul>
+<li><a href="#stopwatch-mode">Stopwatch mode</a></li>
+<li><a href="#photogate">Photogate</a></li>
+<li><a href="#pendulum">Pendulum</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -595,6 +600,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         }
     } 
 }</code></pre></div>
+<h3 id="pickmode">pickmode</h3>
+<p>The pickmode branch allows selection of different operating modes. As of today (August 1, 2018) there are three operating modes.</p>
+<ol type="1">
+<li>Stopwatch</li>
+<li>Photogate</li>
+<li>Pendulum</li>
+</ol>
+<p>When the timer box is powered up window 1 of the display will cycle displaying possible mode selections in a repeating sequence. The <strong>mode select</strong> button allows one to select the mode.</p>
+<h4 id="stopwatch-mode">Stopwatch mode</h4>
+<p>When the Stopwatch mode is selected the <strong>mode select</strong> button becomes the Start/Stop button. During timing window 2 of the display shows **- - -*. When timing is stopped the time will be displayed in window 2. Time is reset automatically if/when the Start/Stop button is pressed again. The Mode Reset button will restart the timer with window 1 cycling the available modes.</p>
+<h4 id="photogate">Photogate</h4>
+<p>The Photogate mode will time the duration between negative going edges on the photogate1 input.</p>
+<h4 id="pendulum">Pendulum</h4>
+<p>The Pendulum mode is similar to Photogate mode but is displays the total period of a swinging pendulum.</p>
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
