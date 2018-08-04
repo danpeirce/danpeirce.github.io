@@ -38,7 +38,7 @@
                 -   [Branches Graphic](#branches-graphic)
         -   [timegateosc](#timegateosc)
         -   [stopwatch](#stopwatch)
-        -   [pickmode](#pickmode)
+        -   [pickmode2620](#pickmode2620)
             -   [Stopwatch mode](#stopwatch-mode)
             -   [Photogate](#photogate)
             -   [Pendulum](#pendulum)
@@ -569,9 +569,9 @@ void main(void)
 }
 ```
 
-### pickmode
+### pickmode2620
 
-The pickmode branch allows selection of different operating modes. As of today (August 1, 2018) there are three operating modes.
+The pickmode2620 branch allows selection of different operating modes. As of today (August 1, 2018) there are three operating modes.
 
 1.  Stopwatch
 2.  Photogate
@@ -579,9 +579,11 @@ The pickmode branch allows selection of different operating modes. As of today (
 
 When the timer box is powered up window 1 of the display will cycle displaying possible mode selections in a repeating sequence. The **mode select** button allows one to select the mode.
 
+The pickmode2620 differs from the pickmode branch in thaat it was updated for the PIC18F2620. The project was started on a breadboard using a PIC18F4525 as it happened to be available. The intent was to use the PIC18F2620 on the final project as it is physically smaller.
+
 #### Stopwatch mode
 
-When the Stopwatch mode is selected the **mode select** button becomes the Start/Stop button. During timing window 2 of the display shows \*\*- - -\*. When timing is stopped the time will be displayed in window 2. Time is reset automatically if/when the Start/Stop button is pressed again. The Mode Reset button will restart the timer with window 1 cycling the available modes.
+When the Stopwatch mode is selected the **mode select** button becomes the Start/Stop button. During timing window 2 of the display shows **- - -**. When timing is stopped the time will be displayed in window 2. Time is reset automatically if/when the Start/Stop button is pressed again. The Mode Reset button will restart the timer with window 1 cycling the available modes.
 
 #### Photogate
 
