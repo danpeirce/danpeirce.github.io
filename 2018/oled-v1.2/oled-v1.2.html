@@ -113,6 +113,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#stopwatch-mode">Stopwatch mode</a></li>
 <li><a href="#photogate">Photogate</a></li>
 <li><a href="#pendulum">Pendulum</a></li>
+<li><a href="#pulse">Pulse</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -615,6 +616,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The Photogate mode will time the duration between negative going edges on the photogate1 input.</p>
 <h4 id="pendulum">Pendulum</h4>
 <p>The Pendulum mode is similar to Photogate mode but is displays the total period of a swinging pendulum.</p>
+<h4 id="pulse">Pulse</h4>
+<p>The Pulse mode times the duration from falling edge to rising edge. Currently this mode runs once and returns to the mode selection state with the time displayed in window 2.</p>
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html

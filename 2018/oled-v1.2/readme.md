@@ -42,6 +42,7 @@
             -   [Stopwatch mode](#stopwatch-mode)
             -   [Photogate](#photogate)
             -   [Pendulum](#pendulum)
+            -   [Pulse](#pulse)
 
 IIC OLED V1.2 Notes
 ===================
@@ -592,6 +593,10 @@ The Photogate mode will time the duration between negative going edges on the ph
 #### Pendulum
 
 The Pendulum mode is similar to Photogate mode but is displays the total period of a swinging pendulum.
+
+#### Pulse
+
+The Pulse mode times the duration from falling edge to rising edge. Currently this mode runs once and returns to the mode selection state with the time displayed in window 2.
 
 <!---
 use 
