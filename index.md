@@ -27,6 +27,7 @@ Some of those links are copied here:
 -   [ipython\_notes.html](https://danpeirce.github.io/ipython_notes.html)
 -   [ipython\_rpi.html](https://danpeirce.github.io/ipython_rpi.html)
 -   [matplotlib.html](https://danpeirce.github.io/matplotlib.html)
+-   [oled-v1.2.html](https://danpeirce.github.io/2018/oled-v1.2/oled-v1.2.html)
 -   [openscad.html](https://danpeirce.github.io/openscad.html)
 -   [photogate (old)](https://danpeirce.github.io/photogate/)
 -   [phys1600\_parts.html](https://danpeirce.github.io/phys1600_parts.html)
