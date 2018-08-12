@@ -43,6 +43,7 @@
             -   [Photogate](#photogate)
             -   [Pendulum](#pendulum)
             -   [Pulse](#pulse)
+            -   [Picket Fence 1](#picket-fence-1)
 
 IIC OLED V1.2 Notes
 ===================
@@ -597,6 +598,10 @@ The Pendulum mode is similar to Photogate mode but is displays the total period 
 #### Pulse
 
 The Pulse mode times the duration from falling edge to rising edge. Currently this mode runs once and returns to the mode selection state with the time displayed in window 2.
+
+#### Picket Fence 1
+
+This mode measures the duration between the first falling edge (the trigger point) and each of eight subsequent falling edges. None of the times are displayed until they have all been recorded. The display will then continuously cycle through and display each time.
 
 <!---
 use 

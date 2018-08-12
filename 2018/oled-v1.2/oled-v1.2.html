@@ -52,7 +52,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <body>
 <header>
 <h1 class="title">IIC OLED V1.2</h1>
-<p class="author">Notes by Dan Peirce B.Sc.</p>
+<h2 class="author">Notes by Dan Peirce B.Sc.</h2>
 </header>
 <nav id="TOC">
 <ul>
@@ -114,6 +114,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#photogate">Photogate</a></li>
 <li><a href="#pendulum">Pendulum</a></li>
 <li><a href="#pulse">Pulse</a></li>
+<li><a href="#picket-fence-1">Picket Fence 1</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -420,7 +421,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         <span class="cf">if</span> (count &gt; <span class="dv">500000</span>)
         {
             <span class="dt">static</span> <span class="dt">unsigned</span> <span class="dt">int</span> cycle = <span class="dv">0</span>; 
-            <span class="dt">static</span> <span class="dt">const</span> <span class="dt">char</span> code[] = {SHIFTOUT, <span class="ch">&#39;w&#39;</span>, <span class="ch">&#39;2&#39;</span>, <span class="dv">0</span>};
+            <span class="dt">static</span> <span class="dt">const</span> <span class="dt">char</span> code[] = {SHIFTOUT, &#39;w&#39;, &#39;<span class="dv">2</span>&#39;, <span class="dv">0</span>};
             count = <span class="dv">0</span>;
             printf(<span class="st">&quot;%s&gt; %d</span><span class="sc">\n</span><span class="st">&quot;</span>, code, cycle);
             cycle++;
@@ -618,6 +619,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The Pendulum mode is similar to Photogate mode but is displays the total period of a swinging pendulum.</p>
 <h4 id="pulse">Pulse</h4>
 <p>The Pulse mode times the duration from falling edge to rising edge. Currently this mode runs once and returns to the mode selection state with the time displayed in window 2.</p>
+<h4 id="picket-fence-1">Picket Fence 1</h4>
+<p>This mode measures the duration between the first falling edge (the trigger point) and each of eight subsequent falling edges. None of the times are displayed until they have all been recorded. The display will then continuously cycle through and display each time.</p>
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
