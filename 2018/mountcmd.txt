@@ -1,0 +1,1 @@
+sudo mount -t cifs -o username=danp,uid=danp,gid=danp //192.168.0.15/danp mybook
