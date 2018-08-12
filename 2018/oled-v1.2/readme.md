@@ -578,6 +578,8 @@ The pickmode2620 branch allows selection of different operating modes. As of tod
 1.  Stopwatch
 2.  Photogate
 3.  Pendulum
+4.  Pulse
+5.  Picket Fence 1
 
 When the timer box is powered up window 1 of the display will cycle displaying possible mode selections in a repeating sequence. The **mode select** button allows one to select the mode.
 
