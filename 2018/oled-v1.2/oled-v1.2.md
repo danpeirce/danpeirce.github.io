@@ -337,7 +337,7 @@ of eight subsequent falling edges. None of the times are displayed until they ha
 recorded. The display will then continuously cycle through and display each time.
  
 
-### Historical Notes (before pickmode2620 was created)
+## Historical Notes (before pickmode2620 was created)
 
 The old Git PIC MCU photogate box repository was imported into a new repository and will be modified to 
 make use of the graphics display terminal.

@@ -27,7 +27,7 @@
             -   [Pendulum](#pendulum)
             -   [Pulse](#pulse)
             -   [Picket Fence 1](#picket-fence-1)
-        -   [Historical Notes (before pickmode2620 was created)](#historical-notes-before-pickmode2620-was-created)
+    -   [Historical Notes (before pickmode2620 was created)](#historical-notes-before-pickmode2620-was-created)
         -   [justcount](#justcount)
             -   [Power Source](#power-source)
                 -   [When Programming the Trinket](#when-programming-the-trinket)
@@ -347,7 +347,8 @@ The Pulse mode times the duration from falling edge to rising edge. Currently th
 
 This mode measures the duration between the first falling edge (the trigger point) and each of eight subsequent falling edges. None of the times are displayed until they have all been recorded. The display will then continuously cycle through and display each time.
 
-### Historical Notes (before pickmode2620 was created)
+Historical Notes (before pickmode2620 was created)
+--------------------------------------------------
 
 The old Git PIC MCU photogate box repository was imported into a new repository and will be modified to make use of the graphics display terminal.
 
