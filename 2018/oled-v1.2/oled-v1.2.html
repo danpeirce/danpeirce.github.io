@@ -52,7 +52,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <body>
 <header>
 <h1 class="title">IIC OLED V1.2</h1>
-<h2 class="author">Notes by Dan Peirce B.Sc.</h2>
+<p class="author">Notes by Dan Peirce B.Sc.</p>
 </header>
 <nav id="TOC">
 <ul>
@@ -86,6 +86,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#applications">Applications</a><ul>
 <li><a href="#photogate-timer-repository">Photogate Timer Repository</a><ul>
+<li><a href="#pickmode2620">pickmode2620</a><ul>
+<li><a href="#stopwatch-mode">Stopwatch mode</a></li>
+<li><a href="#photogate">Photogate</a></li>
+<li><a href="#pendulum">Pendulum</a></li>
+<li><a href="#pulse">Pulse</a></li>
+<li><a href="#picket-fence-1">Picket Fence 1</a></li>
+</ul></li>
+<li><a href="#historical-notes-before-pickmode2620-was-created">Historical Notes (before pickmode2620 was created)</a></li>
 <li><a href="#justcount">justcount</a><ul>
 <li><a href="#power-source">Power Source</a><ul>
 <li><a href="#when-programming-the-trinket">When Programming the Trinket</a></li>
@@ -97,7 +105,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#use-of-sprintf-and-a-char-buffer">Use of sprintf and a char buffer</a></li>
 <li><a href="#oledterminal.ino-has-been-moved-to-photogatelv.c-repository">oledterminal.ino has been moved to PhotogateLV.c Repository</a></li>
 </ul></li>
-<li><a href="#swtchpresscount">swtchpresscount</a></li>
+<li><a href="#switchpresscount">switchpresscount</a></li>
 <li><a href="#timeswitch">timeswitch</a><ul>
 <li><a href="#code-for-timewswitch">Code for timewswitch</a></li>
 <li><a href="#simple-simulation-of-photogate">Simple Simulation of Photogate</a><ul>
@@ -109,13 +117,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li><a href="#timegateosc">timegateosc</a></li>
 <li><a href="#stopwatch">stopwatch</a></li>
-<li><a href="#pickmode2620">pickmode2620</a><ul>
-<li><a href="#stopwatch-mode">Stopwatch mode</a></li>
-<li><a href="#photogate">Photogate</a></li>
-<li><a href="#pendulum">Pendulum</a></li>
-<li><a href="#pulse">Pulse</a></li>
-<li><a href="#picket-fence-1">Picket Fence 1</a></li>
-</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -384,6 +385,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </figure>
 <h1 id="applications">Applications</h1>
 <h2 id="photogate-timer-repository">Photogate Timer Repository</h2>
+<h3 id="pickmode2620">pickmode2620</h3>
+<p>The pickmode2620 branch allows selection of different operating modes.</p>
+<ol type="1">
+<li>Stopwatch</li>
+<li>Photogate
+<ol type="a">
+<li>continual update</li>
+<li>keep first time measured</li>
+</ol></li>
+<li>Pendulum</li>
+<li>Pulse</li>
+<li>Picket Fence 1</li>
+</ol>
+<p>The descriptions at <a href="https://github.com/danpeirce/photogate-box-ssd1306term" class="uri">https://github.com/danpeirce/photogate-box-ssd1306term</a> are updated more frequently than the descriptions of the modes found here.</p>
+<p>When the timer box is powered up window 1 of the display will cycle displaying possible mode selections in a repeating sequence. The <strong>mode select</strong> button allows one to select the mode.</p>
+<p>The pickmode2620 differs from the pickmode branch in thaat it was updated for the PIC18F2620. The project was started on a breadboard using a PIC18F4525 as it happened to be available. The intent was to use the PIC18F2620 on the final project as it is physically smaller.</p>
+<h4 id="stopwatch-mode">Stopwatch mode</h4>
+<p>When the Stopwatch mode is selected the <strong>mode select</strong> button becomes the Start/Stop button. During timing window 2 of the display shows <strong>- - -</strong>. When timing is stopped the time will be displayed in window 2. Time is reset automatically if/when the Start/Stop button is pressed again. The Mode Reset button will restart the timer with window 1 cycling the available modes.</p>
+<h4 id="photogate">Photogate</h4>
+<p>The Photogate mode will time the duration between negative going edges on the photogate1 input.</p>
+<h4 id="pendulum">Pendulum</h4>
+<p>The Pendulum mode is similar to Photogate mode but is displays the total period of a swinging pendulum.</p>
+<h4 id="pulse">Pulse</h4>
+<p>The Pulse mode times the duration from falling edge to rising edge. Currently this mode runs once and returns to the mode selection state with the time displayed in window 2.</p>
+<h4 id="picket-fence-1">Picket Fence 1</h4>
+<p>This mode measures the duration between the first falling edge (the trigger point) and each of eight subsequent falling edges. None of the times are displayed until they have all been recorded. The display will then continuously cycle through and display each time.</p>
+<h3 id="historical-notes-before-pickmode2620-was-created">Historical Notes (before pickmode2620 was created)</h3>
 <p>The old Git PIC MCU photogate box repository was imported into a new repository and will be modified to make use of the graphics display terminal.</p>
 <ul>
 <li><a href="https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box" class="uri">https://github.com/danpeirce/photogate-box-ssd1306term#photogate-box</a></li>
@@ -400,9 +428,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h4 id="power-source">Power Source</h4>
 <p>There are several possible methods of powering the Pro Trinket board which distributes power to the rest of the project.</p>
 <h5 id="when-programming-the-trinket">When Programming the Trinket</h5>
-<p>The Pro 5+Volt Trinket board was powered from a USB to serial adaptor board that was also used to program the Trinket.</p>
+<p>The Pro 5+Volt Trinket board was powered from a USB to serial adapter board that was also used to program the Trinket.</p>
 <h5 id="when-receiving-serial-data-from-a-pic-mcu">When Receiving Serial Data from a PIC MCU</h5>
-<p>The adaptor is removed and power comes through a Micro B USB connector in the Trinket. V<sub>DD</sub> and ground is being distributed to the PIC MCU and the OLED display from the Trinket.</p>
+<p>The adapter is removed and power comes through a Micro B USB connector in the Trinket. V<sub>DD</sub> and ground is being distributed to the PIC MCU and the OLED display from the Trinket.</p>
 <p>There is a jumper from the PIC Tx pin to the Trinket board Rx.</p>
 <h4 id="added-a-window-state-to-terminal">Added a Window State to Terminal</h4>
 <p>In an effort to eliminate flicker that was evident in the count line on the display a window state was created. There is no call to <strong>display.display()</strong> until a newline is received.</p>
@@ -421,7 +449,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         <span class="cf">if</span> (count &gt; <span class="dv">500000</span>)
         {
             <span class="dt">static</span> <span class="dt">unsigned</span> <span class="dt">int</span> cycle = <span class="dv">0</span>; 
-            <span class="dt">static</span> <span class="dt">const</span> <span class="dt">char</span> code[] = {SHIFTOUT, &#39;w&#39;, &#39;<span class="dv">2</span>&#39;, <span class="dv">0</span>};
+            <span class="dt">static</span> <span class="dt">const</span> <span class="dt">char</span> code[] = {SHIFTOUT, <span class="ch">&#39;w&#39;</span>, <span class="ch">&#39;2&#39;</span>, <span class="dv">0</span>};
             count = <span class="dv">0</span>;
             printf(<span class="st">&quot;%s&gt; %d</span><span class="sc">\n</span><span class="st">&quot;</span>, code, cycle);
             cycle++;
@@ -476,7 +504,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     } </code></pre></div>
 <h4 id="oledterminal.ino-has-been-moved-to-photogatelv.c-repository">oledterminal.ino has been moved to PhotogateLV.c Repository</h4>
 <p>It seemed more practical to have a copy of the terminal sketch in the PhotogateLC.c repository.</p>
-<h3 id="swtchpresscount">swtchpresscount</h3>
+<h3 id="switchpresscount">switchpresscount</h3>
 <p>This branch counts the number of times a button switch has been pressed. This could be useful to ensure switch bounce has been deal with adequately.</p>
 <p><em>place image</em></p>
 <h3 id="timeswitch">timeswitch</h3>
@@ -602,27 +630,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         }
     } 
 }</code></pre></div>
-<h3 id="pickmode2620">pickmode2620</h3>
-<p>The pickmode2620 branch allows selection of different operating modes. As of today (August 1, 2018) there are three operating modes.</p>
-<ol type="1">
-<li>Stopwatch</li>
-<li>Photogate</li>
-<li>Pendulum</li>
-<li>Pulse</li>
-<li>Picket Fence 1</li>
-</ol>
-<p>When the timer box is powered up window 1 of the display will cycle displaying possible mode selections in a repeating sequence. The <strong>mode select</strong> button allows one to select the mode.</p>
-<p>The pickmode2620 differs from the pickmode branch in thaat it was updated for the PIC18F2620. The project was started on a breadboard using a PIC18F4525 as it happened to be available. The intent was to use the PIC18F2620 on the final project as it is physically smaller.</p>
-<h4 id="stopwatch-mode">Stopwatch mode</h4>
-<p>When the Stopwatch mode is selected the <strong>mode select</strong> button becomes the Start/Stop button. During timing window 2 of the display shows <strong>- - -</strong>. When timing is stopped the time will be displayed in window 2. Time is reset automatically if/when the Start/Stop button is pressed again. The Mode Reset button will restart the timer with window 1 cycling the available modes.</p>
-<h4 id="photogate">Photogate</h4>
-<p>The Photogate mode will time the duration between negative going edges on the photogate1 input.</p>
-<h4 id="pendulum">Pendulum</h4>
-<p>The Pendulum mode is similar to Photogate mode but is displays the total period of a swinging pendulum.</p>
-<h4 id="pulse">Pulse</h4>
-<p>The Pulse mode times the duration from falling edge to rising edge. Currently this mode runs once and returns to the mode selection state with the time displayed in window 2.</p>
-<h4 id="picket-fence-1">Picket Fence 1</h4>
-<p>This mode measures the duration between the first falling edge (the trigger point) and each of eight subsequent falling edges. None of the times are displayed until they have all been recorded. The display will then continuously cycle through and display each time.</p>
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html

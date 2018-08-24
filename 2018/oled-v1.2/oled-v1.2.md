@@ -287,6 +287,58 @@ need the USB to serial adaptor board attached which will further reduce cost whe
 
 ## Photogate Timer Repository
 
+### pickmode2620
+
+The pickmode2620 branch allows selection of different operating modes. 
+
+1. Stopwatch
+2. Photogate
+    a. continual update
+	b. keep first time measured
+3. Pendulum
+4. Pulse
+5. Picket Fence 1
+
+The descriptions at [https://github.com/danpeirce/photogate-box-ssd1306term](https://github.com/danpeirce/photogate-box-ssd1306term)
+are updated more frequently than the descriptions of the modes found here.
+
+When the timer box is powered up window 1 of the display will cycle displaying possible mode selections in a repeating 
+sequence. The **mode select** button allows one to select the mode.
+
+The pickmode2620 differs from the pickmode branch in thaat it was updated for the PIC18F2620. The project was 
+started on a breadboard using a PIC18F4525 as it happened to be available. The intent was to use the PIC18F2620 on 
+the final project as it is physically smaller.  
+
+#### Stopwatch mode
+
+When the Stopwatch mode is selected the **mode select** button becomes the Start/Stop button.
+During timing window 2 of the display shows **- - -**.
+When timing is stopped the time will be displayed in window 2. Time is reset automatically if/when the Start/Stop 
+button is pressed again.
+The Mode Reset button will restart the timer with window 1 cycling the available modes.
+
+#### Photogate
+
+The Photogate mode will time the duration between negative going edges on the photogate1 input.
+
+#### Pendulum
+
+The Pendulum mode is similar to Photogate mode but is displays the total period of a swinging pendulum.
+
+#### Pulse
+
+The Pulse mode times the duration from falling edge to rising edge. Currently this mode runs once and returns 
+to the mode selection state with the time displayed in window 2. 
+
+#### Picket Fence 1
+
+This mode measures the duration between the first falling edge (the trigger point) and each 
+of eight subsequent falling edges. None of the times are displayed until they have all been 
+recorded. The display will then continuously cycle through and display each time.
+ 
+
+### Historical Notes (before pickmode2620 was created)
+
 The old Git PIC MCU photogate box repository was imported into a new repository and will be modified to 
 make use of the graphics display terminal.
 
@@ -311,12 +363,12 @@ project.
 
 ##### When Programming the Trinket
 
-The Pro 5+Volt Trinket board was powered from a USB to serial adaptor board that was also used to
+The Pro 5+Volt Trinket board was powered from a USB to serial adapter board that was also used to
 program the Trinket. 
 
 ##### When Receiving Serial Data from a PIC MCU
 
-The adaptor is removed and power comes through a Micro B USB connector in the 
+The adapter is removed and power comes through a Micro B USB connector in the 
 Trinket. V<sub>DD</sub> and ground is being distributed to the PIC MCU and the OLED display from the Trinket.
 
 There is a jumper from the PIC Tx pin to the Trinket board Rx.
@@ -417,7 +469,7 @@ of checking the switch condition.
 
 It seemed more practical to have a copy of the terminal sketch in the PhotogateLC.c repository.
 
-### swtchpresscount
+### switchpresscount
 
 This branch counts the number of times a button switch has been pressed. This could be useful to ensure switch 
 bounce has been deal with adequately.
@@ -569,51 +621,7 @@ void main(void)
 }
 ~~~~
  
-### pickmode2620
 
-The pickmode2620 branch allows selection of different operating modes. As of today (August 1, 2018) there are 
-three operating modes.
-
-1. Stopwatch
-2. Photogate
-3. Pendulum
-4. Pulse
-5. Picket Fence 1
-
-When the timer box is powered up window 1 of the display will cycle displaying possible mode selections in a repeating 
-sequence. The **mode select** button allows one to select the mode.
-
-The pickmode2620 differs from the pickmode branch in thaat it was updated for the PIC18F2620. The project was 
-started on a breadboard using a PIC18F4525 as it happened to be available. The intent was to use the PIC18F2620 on 
-the final project as it is physically smaller.  
-
-#### Stopwatch mode
-
-When the Stopwatch mode is selected the **mode select** button becomes the Start/Stop button.
-During timing window 2 of the display shows **- - -**.
-When timing is stopped the time will be displayed in window 2. Time is reset automatically if/when the Start/Stop 
-button is pressed again.
-The Mode Reset button will restart the timer with window 1 cycling the available modes.
-
-#### Photogate
-
-The Photogate mode will time the duration between negative going edges on the photogate1 input.
-
-#### Pendulum
-
-The Pendulum mode is similar to Photogate mode but is displays the total period of a swinging pendulum.
-
-#### Pulse
-
-The Pulse mode times the duration from falling edge to rising edge. Currently this mode runs once and returns 
-to the mode selection state with the time displayed in window 2. 
-
-#### Picket Fence 1
-
-This mode measures the duration between the first falling edge (the trigger point) and each 
-of eight subsequent falling edges. None of the times are displayed until they have all been 
-recorded. The display will then continuously cycle through and display each time.
- 
 <!---
 use 
   pandoc -s --toc --toc-depth=5 -t html5 -c ../../pandocbd.css oled-v1.2.md -o oled-v1.2.html
