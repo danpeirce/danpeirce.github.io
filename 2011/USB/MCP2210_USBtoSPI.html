@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1"
+      http-equiv="Content-Type">
+    <meta content="Dan Peirce B.Sc." name="author">
+    <title>MCP2210 Evaluation Kit and the MCP2210 Breakout Module</title>
+  </head>
+  <body alink="#000088" bgcolor="#FFFFFF" link="#0000FF" text="#000000"
+    vlink="#000088">
+    <div align="center">
+      <h1>MCP2210 Evaluation Kit&nbsp; and the MCP2210 Breakout Module</h1>
+      <p>Notes by Dan Peirce B.Sc.<br>
+      </p>
+      <div align="left">
+        <hr size="2" width="100%">April 2, 2012
+        <hr size="2" width="100%">
+        <p>Updates at<span class="attribute-value"> <a
+              href="http://danpeirce.net46.net/notes.html#MCP2210userguide">#MCP2210userguide</a>
+            and </span><span class="attribute-value"><a
+              href="http://danpeirce.net46.net/notes.html#USB_SPI">#USB_SPI</a>.<br>
+          </span><a name="MCP2210userguide">A new document became
+            available on March 15, 2012 </a><a
+            href="http://ww1.microchip.com/downloads/en/DeviceDoc/52057A.pdf">MCP2210
+            Evaluation Kit and the MCP2210</a> <br>
+          <br>
+        </p>
+        <hr size="2" width="100%"><br>
+        <hr size="2" width="100%">Feb. 16, 2012
+        <hr size="2" width="100%">Also see&nbsp; <a
+          href="USBdevelopment.html">USBdevelopment.html</a><br>
+        <br>
+        New development boards are available from Microchip. MCP2210
+        Evaluation Kit&nbsp; and the MCP2210 Breakout Module.<br>
+        <br>
+        This may be preferable to the Low Pin Count USB Development Kit
+        since it would not require direct use of the Microchip USB
+        framework which has a very significant learning curve and takes
+        up PIC program memory. The Low Pin Count USB Development Kit
+        would probably be most useful to us if we were giving a course
+        specifically on USB.<br>
+        <br>
+        At first look of what I can see on line I suspect that the
+        Breakout Module could be inserted into a breadboard like a DIP
+        IC.<br>
+        <div align="center">http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=1406&amp;dDocName=en556988<br>
+          <br>
+          <img alt="Breakout Module image" src="ADM00419.jpg" border="0"
+            height="145" hspace="1" vspace="1" width="114"><br>
+          <br>
+        </div>
+        <div align="center">
+          <table border="1" cellpadding="2" cellspacing="2">
+            <tbody>
+              <tr>
+                <td valign="top"><span style="font-family: 'Verdana';
+                    font-size: 10pt;"><b>quote from </b></span><a
+href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=1406&amp;dDocName=en556988">MCP2210
+
+
+
+
+                    Evaluation Kit</a><br>
+                  <hr size="2" width="100%"><font color="blue"><span
+                      style="font-family: 'Verdana'; font-size: 10pt"><b>Features
+
+
+
+
+                        : </b><i><br>
+                        MCP2210 Breakout Board:</i><br>
+                      &#8226; Small plug-in board with DIP form factor (2,
+                      10-pin headers spaced at 600mil)<br>
+                      &#8226; Mini-USB connector<br>
+                      &#8226; Access to the SPI bus and all the GP signals<br>
+                      &#8226; PICkit Serial Analyzer compatible header<br>
+                      &#8226; 3.3 or 5V jumper selectable VDD<br>
+                      &#8226; Able to supply up to 500mA to the rest of the
+                      system </span></font></td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          http://ww1.microchip.com/downloads/en/DeviceDoc/22288A.pdf<br>
+          <br>
+          <div align="left">I think this has advantages over using a USB
+            to USART module and it avoids some of the disadvantages of
+            using a PIC with a built in USB transceiver.<br>
+            <br>
+            <b>Advantages of USB to SPI over USB to USART module:</b><br>
+            <ul>
+              <li><b>The USB model of data transfer is more like that of
+                  SPI than and less like the USART model.&nbsp; <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp; USB is set up as a host and
+                  device and SPI has a master and slave. USART on the
+                  other hand is for communications between peers.</b></li>
+              <li>This module also has built in general purpose IO. <br>
+              </li>
+              <li>One can connect it directly to devices like SPI 12 bit
+                ADC's or SPI enabled sensors.</li>
+              <li>The PIC18F4525 can also be configured to act as an SPI
+                slave device. <br>
+              </li>
+              <li>It is possible to have multiple SPI slaves connected
+                to one master device. In this case the MCP2210 is the
+                master.</li>
+              <li>We could continue to use the USART to connect to a LCD
+                module.</li>
+              <li>It is conceivable one could use GPIO channels to
+                indicate data is ready to send or receive or busy or
+                stop and listen. <br>
+              </li>
+            </ul>
+            <p>Example of use with SPI sensors and ADC's is provided by
+              an available mother board this module can plug into:<br>
+            </p>
+            <div align="center"><img alt="Image of USB module on mother
+                board" src="153109-1.png" height="384" hspace="1"
+                vspace="1" width="416"><br>
+              <br>
+              <table border="1" cellpadding="2" cellspacing="2">
+                <tbody>
+                  <tr>
+                    <td valign="top"><span style="font-family:
+                        'Verdana'; font-size: 10pt;"><b>quote from </b></span><a
+href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=1406&amp;dDocName=en556988">MCP2210
+
+
+
+
+                        Evaluation Kit</a><br>
+                      <hr size="2" width="100%"><font color="blue"><span
+                          style="font-family: 'Verdana'; font-size:
+                          10pt"><b><i>MCP2210 SPI slave Motherboard:</i></b><br>
+                          &#8226; Socket for insertion of the MCP2210 Breakout
+                          Board<br>
+                          &#8226; Easily accessible test points for the SPI
+                          bus and GP signals<br>
+                          &#8226; PICkit Serial Analyzer header to access the
+                          MCP23S08<br>
+                          &#8226; Potentiometer allows altering of voltage on
+                          the channel 1 ADC input</span></font></td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+            </div>
+            <p>By itself the USB adaptor board is about $15. The kit
+              with both boards is about $30.<br>
+            </p>
+            <p align="center">Microchip Provides an example program
+              called SPI terminal (with source code)<br>
+              <img alt="screen shot of SPI terminal"
+                src="SPI_terminal.png" border="1" height="646"
+                hspace="1" vspace="1" width="827"><br>
+            </p>
+          </div>
+        </div>
+        <hr size="2" width="100%"><br>
+      </div>
+      <p><br>
+      </p>
+    </div>
+  </body>
+</html>

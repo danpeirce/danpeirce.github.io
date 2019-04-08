@@ -1,0 +1,4121 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="GENERATOR" content="Mozilla/4.79 [en] (Windows NT 5.0;
+      U) [Netscape]">
+    <title>USB Development Kit From Microchip -- Notes </title>
+  </head>
+  <body>
+    <center>
+      <div align="center">
+        <h1>Notes on Low Pin Count USB Development Kit&nbsp;</h1>
+      </div>
+      <h1>From Microchip</h1>
+    </center>
+    <center>by Dan Peirce B.Sc.
+      <p>link to <a href="../SensorsNotesIndex.html">Sensor Notes Index</a><br>
+      </p>
+      <p>See <a href="#USB_documents">USB Documents</a><br>
+        <a href="#CDC_docs">USB CDC Documents</a><br>
+      </p>
+      <blockquote>
+        <blockquote>
+          <div align="left">
+            <hr size="2" width="100%">Feb. 16, 2012
+            <hr size="2" width="100%">New development boards are
+            available from Microchip. <b>MCP2210 Evaluation Kit&nbsp;
+              and the MCP2210 Breakout Module.</b><br>
+            <br>
+            This may be preferable to the Low Pin Count USB Development
+            Kit since it would not require direct use of the Microchip
+            USB framework which has a very significant learning curve
+            and takes up program memory. The Low Pin Count USB
+            Development Kit would probably be most useful to us if we
+            were giving a course specifically on USB.<br>
+            <br>
+            I will post notes at <a href="MCP2210_USBtoSPI.html">MCP2210_USBtoSPI.html</a><br>
+            <hr size="2" width="100%"><br>
+            <hr size="2" width="100%">June 20, 2011
+            <hr size="2" width="100%">
+            <h2>Start Of Frame</h2>
+            Over the weekend I decided to read chapter 2 of <i>USB
+              Complete</i>. I don't want to delve into all the details
+            of the Microchip USB framework (at least not at this time)
+            but a read of chapter 2 on Inside USB Transfers is answering
+            some questions regarding the CDC demo project. For example
+            in the CDC demo there is a function related to the USB that
+            gets called periodically at a 1ms rate. In this example
+            there is a counter in that function that counts these calls
+            so that a vairiable will be updated once every 100 ms with
+            the status of the switch on the board. The function is
+            actually generic and exists in many examples regardless of
+            if it is actually doing anything.<br>
+            The function is called <b>USBCB_SOF_Handler().</b><br>
+            <br>
+            At low and full speeds the USB uses 1 ms frames (generated
+            by the host). See figure 2-1 on page 35 of <b>USB Complete</b>.
+            SOF stands for Start Of Frame.<br>
+            The function <b>USBCB_SOF_Handler()</b> is called by BOOL <b>USER_USB_CALLBACK_EVENT_HANDLER</b>(USB_EVENT
+event,
+
+            void *pdata, WORD size) when the event is EVENT_SOF.<br>
+            <br>
+            That appears that <b>USER_USB_CALLBACK_EVENT_HANDLER </b>is
+
+            not called directly anyplace in the project. It is called by
+            the alias USB_SOF_HANDLER(). There is a macro in
+            usb_device_local.h:<br>
+            <br>
+            <font size="-2">F:\Microchip Solutions
+              v2010-10-19\Microchip\USB\usb_device_local.h:450:&nbsp;&nbsp;&nbsp;&nbsp;
+
+              #define
+              USB_SOF_HANDLER(event,pointer,size)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+              USER_USB_CALLBACK_EVENT_HANDLER(event,pointer,size)</font><br>
+            <br>
+            The call to <b>USB_SOF_HANDLER()</b> occures in <b>USBDeviceTasks()</b>
+            which is the file <b>USB_device.c</b>.<br>
+            <br>
+            <blockquote>In summary the <b>USBCB_SOF_Handler() </b>is
+              called at the start of each USB frame which happens once
+              each millisecond<b> </b>(this timing is controlled by the
+              host).<br>
+            </blockquote>
+            <h2>Transfer type</h2>
+            The <b>CDC basic demo</b> results in data being transfered
+            using <b>bulk transfer</b> type. The disadvantage of this
+            type is that there is no reserved bandwith. Data transfer is
+            fast when the USB is not busy but slows down&nbsp; when it
+            is busy. This means if someone is coping a file to a USB
+            flashdrive then other devices using bulk transfer may
+            encounter a slow down in data transfer. <br>
+            <br>
+            If one were to use a <b>custom HID</b> configuration then <b>Interrupt
+
+              Transfer</b> would be used and bandwidth would be reserved
+            for the device. For data aquisition and control applications
+            this would be more reliable.<br>
+            <br>
+            <h2>Windows Application Software Language</h2>
+            If the <b>CDC configuration</b> is used one can easily use
+            any one of many languages since com ports (and so virtual
+            com ports) are supported by languages like Perl, Processing
+            and MatLab.<br>
+            If one is using the <b>custom HID configuration </b>it
+            appears there is not support in all these languages yet.<br>
+            This is where <b>Labview</b> has a big advantage. It
+            appears that labview has a versatile utility that allows one
+            to access a wide variety of USB configurations.<br>
+            <a href="http://zone.ni.com/devzone/cda/tut/p/id/4478">http://zone.ni.com/devzone/cda/tut/p/id/4478</a><br>
+            <br>
+            Well I see some are debating the Labveiw advantage. Some
+            like using the .Net languages (like visual C++ .NET). My
+            guess it all depends on what someone already knows.<br>
+            <a
+href="http://www.microchip.com/forums/tm.aspx?m=440704&amp;mpage=1&amp;print=true">http://www.microchip.com/forums/tm.aspx?m=440704&amp;mpage=1&amp;print=true</a><br>
+            <br>
+            <hr size="2" width="100%"><br>
+            <hr size="2" width="100%">June 16, 2011
+            <hr size="2" width="100%">I received the book <i>USB
+              Complete</i> back today. It seemed like a good idea to get
+            it back at this time since in comparing the USB CDC document
+            to the Mirochip usb_descriptors.c file it was really unclear
+            why some of the descriptors were there. The block diagram
+            from <a href="http://www.lvr.com/usb_virtual_com_port.htm">http://www.lvr.com/usb_virtual_com_port.htm</a>
+            indicated there were four class specific descriptors needed
+            for the virtual com port application but I was looking for
+            more clairity on this. The <i>USB Complete</i> Figure 7-5
+            shows the descriptors for communication-device class. This
+            is less general that microchip slide 20 but more general
+            than the usb_virtual_com_port block diagram.<br>
+            <div align="center"><img alt=""
+                src="communication-class_descriptors.png" border="3"
+                height="522" hspace="3" vspace="3" width="800"><br>
+              <div align="left">If one were to expand the
+                Function-specific Functional Descriptor block into three
+                blocks (it says 1 or more) then one would start to get a
+                diagram more like the usb_virtual_com_port block
+                diagram.<br>
+                <br>
+                <a name="V25TER"></a>The question that still remained
+                was some specifics like where are those blocks
+                specifically defined and why. Also, both Microchip and
+                the usb_virtual_com_port required that the interface
+                descriptor include a protocol code for a modem but it
+                was not clear why (no modem will actually be used and
+                the Microchip firmware demo has no support for AT
+                commands)<br>
+                <div align="center">&nbsp;&nbsp;&nbsp;
+                  V25TER,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//
+Protocol
+
+                  code - Common AT commands ("Hayes(TM)")<br>
+                  <br>
+                  <div align="left">I have browsed <b>chapter 7 of USB
+                      Complete for answers. It looks like there is some
+                      info on both questions. Specifically looking for
+                      why V25TER when no AT commands are being used I
+                      find an answer on pages 197 and 198.</b><br>
+                    <blockquote><font color="blue">"The modem driver
+                        included with Windows 98 SE and later
+                        (usbser.sys) is compatible with modems that use
+                        the Abstract Control Model. A modem used by
+                        applications that use the Windows Telephony
+                        Application Programming Interface (TAPI) must
+                        have its own INF file."<br>
+                        <br>
+                        "Devices other than modems can use the
+                        usbser.sys driver as well. To enable host
+                        applications to access a device using COM-port
+                        functions (a virtual COM port),
+                        bInterfaceSubClass must be set to the Abstract
+                        Control Model."</font><br>
+                    </blockquote>
+                    So the answer that starts to emerge here is that
+                    some of the specifics of using a virtual COM port in
+                    a windows environment stems from the nature of the
+                    driver supplied by Microsoft and that Microsoft
+                    provides a driver for modems that can be used for a
+                    virtual com port even if no modem is actually going
+                    to be present.<br>
+                    <br>
+                    <b>CDC vs HID</b><br>
+                    One reason to use the communication class and a
+                    virtual com port it to avoid the need to create a
+                    new special purpose diver. Also, packages like
+                    LabView, MatLab, Perl, Processing.... typically
+                    already have modules that can interface to a virtual
+                    com port. <br>
+                    <br>
+                    <br>
+                    <br>
+                    [for futrue reference about virtual COM issues:
+http://supp.iar.com/Support/?note=15729&amp;from=search+result]<br>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr size="2" width="100%"><br>
+            <hr size="2" width="100%">June 10, 2011 (rev. June13, 2011)<br>
+            <hr size="2" width="100%">On my bus rides I have started
+            comparing the USB descriptor information in the version
+            of&nbsp; <b>usb_descriptors.c</b> (from Microchip) used for
+            the basic CDC demo to infomation from USB Class Definitions
+            for Communications Devices so I could clairify some points
+            in my own mind.<br>
+            <div align="center"><a name="CDC_docs"></a>see <a
+                href="http://www.usb.org/developers/devclass_docs/">http://www.usb.org/developers/devclass_docs/</a><br>
+              <div align="left"><br>
+                The older version of the<b> USB Class Definitions for
+                  Communications Devices document (version 1.1)</b> was
+                available as a PDF and was about 120 pages long. The
+                newer version 1.2 document is only about 30 pages long
+                since some sub-classes were taking out of the main
+                document and put in separate documents. This looks
+                cleaner and less confusing but the on line CDC document
+                is now stuffed in a zip file with the sub class
+                documents. For convenience I'll put the <b>version 1.2
+                  pdf </b>2010 revised version document here:<br>
+                <div align="center"><a href="CDC120-20101103-track.pdf">CDC120.pdf</a><br>
+                  <div align="left">I have also seen a 2007 version of
+                    the same document.<br>
+                    <br>
+                    Other CDC related documents<br>
+                    <div align="center">
+                      <table border="1" cellpadding="2" cellspacing="2">
+                        <tbody>
+                          <tr>
+                            <td valign="top">
+                              <table border="0" cellpadding="0"
+                                cellspacing="0" width="774">
+                                <colgroup><col style="width: 68pt;"
+                                    width="91"> <col style="width:
+                                    464pt;" width="619"> <col
+                                    style="width: 48pt;" width="64"> </colgroup><tbody>
+                                  <tr style="height: 12.75pt;"
+                                    height="17">
+                                    <td class="xl63" style="height:
+                                      12.75pt; width: 68pt;" height="17"
+                                      width="91"><b>Reference</b></td>
+                                    <td class="xl63" style="border-left:
+                                      medium none; width: 464pt;"
+                                      align="center" width="619"><b>Title</b></td>
+                                    <td class="xl63" style="border-left:
+                                      medium none; width: 48pt;"
+                                      width="64"><b>Revision</b></td>
+                                  </tr>
+                                  <tr style="height: 12.75pt;"
+                                    height="17">
+                                    <td class="xl64" style="border-top:
+                                      medium none; height: 12.75pt;"
+                                      height="17">[USB2.0]</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;">Universal Serial Bus
+                                      Specification (also referred to as
+                                      the USB Specification).</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;" align="right">2</td>
+                                  </tr>
+                                  <tr style="height: 12.75pt;"
+                                    height="17">
+                                    <td class="xl64" style="border-top:
+                                      medium none; height: 12.75pt;"
+                                      height="17">[USBCCS1.0]</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;">Universal Serial Bus Common
+                                      Class Specification</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;" align="right">1</td>
+                                  </tr>
+                                  <tr style="height: 12.75pt;"
+                                    height="17">
+                                    <td class="xl64" style="border-top:
+                                      medium none; height: 12.75pt;"
+                                      height="17">[USBPSTN1.2]</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;">USB CDC Subclass
+                                      Specification for PSTN Devices</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;" align="right">1.2</td>
+                                  </tr>
+                                  <tr style="height: 12.75pt;"
+                                    height="17">
+                                    <td class="xl64" style="border-top:
+                                      medium none; height: 12.75pt;"
+                                      height="17">[USBISDN1.2]</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;">USB CDC Subclass
+                                      Specification for ISDN Devices</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;" align="right">1.2</td>
+                                  </tr>
+                                  <tr style="height: 12.75pt;"
+                                    height="17">
+                                    <td class="xl64" style="border-top:
+                                      medium none; height: 12.75pt;"
+                                      height="17">[USBECM1.2]</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;">USB CDC Subclass
+                                      Specification for Ethernet Devices</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;" align="right">1.2</td>
+                                  </tr>
+                                  <tr style="height: 12.75pt;"
+                                    height="17">
+                                    <td class="xl64" style="border-top:
+                                      medium none; height: 12.75pt;"
+                                      height="17">[USBNCM1.2]</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;">Universal Serial Bus
+                                      Communications Class Subclass
+                                      Specifications for Network Control
+                                      Model Devices</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;" align="right">1</td>
+                                  </tr>
+                                  <tr style="height: 12.75pt;"
+                                    height="17">
+                                    <td class="xl64" style="border-top:
+                                      medium none; height: 12.75pt;"
+                                      height="17">[USBATM1.2]</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;">USB CDC Subclass
+                                      Specification for ATM Devices</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;" align="right">1.2</td>
+                                  </tr>
+                                  <tr style="height: 12.75pt;"
+                                    height="17">
+                                    <td class="xl64" style="border-top:
+                                      medium none; height: 12.75pt;"
+                                      height="17">[USBWMC1.1]</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;">USB CDC Subclass
+                                      Specification for Wireless Mobile
+                                      Communications Devices</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;" align="right">1.1</td>
+                                  </tr>
+                                  <tr style="height: 12.75pt;"
+                                    height="17">
+                                    <td class="xl64" style="border-top:
+                                      medium none; height: 12.75pt;"
+                                      height="17">[USBEEM1.0]</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;">USB CDC Subclass
+                                      Specification for Ethernet
+                                      Emulation Devices</td>
+                                    <td class="xl64" style="border-top:
+                                      medium none; border-left: medium
+                                      none;" align="right">1</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <br>
+                      From <a
+                        href="Getting_Started_with_MLPCUSB_Solutions_final.pdf">Getting_Started_with_MLPCUSB_Solutions_final.pdf</a>
+                      side 20<br>
+                      <img alt="" src="descriptors_blockdiagram.png"
+                        border="3" height="411" hspace="3" vspace="3"
+                        width="544"><br>
+                      <div align="left"><br>
+                        The file that sets up the descriptors supplied
+                        from Microchip for the Basic USB CDC demo is <b>usb_descriptors.c</b>.<br>
+                        <br>
+                        Slide 20 from microchip is generic for USB in
+                        general. They do not provide a more specific
+                        conceptual block diagram for the communications
+                        class. I found the following image at <a
+                          href="http://www.lvr.com/usb_virtual_com_port.htm">http://www.lvr.com/usb_virtual_com_port.htm</a><br>
+                        <div align="center"><img alt=""
+                            src="CDC_descriptors_dia.png" border="3"
+                            height="734" hspace="3" vspace="3"
+                            width="500"><br>
+                        </div>
+                        <br>
+                        Microchip does have an Application Note specific
+                        to the USB CDC class. see <a
+                          href="http://ww1.microchip.com/downloads/en/AppNotes/01164a.pdf"><b>AN1164
+USB
+CDC
+Class
+
+                            on an Embedded Device</b></a><br>
+                        Appendix E in that application note gives a
+                        break down of the CDC specific descriptors.<br>
+                        <br>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </blockquote>
+        <div align="left">
+          <div align="center">
+            <div align="left">
+              <div align="center">
+                <div align="left">
+                  <div align="center">
+                    <div align="left">
+                      <h2>Back to the Current Project -- Basic CDC demo</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <blockquote>
+          <div align="left">
+            <div align="center">
+              <div align="left">
+                <div align="center">
+                  <div align="left">
+                    <div align="center">
+                      <div align="left">In <b>usb_descriptors.c</b> two
+                        ROM arrays have been defined and initialized
+                        with the necessary descriptor information needed
+                        by the PC (and windows and the USB drivers on
+                        the windows machine) to recognize what type of
+                        device has been attached to the USB port.<br>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </blockquote>
+        <div align="left">
+          <h2>Device Descriptor</h2>
+        </div>
+        <blockquote>
+          <div align="left">
+            <div align="center">
+              <div align="left">
+                <div align="center">
+                  <div align="left">
+                    <div align="center">
+                      <div align="center">
+                        <table border="1" cellpadding="2"
+                          cellspacing="2">
+                          <tbody>
+                            <tr>
+                              <td valign="top"><font size="-1"><tt>from
+                                    usb_descriptors.c<br>
+                                  </tt></font></td>
+                              <td valign="top"><font size="-1"><tt>from&nbsp;
+
+                                    usb_config.h<br>
+                                  </tt></font></td>
+                              <td valign="top"><font size="-1"><tt>from&nbsp;
+
+                                    usb_function_cdc.h<br>
+                                  </tt></font></td>
+                              <td valign="top"><font size="-1"><tt>CDC1.2
+
+                                    pdf<br>
+                                  </tt></font></td>
+                            </tr>
+                            <tr>
+                              <td valign="top"><font size="-1"><tt>/*
+                                    Device Descriptor */<br>
+                                    ROM USB_DEVICE_DESCRIPTOR
+                                    device_dsc=<br>
+                                    {<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    0x12,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//
+Size
+of
+this
+descriptor
+in
+
+                                    bytes<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    USB_DESCRIPTOR_DEVICE,&nbsp; //
+                                    DEVICE descriptor type<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    0x0200,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//
+USB
+Spec
+Release
+Number
+in
+
+                                    BCD format<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    CDC_DEVICE,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    // Class Code<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    0x00,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    // Subclass code<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    0x00,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//
+Protocol
+code
+-No
+class
+specific
+
+                                    protocol required<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    USB_EP0_BUFF_SIZE,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    // Max packet size for EP0, see
+                                    usb_config.h<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    0x04D8,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    // Vendor ID<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    0x000A,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//
+Product
+ID:
+CDC
+RS-232
+Emulation
+
+                                    Demo<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    0x0100,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//
+Device
+release
+number
+in
+BCD
+
+                                    format<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    0x01,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    // Manufacturer string index<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    0x02,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    // Product string index<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    0x00,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    // Device serial number string index<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    0x01&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                    // Number of possible configurations<br>
+                                    };<br>
+                                  </tt></font></td>
+                              <td valign="top"><font size="-1"><tt><br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                  </tt><tt>#define USB_EP0_BUFF_SIZE 8<br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                  </tt></font></td>
+                              <td valign="top"><font size="-1"><tt><br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    #define CDC_DEVICE 0x02<br>
+                                  </tt></font></td>
+                              <td valign="top"><font size="-1"><tt><br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    table#2p12<br>
+                                    table#4p12<br>
+                                    table#5p13 <br>
+                                  </tt></font></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div align="left"><br>
+                          <div align="center"> </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </blockquote>
+      </blockquote>
+      <blockquote>
+        <h2 align="left"><font color="#000000" face="Arial Unicode MS">Configuration
+
+            1 Descriptor</font></h2>
+        It appears that configuration descriptor, interface descrptors
+        and interface descritors are all kept in this one ROM array <b><font
+            color="#000000" face="Arial Unicode MS">configDescriptor1[]<br>
+          </font></b>This device has only one configuration.<b><font
+            color="#000000" face="Arial Unicode MS"><br>
+          </font></b></blockquote>
+      <table border="1" cellpadding="2" cellspacing="1" cols="4">
+        <colgroup><col width="67"><col width="67"><col width="566"><col
+            width="491"></colgroup> <tbody>
+          <tr>
+            <td colspan="4" rowspan="1" valign="top">Table created June
+              10, (and revised June 11, 12, 13) 2011&nbsp; --- still
+              adding comments and notes to this table.<br>
+              The first two columns of the table origniated from the
+              watch window in MP lab.<br>
+              The third column is from usb_descriptors.c<br>
+              The fourth column is a combination of my own comments and
+              notes taken from the CDC1.2 document.<br>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" rowspan="1" valign="top">from MPlab watch
+              wnidow <br>
+            </td>
+            <td valign="top">each row in this column is from the file <b>usb_descriptors.c</b><br>
+            </td>
+            <td valign="top">My comments and notes from <br>
+              <a
+href="http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/USB/CDC120-20101103-track.pdf">CDC
+
+                1.2 (pdf)</a><br>
+            </td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17" width="67"><font
+                color="#000000">byte</font><br>
+            </td>
+            <td align="LEFT" width="67"><font color="#000000">Hex</font></td>
+            <td align="LEFT" width="566"><font color="#000000"
+                face="Arial Unicode MS">/* Configuration 1 Descriptor */</font></td>
+            <td align="LEFT" width="491"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT" valign="top"><font color="#000000"
+                face="Arial Unicode MS">ROM BYTE configDescriptor1[]={</font></td>
+            <td align="LEFT"><font color="#000000">All of this is just
+                the definition and initialization of a ROM array. (set
+                at compile time).<br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; <b>/* Configuration Descriptor
+                  */</b></font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[0]</font></td>
+            <td align="LEFT"><font color="#000000">0x09</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0x09,//sizeof(USB_CFG_DSC),&nbsp;&nbsp;&nbsp; // Size of
+                this descriptor in bytes</font></td>
+            <td align="LEFT"><font color="#000000">[0] to
+                [8]&nbsp;&nbsp; ---- configuration descriptor<br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[1]</font></td>
+            <td align="LEFT"><font color="#000000">0x02</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                USB_DESCRIPTOR_CONFIGURATION,&nbsp; // CONFIGURATION
+                descriptor type</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17" valign="top"><font
+                color="#000000">[2]</font></td>
+            <td align="LEFT" valign="top"><font color="#000000">0x43</font></td>
+            <td align="LEFT" valign="top"><font color="#000000"
+                face="Arial Unicode MS">&nbsp;&nbsp;&nbsp;
+                67,0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//
+Total
+length
+of
+data
+for
+this
+cfg
+-
+
+                is 0x43</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&gt; total length of this confiuratoin Descriptor<br>
+                [0] to [66]<br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[3]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17" valign="top"><font
+                color="#000000">[4]</font></td>
+            <td align="LEFT" valign="top"><font color="#000000">0x02</font></td>
+            <td align="LEFT" valign="top"><font color="#000000"
+                face="Arial Unicode MS">&nbsp;&nbsp;&nbsp;
+                2,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Number of interfaces in this cfg</font></td>
+            <td align="LEFT" valign="top"><font color="#000000"
+                face="Arial Unicode MS">Data Class Interface,
+                Communications Interface Class</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[5]</font></td>
+            <td align="LEFT"><font color="#000000">0x01</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                1,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Index value of this configuration</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[6]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Configuration string index</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[7]</font></td>
+            <td align="LEFT"><font color="#000000">0xC0</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; _DEFAULT |
+                _SELF,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Attributes, see usb_device.h</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[8]</font></td>
+            <td align="LEFT"><font color="#000000">0x32</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                50,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Max power consumption (2X mA)</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">2x50 =&gt; 100 mA which is default value</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; <b>/* Interface Descriptor */</b></font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[9]</font></td>
+            <td align="LEFT"><font color="#000000">0x09</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                9,//sizeof(USB_INTF_DSC),&nbsp;&nbsp; // Size of this
+                descriptor in bytes</font></td>
+            <td align="LEFT"><font color="#000000">[9] to [17]<br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[10]</font></td>
+            <td align="LEFT"><font color="#000000">0x04</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                USB_DESCRIPTOR_INTERFACE,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // INTERFACE descriptor type</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[11]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Interface Number</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[12]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Alternate Setting Number</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[13]</font></td>
+            <td align="LEFT"><font color="#000000">0x01</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                1,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Number of endpoints in this intf</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[14]</font></td>
+            <td align="LEFT"><font color="#000000">0x02</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                COMM_INTF,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Class code</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">0x02 from usb_function_cdc.h and table#3p12</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[15]</font></td>
+            <td align="LEFT"><font color="#000000">0x02</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; ABSTRACT_CONTROL_MODEL, //
+                Subclass code</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">0x02 from usb_function_cdc.h and talbe#4p12</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[16]</font></td>
+            <td align="LEFT"><font color="#000000">0x01</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                V25TER,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Protocol code - Common AT commands ("Hayes(TM)")</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">0x01 from usb_function_cdc.h &amp; table#5p13 AT
+                Commands: V.250 etc note#1.</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[17]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Interface string index</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;<b> /* CDC Class-Specific
+                  Descriptors */</b></font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">this group seems to be shown in table#15p18</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[18]</font></td>
+            <td align="LEFT"><font color="#000000">0x05</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; sizeof(USB_CDC_HEADER_FN_DSC),</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;Size of this descriptor.</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[19]</font></td>
+            <td align="LEFT"><font color="#000000">0x24</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; CS_INTERFACE,</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">#define CS_INTERFACE 0x24 from usb_function_cdc.h
+                table#12p17</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[20]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; DSC_FN_HEADER,</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">#define DSC_FN_HEADER 0x00 from usb_function_cdc.h
+                table#13p17</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[21]</font></td>
+            <td align="LEFT"><font color="#000000">0x10</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; 0x10,0x01,</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">bcdCDC field &gt; USB Class Definitions for
+                Communications Devices</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[22]</font></td>
+            <td align="LEFT"><font color="#000000">0x01</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">Specification release number in&nbsp; binary-coded
+                decimal (see table#18)</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[23]</font></td>
+            <td align="LEFT"><font color="#000000">0x04</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; sizeof(USB_CDC_ACM_FN_DSC),</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[24]</font></td>
+            <td align="LEFT"><font color="#000000">0x24</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; CS_INTERFACE,</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">#define CS_INTERFACE 0x24 from usb_function_cdc.h
+                table#12p17</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[25]</font></td>
+            <td align="LEFT"><font color="#000000">0x02</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; DSC_FN_ACM,</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">#define DSC_FN_ACM 0x02 - Abstract Control
+                Management table#13p17</font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[26]</font></td>
+            <td align="LEFT"><font color="#000000">0x02</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; USB_CDC_ACM_FN_DSC_VAL,</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[27]</font></td>
+            <td align="LEFT"><font color="#000000">0x05</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; sizeof(USB_CDC_UNION_FN_DSC),</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[28]</font></td>
+            <td align="LEFT"><font color="#000000">0x24</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; CS_INTERFACE,</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[29]</font></td>
+            <td align="LEFT"><font color="#000000">0x06</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; DSC_FN_UNION,</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[30]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; CDC_COMM_INTF_ID,</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[31]</font></td>
+            <td align="LEFT"><font color="#000000">0x01</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; CDC_DATA_INTF_ID,</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[32]</font></td>
+            <td align="LEFT"><font color="#000000">0x05</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; sizeof(USB_CDC_CALL_MGT_FN_DSC),</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[33]</font></td>
+            <td align="LEFT"><font color="#000000">0x24</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; CS_INTERFACE,</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[34]</font></td>
+            <td align="LEFT"><font color="#000000">0x01</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; DSC_FN_CALL_MGT,</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[35]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; 0x00,</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[36]</font></td>
+            <td align="LEFT"><font color="#000000">0x01</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; CDC_DATA_INTF_ID,</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; /* Endpoint Descriptor */</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+//sizeof(USB_EP_DSC),DSC_EP,_EP02_IN,_INT,CDC_INT_EP_SIZE,0x02,</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[37]</font></td>
+            <td align="LEFT"><font color="#000000">0x07</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; 0x07,/*sizeof(USB_EP_DSC)*/</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[38]</font></td>
+            <td align="LEFT"><font color="#000000">0x05</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                USB_DESCRIPTOR_ENDPOINT,&nbsp;&nbsp;&nbsp; //Endpoint
+                Descriptor</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[39]</font></td>
+            <td align="LEFT"><font color="#000000">0x81</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                _EP01_IN,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //EndpointAddress</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[40]</font></td>
+            <td align="LEFT"><font color="#000000">0x03</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                _INTERRUPT,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //Attributes</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[41]</font></td>
+            <td align="LEFT"><font color="#000000">0x08</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0x08,0x00,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //size</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[42]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[43]</font></td>
+            <td align="LEFT"><font color="#000000">0x02</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0x02,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //Interval</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; /* Interface Descriptor */</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[44]</font></td>
+            <td align="LEFT"><font color="#000000">0x09</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                9,//sizeof(USB_INTF_DSC),&nbsp;&nbsp; // Size of this
+                descriptor in bytes</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[45]</font></td>
+            <td align="LEFT"><font color="#000000">0x04</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                USB_DESCRIPTOR_INTERFACE,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // INTERFACE descriptor type</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[46]</font></td>
+            <td align="LEFT"><font color="#000000">0x01</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                1,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Interface Number</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[47]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Alternate Setting Number</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[48]</font></td>
+            <td align="LEFT"><font color="#000000">0x02</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                2,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Number of endpoints in this intf</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[49]</font></td>
+            <td align="LEFT"><font color="#000000">0x0A</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                DATA_INTF,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Class code</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[50]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Subclass code</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[51]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                NO_PROTOCOL,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Protocol code</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[52]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                // Interface string index</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; /* Endpoint Descriptor */</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+//sizeof(USB_EP_DSC),DSC_EP,_EP03_OUT,_BULK,CDC_BULK_OUT_EP_SIZE,0x00,</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[53]</font></td>
+            <td align="LEFT"><font color="#000000">0x07</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; 0x07,/*sizeof(USB_EP_DSC)*/</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[54]</font></td>
+            <td align="LEFT"><font color="#000000">0x05</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                USB_DESCRIPTOR_ENDPOINT,&nbsp;&nbsp;&nbsp; //Endpoint
+                Descriptor</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[55]</font></td>
+            <td align="LEFT"><font color="#000000">0x02</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                _EP02_OUT,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //EndpointAddress</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[56]</font></td>
+            <td align="LEFT"><font color="#000000">0x02</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                _BULK,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //Attributes</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[57]</font></td>
+            <td align="LEFT"><font color="#000000">0x40</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0x40,0x00,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //size</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[58]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[59]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0x00,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //Interval</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; /* Endpoint Descriptor */</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+//sizeof(USB_EP_DSC),DSC_EP,_EP03_IN,_BULK,CDC_BULK_IN_EP_SIZE,0x00</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[60]</font></td>
+            <td align="LEFT"><font color="#000000">0x07</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp; 0x07,/*sizeof(USB_EP_DSC)*/</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[61]</font></td>
+            <td align="LEFT"><font color="#000000">0x05</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                USB_DESCRIPTOR_ENDPOINT,&nbsp;&nbsp;&nbsp; //Endpoint
+                Descriptor</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[62]</font></td>
+            <td align="LEFT"><font color="#000000">0x82</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                _EP02_IN,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //EndpointAddress</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[63]</font></td>
+            <td align="LEFT"><font color="#000000">0x02</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                _BULK,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //Attributes</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[64]</font></td>
+            <td align="LEFT"><font color="#000000">0x40</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0x40,0x00,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //size</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[65]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000">[66]</font></td>
+            <td align="LEFT"><font color="#000000">0x00</font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">&nbsp;&nbsp;&nbsp;
+                0x00,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                //Interval</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+          <tr>
+            <td align="LEFT" height="17"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+            <td align="LEFT"><font color="#000000" face="Arial Unicode
+                MS">};</font></td>
+            <td align="LEFT"><font color="#000000"><br>
+              </font></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <blockquote>
+        <blockquote>
+          <div align="left">
+            <hr size="2" width="100%"><br>
+            <hr size="2" width="100%">June 6, 2011<br>
+            <hr size="2" width="100%"><br>
+            <center><iframe
+src="https://docs.google.com/document/pub?id=1PlTOPnCmAYx3QtMqdeD7j0zxS83mPBNK6KQGqu9loeM&amp;embedded=true"
+                height="370" width="80%"></iframe></center>
+            <hr size="2" width="100%"><br>
+            <hr size="2" width="100%">May 23, 2011
+            <hr size="2" width="100%">I have now tested the CDC demo
+            (lab4) from microchip for use on the LPC USB Development
+            Kit.<br>
+            <br>
+            As before I had to make some small changes to get this up
+            and running. I will outline those later.<br>
+            <br>
+            <div align="left">This demo essentially makes the
+              Development kit a USB to RS232 adaptor at 19200 bps. It is
+              tested with two hyperterminal windows.<br>
+              <div align="center"><img alt=""
+                  src="Hyperterminal_demo.png" border="3" height="584"
+                  hspace="3" vspace="3" width="528"><br>
+                <br>
+                <div align="left">What I am actually interested in doing
+                  with this is simply dropping the RS232 side and
+                  sending information directly to the USB buffer from
+                  firmware that makes use of either the ADC or timers or
+                  both.<br>
+                  <br>
+                  The instructions in the User Guide assume one is using
+                  Windows XP. I'll have to look into getting the right
+                  driver for windows 7.<br>
+                  <br>
+                  <div align="center"><img alt=""
+                      src="device_man_CDC.png" border="3" height="456"
+                      hspace="3" vspace="3" width="653"><br>
+                    <div align="left"><br>
+                      <h3>CDC Basic Demo</h3>
+                      I was thinking that I wanted a make changes to the
+                      demo that would essentially drop the RS232 part of
+                      the link and just use the serial USB in conjuction
+                      to input to the PIC. I discovered that the USB
+                      framwork files come with other examples. There is
+                      a basic demo that sends a message to through the
+                      USB if a button on the board is pressed. It also
+                      echo's characters it recieves but adds one to them
+                      so that an A comes back as a B and so on. The
+                      exception is carrage return and linefeed which
+                      come back as sent. I compiled the project and
+                      tryied it with hyperterminal.<br>
+                      <div align="center"><img alt=""
+                          src="CDC_hyperterminal_basic_demo.png"
+                          border="3" height="266" hspace="3" vspace="3"
+                          width="521"><br>
+                        <br>
+                        <div align="left">
+                          <h3><a name="CDC_Processing"></a>Using the CDC
+                            basic Demo with Processing</h3>
+                          I thought it would be nice to try this demo
+                          with a <a
+                            href="../Processing/ProcessingComputerLanguage.html">Processing
+Language
+
+                            GUI</a>. I looked in the examples and found
+                          one that could be used without changes (exept
+                          setting the write com port and baud rate --
+                          19200).<br>
+                          <div align="center"><img alt=""
+                              src="Processing_CDC_demo.png" border="3"
+                              height="478" hspace="3" vspace="3"
+                              width="484"><br>
+                            <br>
+                            <div align="left">When the button is pressed
+                              the inner square changes color.<br>
+                              <div align="center"><img alt=""
+                                  src="Processing_CDC_demo_pressed.png"
+                                  border="3" height="197" hspace="3"
+                                  vspace="3" width="179"><br>
+                                <br>
+                                <div align="left">There are other
+                                  processing examples that could be used
+                                  but the PIC program will require some
+                                  changes to match the expectations of
+                                  the exising processing serial demo's.
+                                  At least some of them were set up to
+                                  be used with a Wiring / Arduino&nbsp;
+                                  demo but they should work just as well
+                                  with the PIC board (once the firmware
+                                  is adjusted).<br>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr size="2" width="100%"><br>
+            <hr size="2" width="100%">May 10, 2011(rev. May 24, 2011)<br>
+            <hr size="2" width="100%"><b>Microchip</b> has a page that
+            includes protocol analyzers (added May 24, 2011)<br>
+            <b>third party</b> <a
+href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=2519&amp;param=en025441#P275_17192"><b><font
+                  color="#0000ff" face="Arial" size="+1">Protocol
+                  Analyzers</font></b></a><br>
+            <hr size="2" width="100%"><br>
+            I come across this (looking for something else) <a
+              href="http://www.beyondlogic.org/usbnutshell/usb1.shtml">http://www.beyondlogic.org/usbnutshell/usb1.shtml</a><br>
+            and <a
+              href="http://www.beyondlogic.org/usbnutshell/usb2.shtml">http://www.beyondlogic.org/usb/otghost.htm</a>
+            (on the go host)<br>
+            <br>
+            <a name="USB_Analyzer"></a>USB packet snifter ("sniffer") I
+            had a look at <a
+              href="http://sourceforge.net/projects/usbsnoop/">http://sourceforge.net/projects/usbsnoop/</a><br>
+            <a href="http://benoit.papillault.free.fr/usbsnoop/">http://benoit.papillault.free.fr/usbsnoop/</a><br>
+            This is software only and is free and beta. Not much in the
+            way of documentation.<br>
+            <br>
+            Another possibility&nbsp;&nbsp; see <a
+              href="http://www.usb-monitor.com/usb-monitor-pro.html">http://www.usb-monitor.com/usb-monitor-pro.html<br>
+            </a>free 15 day trial ($199 after trial period). Includes
+            filtering. May be a better bet than usbsnoop.<br>
+            <br>
+            found another possiblity. <b>USBTrace : Software-only USB
+              Protocol Analyzer</b>&nbsp; Like the screenshoot of this
+            one. <a href="http://www.sysnucleus.com/">http://www.sysnucleus.com/</a><br>
+            They provide more information than the others see <a
+              href="http://www.sysnucleus.com/usbtrace_advantage.html">http://www.sysnucleus.com/usbtrace_advantage.html</a><br>
+            <a href="http://www.sysnucleus.com/USBTrace%20Datasheet.pdf">http://www.sysnucleus.com/USBTrace%20Datasheet.pdf</a><br>
+            <br>
+            Also <a href="http://www.hhdsoftware.com/usb-monitor">http://www.hhdsoftware.com/usb-monitor</a><br>
+            <br>
+            Someone else has made a list here <a
+href="http://www.freedownloadmanager.org/downloads/usb_protocol_analyzer_software/">http://www.freedownloadmanager.org/downloads/usb_protocol_analyzer_software/</a><br>
+            <a
+href="http://comvcon.blogspot.com/2008/11/list-of-usb-protocol-analyzers.html">http://comvcon.blogspot.com/2008/11/list-of-usb-protocol-analyzers.html</a><br>
+            <br>
+            An actual hardware <a
+              href="http://www.totalphase.com/products/beagle/usb12/">USB
+
+              <span class="name">Protocol Analyzer</span></a> at $475
+            (plus free software).<br>
+            <hr size="2" width="100%"><br>
+            <hr size="2" width="100%">May 9, 2011
+            <hr size="2" width="100%">I was hoping we would be able to
+            use some of these USB projects with our new Android 2.2
+            ViewPad 7. It turns out that the ViewPad 7 is a USB device
+            and not a USB host. This means we will not be able to attach
+            a USB webcam (telescope camera) or USB keyboard to the
+            ViewPad7. If we want to connect exteral sensors it would
+            have to be through the bluetooth interface. see <a
+              href="../android/index.html#viewpad7">../android/index.html#viewpad7</a><br>
+            <br>
+            Some talk about hacking the USB so that the Android could be
+            a host (or adding the feature). see <a
+              href="../android/index.html#hostmode">../android/index.html#hostmode</a><br>
+            <br>
+            <hr size="2" width="100%"><br>
+            <hr size="2" width="100%">May 4, 2011
+            <hr size="2" width="100%">
+            <h3>Jumper position for Microchip examples </h3>
+            (mouse in circle and USB keyboard). This combination allows
+            the board to power up from the USB interface.<br>
+            <br>
+            <b>J14 on right most pins</b> (this is step 22 shown on page
+            17 of <i>Low Pin Count USB Development Kit User's Guide</i>).<br>
+            <div align="center"><img alt="" src="J14right.PNG"
+                height="603" vspace="3" width="703"><br>
+              <b><br>
+              </b>
+              <div align="left"><b>J12 off the pins</b> (I leave the
+                jumper on just one pin so it won't go missing). (this is
+                step 23 shown on page 17 of <i>Low Pin Count USB
+                  Development Kit User's Guide</i>).
+                <div align="center"><img alt="" src="J12off.png"
+                    border="3" height="576" hspace="3" vspace="3"
+                    width="600"><br>
+                </div>
+              </div>
+            </div>
+            <br>
+            For programming the PICkit2 goes on this header.<br>
+            <div align="center"><img alt="" src="ICSP1.png" border="3"
+                height="406" hspace="3" vspace="3" width="700"><br>
+            </div>
+            <hr size="2" width="100%"><br>
+            <hr size="2" width="100%">April 29, 2011 (rev. May 1, 2011)<br>
+            <hr size="2" width="100%">The original demo project from
+            Microchip was focused on how the interface is set up. By
+            moving Keyboard() into a different file than the USB code I
+            was hoping to move the level of abstraction to focus on the
+            keyboard operations and put the USB HID aspects of the
+            project "under the hood". This was intended to expedite
+            creating new projects. I think a few more simple changes
+            could make this distinction more complete. I think I can do
+            this primarily by creating some function like macros.<br>
+            <br>
+            <b>main()</b> was moved to the new file to emphasize the
+            cooperative multitasking nature of the project. It is
+            because of this cooperative multitasking that a state
+            machine for the keyboard is really needed.&nbsp; There are
+            different ways to implement state machines in C. As an
+            program is given more features the switch statement method
+            becomes cumbersome. For this reason I perfer use a variable
+            that is a function pointer. <br>
+            <blockquote>Advantages of the <a
+href="http://publications.gbdirect.co.uk/c_book/chapter5/function_pointers.html">function
+
+                pointer</a> method of creating state machines<br>
+              <ol>
+                <li>The code for each state exists in an independent
+                  function with a name that is descriptive of what that
+                  function does. This is much better than just using
+                  numbers.</li>
+                <li>Even in the switch statement method if the code gets
+                  long it becomes necessary to create functions for what
+                  happens in each state (or the switch statement ends up
+                  running on for pages).</li>
+                <li>One can use an enum with meaningful names rather
+                  than just giving the states numbers but then one has
+                  to keep the enum list of names and a bunch of names
+                  for the state functions and this gets difficult to
+                  maintain as the program gets longer. With the function
+                  pointer method the name of the functions themselves
+                  are used to change states. There is no need for two
+                  lists of names. This make this method quite eloquent.</li>
+              </ol>
+              The function pointer concept is really quite simple and
+              one does not need to worry about <a
+                href="http://en.wikipedia.org/wiki/Dereference_operator">dereferencing</a>
+              the way one does when using standard variable pointers so
+              you don't need to remember the meaning of different "funny
+              characters" that go in front of the variables. Well, the
+              exception is in the function pointer variable definition
+              which has a funny syntax.<br>
+            </blockquote>
+            <h3>Simple Changes in Kwantlen Project</h3>
+            <blockquote><b>keyboard01.h</b><br>
+              <iframe src="USBkeyboard_Kwantlen01/keyboard01.h"
+                height="370" width="100%"></iframe><br>
+              <br>
+              <b>keyboard_main_kwantlen01.c</b><br>
+              <iframe
+                src="USBkeyboard_Kwantlen01/keyboard_main_Kwantlen01.c"
+                height="800" width="100%"></iframe> </blockquote>
+          </div>
+          <div align="left">
+            <h3>Using State Functions</h3>
+            <blockquote>The state machine itself is less cluttered if
+              one uses state functions.<br>
+              <br>
+              <div align="center">
+                <table border="1" cellpadding="2" cellspacing="2">
+                  <tbody>
+                    <tr>
+                      <td valign="top"><b><tt>void Keyboard(void)<br>
+                            {<br>
+                            //State machine<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            switch (state)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            {&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp; &nbsp;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+case
+0:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            start_wait();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+case
+3:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            type_message();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            break;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            case
+                            4:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            // case 4 sends a key-up message<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            key_up();<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+break;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            case 5:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            // does nothing at all (all done!)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            break;<br>
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+default:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            state = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            break;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            }</tt></b><br>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div align="left"><br>
+                  The number designations really don't add anything to
+                  the state machine. They can be eliminated by using a
+                  function pointer.<br>
+                </div>
+              </div>
+            </blockquote>
+            <h3>Function Pointer State Machine</h3>
+            <div align="left">
+              <blockquote>The function pointer version of Keyboard() is
+                shorter still!<br>
+                <br>
+                <div align="center">
+                  <table border="1" cellpadding="2" cellspacing="2">
+                    <tbody>
+                      <tr>
+                        <td valign="top"><b><tt>void Keyboard(void)<br>
+                              {<br>
+                              &nbsp;&nbsp;&nbsp; state(); // the
+                              function actually called depends on the
+                              contents<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//
+of
+the
+function
+pointer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              <u>state</u>!&nbsp;&nbsp;&nbsp; <br>
+                              }</tt></b><br>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div align="left"><br>
+                    <div align="left">keyboard_main_Kwantlen02.c<br>
+                      <iframe
+                        src="USBkeyboard_Kwantlen02/keyboard_main_Kwantlen02.c"
+                        height="800" width="100%"></iframe> </div>
+                  </div>
+                </div>
+              </blockquote>
+            </div>
+            <div align="center">Revised State Transition Diagram<br>
+              <img alt=""
+                src="state_transition_diagram_kb_kwantlen02.png"
+                border="3" height="433" hspace="3" vspace="3"
+                width="579"><br>
+              <br>
+            </div>
+            <div align="center">
+              <div align="left"><br>
+              </div>
+            </div>
+            <br>
+            <hr size="2" width="100%"><br>
+          </div>
+          <hr>
+          <div align="left"><a name="keyboard_helloworld"></a>April 28,
+            2011 </div>
+          <hr size="2" width="100%">
+          <div align="center">
+            <div align="center">
+              <div align="left">I have written a new firmware program
+                that emulates a keyboard sort of like a <b>USB HID
+                  keyboard "hello world"</b>. This differs significantly
+                from what we have done with the Surrey Campus photogate
+                timer boxes. In that case we used a sparkfun board that
+                allowed the USB port to emulate a serial com port. In
+                this case the USB development Kit is emulating a
+                keyboard (it can alternatively be made to emulate a
+                serial port, or a mouse...).<br>
+                <br>
+                One first goes to a <b>PC</b> and opens <b>a program
+                  like notepad.exe</b> and then attaches the Low Pin
+                Count <b>USB Development Kit board to the PC via a USB
+                  cable</b>. The firmware program waits for the PC to
+                enumerate the board. The firmware program then sends a
+                message to the PC as shown below:<br>
+                <br>
+              </div>
+              <img alt="" src="USB_Kwantlen_msg.png" border="3"
+                height="153" hspace="3" vspace="3" width="467"><br>
+              <div align="left"><br>
+                The next step is to get the program to display the ADC
+                reading from the potentiometer (emulated sensor) and/or
+                an actual sensor.<br>
+              </div>
+            </div>
+            <div align="left"><br>
+              Code for this firmware program <br>
+              <blockquote><iframe src="keyboard_main_Kwantlen.c"
+                  height="800" width="100%"></iframe><br>
+                <br>
+              </blockquote>
+            </div>
+            see <a href="#bitmap_scan_codes">bitmaps and scan codes</a><br>
+            <br>
+            This table is for <b>bitmaps of Modifier keys</b><br>
+          </div>
+          <div align="center">
+            <table border="1" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <td valign="top"><b>Bit</b><br>
+                  </td>
+                  <td valign="top"><b>Key</b><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">0<br>
+                  </td>
+                  <td valign="top">LEFT CTRL<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">1<br>
+                  </td>
+                  <td valign="top">LEFT SHIFT<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">2<br>
+                  </td>
+                  <td valign="top">LEFT ALT<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">3<br>
+                  </td>
+                  <td valign="top">LEFT GUI<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">4<br>
+                  </td>
+                  <td valign="top">RIGHT CTRL<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">5<br>
+                  </td>
+                  <td valign="top">RIGHT SHIFT<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">6<br>
+                  </td>
+                  <td valign="top">RIGHT ALT<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">7<br>
+                  </td>
+                  <td valign="top">RIGHT GUI<br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            This table is for The Keyboard Input Report<br>
+            <table border="1" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <td valign="top"><b>Byte</b><br>
+                  </td>
+                  <td valign="top"><b>Description</b><br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">0<br>
+                  </td>
+                  <td valign="top">Modifier Keys<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">1<br>
+                  </td>
+                  <td valign="top">Reserved<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">2<br>
+                  </td>
+                  <td valign="top">Keycode 1<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">3<br>
+                  </td>
+                  <td valign="top">Keycode 2<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">4<br>
+                  </td>
+                  <td valign="top">Keycode 3<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">5<br>
+                  </td>
+                  <td valign="top">Keycode 4<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">6<br>
+                  </td>
+                  <td valign="top">Keycode 5<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td valign="top">7<br>
+                  </td>
+                  <td valign="top">Keycode 6<br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+          </div>
+          <hr size="2" width="100%"><br>
+          <hr size="2" width="100%">
+          <div align="left">April 27, 2011 </div>
+          <hr size="2" width="100%">
+          <div align="left">I have taken the new keyboard01.c and
+            divided it into three files.<br>
+          </div>
+          <table align="center" border="1" cellpadding="6"
+            cellspacing="2">
+            <tbody>
+              <tr>
+                <td valign="top"><a href="keyboard.h">keyboard.h</a><br>
+                  <a href="USB_Keyboard.c">USB_keyboard.c</a><br>
+                  <a href="keyboard_main_state_machine.c">keyboard_main_state_machine.c</a><br>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div align="left">I expect this new version of the project
+            will be easier to follow and make changes to. Changes can be
+            made mostly in <b>keyboard_main_state_machine.c</b>.<br>
+          </div>
+          <br>
+          <div align="left">Also, the delay which makes up the 0 state
+            of the state machine has been make 100 times shorter. This
+            means that the pot can now be turned very quickly and none
+            of the letters in the output will be skipped. By moving
+            quickly in one fluid motion it is also possible to avoid any
+            back tracking during the movement. <b>This is a substantial
+              improvement </b>and essentially results in a faster
+            sample rate. The original comment in the code about the
+            delay being needed to allow time to charge the capacitor was
+            wrong (there is no way that the capacitor would require that
+            much time to charge).<br>
+          </div>
+          <br>
+          Files in the project:<br>
+          <div align="center">
+            <table border="1" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <td valign="top"><tt>[FILE_INFO]<br>
+                      file_000=usb_descriptors.c<br>
+                      file_001=usb_device.c<br>
+                      file_002=usb_function_hid.c<br>
+                      file_003=USB_Keyboard.c<br>
+                      file_004=keyboard_main_state_machine.c<br>
+                      file_005=Compiler.h<br>
+                      file_006=GenericTypeDefs.h<br>
+                      file_007=HardwareProfile.h<br>
+                      file_008=usb.h<br>
+                      file_009=usb_ch9.h<br>
+                      file_010=usb_common.h<br>
+                      file_011=usb_config.h<br>
+                      file_012=usb_device.h<br>
+                      file_013=usb_function_hid.h<br>
+                      file_014=usb_hal.h<br>
+                      file_015=keyboard.h</tt><br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+          </div>
+          <br>
+          <hr size="2" width="100%"><br>
+          <hr size="2" width="100%">
+          <div align="left">April 26, 2011<br>
+          </div>
+          <hr size="2" width="100%">
+          <div align="left">If at some time it is decided to have the
+            students in some course work on labs based on those in the <b>Low
+
+              Pin Count USB Development Kit User Guide</b> From
+            Microchip the code in the <b>keyboard.c </b>source file
+            could be greatly simplified to make it easier to follow.
+            This file contains a lot of conditionally included
+            directives and c code so that the same file could be used
+            with any one of a number of different Microchip
+            demonstration boards and compilers. For example there are
+            about 6 different blocks of #pragma config directives but
+            only one of these will actually be used in a given build!
+            For example the #pragma config('s) for the Low Pin Count USB
+            Development Kit look like the following:<br>
+          </div>
+          <div align="center">
+            <table border="1" cellpadding="2" cellspacing="2">
+              <tbody>
+                <tr>
+                  <td valign="top"><b><tt>#elif
+                        defined(LOW_PIN_COUNT_USB_DEVELOPMENT_KIT)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config CPUDIV = NOCLKDIV<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config USBDIV = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config FOSC&nbsp;&nbsp; = HS<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config PLLEN&nbsp; = ON<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config FCMEN&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config IESO&nbsp;&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config PWRTEN = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config BOREN&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config BORV&nbsp;&nbsp; = 30<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config WDTEN&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config WDTPS&nbsp; = 32768<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config MCLRE&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config HFOFST = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config STVREN = ON<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config LVP&nbsp;&nbsp;&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config XINST&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config BBSIZ&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config CP0&nbsp;&nbsp;&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config CP1&nbsp;&nbsp;&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config CPB&nbsp;&nbsp;&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config WRT0&nbsp;&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config WRT1&nbsp;&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config WRTB&nbsp;&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config WRTC&nbsp;&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config EBTR0&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config EBTR1&nbsp; = OFF<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #pragma config EBTRB&nbsp; = OFF&nbsp; </tt></b><br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div align="left"><br>
+              There is also a long section of vector remapping that is
+              not relavent since we are not intending to use a
+              bootloader! We can safely remove this section.<br>
+              <div align="center"><b><tt>/** VECTOR REMAPPING
+                    ***********************************************/</tt></b><br>
+                <br>
+                <div align="left"><b>The top of main() could also be
+                    simplified from</b><br>
+                  <table align="center" border="1" cellpadding="2"
+                    cellspacing="2">
+                    <tbody>
+                      <tr>
+                        <td valign="top"><b><tt>#if defined(__18CXX)<br>
+                              void main(void)<br>
+                              #else<br>
+                              int main(void)<br>
+                              #endif<br>
+                              {<br>
+                              //&nbsp;&nbsp;&nbsp; //This can be used
+                              for user entry into the bootloader &nbsp;<br>
+                              //&nbsp;&nbsp;&nbsp; #if defined(__C30__)
+                              <br>
+                              //&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                              mInitSwitch2();<br>
+                              //&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                              if(sw2 == 0)<br>
+                              //&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                              {<br>
+                              //&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                              EnterBootloader();<br>
+                              //&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                              }<br>
+                              //&nbsp;&nbsp;&nbsp; #endif</tt></b></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <br>
+                  <b>to the more typical </b><br>
+                  <div align="center">
+                    <table border="1" cellpadding="2" cellspacing="2">
+                      <tbody>
+                        <tr>
+                          <td valign="top"><b><tt>void main(void)<br>
+                                { ...</tt></b><br>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div align="left"><br>
+                      That is at least the way we start our main
+                      function when using the <b>C18</b> compiler. <b>Reducing
+                        14 lines down to just two lines does make a
+                        difference in readability!</b><br>
+                      <br>
+                      <div align="center">
+                        <table border="1" cellpadding="2"
+                          cellspacing="2">
+                          <tbody>
+                            <tr>
+                              <td valign="top"><tt><b>void main(void)<br>
+                                    {<br>
+                                    &nbsp;&nbsp;&nbsp;
+                                    InitializeSystem();<br>
+                                    <br>
+                                    &nbsp;&nbsp;&nbsp; while(1)<br>
+                                    &nbsp;&nbsp;&nbsp; {</b><br>
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  // Check bus status and service USB.<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  <b>USBDeviceTasks();</b> // Using
+                                  polling, must call<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp; // this function
+                                  periodically.&nbsp; This function will
+                                  take care<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp; // of processing and responding
+                                  to SETUP transactions <br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp; // (such as during the
+                                  enumeration process when you first<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp; // plug in).&nbsp; USB hosts
+                                  require that USB devices should accept<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp; // and process SETUP packets in
+                                  a timely fashion.&nbsp; Therefore,<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp; // when using polling, this
+                                  function should be called <br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp; // frequently (such as once
+                                  about every 100 microseconds) at any<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp; // time that a SETUP packet
+                                  might reasonably be expected to<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp; // be sent by the host to your
+                                  device.&nbsp; In most cases, the<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp; // USBDeviceTasks() function
+                                  does not take very long to<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp; // execute (~50 instruction
+                                  cycles) before it returns.<br>
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  &nbsp;&nbsp;&nbsp; &nbsp; <br>
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  // Application-specific tasks.<br>
+                                  &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                                  // Application related code may be
+                                  added here, or in the ProcessIO()
+                                  function.<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                  <b>ProcessIO();</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  <br>
+                                  &nbsp;&nbsp;&nbsp; <b>}</b>//end
+                                  while<br>
+                                  <b>}</b>//end main</tt><br>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div align="left"><br>
+                          &nbsp;I did not make changes outlined above
+                          when I worked through this exersize but it is
+                          done now.<big><big> <a href="Keyboard01.c">posted
+
+                                simplified file</a></big></big>. Note
+                          that I only made changes up to the end of
+                          main(). I think it would be a good idea to
+                          divide up this file to put custom parts into a
+                          new file apart from the microchip supplied
+                          parts.<br>
+                          <br>
+                          <b>ProcessIO()</b> is a simple function<br>
+                          <div align="center">
+                            <table border="1" cellpadding="2"
+                              cellspacing="2">
+                              <tbody>
+                                <tr>
+                                  <td valign="top"><tt><b>void
+                                        ProcessIO(void)<br>
+                                        {&nbsp;</b>&nbsp; <br>
+                                      &nbsp;&nbsp;&nbsp; //Blink the
+                                      LEDs according to the USB device
+                                      status<br>
+                                      &nbsp;&nbsp;&nbsp; <b>BlinkUSBStatus();</b><br>
+                                      <br>
+                                      &nbsp;&nbsp;&nbsp; // User
+                                      Application USB tasks<br>
+                                      &nbsp;&nbsp;&nbsp; <b>if((USBDeviceState
+
+                                        &lt;
+                                        CONFIGURED_STATE)||(USBSuspendControl==1))
+                                        return;</b><br>
+                                      <br>
+                                      &nbsp;&nbsp; <b>Keyboard();&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      <br>
+                                      &nbsp;&nbsp;&nbsp; //Call the
+                                      function that behaves like a
+                                      keyboard&nbsp;&nbsp; <br>
+                                      <b>}</b>//end ProcessIO</tt><br>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <div align="left"><br>
+                              The function <b>Keyboard()</b> is
+                              implemented as a state machine so that
+                              there will be no blocking code and all the
+                              <b>USB</b> related functions have a chance
+                              to execute when needed in a timely
+                              fashion. Details of the <b>Keyboard()</b>
+                              function can be seen in the <b>April 25,
+                                2011</b> note entry.<br>
+                              <br>
+                              <h3>Comment on where to go from here</h3>
+                              <blockquote>The keyboard state machine is
+                                quite simple and illustrates how the
+                                user code can be integrated into the USB
+                                framework code. This example illustrates
+                                that one could interface a device to a
+                                PC with a <b>HID keyboard</b>
+                                interface. In this case one does not
+                                need to write any software for the PC at
+                                all. We simply used <b>Notepad.exe</b>
+                                and the existing <b>Microsoft USB
+                                  keyboard</b> drivers. Rather than just
+                                sending a letter to represent the
+                                position of a pot one might want to send
+                                the actual ADC value. This could be done
+                                in Notepad or possibly directly in MS
+                                Excel.<br>
+                                <br>
+                              </blockquote>
+                              <h3>Error USB_INTERRUPT</h3>
+                              <blockquote>In the process of simplifying
+                                Keyboard.c I found that in the version
+                                of the files I had downloaded from the
+                                internet <b>USB_POLLING</b> had not
+                                been defined. I verified this to be the
+                                case by looking at the Disassembly
+                                Listing. <br>
+                                <div align="center"><img alt=""
+                                    src="DisassemblyListing.png"
+                                    border="3" height="185" hspace="3"
+                                    vspace="3" width="181"><br>
+                                </div>
+                                To be consistent with the descriptions
+                                in the user guide <b>USB_POLLING</b>
+                                must be defined and the definition of <b>USB_INTERRUPT</b>
+                                must be commented out. With the original
+                                files this project seems to work either
+                                way! To be using polling one must edit
+                                usb_config.h so that <b>USB_POLLING</b>
+                                is defined.<br>
+                              </blockquote>
+                              <div align="center"><img alt=""
+                                  src="USB_POLLING.png" border="3"
+                                  height="91" hspace="3" vspace="3"
+                                  width="315"><br>
+                                <div align="left"><br>
+                                  <br>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr size="2" width="100%"><br>
+          <hr size="2" width="100%">
+          <div align="left">April 25, 2011 (rev. April 26, 2011)(revised
+            April 28, 2011) </div>
+          <hr size="2" width="100%">
+          <div align="left">Worked through the <b>third lab</b> on <b>HID
+
+              keyboard</b> and have made a modification that makes it
+            work more like I would have expected.<br>
+            <br>
+            As with the first two demo's changes to some files must be
+            made so that<a href="#Errors"> <b>usb.h</b> is always
+              included before <b>usb_device.h</b>.</a><br>
+            <br>
+            To test the original keyboard demo I opened <b>notpad.exe</b>
+            and then plugged in the LPC USB Demo board to the USB. With
+            the original version of keyboard.c the character output
+            would change as expected as the <a
+              href="http://en.wikipedia.org/wiki/Potentiometer">potentiometer</a>
+            knob was slowly rotated. There was seemingly an anomaly if
+            the rotation of the knob was stopped. After a delay the
+            letter would start to repeat quickly. If the pot was slowly
+            turned this long delay did not occur but a string of
+            characters of the alphabet were displayed. The long delay
+            followed by the repeat of the character was not caused by
+            the PIC program but within the operating system. In general
+            keyboards used with windows operating systems send one
+            character when a key is pressed and another character when
+            it is released. <b>With the USB keyboard a code is sent for
+              the pressing of the key. The code for the release could
+              come next as a 0x00 or it could come as a new code for a
+              different key with the code for the old key absent. </b>Windows
+            watches both for the key press and the key release. If no
+            release comes within a predefined amount of time it is
+            assumed that the user is holding the key down and wants it
+            repeated till released. The timing for this is completely
+            controlled within windows and the control panel.<br>
+            <br>
+            &nbsp;I added a state 4 to the keyboard state machine. This
+            extra state would send a key up code (<b>0x00</b>) as soon
+            as the USB interface was ready. This "fixed" the behaviour
+            so the example worked the way I expected without repeating
+            keys.<br>
+          </div>
+          <div align="center"><img alt=""
+              src="keyboard01_c_scrn_sht.png" border="3" height="138"
+              hspace="3" vspace="3" width="653"><br>
+          </div>
+          <div align="left"><a
+              name="state_diagram_keyboard_from_Microchip"></a>As it now
+            exists it is possible to turn the pot too quickly so that
+            some letters are missed in the sequence.<br>
+            The following state transition diagram is taken from page 23
+            of <a
+              href="http://ww1.microchip.com/downloads/en/DeviceDoc/41356B.pdf">Low
+Pin
+Count
+USB
+
+              Development Kit User's Guide</a>.
+            <div align="center"><img alt=""
+                src="stateDiagramKeyboard.png" border="3" height="641"
+                hspace="3" vspace="3" width="488"><br>
+              <div align="left"><br>
+                <a name="state_diagram_new_keyboard"></a>I have updated
+                the state diagram to reflect changes I have made.<br>
+                <div align="center"><img alt=""
+                    src="revisedStateDiagramKeyboard.PNG" border="3"
+                    height="831" hspace="3" vspace="3" width="482"><br>
+                </div>
+              </div>
+              <br>
+              <div align="left"><a
+                  name="code_altered_keyboard_state_machine"></a><b>code
+                  for the altered state machine</b>
+                <div align="center">
+                  <table border="1" cellpadding="2" cellspacing="2">
+                    <tbody>
+                      <tr>
+                        <td valign="top"><tt>void Keyboard(void)<br>
+                            {<br>
+                            &nbsp;&nbsp;&nbsp; static unsigned char
+                            state = 0;&nbsp;&nbsp;&nbsp; //declare a
+                            state variable for the keyboard state
+                            machine<br>
+                            &nbsp;&nbsp;&nbsp; static unsigned long
+                            delaycounter = 0;&nbsp;&nbsp;&nbsp; <br>
+                            &nbsp;&nbsp;&nbsp; static unsigned char
+                            HIDoutput;&nbsp;&nbsp;&nbsp; //will store an
+                            altered version of the ADRESH result<br>
+                            &nbsp;&nbsp;&nbsp; static unsigned char
+                            HIDoutputLast=5; // added april 25, 2011<br>
+                            &nbsp;&nbsp;&nbsp; <br>
+                            //State machine<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            switch (state)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            {<br>
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; //ADD
+                            STATE MACHINE CODE HERE<br>
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp; &nbsp;//delay to allow
+                            the hold capacitor on the ADC to charge<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+case
+0:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            delaycounter++;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            if(delaycounter&gt;9000u)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            delaycounter = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            state = 1;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            }<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            break;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+case
+1:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            ADCON0bits.GO_DONE = 1; //Start an ADC
+                            conversion<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            state = 2;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            break;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+case
+2:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            if(ADCON0bits.GO_DONE == 0) //Check if
+                            conversion is<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            //completed<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            state = 3;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            }<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+case
+3:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            HIDoutput = ADRESH&gt;&gt;3;//shift the
+                            result in ADRESH<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            //left by three<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            if(HIDoutput&lt;=4u) HIDoutput = 4;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            if(HIDoutput&gt;=29u) HIDoutput = 29;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            //Can the SIE transmit?<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            if((HIDTxHandleBusy(lastTransmission) == 0)
+                            )<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            if( HIDoutput != HIDoutputLast )<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            //Load the HID buffer<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[0] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[1] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[2] = HIDoutput;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[3] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[4] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[5] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[6] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[7] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            //Send the 8 byte packet over USB to the
+                            host.<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            lastTransmission =
+                            HIDTxPacket(HID_EP,(BYTE*)hid_report_in,
+                            0x08);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            HIDoutputLast = HIDoutput;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            }<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            state = 4;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            }<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            break;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            case 4:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            if((HIDTxHandleBusy(lastTransmission) == 0)
+                            )<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            HIDoutput = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            //Load the HID buffer<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[0] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[1] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[2] = HIDoutput;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[3] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[4] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[5] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[6] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            hid_report_in[7] = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            //Send the 8 byte packet over USB to the
+                            host.<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            lastTransmission =
+                            HIDTxPacket(HID_EP,(BYTE*)hid_report_in,
+                            0x08);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            }<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            state = 0;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            }<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                            break;<br>
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                            default: state = 0;<br>
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp; break;<br>
+                            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp; <br>
+                            &nbsp;&nbsp;&nbsp; <br>
+                            }//end keyboard()</tt><br>
+                          <br>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div align="left"><br>
+                    <blockquote><a name="bitmap_scan_codes"></a>see <a
+href="http://www.usb.org/developers/devclass_docs/HID1_11.pdf">http://www.usb.org/developers/devclass_docs/HID1_11.pdf</a>
+                      page 56, 60,&nbsp; 62, 63&nbsp; (revised April 28,
+                      2011)<br>
+                      Page 56 shows "<b>bitmap for the modifiers</b>" ;
+                      this is needed for shift, control and alt<br>
+                      <b>Page 60</b> shows "<b>keyboard input report</b>
+                      (8 bytes)" structure.<br>
+                      <br>
+                      <br>
+                      The usage tables (<b>scan codes</b>) are actually
+                      in a different document.<br>
+                      <a
+                        href="http://www.usb.org/developers/devclass_docs/Hut1_12.pdf">http://www.usb.org/developers/devclass_docs/Hut1_12.pdf</a>
+                      see pages 53 to 59.<br>
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr size="2" width="100%"><br>
+          <hr size="2" width="100%">
+          <div align="left">April 23, 2011 </div>
+          <hr size="2" width="100%">Have worked through the first two
+          Microchip labs for the Low Pin Count USB Development Kit.<br>
+          <br>
+          <table align="center" border="1" cellpadding="6"
+            cellspacing="2">
+            <tbody>
+              <tr>
+                <td valign="top">HID mouse<br>
+                </td>
+                <td valign="top"><b>enumeration</b></td>
+                <td valign="top">lab1<br>
+                </td>
+              </tr>
+              <tr>
+                <td valign="top">HID mouse</td>
+                <td valign="top"><b>Mouse In a Circle Demo</b><br>
+                </td>
+                <td valign="top">Lab 2<br>
+                </td>
+              </tr>
+              <tr>
+                <td valign="top">HID keyboard<br>
+                </td>
+                <td valign="top"><br>
+                </td>
+                <td valign="top">Lab 3<br>
+                </td>
+              </tr>
+              <tr>
+                <td valign="top">CDC Serial Emulator<br>
+                </td>
+                <td valign="top"><br>
+                </td>
+                <td valign="top">Lab 4<br>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <div align="center"><img alt=""
+              src="circleDemoHID_scn_sht.PNG" border="3" height="318"
+              hspace="3" vspace="3" width="588"><br>
+            <div align="left"><br>
+              <h3><b>enumeration</b></h3>
+              <blockquote>The intent of this example lab is to get one
+                familar with some asplects of the files used. The PC
+                will detect the pressense of&nbsp; a HID mouse and load
+                microsoft drivers. The program does not really do
+                anything more.<br>
+              </blockquote>
+              <h3><b><a name="Mouse_In_a_Circle_Demo"></a>Mouse In a
+                  Circle Demo</b></h3>
+              <blockquote>In this case the program actually does
+                something. One can see LED's on the board change flash
+                sequence as the board is recognized by the PC. Once
+                enumeration is complete the LED's flash alternately. The
+                mouse pointer on the monitor moves very fast in a circle
+                (really just looks like multiple pointers in a circle
+                pattern that rotates). If the actual mouse is moved the
+                pointer circle will move. There is a button on the
+                board. If pressed the mouse pointer goes back to normal.
+                If pressed again the mouse moves in a circle again.<br>
+                <br>
+              </blockquote>
+              For both demo's (one and two) I used files downloaded from
+              the internet. <br>
+              <ul>
+                <li>Downloaded and installed the Microchip Full-Speed
+                  USB Firmware Framework.<br>
+                  Available free at: <a
+href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=2651&amp;param=en534494">http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=2651&amp;param=en534494</a></li>
+                <li>Actual lab files from page at:<br>
+                  <a
+href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=1406&amp;dDocName=en536385">http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=1406&amp;dDocName=en536385</a></li>
+              </ul>
+              I did not follow the suggested folder structure for the
+              lab files as I wanted them on a flash-drive. Some of the
+              instructions seemed to relate to older versions of the
+              IDE. For example one does not need to worry about the
+              linker file with the current version of the IDE.<br>
+              I was a little confused by the fact the directions both
+              said to copy a large number of header files to the project
+              folder but also wanted to add the original folder in the
+              search path (turns out it is not necessary to do both --
+              note added May 20, 2011).<br>
+              <br>
+              No comments were made about optimizations.<br>
+              <h3><a name="Errors"></a>Errors</h3>
+              For both labs 1 and 2 the build could not be completed
+              without making a changes to #include file directives. It
+              turns out that <b>usb.h</b> must be included before <b>usb_device.h</b>.&nbsp;
+              (this reqires changes to two files in lab 1 and 2 files in
+              lab 2).<br>
+              <blockquote>See <a
+href="http://www.microchip.com/forums/tm.aspx?m=460370#include%20%22usb_device.h%22">http://www.microchip.com/forums/tm.aspx?m=460370#include
+
+                  "usb_device.h"</a><br>
+                (scroll down to <span id="subject463969"
+                  style="font-family: Verdana; font-style: normal;
+                  font-variant: normal; font-weight: bold; font-size:
+                  11px; line-height: normal; font-size-adjust: none;
+                  font-stretch: normal;">RE: Syntax error of
+                  USB_DEVICE.h </span><span id="date463969"
+                  style="font-family: Verdana; font-style: normal;
+                  font-variant: normal; font-weight: normal; font-size:
+                  11px; line-height: normal; font-size-adjust: none;
+                  font-stretch: normal;">- Tuesday, December 08, 2009
+                  3:42 AM </span> ( <a>#6</a> ) )<br>
+              </blockquote>
+              <br>
+              <div align="center">
+                <table border="1" cellpadding="2" cellspacing="2">
+                  <tbody>
+                    <tr>
+                      <td valign="top"><tt>#include "./USB/usb.h"&nbsp;</tt><b><tt>
+                            // must have this line before usb_device.h<br>
+                            //
+                            http://www.microchip.com/forums/tm.aspx?m=460370<br>
+                          </tt></b><tt>#include "usb_device.h"</tt><br>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br>
+              </div>
+            </div>
+          </div>
+          <hr size="2" width="100%"><br>
+          <hr size="2" width="100%">
+          <div align="left">April 21, 2011 </div>
+          <hr size="2" width="100%">
+          <div align="left">Files for download from Microchip related to
+            the Low Pin Count USB Development Kit can be found at <br>
+          </div>
+          <a
+href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=1406&amp;dDocName=en536385">http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=1406&amp;dDocName=en536385</a><br>
+          <br>
+          Those files include Zip files for <b>"Project Labs"</b> and <b>"Lab
+
+            Folders"</b>.<br>
+          4 Labs: Enumeration, <b>HID Mouse</b>, <b>HID Keyboard</b>,
+          <b>CDC Serial Emulator</b><br>
+          <br>
+          <div align="left">The kit we purchased was obtained from
+            Digikey (part number DM164127-ND -- $42.18).&nbsp; There is
+            another version that comes with a PICkit3 but it is more
+            expensive at about $72.<br>
+            <br>
+            <b>Another kit related</b> and of interest is the <a
+href="http://www.kwantlen.ca/science/physics/faculty/dpeirce/notes/apsc1299/2010/PIC18starterKit.html">DM180021
+
+              starter kit from Microchip</a> . <b>It does not focus on
+              setting up the USB but it does demonstrate a wider variety
+              of configurations:</b><br>
+            USB HID MOUSE DEMO, USB HID JOYSTICK DEMO, USB HID CUSTOM
+            DEVICE DEMO, USB CDC DEMO, USB MSD CARD READER DEMO (Mass
+            Storage Device). Also, the web page now also features three
+            applications from contest winners:<br>
+          </div>
+          <ul>
+            <li>
+              <div align="left"><span style="font-family: 'Arial';
+                  font-size: 10pt;">"real-time 2-axis level. The OLED
+                  display show a bubble that “floats” as you tilt the
+                  board, simulating a <b>traditional spirit level</b>"</span></div>
+            </li>
+            <li>
+              <div align="left"><span style="font-family: 'Arial';
+                  font-size: 10pt;">"</span><span style="font-family:
+                  'Arial'; font-size: 10pt;"><b>mimics the old Labyrinth
+                    board</b> game where you have to get a marble from
+                  one side of a maze to the other without falling
+                  through holes. &nbsp;This demo uses the accelerometer
+                  as the player tilts the demo board to direct the
+                  virtual marble to the goal through various levels.
+                  &nbsp;<b>The ball and maze have physics applied to
+                    them to give them real feeling movement (bouncing
+                    off of walls, acceleration and deceleration, etc).</b>&nbsp;
+
+                  The capacitive buttons are used to make menu
+                  selections inside of the game."</span></div>
+            </li>
+            <li>
+              <div align="left"><span style="font-family: 'Arial';
+                  font-size: 10pt;">"The time and date of the<b> clock</b>
+                  can be set and you can view the time as either a
+                  digital output or like an analog clock.&nbsp; The user
+                  can also set an alarm that uses the alarm features of
+                  the RTCC to notify the user when the alarm is reached.
+                  &nbsp;The time information can also be obtained
+                  through the USB interface. &nbsp;<b>The demo appears
+                    to the computer like a serial/COM port where the
+                    user can query for the time</b>."</span></div>
+            </li>
+          </ul>
+          <hr size="2" width="100%"><a name="USB_documents"></a><br>
+          <hr size="2" width="100%">
+          <div align="left">April 20, 2011 (rev. May 24, 2011)<br>
+          </div>
+          <hr size="2" width="100%">
+          <div align="left">I had 2 copies of <i><a
+                href="Getting_Started_with_MLPCUSB_Solutions_final.pdf">Getting_Started_with_MLPCUSB_Solutions_final.pdf</a></i>&nbsp;
+and
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <a
+              href="http://ww1.microchip.com/downloads/en/DeviceDoc/41356B.pdf">Low
+
+              Pin Count USB Development Kit User's Guide</a> printed
+            through eprint. (I thought Mike may want a copy of each). <br>
+            <br>
+            The LPC USB DK User Guide suggests reading the Getting
+            started document first (It's about 90 pages but many of the
+            pages are slides (power point?) ). I got around to reading
+            these on my Tuesday Ferry trip to Vancouver Island. I read
+            the getting started pdf in printed form as suggested in <b>2.2
+              Prerequisites (see March 5 below)</b> and discovered that
+            <br>
+            <b>to complete the projects in the guide more documents are
+              required!</b><br>
+          </div>
+          <br>
+          <table align="center" border="1" cellpadding="6"
+            cellspacing="2">
+            <tbody>
+              <tr>
+                <td valign="top">Microchip USB Device Firmware Framework
+                  User’s Guide (18 pages)<br>
+                </td>
+                <td valign="top"><a
+                    href="http://ww1.microchip.com/downloads/en/DeviceDoc/51679b.pdf">http://ww1.microchip.com/downloads/en/DeviceDoc/51679b.pdf</a><br>
+                </td>
+              </tr>
+              <tr>
+                <td valign="top"><font color="#000000"><b><font
+                        face="Arial" size="+1">Microchip Free USB
+                        Software</font></b></font></td>
+                <td valign="top"><a
+href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=2651&amp;param=en534494">http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=2651&amp;param=en534494</a><br>
+                </td>
+              </tr>
+              <tr>
+                <td valign="top">PIC18F13K50/14K50 data sheet (414
+                  pages)<br>
+                </td>
+                <td valign="top"><a
+                    href="http://ww1.microchip.com/downloads/en/devicedoc/41350c.pdf">http://ww1.microchip.com/downloads/en/devicedoc/41350c.pdf</a><br>
+                </td>
+              </tr>
+              <tr>
+                <td valign="top">USB Revision 2.0 Specification<br>
+                  (the zip file at the first link actually contains 29
+                  documents <br>
+                  -- an original document from 2000 and revisions and
+                  additions <br>
+                  -- the main document <b>usb_20.pdf </b>is 650 pages)<br>
+                </td>
+                <td valign="top"><a
+                    href="http://www.usb.org/developers/docs/usb_20_021411.zip">http://www.usb.org/developers/docs/usb_20_021411.zip</a><br>
+                  <br>
+                </td>
+              </tr>
+              <tr>
+                <td valign="top">HID Usage Tables (168 pages)<br>
+                </td>
+                <td valign="top"><a
+                    href="http://www.usb.org/developers/devclass_docs/Hut1_12.pdf">http://www.usb.org/developers/devclass_docs/Hut1_12.pdf</a><br>
+                </td>
+              </tr>
+              <tr>
+                <td valign="top">USB HID Descriptor Tool <br>
+                </td>
+                <td valign="top"><a
+                    href="http://www.usb.org/developers/hidpage/dt2_4.zip">http://www.usb.org/developers/hidpage/dt2_4.zip</a><br>
+                </td>
+              </tr>
+              <tr>
+                <td valign="top">Universal Serial Bus Class Definitions
+                  for Communications Devices<br>
+                </td>
+                <td valign="top">
+                  <ul>
+                    <li><a
+                        href="http://www.usb.org/developers/devclass_docs">http://www.usb.org/developers/devclass_docs</a>
+                      (all class definitions)</li>
+                    <li><font size="3"><font size="3"><font size="2"><font
+                              face="Arial"><a
+href="http://www.usb.org/developers/devclass_docs/CDC1.2_WMC1.1_012011.zip">Class
+
+                                definitions for Communication Devices
+                                1.2 (.zip file format, size 3.42 MB)</a></font></font></font></font></li>
+                    <li><a href="CDC120-20101103-track.pdf">CDC120-20101103-track.pdf
+
+                        (guessing this is the one they want-- 33 pages)<br>
+                      </a></li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <br>
+          <div align="left"><big><a name="USBfirmwareFramework"></a>Fortunately
+
+              the Microchip USB Device Firmware Framework greatly
+              simplifies the implementation of USB projects!</big> Or so
+            they claim (I am inclined to believe it).<br>
+            <br>
+            As I see it (at this time at least) Microchip has taken an
+            approach much like I did with sumovore.c and sumovore.h in
+            2011. That is to provide a predefined set of functions that
+            do common low level interaction with the machine. In the
+            case of the USB Framwork the framework takes care of the
+            details of the USB protocol so that the programmer can
+            concentrate on the application. <br>
+            <blockquote><b>"...the user defined source code is called
+                from the ProcessIO() function in the
+                &lt;application&gt;.c file."</b><br>
+              from page 19 of <a
+                href="http://ww1.microchip.com/downloads/en/DeviceDoc/41356B.pdf">Low
+Pin
+
+                count USB Development Kit User's Guide</a><br>
+            </blockquote>
+            <blockquote><b>"The main point the user should take away
+                from this lab is this: since the USB Framework<br>
+                is a <big>multitasking environment</big>, no blocking
+                code should be used. Therefore, as<br>
+                shown in this lab, <big>state machines</big> will
+                become the norm in many applications."</b><br>
+              from page 23 of <a
+                href="http://ww1.microchip.com/downloads/en/DeviceDoc/41356B.pdf">Low
+Pin
+
+                count USB Development Kit User's Guide</a><br>
+            </blockquote>
+            <big><b>Cooperative Multitasking</b></big> is a concept I
+            have been talking about in the past see <a
+              href="../apsc1299/real_time_code.html">../apsc1299/real_time_code.html</a><br>
+          </div>
+          <br>
+          <div align="center">The <b>multitasking environment</b> is
+            also meantioned in the <b>getting started document on slide
+              67</b><br>
+            <img alt="slide 67 multitasking environment"
+              src="slide67_multitasking.png" border="3" height="618"
+              hspace="3" vspace="3" width="643"><br>
+            <div align="left"><br>
+              There is no explination of either cooperative multitasking
+              or state machines in the microchip documents I have read
+              so far. I did a search to see if they have applications
+              notes on these subject. So far this is all I have found
+              from them:<br>
+              <div align="center">
+                <table border="1" cellpadding="2" cellspacing="2">
+                  <tbody>
+                    <tr>
+                      <td valign="top">"All applications based on the
+                        Microchip Stack must be<br>
+                        written in a cooperative multitasking manner.<br>
+                        Cooperative multitasking architecture consists
+                        of a<br>
+                        number of tasks executing in sequence. A
+                        cooperative<br>
+                        task would quickly perform its required
+                        operation and<br>
+                        return so that the next task would be able to
+                        execute.<br>
+                        Because of this requirement, a task that needs
+                        to wait<br>
+                        for some external input, or needs to perform a
+                        long<br>
+                        operation, should be broken down into multiple<br>
+                        subtasks using a state machine approach. Further<br>
+                        discussion of cooperative multitasking and state<br>
+                        machine programming is beyond the scope of this<br>
+                        document. You should refer to software
+                        engineering<br>
+                        literature for more detail."<br>
+                        <hr size="2" width="100%">that was from page 12
+                        of <br>
+                        <a
+                          href="http://ww1.microchip.com/downloads/en/AppNotes/00965a.pdf">http://ww1.microchip.com/downloads/en/AppNotes/00965a.pdf</a><br>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br>
+                <div align="center">
+                  <table border="1" cellpadding="6" cellspacing="2"
+                    width="75%">
+                    <tbody>
+                      <tr>
+                        <td valign="top">There is an <a
+                            href="http://ww1.microchip.com/downloads/en/AppNotes/00585b.pdf">older
+application
+
+                            note</a> that covers these concepts in the
+                          context of a real time operating system but
+                          that is more complex than basic cooperative
+                          multitasking. Only older PIC16CXXX devices are
+                          meantioned in that application note probably
+                          because it was written back in 1997.<br>
+                          <br>
+                          Some useful background on concepts of
+                          multitasking and sequential states are given
+                          in the document <a
+                            href="http://www.me.berkeley.edu/%7Edma/controls/mechsoft.pdf">http://www.me.berkeley.edu/~dma/controls/mechsoft.pdf</a><br>
+                          <blockquote>Perhaps for a primer I could
+                            suggest PDF file pages 12 (printed page
+                            numbered 6), 13, 15, 16, 19 - 21 (pdf 21 is
+                            printed page 15)<br>
+                          </blockquote>
+                          Also, see <br>
+                          <ul>
+                            <li><a
+                                href="http://en.wikipedia.org/wiki/Finite_state_machine">http://en.wikipedia.org/wiki/Finite_state_machine</a></li>
+                            <li><a
+                                href="http://en.wikipedia.org/wiki/Event_driven_finite_state_machine">http://en.wikipedia.org/wiki/Event_driven_finite_state_machine</a></li>
+                            <li><a
+                                href="http://en.wikipedia.org/wiki/Automata-based_programming">http://en.wikipedia.org/wiki/Automata-based_programming</a></li>
+                          </ul>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div align="left"><br>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr size="2" width="100%"><br>
+          <hr size="2" width="100%">
+          <div align="left">March 5, 2011 (rev. March 6, 2011) <br>
+          </div>
+          <hr>
+          <div align="left">Microchip has a web page about the <b>Low
+              Pin Count USB Development Kit</b> <a
+href="http://www.microchip.com/stellent/idcplg?IdcService=SS_GET_PAGE&amp;nodeId=1406&amp;dDocName=en536385">at
+
+              this link</a>. </div>
+          <div align="left">
+            <ul>
+              <li>One of the documents that comes on the CD with the kit
+                <i><a
+                    href="Getting_Started_with_MLPCUSB_Solutions_final.pdf">Getting_Started_with_MLPCUSB_Solutions_final.pdf</a></i>
+                .</li>
+            </ul>
+          </div>
+          It has about 94 pages of slides giving an intro to the USB and
+          the development kit.
+          <ul>
+            <li>
+              <div align="left">Another file on the CD is the <a
+                  href="http://ww1.microchip.com/downloads/en/DeviceDoc/41356B.pdf">Low
+Pin
+
+                  Count USB Development Kit User's Guide</a> . It
+                recomends reading the "getting started" document be read
+                first (which it calls a course). The following is quoted
+                from the document:</div>
+            </li>
+            <br>
+            <table style="text-align: left; width: 604px; height: 152px;
+              color: blue;" border="1" cellpadding="2" cellspacing="2">
+              <caption><br>
+              </caption><tbody>
+              </tbody> <tbody>
+                <tr>
+                  <td style="vertical-align: top;"><span
+                      style="font-weight: bold;">2.2 PREREQUISITES</span>
+                    <br>
+                    These labs assume that the user:
+                    <ol>
+                      <li>Has completed the self-directed course
+                        "Getting Started with Microchip's LowPin Count
+                        USB Solutions" provided on the accompanying CD.</li>
+                      <li>Is familiar with the MPLAB IDE and C18
+                        compiler.</li>
+                      <li>Has some programming experience using the C
+                        language.</li>
+                      <li>Is familiar with Microchip's PIC18F family of
+                        microcontrollers.</li>
+                    </ol>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <li>more to come...</li>
+          </ul>
+          <div align="left">Another development tool that may be of
+            interest is MCP6V01 Thermocouple Auto-Zeroed Reference
+            Design <br>
+            see <a
+              href="http://ww1.microchip.com/downloads/en/DeviceDoc/51738b.pdf">http://ww1.microchip.com/downloads/en/DeviceDoc/51738b.pdf</a></div>
+          <hr>
+          <hr>
+          <div align="left">March 6, 2011&nbsp; </div>
+          <hr>
+          <div align="left">Depending on the application USB 2.0 can
+            operate at different speeds. <br>
+            {covered on page 7 of "getting started" document)
+            <ol>
+              <li>low speed&nbsp; -- designed for Human Input Devices
+                (HID)</li>
+              <ul>
+                <li>examples -- keyboard, mouse, POS (point of sale)
+                  terminal and PICkit2</li>
+              </ul>
+              <li>full speed&nbsp; (clocked at 12MB/sec -- maximum
+                throughput is around 1MB/sec)</li>
+              <ul>
+                <li>examples -- cameras, thumb drives, data loggers,
+                  external disk drives.</li>
+              </ul>
+              <li>High speed --&nbsp;<span style="font-weight: bold;">not
+supported
+
+                  by this development kit</span> (clocked at
+                480MB/second )</li>
+              <ul>
+                <li>competes with fire wire ; used for high volume data
+                  like video</li>
+              </ul>
+            </ol>
+            ...page 40 Voltages </div>
+          <ul>
+            <li>
+              <div align="left"><span style="color: blue;">"The USB
+                  peripheral on the PIC18F1XK50 has a built-in, USB 2.0,
+                  full-speed and low-speed capable transceiver. A 3.3V
+                  regulator provides power to the transceiver and
+                  on-chip pull-up resistors for low-cost, single chip
+                  applications. In order to meet USB signaling level
+                  specifications, the VUSB line output of the regulator
+                  must be supplied with a voltage source between 3 and
+                  3.6V. The best electrical signal quality is obtained
+                  when a 3.3V supply is used and locally bypassed with a
+                  high quality ceramic capacitor (10uF) placed as close
+                  to the VUSB and VSS pins found on the same edge of the
+                  package.</span>" </div>
+            </li>
+          </ul>
+          <div align="left">...page 41 <br>
+          </div>
+          <div align="left">Serial Interface Engine (SIE). <br>
+          </div>
+          <div align="left"><span style="color: blue;">"This dedicated
+              hardware component carries out low-level functions such as
+              time critical communication portions of the USB protocol."</span></div>
+          <p><br>
+          </p>
+          <hr></blockquote>
+      </blockquote>
+    </center>
+  </body>
+</html>
