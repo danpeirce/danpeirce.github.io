@@ -5,6 +5,9 @@
 use pandoc -s -t html5 -c pandocbd.css index.md -o index.html
 -->
 
+-   [xpress-pic18f46k42](https://github.com/danpeirce/xpress-pic18f46k42)
+-   [pureThermal2](https://github.com/danpeirce/pureThermal2)
+
 * [My Google Sites Links to Notes Page](https://sites.google.com/site/danpeircenotes/)
 
 Some of those links are copied here:
