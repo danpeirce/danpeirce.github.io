@@ -91,19 +91,6 @@ Will autocalibrate the sensors if in Roam mode.
 For meaningful results the robot should be sitting over a black tape line. The robot will spin to the left and right sweeping 
 the sensors over the line so that normalized readings can be calculated.
 
-## Proportional Derivative Control in Roam mode
-
-The maximum speed for PID (a function of the physical layer MCU) was changed to 75 rather than 50. The change on the executive MCU
-was made in the start_PD() function that commands the physical layer to execute PID until instructed to stop PID.
-
-Since the robot is moving significantly faster than in the spd50 branch it was also necessary to reduce the value of time2_inc from 3
-to 2.
-
-Also note that in the spd50 branch the robot worked fine without derivative feedback. Once the speed was increased to 50 it was necessary
-to use some derivative. The d variable was changed from BA (a rather big number) to 2. Note that the derivative constant is actually c/d. 
-I left c as 3. I have not investigated the Pololu slave program to see exactly how they implemented the equation. 
-
-
 ## Demo
 
 Demo Video at Link
