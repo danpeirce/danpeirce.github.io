@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="By Dan Peirce B.Sc." />
+  <title>Pololu 3Pi Expansion</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../../pandocbd.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Pololu 3Pi Expansion</h1>
+<p class="author">By Dan Peirce B.Sc.</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#pololu-3pi-expansion">Pololu 3Pi Expansion</a><ul>
+<li><a href="#pic18f46k42-xpress-board-features">PIC18F46K42 XPRESS Board Features</a><ul>
+<li><a href="#pins-used">Pins Used</a></li>
+</ul></li>
+<li><a href="#pololu-3pi-robot">Pololu 3Pi robot</a><ul>
+<li><a href="#roam-mode">Roam Mode</a></li>
+<li><a href="#no-roam-mode">No Roam Mode</a></li>
+</ul></li>
+<li><a href="#mounting-pic-xpress-board-on-3pi-expansion-board">Mounting PIC XPRESS board on 3Pi Expansion board</a><ul>
+<li><a href="#mount-1-no-longer-used">Mount 1 (no longer used)</a></li>
+<li><a href="#mount-2">Mount 2</a></li>
+</ul></li>
+<li><a href="#roam-and-no-roam-shunt-jumper">Roam and No Roam Shunt Jumper</a></li>
+<li><a href="#autocalibrates-when-in-roam-mode">Autocalibrates when in Roam mode</a></li>
+<li><a href="#proportional-derivative-control-in-roam-mode">Proportional Derivative Control in Roam mode</a></li>
+<li><a href="#demo">Demo</a></li>
+<li><a href="#pull-up-on-rx2rb7">Pull up on RX2/RB7</a></li>
+<li><a href="#charging-circuit">Charging Circuit</a></li>
+<li><a href="#added-print-sensor-values-to-menu">Added Print Sensor Values to menu</a></li>
+<li><a href="#working-with-putty-and-issues">Working with PuTTY and issues</a></li>
+<li><a href="#test-of-expansion-board">Test of Expansion Board</a></li>
+</ul></li>
+</ul>
+</nav>
+<!---
+use 
+pandoc -s --toc -t html5 -c ../../pandocbd.css README.pandoc.md -o README.html
+
+pandoc -s --toc -t gfm README.pandoc.md -o README.md
+-->
+<h1 id="pololu-3pi-expansion">Pololu 3Pi Expansion</h1>
+<h2 id="pic18f46k42-xpress-board-features">PIC18F46K42 XPRESS Board Features</h2>
+<p>This board has a USB microB connector. It has a PIC MCU on board configured to act as an interface and it enumerates as a multifunction device. This allows one to both download programs to it and use the interface as a virtual com port. The board is also less expensive than the USB to serial board we have used in the past with the Microstick II or PIC18F4525.</p>
+<h3 id="pins-used">Pins Used</h3>
+<p><img src="images/pins.png" /></p>
+<ul>
+<li>UART1 is at 115200 baud. Tx1 is on RC6.</li>
+<li>UART2 is connected to the XPRESS boards USB interface PIC.
+<ul>
+<li>Communication between UART2 and the interface IC is at 9600 baud.</li>
+</ul></li>
+<li>roam input used to determine if robot should
+<ol type="1">
+<li>Stay in place (perhaps for programming)</li>
+<li>Roam (perhaps following a line)</li>
+</ol></li>
+<li>PWM output at about 1 KHz on pad RC4 (set to 10% duty cycle)</li>
+</ul>
+<h2 id="pololu-3pi-robot">Pololu 3Pi robot</h2>
+<p>The robot is running the serial slave program from Pololu. This will allow the 3Pi robot to be controlled from a XPRESS board.</p>
+<ul>
+<li><a href="https://www.pololu.com/docs/0J21/all#10.a">10.a. Serial slave program</a></li>
+</ul>
+<p>More information on the Pololu 3Pi robot</p>
+<ul>
+<li><a href="https://www.pololu.com/product/975">https://www.pololu.com/product/975</a></li>
+</ul>
+<h3 id="roam-mode">Roam Mode</h3>
+<p>In roam mode the robot will</p>
+<ol type="1">
+<li>do a self calibration of the sensors and then follow a line for approximatly 10 seconds.</li>
+<li>If the robot detects a line on both the far left and far right at the same time it will stop until power is cycled off and on. Picking the robot up will have the same effect of shutting the robot down until power is recycled.</li>
+</ol>
+<h3 id="no-roam-mode">No Roam Mode</h3>
+<p>The purpose of no Roam Mode is to</p>
+<ol type="1">
+<li>Allow the robot to be programmed</li>
+<li>Allow the robot batteries to be charged</li>
+<li>Allow the robot to be in an interactive mode in which a USB cable and PuTTY can be used to control the robot and check sensor readings.</li>
+</ol>
+<p>The menu meantioned in list item 3. looks as follows:</p>
+<p><img src="images/menu.png" /></p>
+<h2 id="mounting-pic-xpress-board-on-3pi-expansion-board">Mounting PIC XPRESS board on 3Pi Expansion board</h2>
+<h3 id="mount-1-no-longer-used">Mount 1 (no longer used)</h3>
+<p>The first XPRESS board mount was forward on the 3Pi expansion board. This appeared to have a negative effect on the balance and stability of the robot. For a second mount position was tested.</p>
+<p><img src="images/xpress-mount1.jpg" /></p>
+<h3 id="mount-2">Mount 2</h3>
+<p>For better stability the XPRESS board was moved over the wheels.</p>
+<p><img src="images/expansion-mounted-2-s.jpg" /></p>
+<p>Wiring under the XPRESS board.</p>
+<p><img src="images/expansion-wire-s.jpg" /></p>
+<h2 id="roam-and-no-roam-shunt-jumper">Roam and No Roam Shunt Jumper</h2>
+<p>The image below shows the jumper in the no roam possition. This will be changed to a switch.</p>
+<p><img src="images/no_roam_s.jpg" /></p>
+<h2 id="autocalibrates-when-in-roam-mode">Autocalibrates when in Roam mode</h2>
+<p>Will autocalibrate the sensors if in Roam mode. For meaningful results the robot should be sitting over a black tape line. The robot will spin to the left and right sweeping the sensors over the line so that normalized readings can be calculated.</p>
+<h2 id="proportional-derivative-control-in-roam-mode">Proportional Derivative Control in Roam mode</h2>
+<p>The maximum speed for PID (a function of the physical layer MCU) was changed to 75 rather than 50. The change on the executive MCU was made in the start_PD() function that commands the physical layer to execute PID until instructed to stop PID.</p>
+<p>Since the robot is moving significantly faster than in the spd50 branch it was also necessary to reduce the value of time2_inc from 3 to 2.</p>
+<p>Also note that in the spd50 branch the robot worked fine without derivative feedback. Once the speed was increased to 50 it was necessary to use some derivative. The d variable was changed from BA (a rather big number) to 2. Note that the derivative constant is actually c/d.  I left c as 3. I have not investigated the Pololu slave program to see exactly how they implemented the equation.</p>
+<h2 id="demo">Demo</h2>
+<p>Demo Video at Link</p>
+<ul>
+<li><a href="https://youtu.be/frrQDTKzhbE">Youtube Video Link</a></li>
+</ul>
+<h2 id="pull-up-on-rx2rb7">Pull up on RX2/RB7</h2>
+<p>A 10 Kohm pull up resistor was added to RX2 for better reliability when USB cable is not attached.</p>
+<h2 id="charging-circuit">Charging Circuit</h2>
+<p>A charging circuit has been added to the expantion board. The charging circuit is just a 75 ohm resistor in series with the four AAA NiMH cells on the robot. A 9 volt external AC-DC adaptor provides power to the board.</p>
+<p><img src="images/charging-sm.jpg" /></p>
+<p>Showing the 75 ohm 2 watt resistor (located under the expansion board.</p>
+<p><img src="images/charging-75ohm-sm.jpg" /></p>
+<p><strong>Will update photos. Had to move one jumper to top side of board as it caused rubbing on right wheel. Also bend tab on barrel connector so it is flush on board before soldering.</strong></p>
+<h2 id="added-print-sensor-values-to-menu">Added Print Sensor Values to menu</h2>
+<p>Can now print sensor values in PuTTY when in No Roam mode. Can move robot over track by hand.</p>
+<h2 id="working-with-putty-and-issues">Working with PuTTY and issues</h2>
+<p>One can use a PuTTY terminal with the virtual serial port of the Xpress board. This works fine when one is typing into the terminal. There is an issue though if one attempts pasting into the PuTTY terminal (using a right mouse click). In that case only the first character is sent. This is an issue of the USB to serial bridge on the Xpress board and not the PIC code! This was verified by using a USB to serial bridge on a different board (TTLyFTDI USB-to-TTL Cable Adapter) fed into RB7. In this case the code worked as expected and all pasted characters appeared in the PuTTY terminal and were correctly sent out uart1 TX.</p>
+<figure>
+<img src="images/uart1-uart2.jpg" alt="uart1-uart2.jpg" /><figcaption>uart1-uart2.jpg</figcaption>
+</figure>
+<p>Others have commented on the limitation of the USART to USB bridge on the Xpress board:</p>
+<ul>
+<li><a href="https://www.microchip.com/forums/m1097510.aspx">Xpress PIC18F46K42 board virtual COM port bridge to UART receive limitations</a></li>
+</ul>
+<h2 id="test-of-expansion-board">Test of Expansion Board</h2>
+<p>Initial testing of expansion board for 3PI.</p>
+<p><img src="images/test-expansion-b.jpg" /></p>
+</body>
+</html>
