@@ -75,9 +75,15 @@ For better stability the XPRESS board was moved over the wheels.
 
 ![](images/expansion-mounted-2-s.jpg)
   
-Wiring under the XPRESS board.
+## Expansion Board Wiring
 
-![](images/expansion-wire-s.jpg)
+### Wiring under the XPRESS board.
+
+![](images/underboard-wire.jpg)
+
+### Wiring near Expansion Port
+
+![](images/expansion-port-wire.jpg)
 
 ## Roam and No Roam Shunt Jumper
 

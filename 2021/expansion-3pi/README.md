@@ -9,6 +9,10 @@
         board](#mounting-pic-xpress-board-on-3pi-expansion-board)
           - [Mount 1 (no longer used)](#mount-1-no-longer-used)
           - [Mount 2](#mount-2)
+      - [Expansion Board Wiring](#expansion-board-wiring)
+          - [Wiring under the XPRESS
+            board.](#wiring-under-the-xpress-board.)
+          - [Wiring near Expansion Port](#wiring-near-expansion-port)
       - [Roam and No Roam Shunt Jumper](#roam-and-no-roam-shunt-jumper)
       - [Autocalibrates when in Roam
         mode](#autocalibrates-when-in-roam-mode)
@@ -104,9 +108,15 @@ For better stability the XPRESS board was moved over the wheels.
 
 ![](images/expansion-mounted-2-s.jpg)
 
-Wiring under the XPRESS board.
+## Expansion Board Wiring
 
-![](images/expansion-wire-s.jpg)
+### Wiring under the XPRESS board.
+
+![](images/underboard-wire.jpg)
+
+### Wiring near Expansion Port
+
+![](images/expansion-port-wire.jpg)
 
 ## Roam and No Roam Shunt Jumper
 
