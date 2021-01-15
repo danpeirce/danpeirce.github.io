@@ -20,3 +20,10 @@ pandoc -s --toc -t gfm wiring.pandoc.md -o wiring.md
 ### Wiring near Expansion Port
 
 ![](images/expansion-port-wire.jpg)
+
+### Add Short Jumpers
+
+There are five very short jumpers to add.
+
+![](images/short-jumpers.jpg)
+
