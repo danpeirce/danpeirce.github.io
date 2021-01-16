@@ -27,3 +27,14 @@ There are five very short jumpers to add.
 
 ![](images/short-jumpers.jpg)
 
+### Place Long Pin Headers for Xpress Board
+
+One way to get the Header pins in strait is to place them in the correct holes in the expansion board and then add the Xpress board.
+At this point the Pins are soldered into the Xpress board and not yet to the expansion board. Note the Xpress board must remain removable to solder in 
+very long headers for expansion to robot interconnect.
+
+![](images/long-pin-headers-placed.jpg)
+
+Xpress board added. Photo taken just before soldering long pins.
+
+![](images/align-Xpress-pins.jpg)
