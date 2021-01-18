@@ -1,11 +1,13 @@
-  - [Pololu 3Pi Expansion Wiring and
+-   [Pololu 3Pi Expansion Wiring and
     Assembly](#pololu-3pi-expansion-wiring-and-assembly)
-      - [Expansion Board Wiring](#expansion-board-wiring)
-          - [Wiring under the XPRESS
+    -   [Expansion Board Wiring](#expansion-board-wiring)
+        -   [Wiring under the XPRESS
             board.](#wiring-under-the-xpress-board.)
-          - [Wiring near Expansion Port](#wiring-near-expansion-port)
-          - [Add Short Jumpers](#add-short-jumpers)
-          - [Place Long Pin Headers for Xpress
+        -   [Wiring near Expansion Port](#wiring-near-expansion-port)
+        -   [Add Short Jumpers](#add-short-jumpers)
+        -   [Added 10K Resistors and Mode
+            Switch](#added-10k-resistors-and-mode-switch)
+        -   [Place Long Pin Headers for Xpress
             Board](#place-long-pin-headers-for-xpress-board)
 
 <!---
@@ -15,9 +17,11 @@ pandoc -s --toc -t html5 -c ../../pandocbd.css wiring.pandoc.md -o wiring.html
 pandoc -s --toc -t gfm wiring.pandoc.md -o wiring.md
 -->
 
-# Pololu 3Pi Expansion Wiring and Assembly
+Pololu 3Pi Expansion Wiring and Assembly
+========================================
 
-## Expansion Board Wiring
+Expansion Board Wiring
+----------------------
 
 ### Wiring under the XPRESS board.
 
@@ -32,6 +36,10 @@ pandoc -s --toc -t gfm wiring.pandoc.md -o wiring.md
 There are five very short jumpers to add.
 
 ![](images/short-jumpers.jpg)
+
+### Added 10K Resistors and Mode Switch
+
+{*photo needed*}
 
 ### Place Long Pin Headers for Xpress Board
 

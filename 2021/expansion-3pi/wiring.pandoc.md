@@ -27,6 +27,10 @@ There are five very short jumpers to add.
 
 ![](images/short-jumpers.jpg)
 
+### Added 10K Resistors and Mode Switch
+
+{*photo needed*}
+
 ### Place Long Pin Headers for Xpress Board
 
 One way to get the Header pins in strait is to place them in the correct holes in the expansion board and then add the Xpress board.
