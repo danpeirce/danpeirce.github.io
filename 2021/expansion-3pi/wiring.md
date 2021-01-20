@@ -85,9 +85,11 @@ hold long interconnect headers strait.
 
 ![](images/jig-sockets.jpg)
 
-The long board interconnect headers are then put on the gig sockets.
+The long board interconnect headers are then put on the jig sockets.
 
-![](images/expansion-headers-long-for-socket.jpg)
+<!---  ![](images/expansion-headers-long-for-socket.jpg)  -->
+
+{wrong image. need new photo}
 
 The expansion board is fitted over the jig to solder the board
 interconnect headers.
