@@ -66,7 +66,7 @@ Current limiting resistor on underside of board.
 
 The pins of the board interconnect headers are long. A jig was made to hold long interconnect headers strait.
 
-![](image/jig-sockets.jpg)
+![](images/jig-sockets.jpg)
 
 The long board interconnect headers are then put on the gig sockets.
 
