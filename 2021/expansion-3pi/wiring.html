@@ -35,6 +35,8 @@
 <li><a href="#wiring-near-expansion-port">Wiring near Expansion Port</a></li>
 <li><a href="#add-short-jumpers">Add Short Jumpers</a></li>
 <li><a href="#added-10k-resistors-and-mode-switch">Added 10K Resistors and Mode Switch</a></li>
+<li><a href="#added-charging-circuit-to-expansion-board">Added Charging Circuit to Expansion Board</a></li>
+<li><a href="#jig-for-board-interconnect-headers">Jig for Board Interconnect Headers</a></li>
 <li><a href="#place-long-pin-headers-for-xpress-board">Place Long Pin Headers for Xpress Board</a></li>
 </ul></li>
 </ul></li>
@@ -53,10 +55,43 @@ pandoc -s --toc -t gfm wiring.pandoc.md -o wiring.md
 <h3 id="wiring-near-expansion-port">Wiring near Expansion Port</h3>
 <p><img src="images/expansion-port-wire.jpg" /></p>
 <h3 id="add-short-jumpers">Add Short Jumpers</h3>
-<p>There are five very short jumpers to add.</p>
+<p>There are five very short jumpers to add. A suggestion is made in the next section to alter the arrangement of jumpers.</p>
 <p><img src="images/short-jumpers.jpg" /></p>
 <h3 id="added-10k-resistors-and-mode-switch">Added 10K Resistors and Mode Switch</h3>
-<p>{<em>photo needed</em>}</p>
+<p>A change was made here from the prototype.</p>
+<ul>
+<li>Now using a <strong>switch</strong> instead of a header and jumper.</li>
+<li>The switch was added last but is wider than the header was.</li>
+<li>To provide more space for the 10 K resister attached to ground near RB6 I suggest adjusting the jumper positions so that the switch can be moved one hole farther away from the Xpress board.</li>
+</ul>
+<p>Example layout with switch before adjusting jumpers. Note that the photo does not illustrate the ground connection of the resistor because the lead is folded under the resister in this shot.</p>
+<p><img src="images/mode-switch-review.jpg" />images</p>
+<h3 id="added-charging-circuit-to-expansion-board">Added Charging Circuit to Expansion Board</h3>
+<p>Power jack not shown in this image.</p>
+<p><img src="images/expansion-before-headers.jpg" /></p>
+<p>Power Jack shown here.</p>
+<ul>
+<li>Black wire connected to horizontal strip to tie jack ground to charging point ground.</li>
+</ul>
+<p><img src="images/power-jack.jpg" /></p>
+<p>Current limiting resistor on underside of board.</p>
+<ul>
+<li>Mounted one proto-board thickness above board.
+<ul>
+<li>gap to allow power resister to shed heat in all directions.</li>
+</ul></li>
+</ul>
+<p><img src="images/resistor-75ohm.jpg" /></p>
+<h3 id="jig-for-board-interconnect-headers">Jig for Board Interconnect Headers</h3>
+<p>The pins of the board interconnect headers are long. A jig was made to hold long interconnect headers strait.</p>
+<p><img src="image/jig-sockets.jpg" /></p>
+<p>The long board interconnect headers are then put on the gig sockets.</p>
+<p><img src="images/expansion-headers-long-for-socket.jpg" /></p>
+<p>The expansion board is fitted over the jig to solder the board interconnect headers.</p>
+<p><img src="images/expansion-over-jig.jpg" /></p>
+<p>The expansion board is separated from the jig and sockets for the new robot added to the pins.</p>
+<p><img src="images/prepare-socket-mount.jpg" /></p>
+<p>The expansion board can then be mounted on the robot and the sockets soldered in place.</p>
 <h3 id="place-long-pin-headers-for-xpress-board">Place Long Pin Headers for Xpress Board</h3>
 <p>One way to get the Header pins in strait is to place them in the correct holes in the expansion board and then add the Xpress board. At this point the Pins are soldered into the Xpress board and not yet to the expansion board. Note the Xpress board must remain removable to solder in very long headers for expansion to robot interconnect.</p>
 <p><img src="images/long-pin-headers-placed.jpg" /></p>
