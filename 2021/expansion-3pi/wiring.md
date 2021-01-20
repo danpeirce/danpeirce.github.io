@@ -9,6 +9,7 @@
             Switch](#added-10k-resistors-and-mode-switch)
           - [Added Charging Circuit to Expansion
             Board](#added-charging-circuit-to-expansion-board)
+      - [Assemble Parts](#assemble-parts)
           - [Jig for Board Interconnect
             Headers](#jig-for-board-interconnect-headers)
           - [Place Long Pin Headers for Xpress
@@ -75,6 +76,8 @@ Current limiting resistor on underside of board.
       - gap to allow power resister to shed heat in all directions.
 
 ![](images/resistor-75ohm.jpg)
+
+## Assemble Parts
 
 ### Jig for Board Interconnect Headers
 

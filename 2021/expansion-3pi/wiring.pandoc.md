@@ -62,6 +62,8 @@ Current limiting resistor on underside of board.
 
 ![](images/resistor-75ohm.jpg)
 
+## Assemble Parts
+
 ### Jig for Board Interconnect Headers
 
 The pins of the board interconnect headers are long. A jig was made to hold long interconnect headers strait.
