@@ -83,6 +83,8 @@ The expansion board is separated from the jig and sockets for the new robot adde
 
 The expansion board can then be mounted on the robot and the sockets soldered in place.
 
+![](images/sockets-to-solder.jpg)
+
 ### Place Long Pin Headers for Xpress Board
 
 One way to get the Header pins in strait is to place them in the correct holes in the expansion board and then add the Xpress board.

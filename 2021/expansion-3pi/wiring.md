@@ -1,17 +1,17 @@
--   [Pololu 3Pi Expansion Wiring and
+  - [Pololu 3Pi Expansion Wiring and
     Assembly](#pololu-3pi-expansion-wiring-and-assembly)
-    -   [Expansion Board Wiring](#expansion-board-wiring)
-        -   [Wiring under the XPRESS
+      - [Expansion Board Wiring](#expansion-board-wiring)
+          - [Wiring under the XPRESS
             board.](#wiring-under-the-xpress-board.)
-        -   [Wiring near Expansion Port](#wiring-near-expansion-port)
-        -   [Add Short Jumpers](#add-short-jumpers)
-        -   [Added 10K Resistors and Mode
+          - [Wiring near Expansion Port](#wiring-near-expansion-port)
+          - [Add Short Jumpers](#add-short-jumpers)
+          - [Added 10K Resistors and Mode
             Switch](#added-10k-resistors-and-mode-switch)
-        -   [Added Charging Circuit to Expansion
+          - [Added Charging Circuit to Expansion
             Board](#added-charging-circuit-to-expansion-board)
-        -   [Jig for Board Interconnect
+          - [Jig for Board Interconnect
             Headers](#jig-for-board-interconnect-headers)
-        -   [Place Long Pin Headers for Xpress
+          - [Place Long Pin Headers for Xpress
             Board](#place-long-pin-headers-for-xpress-board)
 
 <!---
@@ -21,11 +21,9 @@ pandoc -s --toc -t html5 -c ../../pandocbd.css wiring.pandoc.md -o wiring.html
 pandoc -s --toc -t gfm wiring.pandoc.md -o wiring.md
 -->
 
-Pololu 3Pi Expansion Wiring and Assembly
-========================================
+# Pololu 3Pi Expansion Wiring and Assembly
 
-Expansion Board Wiring
-----------------------
+## Expansion Board Wiring
 
 ### Wiring under the XPRESS board.
 
@@ -46,9 +44,9 @@ next section to alter the arrangement of jumpers.
 
 A change was made here from the prototype.
 
--   Now using a **switch** instead of a header and jumper.
--   The switch was added last but is wider than the header was.
--   To provide more space for the 10 K resister attached to ground near
+  - Now using a **switch** instead of a header and jumper.
+  - The switch was added last but is wider than the header was.
+  - To provide more space for the 10 K resister attached to ground near
     RB6 I suggest adjusting the jumper positions so that the switch can
     be moved one hole farther away from the Xpress board.
 
@@ -66,15 +64,15 @@ Power jack not shown in this image.
 
 Power Jack shown here.
 
--   Black wire connected to horizontal strip to tie jack ground to
+  - Black wire connected to horizontal strip to tie jack ground to
     charging point ground.
 
 ![](images/power-jack.jpg)
 
 Current limiting resistor on underside of board.
 
--   Mounted one proto-board thickness above board.
-    -   gap to allow power resister to shed heat in all directions.
+  - Mounted one proto-board thickness above board.
+      - gap to allow power resister to shed heat in all directions.
 
 ![](images/resistor-75ohm.jpg)
 
@@ -103,6 +101,8 @@ robot added to the pins.
 
 The expansion board can then be mounted on the robot and the sockets
 soldered in place.
+
+![](images/sockets-to-solder.jpg)
 
 ### Place Long Pin Headers for Xpress Board
 
