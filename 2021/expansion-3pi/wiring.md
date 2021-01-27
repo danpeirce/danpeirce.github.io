@@ -55,7 +55,9 @@ Example layout with switch before adjusting jumpers. Note that the photo
 does not illustrate the ground connection of the resistor because the
 lead is folded under the resister in this shot.
 
-![](images/mode-switch-review.jpg) ![](images/pull-up-down-jumpers.jpg)
+![](images/mode-switch-review.jpg)
+
+![](images/pull-up-down-jumpers.jpg)
 
 ### Added Charging Circuit to Expansion Board
 
