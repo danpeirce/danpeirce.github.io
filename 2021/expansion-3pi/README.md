@@ -10,9 +10,12 @@
           - [Mount 1 (no longer used)](#mount-1-no-longer-used)
           - [Mount 2](#mount-2)
       - [Expansion Board Wiring](#expansion-board-wiring)
-          - [Wiring under the XPRESS
-            board.](#wiring-under-the-xpress-board.)
-          - [Wiring near Expansion Port](#wiring-near-expansion-port)
+      - [Programming 3Pi Robot as a
+        Slave](#programming-3pi-robot-as-a-slave)
+          - [Image of the Pololu Programmer Connected to the
+            3Pi](#image-of-the-pololu-programmer-connected-to-the-3pi)
+          - [Using Atmel Studio](#using-atmel-studio)
+      - [Programming Xpress Board](#programming-xpress-board)
       - [Roam and No Roam Shunt Jumper](#roam-and-no-roam-shunt-jumper)
       - [Autocalibrates when in Roam
         mode](#autocalibrates-when-in-roam-mode)
@@ -110,13 +113,55 @@ For better stability the XPRESS board was moved over the wheels.
 
 ## Expansion Board Wiring
 
-### Wiring under the XPRESS board.
+See [wiring.html](wiring.html)
 
-![](images/underboard-wire.jpg)
+## Programming 3Pi Robot as a Slave
 
-### Wiring near Expansion Port
+The 3Pi Robot has an MCU on board. In APSC1299 the on board MCU will
+contain a program from Pololu that they call 3Pi serial slave. The MCU
+on the 3Pi board is wired directly to the 3Pi sensors and motor drivers.
+I will refer to this as the physical layer. The students will be
+programming the PIC18F46K42 located on the Xpress board. I will call
+this the executive layer. The communication between the two MCUs is via
+UARTs on each device. On the Xpress board it is UART1 that communicates
+with the robot physical layer at 115200 bps, no parady and no
+handshaking.
 
-![](images/expansion-port-wire.jpg)
+Programming the 3Pi Robot MCU requires a small programming board. The
+students will not be provided with this board as that MCU will be
+programmed by the technician with the following file
+[3pi-serial-slave.hex](3pi-serial-slave.hex) .
+
+### Image of the Pololu Programmer Connected to the 3Pi
+
+![programming-slave.jpg](images/programming-slave.jpg)
+
+### Using Atmel Studio
+
+  - Power up the 3Pi before opening Atmel Studio.
+  - Open Atmel Studio
+  - Tools - Device Programming
+
+![atmelStudio-programming.png](images/atmelStudio-programming.png)
+
+  - Check that the programmer is recognized before hitting apply
+
+![atmelStudio-device328P.png](images/atmelStudio-device328P.png)
+
+  - click on apply
+
+  - Memories
+
+![atmelStudio-memories.png](images/atmelStudio-memories.png)
+
+## Programming Xpress Board
+
+This is done in the normal way over USB directly to the Xpress board. We
+can program the following into the Xpress boards before giving them to
+students. This program can also be used to test the basic function of
+the robot.
+
+[xpress-pic18f46k42.3pi-basic.hex](xpress-pic18f46k42.3pi-basic.hex)
 
 ## Roam and No Roam Shunt Jumper
 

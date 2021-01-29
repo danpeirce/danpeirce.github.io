@@ -36,10 +36,12 @@
 <li><a href="#mount-1-no-longer-used">Mount 1 (no longer used)</a></li>
 <li><a href="#mount-2">Mount 2</a></li>
 </ul></li>
-<li><a href="#expansion-board-wiring">Expansion Board Wiring</a><ul>
-<li><a href="#wiring-under-the-xpress-board.">Wiring under the XPRESS board.</a></li>
-<li><a href="#wiring-near-expansion-port">Wiring near Expansion Port</a></li>
+<li><a href="#expansion-board-wiring">Expansion Board Wiring</a></li>
+<li><a href="#programming-3pi-robot-as-a-slave">Programming 3Pi Robot as a Slave</a><ul>
+<li><a href="#image-of-the-pololu-programmer-connected-to-the-3pi">Image of the Pololu Programmer Connected to the 3Pi</a></li>
+<li><a href="#using-atmel-studio">Using Atmel Studio</a></li>
 </ul></li>
+<li><a href="#programming-xpress-board">Programming Xpress Board</a></li>
 <li><a href="#roam-and-no-roam-shunt-jumper">Roam and No Roam Shunt Jumper</a></li>
 <li><a href="#autocalibrates-when-in-roam-mode">Autocalibrates when in Roam mode</a></li>
 <li><a href="#demo">Demo</a></li>
@@ -107,10 +109,39 @@ pandoc -s --toc -t gfm README.pandoc.md -o README.md
 <p>For better stability the XPRESS board was moved over the wheels.</p>
 <p><img src="images/expansion-mounted-2-s.jpg" /></p>
 <h2 id="expansion-board-wiring">Expansion Board Wiring</h2>
-<h3 id="wiring-under-the-xpress-board.">Wiring under the XPRESS board.</h3>
-<p><img src="images/underboard-wire.jpg" /></p>
-<h3 id="wiring-near-expansion-port">Wiring near Expansion Port</h3>
-<p><img src="images/expansion-port-wire.jpg" /></p>
+<p>See <a href="wiring.html">wiring.html</a></p>
+<h2 id="programming-3pi-robot-as-a-slave">Programming 3Pi Robot as a Slave</h2>
+<p>The 3Pi Robot has an MCU on board. In APSC1299 the on board MCU will contain a program from Pololu that they call 3Pi serial slave. The MCU on the 3Pi board is wired directly to the 3Pi sensors and motor drivers. I will refer to this as the physical layer. The students will be programming the PIC18F46K42 located on the Xpress board. I will call this the executive layer. The communication between the two MCUs is via UARTs on each device. On the Xpress board it is UART1 that communicates with the robot physical layer at 115200 bps, no parady and no handshaking.</p>
+<p>Programming the 3Pi Robot MCU requires a small programming board. The students will not be provided with this board as that MCU will be programmed by the technician with the following file <a href="3pi-serial-slave.hex">3pi-serial-slave.hex</a> .</p>
+<h3 id="image-of-the-pololu-programmer-connected-to-the-3pi">Image of the Pololu Programmer Connected to the 3Pi</h3>
+<figure>
+<img src="images/programming-slave.jpg" alt="programming-slave.jpg" /><figcaption>programming-slave.jpg</figcaption>
+</figure>
+<h3 id="using-atmel-studio">Using Atmel Studio</h3>
+<ul>
+<li>Power up the 3Pi before opening Atmel Studio.</li>
+<li>Open Atmel Studio</li>
+<li>Tools - Device Programming</li>
+</ul>
+<figure>
+<img src="images/atmelStudio-programming.png" alt="atmelStudio-programming.png" /><figcaption>atmelStudio-programming.png</figcaption>
+</figure>
+<ul>
+<li>Check that the programmer is recognized before hitting apply</li>
+</ul>
+<figure>
+<img src="images/atmelStudio-device328P.png" alt="atmelStudio-device328P.png" /><figcaption>atmelStudio-device328P.png</figcaption>
+</figure>
+<ul>
+<li><p>click on apply</p></li>
+<li><p>Memories</p></li>
+</ul>
+<figure>
+<img src="images/atmelStudio-memories.png" alt="atmelStudio-memories.png" /><figcaption>atmelStudio-memories.png</figcaption>
+</figure>
+<h2 id="programming-xpress-board">Programming Xpress Board</h2>
+<p>This is done in the normal way over USB directly to the Xpress board. We can program the following into the Xpress boards before giving them to students. This program can also be used to test the basic function of the robot.</p>
+<p><a href="xpress-pic18f46k42.3pi-basic.hex">xpress-pic18f46k42.3pi-basic.hex</a></p>
 <h2 id="roam-and-no-roam-shunt-jumper">Roam and No Roam Shunt Jumper</h2>
 <p>The image below shows the jumper in the no roam possition. This will be changed to a switch.</p>
 <p><img src="images/no_roam_s.jpg" /></p>
