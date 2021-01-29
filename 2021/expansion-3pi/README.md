@@ -124,7 +124,7 @@ I will refer to this as the physical layer. The students will be
 programming the PIC18F46K42 located on the Xpress board. I will call
 this the executive layer. The communication between the two MCUs is via
 UARTs on each device. On the Xpress board it is UART1 that communicates
-with the robot physical layer at 115200 bps, no parady and no
+with the robot physical layer at 115200 bps, no parity and no
 handshaking.
 
 Programming the 3Pi Robot MCU requires a small programming board. The

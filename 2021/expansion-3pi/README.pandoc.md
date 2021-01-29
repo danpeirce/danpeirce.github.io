@@ -84,7 +84,7 @@ See [wiring.html](wiring.html)
 The 3Pi Robot has an MCU on board. In APSC1299 the on board MCU will contain a program from Pololu that they call 3Pi serial slave.
 The MCU on the 3Pi board is wired directly to the 3Pi sensors and motor drivers. I will refer to this as the physical layer. The students 
 will be programming the PIC18F46K42 located on the Xpress board. I will call this the executive layer. The communication between the two MCUs is 
-via UARTs on each device. On the Xpress board it is UART1 that communicates with the robot physical layer at 115200 bps, no parady and no handshaking.
+via UARTs on each device. On the Xpress board it is UART1 that communicates with the robot physical layer at 115200 bps, no parity and no handshaking.
 
 Programming the 3Pi Robot MCU requires a small programming board. The students will not be provided with this board as that MCU will be programmed by the technician 
 with the following file [3pi-serial-slave.hex](3pi-serial-slave.hex) .
