@@ -152,6 +152,12 @@ programmed by the technician with the following file
 
   - Memories
 
+  - The path for the file **3pi-serial-slave.hex** will depend on where
+    you save it.
+
+  - after browsing to the file **3pi-serial-slave.hex** click on
+    program.
+
 ![atmelStudio-memories.png](images/atmelStudio-memories.png)
 
 ## Programming Xpress Board
