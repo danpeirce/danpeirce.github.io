@@ -79,6 +79,8 @@ For better stability the XPRESS board was moved over the wheels.
 
 See [wiring.html](wiring.html)
 
+![expansion-schematic.png](wiring/expansion-schematic.png)
+
 ## Programming 3Pi Robot as a Slave
 
 The 3Pi Robot has an MCU on board. In APSC1299 the on board MCU will contain a program from Pololu that they call 3Pi serial slave.

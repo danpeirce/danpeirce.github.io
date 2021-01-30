@@ -7,10 +7,13 @@
   <meta name="author" content="By Dan Peirce B.Sc." />
   <title>Pololu 3Pi Expansion</title>
   <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="../../pandocbd.css" />
   <!--[if lt IE 9]>
@@ -24,20 +27,25 @@
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#pololu-3pi-expansion">Pololu 3Pi Expansion</a><ul>
-<li><a href="#pic18f46k42-xpress-board-features">PIC18F46K42 XPRESS Board Features</a><ul>
+<li><a href="#pololu-3pi-expansion">Pololu 3Pi Expansion</a>
+<ul>
+<li><a href="#pic18f46k42-xpress-board-features">PIC18F46K42 XPRESS Board Features</a>
+<ul>
 <li><a href="#pins-used">Pins Used</a></li>
 </ul></li>
-<li><a href="#pololu-3pi-robot">Pololu 3Pi robot</a><ul>
+<li><a href="#pololu-3pi-robot">Pololu 3Pi robot</a>
+<ul>
 <li><a href="#roam-mode">Roam Mode</a></li>
 <li><a href="#no-roam-mode">No Roam Mode</a></li>
 </ul></li>
-<li><a href="#mounting-pic-xpress-board-on-3pi-expansion-board">Mounting PIC XPRESS board on 3Pi Expansion board</a><ul>
+<li><a href="#mounting-pic-xpress-board-on-3pi-expansion-board">Mounting PIC XPRESS board on 3Pi Expansion board</a>
+<ul>
 <li><a href="#mount-1-no-longer-used">Mount 1 (no longer used)</a></li>
 <li><a href="#mount-2">Mount 2</a></li>
 </ul></li>
 <li><a href="#expansion-board-wiring">Expansion Board Wiring</a></li>
-<li><a href="#programming-3pi-robot-as-a-slave">Programming 3Pi Robot as a Slave</a><ul>
+<li><a href="#programming-3pi-robot-as-a-slave">Programming 3Pi Robot as a Slave</a>
+<ul>
 <li><a href="#image-of-the-pololu-programmer-connected-to-the-3pi">Image of the Pololu Programmer Connected to the 3Pi</a></li>
 <li><a href="#using-atmel-studio">Using Atmel Studio</a></li>
 </ul></li>
@@ -110,12 +118,15 @@ pandoc -s --toc -t gfm README.pandoc.md -o README.md
 <p><img src="images/expansion-mounted-2-s.jpg" /></p>
 <h2 id="expansion-board-wiring">Expansion Board Wiring</h2>
 <p>See <a href="wiring.html">wiring.html</a></p>
+<figure>
+<img src="wiring/expansion-schematic.png" alt="expansion-schematic.png" /><figcaption aria-hidden="true">expansion-schematic.png</figcaption>
+</figure>
 <h2 id="programming-3pi-robot-as-a-slave">Programming 3Pi Robot as a Slave</h2>
 <p>The 3Pi Robot has an MCU on board. In APSC1299 the on board MCU will contain a program from Pololu that they call 3Pi serial slave. The MCU on the 3Pi board is wired directly to the 3Pi sensors and motor drivers. I will refer to this as the physical layer. The students will be programming the PIC18F46K42 located on the Xpress board. I will call this the executive layer. The communication between the two MCUs is via UARTs on each device. On the Xpress board it is UART1 that communicates with the robot physical layer at 115200 bps, no parity and no handshaking.</p>
 <p>Programming the 3Pi Robot MCU requires a small programming board. The students will not be provided with this board as that MCU will be programmed by the technician with the following file <a href="3pi-serial-slave.hex">3pi-serial-slave.hex</a> .</p>
 <h3 id="image-of-the-pololu-programmer-connected-to-the-3pi">Image of the Pololu Programmer Connected to the 3Pi</h3>
 <figure>
-<img src="images/programming-slave.jpg" alt="programming-slave.jpg" /><figcaption>programming-slave.jpg</figcaption>
+<img src="images/programming-slave.jpg" alt="programming-slave.jpg" /><figcaption aria-hidden="true">programming-slave.jpg</figcaption>
 </figure>
 <h3 id="using-atmel-studio">Using Atmel Studio</h3>
 <ul>
@@ -124,13 +135,13 @@ pandoc -s --toc -t gfm README.pandoc.md -o README.md
 <li>Tools - Device Programming</li>
 </ul>
 <figure>
-<img src="images/atmelStudio-programming.png" alt="atmelStudio-programming.png" /><figcaption>atmelStudio-programming.png</figcaption>
+<img src="images/atmelStudio-programming.png" alt="atmelStudio-programming.png" /><figcaption aria-hidden="true">atmelStudio-programming.png</figcaption>
 </figure>
 <ul>
 <li>Check that the programmer is recognized before hitting apply</li>
 </ul>
 <figure>
-<img src="images/atmelStudio-device328P.png" alt="atmelStudio-device328P.png" /><figcaption>atmelStudio-device328P.png</figcaption>
+<img src="images/atmelStudio-device328P.png" alt="atmelStudio-device328P.png" /><figcaption aria-hidden="true">atmelStudio-device328P.png</figcaption>
 </figure>
 <ul>
 <li><p>click on apply</p></li>
@@ -139,7 +150,7 @@ pandoc -s --toc -t gfm README.pandoc.md -o README.md
 <li><p>after browsing to the file <strong>3pi-serial-slave.hex</strong> click on program.</p></li>
 </ul>
 <figure>
-<img src="images/atmelStudio-memories.png" alt="atmelStudio-memories.png" /><figcaption>atmelStudio-memories.png</figcaption>
+<img src="images/atmelStudio-memories.png" alt="atmelStudio-memories.png" /><figcaption aria-hidden="true">atmelStudio-memories.png</figcaption>
 </figure>
 <h2 id="programming-xpress-board">Programming Xpress Board</h2>
 <p>This is done in the normal way over USB directly to the Xpress board. We can program the following into the Xpress boards before giving them to students. This program can also be used to test the basic function of the robot.</p>
@@ -167,7 +178,7 @@ pandoc -s --toc -t gfm README.pandoc.md -o README.md
 <h2 id="working-with-putty-and-issues">Working with PuTTY and issues</h2>
 <p>One can use a PuTTY terminal with the virtual serial port of the Xpress board. This works fine when one is typing into the terminal. There is an issue though if one attempts pasting into the PuTTY terminal (using a right mouse click). In that case only the first character is sent. This is an issue of the USB to serial bridge on the Xpress board and not the PIC code! This was verified by using a USB to serial bridge on a different board (TTLyFTDI USB-to-TTL Cable Adapter) fed into RB7. In this case the code worked as expected and all pasted characters appeared in the PuTTY terminal and were correctly sent out uart1 TX.</p>
 <figure>
-<img src="images/uart1-uart2.jpg" alt="uart1-uart2.jpg" /><figcaption>uart1-uart2.jpg</figcaption>
+<img src="images/uart1-uart2.jpg" alt="uart1-uart2.jpg" /><figcaption aria-hidden="true">uart1-uart2.jpg</figcaption>
 </figure>
 <p>Others have commented on the limitation of the USART to USB bridge on the Xpress board:</p>
 <ul>

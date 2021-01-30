@@ -1,31 +1,31 @@
-  - [Pololu 3Pi Expansion](#pololu-3pi-expansion)
-      - [PIC18F46K42 XPRESS Board
+-   [Pololu 3Pi Expansion](#pololu-3pi-expansion)
+    -   [PIC18F46K42 XPRESS Board
         Features](#pic18f46k42-xpress-board-features)
-          - [Pins Used](#pins-used)
-      - [Pololu 3Pi robot](#pololu-3pi-robot)
-          - [Roam Mode](#roam-mode)
-          - [No Roam Mode](#no-roam-mode)
-      - [Mounting PIC XPRESS board on 3Pi Expansion
+        -   [Pins Used](#pins-used)
+    -   [Pololu 3Pi robot](#pololu-3pi-robot)
+        -   [Roam Mode](#roam-mode)
+        -   [No Roam Mode](#no-roam-mode)
+    -   [Mounting PIC XPRESS board on 3Pi Expansion
         board](#mounting-pic-xpress-board-on-3pi-expansion-board)
-          - [Mount 1 (no longer used)](#mount-1-no-longer-used)
-          - [Mount 2](#mount-2)
-      - [Expansion Board Wiring](#expansion-board-wiring)
-      - [Programming 3Pi Robot as a
+        -   [Mount 1 (no longer used)](#mount-1-no-longer-used)
+        -   [Mount 2](#mount-2)
+    -   [Expansion Board Wiring](#expansion-board-wiring)
+    -   [Programming 3Pi Robot as a
         Slave](#programming-3pi-robot-as-a-slave)
-          - [Image of the Pololu Programmer Connected to the
+        -   [Image of the Pololu Programmer Connected to the
             3Pi](#image-of-the-pololu-programmer-connected-to-the-3pi)
-          - [Using Atmel Studio](#using-atmel-studio)
-      - [Programming Xpress Board](#programming-xpress-board)
-      - [Roam and No Roam Shunt Jumper](#roam-and-no-roam-shunt-jumper)
-      - [Autocalibrates when in Roam
+        -   [Using Atmel Studio](#using-atmel-studio)
+    -   [Programming Xpress Board](#programming-xpress-board)
+    -   [Roam and No Roam Shunt Jumper](#roam-and-no-roam-shunt-jumper)
+    -   [Autocalibrates when in Roam
         mode](#autocalibrates-when-in-roam-mode)
-      - [Demo](#demo)
-      - [Pull up on RX2/RB7](#pull-up-on-rx2rb7)
-      - [Charging Circuit](#charging-circuit)
-      - [Added Print Sensor Values to
+    -   [Demo](#demo)
+    -   [Pull up on RX2/RB7](#pull-up-on-rx2rb7)
+    -   [Charging Circuit](#charging-circuit)
+    -   [Added Print Sensor Values to
         menu](#added-print-sensor-values-to-menu)
-      - [Working with PuTTY and issues](#working-with-putty-and-issues)
-      - [Test of Expansion Board](#test-of-expansion-board)
+    -   [Working with PuTTY and issues](#working-with-putty-and-issues)
+    -   [Test of Expansion Board](#test-of-expansion-board)
 
 <!---
 use 
@@ -34,9 +34,11 @@ pandoc -s --toc -t html5 -c ../../pandocbd.css README.pandoc.md -o README.html
 pandoc -s --toc -t gfm README.pandoc.md -o README.md
 -->
 
-# Pololu 3Pi Expansion
+Pololu 3Pi Expansion
+====================
 
-## PIC18F46K42 XPRESS Board Features
+PIC18F46K42 XPRESS Board Features
+---------------------------------
 
 This board has a USB microB connector. It has a PIC MCU on board
 configured to act as an interface and it enumerates as a multifunction
@@ -49,26 +51,27 @@ or PIC18F4525.
 
 ![](images/pins.png)
 
-  - UART1 is at 115200 baud. Tx1 is on RC6.
-  - UART2 is connected to the XPRESS boards USB interface PIC.
-      - Communication between UART2 and the interface IC is at 9600
+-   UART1 is at 115200 baud. Tx1 is on RC6.
+-   UART2 is connected to the XPRESS boards USB interface PIC.
+    -   Communication between UART2 and the interface IC is at 9600
         baud.
-  - roam input used to determine if robot should
+-   roam input used to determine if robot should
     1.  Stay in place (perhaps for programming)
     2.  Roam (perhaps following a line)
-  - PWM output at about 1 KHz on pad RC4 (set to 10% duty cycle)
+-   PWM output at about 1 KHz on pad RC4 (set to 10% duty cycle)
 
-## Pololu 3Pi robot
+Pololu 3Pi robot
+----------------
 
 The robot is running the serial slave program from Pololu. This will
 allow the 3Pi robot to be controlled from a XPRESS board.
 
-  - [10.a. Serial slave
+-   [10.a. Serial slave
     program](https://www.pololu.com/docs/0J21/all#10.a)
 
 More information on the Pololu 3Pi robot
 
-  - <https://www.pololu.com/product/975>
+-   <https://www.pololu.com/product/975>
 
 ### Roam Mode
 
@@ -95,7 +98,8 @@ The menu meantioned in list item 3. looks as follows:
 
 ![](images/menu.png)
 
-## Mounting PIC XPRESS board on 3Pi Expansion board
+Mounting PIC XPRESS board on 3Pi Expansion board
+------------------------------------------------
 
 ### Mount 1 (no longer used)
 
@@ -111,11 +115,15 @@ For better stability the XPRESS board was moved over the wheels.
 
 ![](images/expansion-mounted-2-s.jpg)
 
-## Expansion Board Wiring
+Expansion Board Wiring
+----------------------
 
 See [wiring.html](wiring.html)
 
-## Programming 3Pi Robot as a Slave
+![expansion-schematic.png](wiring/expansion-schematic.png)
+
+Programming 3Pi Robot as a Slave
+--------------------------------
 
 The 3Pi Robot has an MCU on board. In APSC1299 the on board MCU will
 contain a program from Pololu that they call 3Pi serial slave. The MCU
@@ -138,29 +146,30 @@ programmed by the technician with the following file
 
 ### Using Atmel Studio
 
-  - Power up the 3Pi before opening Atmel Studio.
-  - Open Atmel Studio
-  - Tools - Device Programming
+-   Power up the 3Pi before opening Atmel Studio.
+-   Open Atmel Studio
+-   Tools - Device Programming
 
 ![atmelStudio-programming.png](images/atmelStudio-programming.png)
 
-  - Check that the programmer is recognized before hitting apply
+-   Check that the programmer is recognized before hitting apply
 
 ![atmelStudio-device328P.png](images/atmelStudio-device328P.png)
 
-  - click on apply
+-   click on apply
 
-  - Memories
+-   Memories
 
-  - The path for the file **3pi-serial-slave.hex** will depend on where
+-   The path for the file **3pi-serial-slave.hex** will depend on where
     you save it.
 
-  - after browsing to the file **3pi-serial-slave.hex** click on
+-   after browsing to the file **3pi-serial-slave.hex** click on
     program.
 
 ![atmelStudio-memories.png](images/atmelStudio-memories.png)
 
-## Programming Xpress Board
+Programming Xpress Board
+------------------------
 
 This is done in the normal way over USB directly to the Xpress board. We
 can program the following into the Xpress boards before giving them to
@@ -169,32 +178,37 @@ the robot.
 
 [xpress-pic18f46k42.3pi-basic.hex](xpress-pic18f46k42.3pi-basic.hex)
 
-## Roam and No Roam Shunt Jumper
+Roam and No Roam Shunt Jumper
+-----------------------------
 
 The image below shows the jumper in the no roam possition. This will be
 changed to a switch.
 
 ![](images/no_roam_s.jpg)
 
-## Autocalibrates when in Roam mode
+Autocalibrates when in Roam mode
+--------------------------------
 
 Will autocalibrate the sensors if in Roam mode. For meaningful results
 the robot should be sitting over a black tape line. The robot will spin
 to the left and right sweeping the sensors over the line so that
 normalized readings can be calculated.
 
-## Demo
+Demo
+----
 
 Demo Video at Link
 
-  - [Youtube Video Link](https://youtu.be/frrQDTKzhbE)
+-   [Youtube Video Link](https://youtu.be/frrQDTKzhbE)
 
-## Pull up on RX2/RB7
+Pull up on RX2/RB7
+------------------
 
 A 10 Kohm pull up resistor was added to RX2 for better reliability when
 USB cable is not attached.
 
-## Charging Circuit
+Charging Circuit
+----------------
 
 A charging circuit has been added to the expantion board. The charging
 circuit is just a 75 ohm resistor in series with the four AAA NiMH cells
@@ -211,19 +225,21 @@ Showing the 75 ohm 2 watt resistor (located under the expansion board.
 caused rubbing on right wheel. Also bend tab on barrel connector so it
 is flush on board before soldering.**
 
-## Added Print Sensor Values to menu
+Added Print Sensor Values to menu
+---------------------------------
 
 Can now print sensor values in PuTTY when in No Roam mode. Can move
 robot over track by hand.
 
-## Working with PuTTY and issues
+Working with PuTTY and issues
+-----------------------------
 
 One can use a PuTTY terminal with the virtual serial port of the Xpress
 board. This works fine when one is typing into the terminal. There is an
 issue though if one attempts pasting into the PuTTY terminal (using a
 right mouse click). In that case only the first character is sent. This
 is an issue of the USB to serial bridge on the Xpress board and not the
-PIC code\! This was verified by using a USB to serial bridge on a
+PIC code! This was verified by using a USB to serial bridge on a
 different board (TTLyFTDI USB-to-TTL Cable Adapter) fed into RB7. In
 this case the code worked as expected and all pasted characters appeared
 in the PuTTY terminal and were correctly sent out uart1 TX.
@@ -233,10 +249,11 @@ in the PuTTY terminal and were correctly sent out uart1 TX.
 Others have commented on the limitation of the USART to USB bridge on
 the Xpress board:
 
-  - [Xpress PIC18F46K42 board virtual COM port bridge to UART receive
+-   [Xpress PIC18F46K42 board virtual COM port bridge to UART receive
     limitations](https://www.microchip.com/forums/m1097510.aspx)
 
-## Test of Expansion Board
+Test of Expansion Board
+-----------------------
 
 Initial testing of expansion board for 3PI.
 
