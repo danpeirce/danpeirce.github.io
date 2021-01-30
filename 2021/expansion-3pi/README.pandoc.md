@@ -79,7 +79,7 @@ For better stability the XPRESS board was moved over the wheels.
 
 See [wiring.html](wiring.html)
 
-![expansion-schematic.png](wiring/expansion-schematic.png)
+![expansion-schematic.png](images/expansion-schematic.png)
 
 ## Programming 3Pi Robot as a Slave
 
