@@ -60,6 +60,7 @@ The menu meantioned in list item 3. looks as follows:
 
 ![](images/menu.png)
 
+
 ## Mounting PIC XPRESS board on 3Pi Expansion board
 
 ### Mount 1 (no longer used)
@@ -121,6 +122,39 @@ This is done in the normal way over USB directly to the Xpress board. We can pro
 to students. This program can also be used to test the basic function of the robot.
 
 [xpress-pic18f46k42.3pi-basic.hex](xpress-pic18f46k42.3pi-basic.hex)
+
+### pololu3pi.h 
+
+This is the header file I wrote for functions that communicate with the MCU built into the robot via UART1 on the Xpress board.
+
+Some improvements and changes might be made. The code can be found at [https://github.com/danpeirce/xpress-pic18f46k42/tree/3pi-menu-basic1](https://github.com/danpeirce/xpress-pic18f46k42/tree/3pi-menu-basic1).
+
+Details on the functions listed below can be found at [pololu3pi.c-details.html](pololu3pi.c-details.html)
+
+#### Contents of pololu3p.h
+
+~~~~c
+unsigned int readbatteryvoltage(void);
+unsigned int* readsensors(void);
+void sendbatteryvoltage(void);
+void send_hyphen(void);
+void send_APSC1299(void);
+void display_signature(void);
+void LCD_print(char *str, char length);
+void foreward(unsigned char speed);
+void backward(unsigned char speed);
+void spinleft(unsigned char speed);
+void spinright(unsigned char speed);
+void LCD_line2(void);
+void sendchar(char a_char);
+void clearLCD(void);
+void calibrate(void);
+void go_pd(unsigned char speed);
+void stop_pd(void);
+void print_sensors(void);
+~~~~
+
+
 
 ## Roam and No Roam Shunt Jumper
 
