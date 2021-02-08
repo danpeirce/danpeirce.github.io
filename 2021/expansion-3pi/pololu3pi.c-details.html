@@ -120,6 +120,18 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 -->
 <h1 id="pololu3pi.c-details">Pololu3pi.c Details</h1>
 <h2 id="print_sensors">print_sensors</h2>
+<ul>
+<li>This function only used in No Roam mode and is called as a menu item</li>
+<li>Calibrates sensors</li>
+<li>Reads sensors and prints values to virtual COM port.</li>
+<li>prints timer3 value</li>
+<li>possible future changes
+<ul>
+<li>Move calibrate into a different function.</li>
+<li>currently prints new values over old. may change so new values go on new line</li>
+<li>may change so it prints only one set of values and returns</li>
+</ul></li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="dt">void</span> print_sensors(<span class="dt">void</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>{</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    <span class="dt">unsigned</span> <span class="dt">int</span> * sensorvalues;</span>
@@ -138,6 +150,9 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>    </span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="foreward">foreward</h2>
+<ul>
+<li>This function only used in Roam mode</li>
+</ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="dt">void</span> foreward(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>{</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
@@ -150,6 +165,9 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>    UART1_Write(speed);</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="backward">backward</h2>
+<ul>
+<li>This function only used in Roam mode</li>
+</ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="dt">void</span> backward(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>{</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
@@ -162,6 +180,9 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>    UART1_Write(speed);</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="spinleft">spinleft</h2>
+<ul>
+<li>This function only used in Roam mode</li>
+</ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="dt">void</span> spinleft(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>{</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
@@ -174,6 +195,9 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>    UART1_Write(speed);</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="spinright">spinright</h2>
+<ul>
+<li>This function only used in Roam mode</li>
+</ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="dt">void</span> spinright(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>{</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
@@ -186,6 +210,10 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>    UART1_Write(speed);</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="readbatteryvoltage">readbatteryvoltage</h2>
+<ul>
+<li>This function used after menu displayed and as a menu item.</li>
+<li>Sends battery voltage to virtual COM port and returns value</li>
+</ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">int</span> readbatteryvoltage(<span class="dt">void</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>{</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>    <span class="dt">unsigned</span> <span class="dt">char</span> lbyte, ubyte;</span>
@@ -202,6 +230,9 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a>    <span class="cf">return</span> (<span class="dt">unsigned</span> <span class="dt">int</span>)(ubyte*<span class="dv">256</span> + lbyte);</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="readsensors">readsensors</h2>
+<ul>
+<li>Returns pointer to array of sensor values.</li>
+</ul>
 <div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">int</span>* readsensors(<span class="dt">void</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>{</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>    <span class="dt">unsigned</span> <span class="dt">char</span> lbyte[<span class="dv">5</span>], ubyte[<span class="dv">5</span>], i;</span>
@@ -225,6 +256,9 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true"></a>    <span class="cf">return</span> values;</span>
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="sendbatteryvoltage">sendbatteryvoltage</h2>
+<ul>
+<li>Calls readbatteryvoltage, prints returned values to LCD.</li>
+</ul>
 <div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="co">// sends battery voltage to LCD</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="dt">void</span> sendbatteryvoltage(<span class="dt">void</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>{</span>
@@ -249,6 +283,9 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true"></a>    </span>
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="sendchar">sendchar</h2>
+<ul>
+<li>Sends a single character to the LCD.</li>
+</ul>
 <div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="dt">void</span> sendchar(<span class="dt">char</span> a_char)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>{</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>

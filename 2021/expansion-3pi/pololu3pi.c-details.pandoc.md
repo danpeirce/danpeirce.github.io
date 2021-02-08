@@ -12,6 +12,15 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 
 ## print_sensors
 
+* This function only used in No Roam mode and is called as a menu item
+* Calibrates sensors
+* Reads sensors and prints values to virtual COM port.
+* prints timer3 value
+* possible future changes
+    * Move calibrate into a different function.
+	* currently prints new values over old. may change so new values go on new line
+	* may change so it prints only one set of values and returns
+
 ~~~~c
 void print_sensors(void)
 {
@@ -34,6 +43,8 @@ void print_sensors(void)
 
 ## foreward 
 
+* This function only used in Roam mode
+
 ~~~~c
 void foreward(unsigned char speed)
 {
@@ -49,6 +60,8 @@ void foreward(unsigned char speed)
 ~~~~
 
 ## backward 
+
+* This function only used in Roam mode
 
 ~~~~c 
 void backward(unsigned char speed)
@@ -66,6 +79,8 @@ void backward(unsigned char speed)
 
 ## spinleft
 
+* This function only used in Roam mode
+
 ~~~~c 
 void spinleft(unsigned char speed)
 {
@@ -82,6 +97,8 @@ void spinleft(unsigned char speed)
 
 ## spinright
 
+* This function only used in Roam mode
+
 ~~~~c 
 void spinright(unsigned char speed)
 {
@@ -97,6 +114,9 @@ void spinright(unsigned char speed)
 ~~~~
 
 ## readbatteryvoltage
+
+* This function used after menu displayed and as a menu item.
+* Sends battery voltage to virtual COM port and returns value
 
 ~~~~c
 unsigned int readbatteryvoltage(void)
@@ -117,6 +137,8 @@ unsigned int readbatteryvoltage(void)
 ~~~~ 
 
 ## readsensors 
+
+* Returns pointer to array of sensor values.
 
 ~~~~c 
 unsigned int* readsensors(void)
@@ -145,6 +167,8 @@ unsigned int* readsensors(void)
 
 ## sendbatteryvoltage 
 
+* Calls readbatteryvoltage, prints returned values to LCD.
+
 ~~~~c
 // sends battery voltage to LCD
 void sendbatteryvoltage(void)
@@ -172,6 +196,8 @@ void sendbatteryvoltage(void)
 ~~~~
 
 ## sendchar 
+
+* Sends a single character to the LCD.
 
 ~~~~c 
 void sendchar(char a_char)

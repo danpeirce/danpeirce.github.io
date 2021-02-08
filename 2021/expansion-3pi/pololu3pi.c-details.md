@@ -31,6 +31,18 @@ Pololu3pi.c Details
 print\_sensors
 --------------
 
+-   This function only used in No Roam mode and is called as a menu item
+-   Calibrates sensors
+-   Reads sensors and prints values to virtual COM port.
+-   prints timer3 value
+-   possible future changes
+    -   Move calibrate into a different function.
+    -   currently prints new values over old. may change so new values
+        go on new line
+    -   may change so it prints only one set of values and returns
+
+<!-- -->
+
     void print_sensors(void)
     {
         unsigned int * sensorvalues;
@@ -52,6 +64,10 @@ print\_sensors
 foreward
 --------
 
+-   This function only used in Roam mode
+
+<!-- -->
+
     void foreward(unsigned char speed)
     {
         while(!UART1_is_tx_ready()) continue;
@@ -66,6 +82,10 @@ foreward
 
 backward
 --------
+
+-   This function only used in Roam mode
+
+<!-- -->
 
     void backward(unsigned char speed)
     {
@@ -82,6 +102,10 @@ backward
 spinleft
 --------
 
+-   This function only used in Roam mode
+
+<!-- -->
+
     void spinleft(unsigned char speed)
     {
         while(!UART1_is_tx_ready()) continue;
@@ -97,6 +121,10 @@ spinleft
 spinright
 ---------
 
+-   This function only used in Roam mode
+
+<!-- -->
+
     void spinright(unsigned char speed)
     {
         while(!UART1_is_tx_ready()) continue;
@@ -111,6 +139,11 @@ spinright
 
 readbatteryvoltage
 ------------------
+
+-   This function used after menu displayed and as a menu item.
+-   Sends battery voltage to virtual COM port and returns value
+
+<!-- -->
 
     unsigned int readbatteryvoltage(void)
     {
@@ -130,6 +163,10 @@ readbatteryvoltage
 
 readsensors
 -----------
+
+-   Returns pointer to array of sensor values.
+
+<!-- -->
 
     unsigned int* readsensors(void)
     {
@@ -157,6 +194,10 @@ readsensors
 sendbatteryvoltage
 ------------------
 
+-   Calls readbatteryvoltage, prints returned values to LCD.
+
+<!-- -->
+
     // sends battery voltage to LCD
     void sendbatteryvoltage(void)
     {
@@ -183,6 +224,10 @@ sendbatteryvoltage
 
 sendchar
 --------
+
+-   Sends a single character to the LCD.
+
+<!-- -->
 
     void sendchar(char a_char)
     {
