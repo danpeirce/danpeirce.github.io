@@ -49,7 +49,6 @@ void menu(void)
 * Reads sensors and prints values to virtual COM port.
 * ~~prints timer3 value~~
 * possible future changes
-    * Move calibrate into a different function.
 	* currently prints new values over old. may change so new values go on new line
 	* may change so it prints only one set of values and returns
 * calibrate() has been commented out. It was found that calibrate works more consistantly when 
