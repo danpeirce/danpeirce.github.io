@@ -10,22 +10,62 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 
 # Pololu3pi.c Details
 
+## menu 
+
+* This function is called after initialization of PIC peripherals.
+* It can also be called from the menu using the **Esc** key.
+
+~~~~c 
+void menu(void)
+{
+    printf(" \r\n");
+    printf("\r\n\n\n\n\n\n\n\n");   
+               // this should clear the terminal screen mostly
+                       // otherwise may display junk from power cycle
+    printf("\tKPU APSC1299 3pi-menu-basic3\n\n\r");
+    printf("\t\t  Menu\n\r");
+    printf("\t\t--------\r\n");  
+    printf("\t\t@. Pololu Signature?\r\n"); 
+    printf("\t\t1. Display mV reading\r\n"); // sent to PuTTY only
+    printf("\t\t2. Display mV reading in LCD\r\n");  // also send to LCD
+    printf("\t\tc. Clear LCD\r\n");
+    printf("\t   ctrl+s. Print Sensor Values\r\n");
+    printf("\t\t-. Send hyphen to LCD\r\n");
+    printf("\t\t~. LCD message APSC1299\r\n");
+    printf("\t\treturn. LCD go to start of line two\r\n");
+    printf("\t\t<, robot spin left\r\n");
+    printf("\t\t>, robot spin right\r\n");
+    printf("\t\t|, robot stop\r\n");
+    printf("\t     Esc, Print Menu\r\n");
+    printf("\t\t--------\r\n\n");
+}
+~~~~
+
+
 ## print_sensors
 
 * This function only used in No Roam mode and is called as a menu item
 * Calibrates sensors
 * Reads sensors and prints values to virtual COM port.
-* prints timer3 value
+* ~~prints timer3 value~~
 * possible future changes
     * Move calibrate into a different function.
 	* currently prints new values over old. may change so new values go on new line
 	* may change so it prints only one set of values and returns
+* calibrate() has been commented out. It was found that calibrate works more consistantly when 
+  done in Roam mode with no USB cable. The following steps can be used to get sensor readings:
+    * Turn robot on in Roam mode
+	* Pick the robot up after calibration is complete
+	* Move switch to No Roam possition
+	* Attach USB cable
+	* Open terminal program
+	* Select sensor readings with **Ctrl+s**
 
 ~~~~c
 void print_sensors(void)
 {
     unsigned int * sensorvalues;
-    calibrate();
+    // calibrate();
     while(1)
     {
         sensorvalues = readsensors();
@@ -35,7 +75,7 @@ void print_sensors(void)
         printf("%4u, ", *(sensorvalues+2));
         printf("%4u, ", *(sensorvalues+3));
         printf("%4u", *(sensorvalues+4));
-        printf(" | Timer Value = %5u",TMR3_ReadTimer());
+        //printf(" | Timer Value = %5u",TMR3_ReadTimer());
     }
     
 }
