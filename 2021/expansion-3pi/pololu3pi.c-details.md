@@ -64,7 +64,7 @@ void menu(void)
 ## print\_sensors
 
   - This function only used in No Roam mode and is called as a menu item
-  - Calibrates sensors
+  - ~~Calibrates sensors~~
   - Reads sensors and prints values to virtual COM port.
   - ~~prints timer3 value~~
   - possible future changes
