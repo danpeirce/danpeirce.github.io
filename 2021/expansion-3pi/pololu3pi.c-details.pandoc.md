@@ -46,16 +46,16 @@ void menu(void)
 
 * This function only used in **No Roam** mode and is called as a menu item
 * ~~Calibrates sensors~~
-* Reads sensors and prints values to virtual COM port.
+* Reads sensors and prints normalized values for each to virtual COM port.
 * ~~prints timer3 value~~
 * possible future changes
 	* currently prints new values over old. may change so new values go on new line
 	* may change so it prints only one set of values and returns
-* calibrate() has been commented out. It was found that calibrate works more consistantly when 
+* calibrate() has been commented out. It was found that calibrate works more consistently when 
   done in Roam mode with no USB cable. The following steps can be used to get sensor readings:
     * Turn robot on in Roam mode
 	* Pick the robot up after calibration is complete
-	* Move switch to No Roam possition
+	* Move slide switch to No Roam position
 	* Attach USB cable
 	* Open terminal program
 	* Select sensor readings with **Ctrl+s**
@@ -80,12 +80,12 @@ void print_sensors(void)
 }
 ~~~~
 
-## foreward 
+## forward 
 
 * This function only used in **Roam** mode
 
 ~~~~c
-void foreward(unsigned char speed)
+void forward(unsigned char speed)
 {
     while(!UART1_is_tx_ready()) continue;
     UART1_Write(0xC1);
@@ -340,11 +340,15 @@ void send_APSC1299(void)
 
 ## calibrate
 
+* It is assumed that the robot is sitting over a black line.
+* the robot spins to the left and right moving the five sensors over the line.
+* the slave program calculates constants to normalize the readings from the sensors.
+
 ~~~~c 
 void calibrate(void)
 {
     while(!UART1_is_tx_ready()) continue;
-    UART1_Write(0xBA);   // autocalibration command to slave
+    UART1_Write(0xBA);   // auto calibration command to slave
     while(!UART1_is_rx_ready()) continue;
     while(UART1_Read() != 'c')
     {
@@ -358,6 +362,21 @@ void calibrate(void)
 
 ## go_pd
 
+* The slave program uses a proportional - derivative algorithm to follow a simple line. 
+* The position of the line relative to the sensors is given by a number from 0 to 4000.
+    * 0 is on the far left
+	* 2000 in the centre
+	* 4000 on the far right
+* difference in the motor speeds will be set to **(L-2000)×a/b + D×c/d**, where 
+    * L is the position of the line as described above, 
+	* D is the derivative of L.
+	* a, b, c and d are constants
+* If the line disappears the algorithm will see a position of zero and the robot will turn to the right.  
+  Students will want the PIC program to override this behaviour when programming for gaps.  Essentially they need to
+  read the sensors watching for all white stop pd and set the direction of the robot in the PIC program.
+* In a similar way the student program needs to watch for acute turns, sharp turns and end of line and have the
+  PIC program take control.
+  
 ~~~~c 
 void go_pd(unsigned char speed)
 {
@@ -372,11 +391,15 @@ void go_pd(unsigned char speed)
     while(!UART1_is_tx_ready()) continue;
     UART1_Write(3);   // set c = 3
     while(!UART1_is_tx_ready()) continue;
-    UART1_Write(0xBA);   // set d = 2
+    UART1_Write(0xBA);   // This value is arbitrarily large and essentially removes the derivative feedback
+	                     // It must be made smaller if the robot is set to faster speeds or the robot 
+						 // will overshoot the line. When seed set to 100 I set this value to d = 2
 }
 ~~~~
 
 ## stop_pd
+
+* Stop using PD so the PIC can control the robot.
 
 ~~~~c 
 void stop_pd(void)

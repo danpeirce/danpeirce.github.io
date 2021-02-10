@@ -7,73 +7,75 @@
   <meta name="author" content="By Dan Peirce B.Sc." />
   <title>Pololu3pi.c Details</title>
   <style>
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <style>
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="../../pandocbd.css" />
   <!--[if lt IE 9]>
@@ -87,10 +89,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#pololu3pi.c-details">Pololu3pi.c Details</a><ul>
+<li><a href="#pololu3pi.c-details">Pololu3pi.c Details</a>
+<ul>
 <li><a href="#menu">menu</a></li>
 <li><a href="#print_sensors">print_sensors</a></li>
-<li><a href="#foreward">foreward</a></li>
+<li><a href="#forward">forward</a></li>
 <li><a href="#backward">backward</a></li>
 <li><a href="#spinleft">spinleft</a></li>
 <li><a href="#spinright">spinright</a></li>
@@ -121,320 +124,348 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <li>This function is called after initialization of PIC peripherals regardless of <strong>Roam</strong> or <strong>No Roam</strong> mode.</li>
 <li>This function is also called in No Roam mode when from the menu using the <strong>Esc</strong> key.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" title="1"><span class="dt">void</span> menu(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2">{</a>
-<a class="sourceLine" id="cb1-3" title="3">    printf(<span class="st">&quot; </span><span class="sc">\r\n</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-4" title="4">    printf(<span class="st">&quot;</span><span class="sc">\r\n\n\n\n\n\n\n\n</span><span class="st">&quot;</span>);   </a>
-<a class="sourceLine" id="cb1-5" title="5">               <span class="co">// this should clear the terminal screen mostly</span></a>
-<a class="sourceLine" id="cb1-6" title="6">                       <span class="co">// otherwise may display junk from power cycle</span></a>
-<a class="sourceLine" id="cb1-7" title="7">    printf(<span class="st">&quot;</span><span class="sc">\t</span><span class="st">KPU APSC1299 3pi-menu-basic3</span><span class="sc">\n\n\r</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-8" title="8">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">  Menu</span><span class="sc">\n\r</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-9" title="9">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">--------</span><span class="sc">\r\n</span><span class="st">&quot;</span>);  </a>
-<a class="sourceLine" id="cb1-10" title="10">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">@. Pololu Signature?</span><span class="sc">\r\n</span><span class="st">&quot;</span>); </a>
-<a class="sourceLine" id="cb1-11" title="11">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">1. Display mV reading</span><span class="sc">\r\n</span><span class="st">&quot;</span>); <span class="co">// sent to PuTTY only</span></a>
-<a class="sourceLine" id="cb1-12" title="12">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">2. Display mV reading in LCD</span><span class="sc">\r\n</span><span class="st">&quot;</span>);  <span class="co">// also send to LCD</span></a>
-<a class="sourceLine" id="cb1-13" title="13">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">c. Clear LCD</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-14" title="14">    printf(<span class="st">&quot;</span><span class="sc">\t</span><span class="st">   ctrl+s. Print Sensor Values</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-15" title="15">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">-. Send hyphen to LCD</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-16" title="16">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">~. LCD message APSC1299</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-17" title="17">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">return. LCD go to start of line two</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-18" title="18">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">&lt;, robot spin left</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-19" title="19">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">&gt;, robot spin right</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-20" title="20">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">|, robot stop</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-21" title="21">    printf(<span class="st">&quot;</span><span class="sc">\t</span><span class="st">     Esc, Print Menu</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-22" title="22">    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">--------</span><span class="sc">\r\n\n</span><span class="st">&quot;</span>);</a>
-<a class="sourceLine" id="cb1-23" title="23">}</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="dt">void</span> menu(<span class="dt">void</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>{</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    printf(<span class="st">&quot; </span><span class="sc">\r\n</span><span class="st">&quot;</span>);</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\r\n\n\n\n\n\n\n\n</span><span class="st">&quot;</span>);   </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>               <span class="co">// this should clear the terminal screen mostly</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>                       <span class="co">// otherwise may display junk from power cycle</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t</span><span class="st">KPU APSC1299 3pi-menu-basic3</span><span class="sc">\n\n\r</span><span class="st">&quot;</span>);</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">  Menu</span><span class="sc">\n\r</span><span class="st">&quot;</span>);</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">--------</span><span class="sc">\r\n</span><span class="st">&quot;</span>);  </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">@. Pololu Signature?</span><span class="sc">\r\n</span><span class="st">&quot;</span>); </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">1. Display mV reading</span><span class="sc">\r\n</span><span class="st">&quot;</span>); <span class="co">// sent to PuTTY only</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">2. Display mV reading in LCD</span><span class="sc">\r\n</span><span class="st">&quot;</span>);  <span class="co">// also send to LCD</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">c. Clear LCD</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t</span><span class="st">   ctrl+s. Print Sensor Values</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">-. Send hyphen to LCD</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">~. LCD message APSC1299</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">return. LCD go to start of line two</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">&lt;, robot spin left</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">&gt;, robot spin right</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">|, robot stop</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t</span><span class="st">     Esc, Print Menu</span><span class="sc">\r\n</span><span class="st">&quot;</span>);</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\t\t</span><span class="st">--------</span><span class="sc">\r\n\n</span><span class="st">&quot;</span>);</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="print_sensors">print_sensors</h2>
 <ul>
 <li>This function only used in <strong>No Roam</strong> mode and is called as a menu item</li>
 <li><del>Calibrates sensors</del></li>
-<li>Reads sensors and prints values to virtual COM port.</li>
+<li>Reads sensors and prints normalized values for each to virtual COM port.</li>
 <li><del>prints timer3 value</del></li>
 <li>possible future changes
 <ul>
 <li>currently prints new values over old. may change so new values go on new line</li>
 <li>may change so it prints only one set of values and returns</li>
 </ul></li>
-<li>calibrate() has been commented out. It was found that calibrate works more consistantly when done in Roam mode with no USB cable. The following steps can be used to get sensor readings:
+<li>calibrate() has been commented out. It was found that calibrate works more consistently when done in Roam mode with no USB cable. The following steps can be used to get sensor readings:
 <ul>
 <li>Turn robot on in Roam mode</li>
 <li>Pick the robot up after calibration is complete</li>
-<li>Move switch to No Roam possition</li>
+<li>Move slide switch to No Roam position</li>
 <li>Attach USB cable</li>
 <li>Open terminal program</li>
 <li>Select sensor readings with <strong>Ctrl+s</strong></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" title="1"><span class="dt">void</span> print_sensors(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2">{</a>
-<a class="sourceLine" id="cb2-3" title="3">    <span class="dt">unsigned</span> <span class="dt">int</span> * sensorvalues;</a>
-<a class="sourceLine" id="cb2-4" title="4">    <span class="co">// calibrate();</span></a>
-<a class="sourceLine" id="cb2-5" title="5">    <span class="cf">while</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb2-6" title="6">    {</a>
-<a class="sourceLine" id="cb2-7" title="7">        sensorvalues = readsensors();</a>
-<a class="sourceLine" id="cb2-8" title="8">        <span class="co">// __delay_ms(80);</span></a>
-<a class="sourceLine" id="cb2-9" title="9">        printf(<span class="st">&quot;</span><span class="sc">\r</span><span class="st">sensor values = %4u, &quot;</span>, *sensorvalues);</a>
-<a class="sourceLine" id="cb2-10" title="10">        printf(<span class="st">&quot;%4u, &quot;</span>, *(sensorvalues+<span class="dv">1</span>));</a>
-<a class="sourceLine" id="cb2-11" title="11">        printf(<span class="st">&quot;%4u, &quot;</span>, *(sensorvalues+<span class="dv">2</span>));</a>
-<a class="sourceLine" id="cb2-12" title="12">        printf(<span class="st">&quot;%4u, &quot;</span>, *(sensorvalues+<span class="dv">3</span>));</a>
-<a class="sourceLine" id="cb2-13" title="13">        printf(<span class="st">&quot;%4u&quot;</span>, *(sensorvalues+<span class="dv">4</span>));</a>
-<a class="sourceLine" id="cb2-14" title="14">        <span class="co">//printf(&quot; | Timer Value = %5u&quot;,TMR3_ReadTimer());</span></a>
-<a class="sourceLine" id="cb2-15" title="15">    }</a>
-<a class="sourceLine" id="cb2-16" title="16">    </a>
-<a class="sourceLine" id="cb2-17" title="17">}</a></code></pre></div>
-<h2 id="foreward">foreward</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="dt">void</span> print_sensors(<span class="dt">void</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>{</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="dt">unsigned</span> <span class="dt">int</span> * sensorvalues;</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    <span class="co">// calibrate();</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    <span class="cf">while</span>(<span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>    {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>        sensorvalues = readsensors();</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>        <span class="co">// __delay_ms(80);</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>        printf(<span class="st">&quot;</span><span class="sc">\r</span><span class="st">sensor values = %4u, &quot;</span>, *sensorvalues);</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>        printf(<span class="st">&quot;%4u, &quot;</span>, *(sensorvalues+<span class="dv">1</span>));</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>        printf(<span class="st">&quot;%4u, &quot;</span>, *(sensorvalues+<span class="dv">2</span>));</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>        printf(<span class="st">&quot;%4u, &quot;</span>, *(sensorvalues+<span class="dv">3</span>));</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>        printf(<span class="st">&quot;%4u&quot;</span>, *(sensorvalues+<span class="dv">4</span>));</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>        <span class="co">//printf(&quot; | Timer Value = %5u&quot;,TMR3_ReadTimer());</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>    }</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>    </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>}</span></code></pre></div>
+<h2 id="forward">forward</h2>
 <ul>
 <li>This function only used in <strong>Roam</strong> mode</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" title="1"><span class="dt">void</span> foreward(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</a>
-<a class="sourceLine" id="cb3-2" title="2">{</a>
-<a class="sourceLine" id="cb3-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb3-4" title="4">    UART1_Write(<span class="bn">0xC1</span>);</a>
-<a class="sourceLine" id="cb3-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb3-6" title="6">    UART1_Write(speed);</a>
-<a class="sourceLine" id="cb3-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb3-8" title="8">    UART1_Write(<span class="bn">0xC5</span>);</a>
-<a class="sourceLine" id="cb3-9" title="9">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb3-10" title="10">    UART1_Write(speed);</a>
-<a class="sourceLine" id="cb3-11" title="11">}</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="dt">void</span> forward(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>{</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xC1</span>);</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>    UART1_Write(speed);</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xC5</span>);</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>    UART1_Write(speed);</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="backward">backward</h2>
 <ul>
 <li>This function only used in <strong>Roam</strong> mode</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb4-1" title="1"><span class="dt">void</span> backward(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</a>
-<a class="sourceLine" id="cb4-2" title="2">{</a>
-<a class="sourceLine" id="cb4-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb4-4" title="4">    UART1_Write(<span class="bn">0xC2</span>);</a>
-<a class="sourceLine" id="cb4-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb4-6" title="6">    UART1_Write(speed);</a>
-<a class="sourceLine" id="cb4-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb4-8" title="8">    UART1_Write(<span class="bn">0xC6</span>);</a>
-<a class="sourceLine" id="cb4-9" title="9">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb4-10" title="10">    UART1_Write(speed);</a>
-<a class="sourceLine" id="cb4-11" title="11">}</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="dt">void</span> backward(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>{</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xC2</span>);</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>    UART1_Write(speed);</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xC6</span>);</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>    UART1_Write(speed);</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="spinleft">spinleft</h2>
 <ul>
 <li>This function only used in <strong>Roam</strong> mode</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb5-1" title="1"><span class="dt">void</span> spinleft(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</a>
-<a class="sourceLine" id="cb5-2" title="2">{</a>
-<a class="sourceLine" id="cb5-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb5-4" title="4">    UART1_Write(<span class="bn">0xC2</span>);      <span class="co">// left motor backwards</span></a>
-<a class="sourceLine" id="cb5-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb5-6" title="6">    UART1_Write(speed);</a>
-<a class="sourceLine" id="cb5-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb5-8" title="8">    UART1_Write(<span class="bn">0xC5</span>);     <span class="co">// right motor forward</span></a>
-<a class="sourceLine" id="cb5-9" title="9">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb5-10" title="10">    UART1_Write(speed);</a>
-<a class="sourceLine" id="cb5-11" title="11">}</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="dt">void</span> spinleft(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>{</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xC2</span>);      <span class="co">// left motor backwards</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>    UART1_Write(speed);</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xC5</span>);     <span class="co">// right motor forward</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>    UART1_Write(speed);</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="spinright">spinright</h2>
 <ul>
 <li>This function only used in <strong>Roam</strong> mode</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb6-1" title="1"><span class="dt">void</span> spinright(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</a>
-<a class="sourceLine" id="cb6-2" title="2">{</a>
-<a class="sourceLine" id="cb6-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb6-4" title="4">    UART1_Write(<span class="bn">0xC1</span>);      <span class="co">// left motor forward</span></a>
-<a class="sourceLine" id="cb6-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb6-6" title="6">    UART1_Write(speed);</a>
-<a class="sourceLine" id="cb6-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb6-8" title="8">    UART1_Write(<span class="bn">0xC6</span>);     <span class="co">// right motor backward</span></a>
-<a class="sourceLine" id="cb6-9" title="9">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb6-10" title="10">    UART1_Write(speed);</a>
-<a class="sourceLine" id="cb6-11" title="11">}</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="dt">void</span> spinright(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>{</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xC1</span>);      <span class="co">// left motor forward</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>    UART1_Write(speed);</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xC6</span>);     <span class="co">// right motor backward</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a>    UART1_Write(speed);</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="readbatteryvoltage">readbatteryvoltage</h2>
 <ul>
 <li>This function used after menu displayed and as a menu item.</li>
 <li>Sends battery voltage to virtual COM port and returns value</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb7-1" title="1"><span class="dt">unsigned</span> <span class="dt">int</span> readbatteryvoltage(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb7-2" title="2">{</a>
-<a class="sourceLine" id="cb7-3" title="3">    <span class="dt">unsigned</span> <span class="dt">char</span> lbyte, ubyte;</a>
-<a class="sourceLine" id="cb7-4" title="4">    </a>
-<a class="sourceLine" id="cb7-5" title="5">    printf(<span class="st">&quot;</span><span class="sc">\r\n\t</span><span class="st">Battery Voltage = &quot;</span>);</a>
-<a class="sourceLine" id="cb7-6" title="6">    </a>
-<a class="sourceLine" id="cb7-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb7-8" title="8">    UART1_Write(<span class="bn">0xB1</span>);</a>
-<a class="sourceLine" id="cb7-9" title="9">    <span class="cf">while</span> (!UART1_is_rx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb7-10" title="10">    lbyte = UART1_Read();</a>
-<a class="sourceLine" id="cb7-11" title="11">    <span class="cf">while</span> (!UART1_is_rx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb7-12" title="12">    ubyte = UART1_Read();</a>
-<a class="sourceLine" id="cb7-13" title="13">    printf(<span class="st">&quot;%d mV</span><span class="sc">\r\n</span><span class="st">&quot;</span>, ubyte*<span class="dv">256</span> + lbyte);</a>
-<a class="sourceLine" id="cb7-14" title="14">    <span class="cf">return</span> (<span class="dt">unsigned</span> <span class="dt">int</span>)(ubyte*<span class="dv">256</span> + lbyte);</a>
-<a class="sourceLine" id="cb7-15" title="15">}</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">int</span> readbatteryvoltage(<span class="dt">void</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>{</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>    <span class="dt">unsigned</span> <span class="dt">char</span> lbyte, ubyte;</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a>    </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\r\n\t</span><span class="st">Battery Voltage = &quot;</span>);</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a>    </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xB1</span>);</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>    <span class="cf">while</span> (!UART1_is_rx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>    lbyte = UART1_Read();</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a>    <span class="cf">while</span> (!UART1_is_rx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a>    ubyte = UART1_Read();</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a>    printf(<span class="st">&quot;%d mV</span><span class="sc">\r\n</span><span class="st">&quot;</span>, ubyte*<span class="dv">256</span> + lbyte);</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a>    <span class="cf">return</span> (<span class="dt">unsigned</span> <span class="dt">int</span>)(ubyte*<span class="dv">256</span> + lbyte);</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="readsensors">readsensors</h2>
 <ul>
 <li>Returns pointer to array of sensor values.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb8-1" title="1"><span class="dt">unsigned</span> <span class="dt">int</span>* readsensors(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb8-2" title="2">{</a>
-<a class="sourceLine" id="cb8-3" title="3">    <span class="dt">unsigned</span> <span class="dt">char</span> lbyte[<span class="dv">5</span>], ubyte[<span class="dv">5</span>], i;</a>
-<a class="sourceLine" id="cb8-4" title="4">    <span class="dt">static</span> <span class="dt">unsigned</span> <span class="dt">int</span> values[<span class="dv">5</span>];</a>
-<a class="sourceLine" id="cb8-5" title="5">    </a>
-<a class="sourceLine" id="cb8-6" title="6">    <span class="co">// printf(&quot;\r\n\tSensor Readings =  &quot;);</span></a>
-<a class="sourceLine" id="cb8-7" title="7">    </a>
-<a class="sourceLine" id="cb8-8" title="8">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb8-9" title="9">    test2_PORT = <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb8-10" title="10">    UART1_Write(<span class="bn">0x87</span>);</a>
-<a class="sourceLine" id="cb8-11" title="11">    <span class="cf">for</span> (i=<span class="dv">0</span>;i&lt;<span class="dv">5</span>;i++)</a>
-<a class="sourceLine" id="cb8-12" title="12">    {</a>
-<a class="sourceLine" id="cb8-13" title="13">        <span class="cf">while</span> (!UART1_is_rx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb8-14" title="14">        lbyte[i] = UART1_Read();</a>
-<a class="sourceLine" id="cb8-15" title="15">        <span class="cf">while</span> (!UART1_is_rx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb8-16" title="16">        ubyte[i] = UART1_Read();</a>
-<a class="sourceLine" id="cb8-17" title="17">        values[i] = ubyte[i]*<span class="dv">256</span> + lbyte[i];</a>
-<a class="sourceLine" id="cb8-18" title="18">    }</a>
-<a class="sourceLine" id="cb8-19" title="19">    test2_PORT = <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb8-20" title="20"></a>
-<a class="sourceLine" id="cb8-21" title="21">    <span class="cf">return</span> values;</a>
-<a class="sourceLine" id="cb8-22" title="22">}</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="dt">unsigned</span> <span class="dt">int</span>* readsensors(<span class="dt">void</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>{</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>    <span class="dt">unsigned</span> <span class="dt">char</span> lbyte[<span class="dv">5</span>], ubyte[<span class="dv">5</span>], i;</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>    <span class="dt">static</span> <span class="dt">unsigned</span> <span class="dt">int</span> values[<span class="dv">5</span>];</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>    </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>    <span class="co">// printf(&quot;\r\n\tSensor Readings =  &quot;);</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a>    </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a>    test2_PORT = <span class="dv">1</span>;</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a>    UART1_Write(<span class="bn">0x87</span>);</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a>    <span class="cf">for</span> (i=<span class="dv">0</span>;i&lt;<span class="dv">5</span>;i++)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a>    {</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true"></a>        <span class="cf">while</span> (!UART1_is_rx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true"></a>        lbyte[i] = UART1_Read();</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true"></a>        <span class="cf">while</span> (!UART1_is_rx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true"></a>        ubyte[i] = UART1_Read();</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true"></a>        values[i] = ubyte[i]*<span class="dv">256</span> + lbyte[i];</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true"></a>    }</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true"></a>    test2_PORT = <span class="dv">0</span>;</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true"></a>    <span class="cf">return</span> values;</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="sendbatteryvoltage">sendbatteryvoltage</h2>
 <ul>
 <li>Calls readbatteryvoltage, prints returned values to LCD.</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb9-1" title="1"><span class="co">// sends battery voltage to LCD</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="dt">void</span> sendbatteryvoltage(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb9-3" title="3">{</a>
-<a class="sourceLine" id="cb9-4" title="4">    <span class="dt">unsigned</span> <span class="dt">int</span> voltage;</a>
-<a class="sourceLine" id="cb9-5" title="5">    <span class="dt">char</span> bat_volt[<span class="dv">9</span>];</a>
-<a class="sourceLine" id="cb9-6" title="6">    <span class="dt">unsigned</span> <span class="dt">char</span> msg_length, i=<span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb9-7" title="7">    </a>
-<a class="sourceLine" id="cb9-8" title="8">    voltage = readbatteryvoltage();</a>
-<a class="sourceLine" id="cb9-9" title="9">    msg_length = sprintf(bat_volt, <span class="st">&quot;%u mV&quot;</span>, voltage);</a>
-<a class="sourceLine" id="cb9-10" title="10">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb9-11" title="11">    UART1_Write(<span class="bn">0xB8</span>);   <span class="co">// print LCD command to slave</span></a>
-<a class="sourceLine" id="cb9-12" title="12">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb9-13" title="13">    UART1_Write(msg_length);     <span class="co">// send eight characters</span></a>
-<a class="sourceLine" id="cb9-14" title="14">    <span class="cf">while</span> (i&lt;msg_length)</a>
-<a class="sourceLine" id="cb9-15" title="15">    {</a>
-<a class="sourceLine" id="cb9-16" title="16">        <span class="cf">if</span>(UART1_is_tx_ready())</a>
-<a class="sourceLine" id="cb9-17" title="17">        {</a>
-<a class="sourceLine" id="cb9-18" title="18">            UART1_Write(bat_volt[i]);</a>
-<a class="sourceLine" id="cb9-19" title="19">            i++;</a>
-<a class="sourceLine" id="cb9-20" title="20">        }</a>
-<a class="sourceLine" id="cb9-21" title="21">    }</a>
-<a class="sourceLine" id="cb9-22" title="22">    </a>
-<a class="sourceLine" id="cb9-23" title="23">}</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="co">// sends battery voltage to LCD</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="dt">void</span> sendbatteryvoltage(<span class="dt">void</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>{</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a>    <span class="dt">unsigned</span> <span class="dt">int</span> voltage;</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>    <span class="dt">char</span> bat_volt[<span class="dv">9</span>];</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>    <span class="dt">unsigned</span> <span class="dt">char</span> msg_length, i=<span class="dv">0</span>;</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a>    </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a>    voltage = readbatteryvoltage();</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a>    msg_length = sprintf(bat_volt, <span class="st">&quot;%u mV&quot;</span>, voltage);</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xB8</span>);   <span class="co">// print LCD command to slave</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true"></a>    UART1_Write(msg_length);     <span class="co">// send eight characters</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true"></a>    <span class="cf">while</span> (i&lt;msg_length)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true"></a>    {</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true"></a>        <span class="cf">if</span>(UART1_is_tx_ready())</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true"></a>        {</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true"></a>            UART1_Write(bat_volt[i]);</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true"></a>            i++;</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true"></a>        }</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true"></a>    }</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true"></a>    </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="sendchar">sendchar</h2>
 <ul>
 <li>Sends a single character to the LCD.</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb10-1" title="1"><span class="dt">void</span> sendchar(<span class="dt">char</span> a_char)</a>
-<a class="sourceLine" id="cb10-2" title="2">{</a>
-<a class="sourceLine" id="cb10-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb10-4" title="4">    UART1_Write(<span class="bn">0xB8</span>);   <span class="co">// print LCD command to slave</span></a>
-<a class="sourceLine" id="cb10-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb10-6" title="6">    UART1_Write(<span class="dv">1</span>);     <span class="co">// send one character</span></a>
-<a class="sourceLine" id="cb10-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb10-8" title="8">    UART1_Write(a_char);     <span class="co">// send one character</span></a>
-<a class="sourceLine" id="cb10-9" title="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="dt">void</span> sendchar(<span class="dt">char</span> a_char)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>{</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xB8</span>);   <span class="co">// print LCD command to slave</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a>    UART1_Write(<span class="dv">1</span>);     <span class="co">// send one character</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a>    UART1_Write(a_char);     <span class="co">// send one character</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="clearlcd">clearLCD</h2>
 <ul>
 <li>Clears the LCD and moves cursor to row zero column zero</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb11-1" title="1"><span class="dt">void</span> clearLCD(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb11-2" title="2">{</a>
-<a class="sourceLine" id="cb11-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb11-4" title="4">    UART1_Write(<span class="bn">0xB7</span>);   <span class="co">// clear LCD</span></a>
-<a class="sourceLine" id="cb11-5" title="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="dt">void</span> clearLCD(<span class="dt">void</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a>{</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xB7</span>);   <span class="co">// clear LCD</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="lcd_print">LCD_print</h2>
 <ul>
 <li>Prints a string to the LCD.</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb12-1" title="1"><span class="dt">void</span> LCD_print(<span class="dt">char</span> *str, <span class="dt">char</span> length)</a>
-<a class="sourceLine" id="cb12-2" title="2">{</a>
-<a class="sourceLine" id="cb12-3" title="3">    <span class="dt">char</span> i=<span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb12-4" title="4">    </a>
-<a class="sourceLine" id="cb12-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb12-6" title="6">    UART1_Write(<span class="bn">0xB8</span>);   <span class="co">// print LCD command to slave</span></a>
-<a class="sourceLine" id="cb12-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb12-8" title="8">    UART1_Write(length);     <span class="co">// send eight characters</span></a>
-<a class="sourceLine" id="cb12-9" title="9">    <span class="cf">while</span> (i&lt;length)</a>
-<a class="sourceLine" id="cb12-10" title="10">    {</a>
-<a class="sourceLine" id="cb12-11" title="11">        <span class="cf">if</span>(UART1_is_tx_ready())</a>
-<a class="sourceLine" id="cb12-12" title="12">        {</a>
-<a class="sourceLine" id="cb12-13" title="13">            UART1_Write(str[i]);</a>
-<a class="sourceLine" id="cb12-14" title="14">            i++;</a>
-<a class="sourceLine" id="cb12-15" title="15">        }</a>
-<a class="sourceLine" id="cb12-16" title="16">    }</a>
-<a class="sourceLine" id="cb12-17" title="17">}</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="dt">void</span> LCD_print(<span class="dt">char</span> *str, <span class="dt">char</span> length)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>{</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>    <span class="dt">char</span> i=<span class="dv">0</span>;</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a>    </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xB8</span>);   <span class="co">// print LCD command to slave</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a>    UART1_Write(length);     <span class="co">// send eight characters</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a>    <span class="cf">while</span> (i&lt;length)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a>    {</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a>        <span class="cf">if</span>(UART1_is_tx_ready())</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a>        {</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true"></a>            UART1_Write(str[i]);</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true"></a>            i++;</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true"></a>        }</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true"></a>    }</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="lcd_line2">LCD_line2</h2>
 <ul>
 <li>Moves the LCD cursor to the beginning of the second row (row 1).</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb13-1" title="1"><span class="dt">void</span> LCD_line2(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb13-2" title="2">{</a>
-<a class="sourceLine" id="cb13-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb13-4" title="4">    UART1_Write(<span class="bn">0xB9</span>);   <span class="co">// goto LCD position</span></a>
-<a class="sourceLine" id="cb13-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb13-6" title="6">    UART1_Write(<span class="bn">0x00</span>);   <span class="co">// column 0</span></a>
-<a class="sourceLine" id="cb13-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb13-8" title="8">    UART1_Write(<span class="bn">0x01</span>);   <span class="co">// row 1</span></a>
-<a class="sourceLine" id="cb13-9" title="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="dt">void</span> LCD_line2(<span class="dt">void</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>{</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xB9</span>);   <span class="co">// goto LCD position</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>    UART1_Write(<span class="bn">0x00</span>);   <span class="co">// column 0</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a>    UART1_Write(<span class="bn">0x01</span>);   <span class="co">// row 1</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="display_signature">display_signature</h2>
 <ul>
 <li>Obtains a version signature form the slave program and prints it in the LCD.</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb14-1" title="1"><span class="dt">void</span> display_signature(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb14-2" title="2">{</a>
-<a class="sourceLine" id="cb14-3" title="3">    <span class="dt">char</span> signature[<span class="dv">7</span>], i = <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb14-4" title="4">    <span class="dt">int</span> sig_length = <span class="dv">6</span>;</a>
-<a class="sourceLine" id="cb14-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb14-6" title="6">    UART1_Write(<span class="bn">0x81</span>);</a>
-<a class="sourceLine" id="cb14-7" title="7">    <span class="cf">while</span> (i &lt; sig_length)</a>
-<a class="sourceLine" id="cb14-8" title="8">    {</a>
-<a class="sourceLine" id="cb14-9" title="9">        <span class="cf">if</span> (UART1_is_rx_ready())</a>
-<a class="sourceLine" id="cb14-10" title="10">        {</a>
-<a class="sourceLine" id="cb14-11" title="11">            signature[i] = UART1_Read();</a>
-<a class="sourceLine" id="cb14-12" title="12">            i++;</a>
-<a class="sourceLine" id="cb14-13" title="13">        }</a>
-<a class="sourceLine" id="cb14-14" title="14">    }</a>
-<a class="sourceLine" id="cb14-15" title="15">    signature[sig_length] = &#39;\<span class="dv">0</span><span class="er">&#39;</span>;  <span class="co">// terminate string</span></a>
-<a class="sourceLine" id="cb14-16" title="16">    printf(<span class="st">&quot;</span><span class="sc">\r\n\t</span><span class="st">The Signature from 3Pi is: %s</span><span class="sc">\r\n</span><span class="st">&quot;</span>, signature);</a>
-<a class="sourceLine" id="cb14-17" title="17">    LCD_print(signature, sig_length);</a>
-<a class="sourceLine" id="cb14-18" title="18">}</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="dt">void</span> display_signature(<span class="dt">void</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>{</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>    <span class="dt">char</span> signature[<span class="dv">7</span>], i = <span class="dv">0</span>;</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a>    <span class="dt">int</span> sig_length = <span class="dv">6</span>;</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a>    UART1_Write(<span class="bn">0x81</span>);</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true"></a>    <span class="cf">while</span> (i &lt; sig_length)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true"></a>    {</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true"></a>        <span class="cf">if</span> (UART1_is_rx_ready())</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true"></a>        {</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true"></a>            signature[i] = UART1_Read();</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true"></a>            i++;</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true"></a>        }</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true"></a>    }</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true"></a>    signature[sig_length] = <span class="ch">&#39;\0&#39;</span>;  <span class="co">// terminate string</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true"></a>    printf(<span class="st">&quot;</span><span class="sc">\r\n\t</span><span class="st">The Signature from 3Pi is: %s</span><span class="sc">\r\n</span><span class="st">&quot;</span>, signature);</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true"></a>    LCD_print(signature, sig_length);</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="send_apsc1299">send_APSC1299</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb15-1" title="1"><span class="dt">void</span> send_APSC1299(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb15-2" title="2">{</a>
-<a class="sourceLine" id="cb15-3" title="3">    <span class="dt">char</span>  msg_length=<span class="dv">8</span>; <span class="co">// to send 8 characters</span></a>
-<a class="sourceLine" id="cb15-4" title="4">    <span class="dt">char</span> msg[] = <span class="st">&quot;APSC1299&quot;</span>;</a>
-<a class="sourceLine" id="cb15-5" title="5">    LCD_print(msg, msg_length); </a>
-<a class="sourceLine" id="cb15-6" title="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="dt">void</span> send_APSC1299(<span class="dt">void</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a>{</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a>    <span class="dt">char</span>  msg_length=<span class="dv">8</span>; <span class="co">// to send 8 characters</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a>    <span class="dt">char</span> msg[] = <span class="st">&quot;APSC1299&quot;</span>;</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a>    LCD_print(msg, msg_length); </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="calibrate">calibrate</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb16-1" title="1"><span class="dt">void</span> calibrate(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb16-2" title="2">{</a>
-<a class="sourceLine" id="cb16-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb16-4" title="4">    UART1_Write(<span class="bn">0xBA</span>);   <span class="co">// autocalibration command to slave</span></a>
-<a class="sourceLine" id="cb16-5" title="5">    <span class="cf">while</span>(!UART1_is_rx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb16-6" title="6">    <span class="cf">while</span>(UART1_Read() != <span class="ch">&#39;c&#39;</span>)</a>
-<a class="sourceLine" id="cb16-7" title="7">    {</a>
-<a class="sourceLine" id="cb16-8" title="8">        <span class="cf">while</span>(!UART1_is_rx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb16-9" title="9">    }</a>
-<a class="sourceLine" id="cb16-10" title="10">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb16-11" title="11">    UART1_Write(<span class="bn">0xB7</span>);   <span class="co">// clear LCD</span></a>
-<a class="sourceLine" id="cb16-12" title="12">    LCD_print(<span class="st">&quot;Cal Done&quot;</span>, <span class="dv">8</span>); <span class="co">// LCD msg</span></a>
-<a class="sourceLine" id="cb16-13" title="13">}</a></code></pre></div>
+<ul>
+<li>It is assumed that the robot is sitting over a black line.</li>
+<li>the robot spins to the left and right moving the five sensors over the line.</li>
+<li>the slave program calculates constants to normalize the readings from the sensors.</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="dt">void</span> calibrate(<span class="dt">void</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a>{</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xBA</span>);   <span class="co">// auto calibration command to slave</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_rx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a>    <span class="cf">while</span>(UART1_Read() != <span class="ch">&#39;c&#39;</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true"></a>    {</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true"></a>        <span class="cf">while</span>(!UART1_is_rx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true"></a>    }</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xB7</span>);   <span class="co">// clear LCD</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true"></a>    LCD_print(<span class="st">&quot;Cal Done&quot;</span>, <span class="dv">8</span>); <span class="co">// LCD msg</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="go_pd">go_pd</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb17-1" title="1"><span class="dt">void</span> go_pd(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</a>
-<a class="sourceLine" id="cb17-2" title="2">{</a>
-<a class="sourceLine" id="cb17-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb17-4" title="4">    UART1_Write(<span class="bn">0xBB</span>);   <span class="co">// start PD control</span></a>
-<a class="sourceLine" id="cb17-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb17-6" title="6">    UART1_Write(speed);   <span class="co">// set speed </span></a>
-<a class="sourceLine" id="cb17-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb17-8" title="8">    UART1_Write(<span class="dv">1</span>);   <span class="co">// set a = 1</span></a>
-<a class="sourceLine" id="cb17-9" title="9">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb17-10" title="10">    UART1_Write(<span class="dv">20</span>);   <span class="co">// set b = 20</span></a>
-<a class="sourceLine" id="cb17-11" title="11">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb17-12" title="12">    UART1_Write(<span class="dv">3</span>);   <span class="co">// set c = 3</span></a>
-<a class="sourceLine" id="cb17-13" title="13">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb17-14" title="14">    UART1_Write(<span class="bn">0xBA</span>);   <span class="co">// set d = 2</span></a>
-<a class="sourceLine" id="cb17-15" title="15">}</a></code></pre></div>
+<ul>
+<li>The slave program uses a proportional - derivative algorithm to follow a simple line.</li>
+<li>The position of the line relative to the sensors is given by a number from 0 to 4000.
+<ul>
+<li>0 is on the far left</li>
+<li>2000 in the centre</li>
+<li>4000 on the far right</li>
+</ul></li>
+<li>difference in the motor speeds will be set to <strong>(L-2000)×a/b + D×c/d</strong>, where
+<ul>
+<li>L is the position of the line as described above,</li>
+<li>D is the derivative of L.</li>
+<li>a, b, c and d are constants</li>
+</ul></li>
+<li>If the line disappears the algorithm will see a position of zero and the robot will turn to the right.<br />
+Students will want the PIC program to override this behaviour when programming for gaps. Essentially they need to read the sensors watching for all white stop pd and set the direction of the robot in the PIC program.</li>
+<li>In a similar way the student program needs to watch for acute turns, sharp turns and end of line and have the PIC program take control.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a><span class="dt">void</span> go_pd(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a>{</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xBB</span>);   <span class="co">// start PD control</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true"></a>    UART1_Write(speed);   <span class="co">// set speed </span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true"></a>    UART1_Write(<span class="dv">1</span>);   <span class="co">// set a = 1</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true"></a>    UART1_Write(<span class="dv">20</span>);   <span class="co">// set b = 20</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true"></a>    UART1_Write(<span class="dv">3</span>);   <span class="co">// set c = 3</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xBA</span>);   <span class="co">// This value is arbitrarily large and essentially removes the derivative feedback</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true"></a>                         <span class="co">// It must be made smaller if the robot is set to faster speeds or the robot </span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true"></a>                         <span class="co">// will overshoot the line. When seed set to 100 I set this value to d = 2</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true"></a>}</span></code></pre></div>
 <h2 id="stop_pd">stop_pd</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb18-1" title="1"><span class="dt">void</span> stop_pd(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb18-2" title="2">{</a>
-<a class="sourceLine" id="cb18-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb18-4" title="4">    UART1_Write(<span class="bn">0xBC</span>);   <span class="co">// stop PD control</span></a>
-<a class="sourceLine" id="cb18-5" title="5">}</a></code></pre></div>
+<ul>
+<li>Stop using PD so the PIC can control the robot.</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="dt">void</span> stop_pd(<span class="dt">void</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a>{</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a>    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true"></a>    UART1_Write(<span class="bn">0xBC</span>);   <span class="co">// stop PD control</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a>}</span></code></pre></div>
 </body>
 </html>
