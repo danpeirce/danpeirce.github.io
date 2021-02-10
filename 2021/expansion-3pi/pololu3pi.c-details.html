@@ -102,7 +102,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#lcd_print">LCD_print</a></li>
 <li><a href="#lcd_line2">LCD_line2</a></li>
 <li><a href="#display_signature">display_signature</a></li>
-<li><a href="#send_hyphen">send_hyphen</a></li>
 <li><a href="#send_apsc1299">send_APSC1299</a></li>
 <li><a href="#calibrate">calibrate</a></li>
 <li><a href="#go_pd">go_pd</a></li>
@@ -119,8 +118,8 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <h1 id="pololu3pi.c-details">Pololu3pi.c Details</h1>
 <h2 id="menu">menu</h2>
 <ul>
-<li>This function is called after initialization of PIC peripherals.</li>
-<li>It can also be called from the menu using the <strong>Esc</strong> key.</li>
+<li>This function is called after initialization of PIC peripherals regardless of <strong>Roam</strong> or <strong>No Roam</strong> mode.</li>
+<li>This function is also called in No Roam mode when from the menu using the <strong>Esc</strong> key.</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" title="1"><span class="dt">void</span> menu(<span class="dt">void</span>)</a>
 <a class="sourceLine" id="cb1-2" title="2">{</a>
@@ -147,7 +146,7 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <a class="sourceLine" id="cb1-23" title="23">}</a></code></pre></div>
 <h2 id="print_sensors">print_sensors</h2>
 <ul>
-<li>This function only used in No Roam mode and is called as a menu item</li>
+<li>This function only used in <strong>No Roam</strong> mode and is called as a menu item</li>
 <li><del>Calibrates sensors</del></li>
 <li>Reads sensors and prints values to virtual COM port.</li>
 <li><del>prints timer3 value</del></li>
@@ -185,7 +184,7 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <a class="sourceLine" id="cb2-17" title="17">}</a></code></pre></div>
 <h2 id="foreward">foreward</h2>
 <ul>
-<li>This function only used in Roam mode</li>
+<li>This function only used in <strong>Roam</strong> mode</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" title="1"><span class="dt">void</span> foreward(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</a>
 <a class="sourceLine" id="cb3-2" title="2">{</a>
@@ -200,7 +199,7 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <a class="sourceLine" id="cb3-11" title="11">}</a></code></pre></div>
 <h2 id="backward">backward</h2>
 <ul>
-<li>This function only used in Roam mode</li>
+<li>This function only used in <strong>Roam</strong> mode</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb4-1" title="1"><span class="dt">void</span> backward(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</a>
 <a class="sourceLine" id="cb4-2" title="2">{</a>
@@ -215,7 +214,7 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <a class="sourceLine" id="cb4-11" title="11">}</a></code></pre></div>
 <h2 id="spinleft">spinleft</h2>
 <ul>
-<li>This function only used in Roam mode</li>
+<li>This function only used in <strong>Roam</strong> mode</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb5-1" title="1"><span class="dt">void</span> spinleft(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</a>
 <a class="sourceLine" id="cb5-2" title="2">{</a>
@@ -230,7 +229,7 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <a class="sourceLine" id="cb5-11" title="11">}</a></code></pre></div>
 <h2 id="spinright">spinright</h2>
 <ul>
-<li>This function only used in Roam mode</li>
+<li>This function only used in <strong>Roam</strong> mode</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb6-1" title="1"><span class="dt">void</span> spinright(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</a>
 <a class="sourceLine" id="cb6-2" title="2">{</a>
@@ -330,12 +329,18 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <a class="sourceLine" id="cb10-8" title="8">    UART1_Write(a_char);     <span class="co">// send one character</span></a>
 <a class="sourceLine" id="cb10-9" title="9">}</a></code></pre></div>
 <h2 id="clearlcd">clearLCD</h2>
+<ul>
+<li>Clears the LCD and moves cursor to row zero column zero</li>
+</ul>
 <div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb11-1" title="1"><span class="dt">void</span> clearLCD(<span class="dt">void</span>)</a>
 <a class="sourceLine" id="cb11-2" title="2">{</a>
 <a class="sourceLine" id="cb11-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
 <a class="sourceLine" id="cb11-4" title="4">    UART1_Write(<span class="bn">0xB7</span>);   <span class="co">// clear LCD</span></a>
 <a class="sourceLine" id="cb11-5" title="5">}</a></code></pre></div>
 <h2 id="lcd_print">LCD_print</h2>
+<ul>
+<li>Prints a string to the LCD.</li>
+</ul>
 <div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb12-1" title="1"><span class="dt">void</span> LCD_print(<span class="dt">char</span> *str, <span class="dt">char</span> length)</a>
 <a class="sourceLine" id="cb12-2" title="2">{</a>
 <a class="sourceLine" id="cb12-3" title="3">    <span class="dt">char</span> i=<span class="dv">0</span>;</a>
@@ -354,6 +359,9 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <a class="sourceLine" id="cb12-16" title="16">    }</a>
 <a class="sourceLine" id="cb12-17" title="17">}</a></code></pre></div>
 <h2 id="lcd_line2">LCD_line2</h2>
+<ul>
+<li>Moves the LCD cursor to the beginning of the second row (row 1).</li>
+</ul>
 <div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb13-1" title="1"><span class="dt">void</span> LCD_line2(<span class="dt">void</span>)</a>
 <a class="sourceLine" id="cb13-2" title="2">{</a>
 <a class="sourceLine" id="cb13-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
@@ -364,6 +372,9 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <a class="sourceLine" id="cb13-8" title="8">    UART1_Write(<span class="bn">0x01</span>);   <span class="co">// row 1</span></a>
 <a class="sourceLine" id="cb13-9" title="9">}</a></code></pre></div>
 <h2 id="display_signature">display_signature</h2>
+<ul>
+<li>Obtains a version signature form the slave program and prints it in the LCD.</li>
+</ul>
 <div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb14-1" title="1"><span class="dt">void</span> display_signature(<span class="dt">void</span>)</a>
 <a class="sourceLine" id="cb14-2" title="2">{</a>
 <a class="sourceLine" id="cb14-3" title="3">    <span class="dt">char</span> signature[<span class="dv">7</span>], i = <span class="dv">0</span>;</a>
@@ -382,60 +393,48 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 <a class="sourceLine" id="cb14-16" title="16">    printf(<span class="st">&quot;</span><span class="sc">\r\n\t</span><span class="st">The Signature from 3Pi is: %s</span><span class="sc">\r\n</span><span class="st">&quot;</span>, signature);</a>
 <a class="sourceLine" id="cb14-17" title="17">    LCD_print(signature, sig_length);</a>
 <a class="sourceLine" id="cb14-18" title="18">}</a></code></pre></div>
-<h2 id="send_hyphen">send_hyphen</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb15-1" title="1"><span class="co">// just to test that printing to the LCD is working</span></a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="dt">void</span> send_hyphen(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb15-3" title="3">{</a>
-<a class="sourceLine" id="cb15-4" title="4">    <span class="co">// see https://www.pololu.com/docs/0J21/10.a </span></a>
-<a class="sourceLine" id="cb15-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb15-6" title="6">    UART1_Write(<span class="bn">0xB8</span>);   <span class="co">// print LCD command to slave</span></a>
-<a class="sourceLine" id="cb15-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb15-8" title="8">    UART1_Write(<span class="dv">1</span>);     <span class="co">// send one character</span></a>
-<a class="sourceLine" id="cb15-9" title="9">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb15-10" title="10">    UART1_Write(<span class="ch">&#39;-&#39;</span>);   <span class="co">// send a hyphen</span></a>
-<a class="sourceLine" id="cb15-11" title="11">}</a></code></pre></div>
 <h2 id="send_apsc1299">send_APSC1299</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb16-1" title="1"><span class="dt">void</span> send_APSC1299(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb16-2" title="2">{</a>
-<a class="sourceLine" id="cb16-3" title="3">    <span class="dt">char</span>  msg_length=<span class="dv">8</span>; <span class="co">// to send 8 characters</span></a>
-<a class="sourceLine" id="cb16-4" title="4">    <span class="dt">char</span> msg[] = <span class="st">&quot;APSC1299&quot;</span>;</a>
-<a class="sourceLine" id="cb16-5" title="5">    LCD_print(msg, msg_length); </a>
-<a class="sourceLine" id="cb16-6" title="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb15-1" title="1"><span class="dt">void</span> send_APSC1299(<span class="dt">void</span>)</a>
+<a class="sourceLine" id="cb15-2" title="2">{</a>
+<a class="sourceLine" id="cb15-3" title="3">    <span class="dt">char</span>  msg_length=<span class="dv">8</span>; <span class="co">// to send 8 characters</span></a>
+<a class="sourceLine" id="cb15-4" title="4">    <span class="dt">char</span> msg[] = <span class="st">&quot;APSC1299&quot;</span>;</a>
+<a class="sourceLine" id="cb15-5" title="5">    LCD_print(msg, msg_length); </a>
+<a class="sourceLine" id="cb15-6" title="6">}</a></code></pre></div>
 <h2 id="calibrate">calibrate</h2>
-<div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb17-1" title="1"><span class="dt">void</span> calibrate(<span class="dt">void</span>)</a>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb16-1" title="1"><span class="dt">void</span> calibrate(<span class="dt">void</span>)</a>
+<a class="sourceLine" id="cb16-2" title="2">{</a>
+<a class="sourceLine" id="cb16-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
+<a class="sourceLine" id="cb16-4" title="4">    UART1_Write(<span class="bn">0xBA</span>);   <span class="co">// autocalibration command to slave</span></a>
+<a class="sourceLine" id="cb16-5" title="5">    <span class="cf">while</span>(!UART1_is_rx_ready()) <span class="cf">continue</span>;</a>
+<a class="sourceLine" id="cb16-6" title="6">    <span class="cf">while</span>(UART1_Read() != <span class="ch">&#39;c&#39;</span>)</a>
+<a class="sourceLine" id="cb16-7" title="7">    {</a>
+<a class="sourceLine" id="cb16-8" title="8">        <span class="cf">while</span>(!UART1_is_rx_ready()) <span class="cf">continue</span>;</a>
+<a class="sourceLine" id="cb16-9" title="9">    }</a>
+<a class="sourceLine" id="cb16-10" title="10">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
+<a class="sourceLine" id="cb16-11" title="11">    UART1_Write(<span class="bn">0xB7</span>);   <span class="co">// clear LCD</span></a>
+<a class="sourceLine" id="cb16-12" title="12">    LCD_print(<span class="st">&quot;Cal Done&quot;</span>, <span class="dv">8</span>); <span class="co">// LCD msg</span></a>
+<a class="sourceLine" id="cb16-13" title="13">}</a></code></pre></div>
+<h2 id="go_pd">go_pd</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb17-1" title="1"><span class="dt">void</span> go_pd(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</a>
 <a class="sourceLine" id="cb17-2" title="2">{</a>
 <a class="sourceLine" id="cb17-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb17-4" title="4">    UART1_Write(<span class="bn">0xBA</span>);   <span class="co">// autocalibration command to slave</span></a>
-<a class="sourceLine" id="cb17-5" title="5">    <span class="cf">while</span>(!UART1_is_rx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb17-6" title="6">    <span class="cf">while</span>(UART1_Read() != <span class="ch">&#39;c&#39;</span>)</a>
-<a class="sourceLine" id="cb17-7" title="7">    {</a>
-<a class="sourceLine" id="cb17-8" title="8">        <span class="cf">while</span>(!UART1_is_rx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb17-9" title="9">    }</a>
-<a class="sourceLine" id="cb17-10" title="10">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb17-11" title="11">    UART1_Write(<span class="bn">0xB7</span>);   <span class="co">// clear LCD</span></a>
-<a class="sourceLine" id="cb17-12" title="12">    LCD_print(<span class="st">&quot;Cal Done&quot;</span>, <span class="dv">8</span>); <span class="co">// LCD msg</span></a>
-<a class="sourceLine" id="cb17-13" title="13">}</a></code></pre></div>
-<h2 id="go_pd">go_pd</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb18-1" title="1"><span class="dt">void</span> go_pd(<span class="dt">unsigned</span> <span class="dt">char</span> speed)</a>
+<a class="sourceLine" id="cb17-4" title="4">    UART1_Write(<span class="bn">0xBB</span>);   <span class="co">// start PD control</span></a>
+<a class="sourceLine" id="cb17-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
+<a class="sourceLine" id="cb17-6" title="6">    UART1_Write(speed);   <span class="co">// set speed </span></a>
+<a class="sourceLine" id="cb17-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
+<a class="sourceLine" id="cb17-8" title="8">    UART1_Write(<span class="dv">1</span>);   <span class="co">// set a = 1</span></a>
+<a class="sourceLine" id="cb17-9" title="9">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
+<a class="sourceLine" id="cb17-10" title="10">    UART1_Write(<span class="dv">20</span>);   <span class="co">// set b = 20</span></a>
+<a class="sourceLine" id="cb17-11" title="11">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
+<a class="sourceLine" id="cb17-12" title="12">    UART1_Write(<span class="dv">3</span>);   <span class="co">// set c = 3</span></a>
+<a class="sourceLine" id="cb17-13" title="13">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
+<a class="sourceLine" id="cb17-14" title="14">    UART1_Write(<span class="bn">0xBA</span>);   <span class="co">// set d = 2</span></a>
+<a class="sourceLine" id="cb17-15" title="15">}</a></code></pre></div>
+<h2 id="stop_pd">stop_pd</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb18-1" title="1"><span class="dt">void</span> stop_pd(<span class="dt">void</span>)</a>
 <a class="sourceLine" id="cb18-2" title="2">{</a>
 <a class="sourceLine" id="cb18-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb18-4" title="4">    UART1_Write(<span class="bn">0xBB</span>);   <span class="co">// start PD control</span></a>
-<a class="sourceLine" id="cb18-5" title="5">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb18-6" title="6">    UART1_Write(speed);   <span class="co">// set speed </span></a>
-<a class="sourceLine" id="cb18-7" title="7">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb18-8" title="8">    UART1_Write(<span class="dv">1</span>);   <span class="co">// set a = 1</span></a>
-<a class="sourceLine" id="cb18-9" title="9">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb18-10" title="10">    UART1_Write(<span class="dv">20</span>);   <span class="co">// set b = 20</span></a>
-<a class="sourceLine" id="cb18-11" title="11">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb18-12" title="12">    UART1_Write(<span class="dv">3</span>);   <span class="co">// set c = 3</span></a>
-<a class="sourceLine" id="cb18-13" title="13">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb18-14" title="14">    UART1_Write(<span class="bn">0xBA</span>);   <span class="co">// set d = 2</span></a>
-<a class="sourceLine" id="cb18-15" title="15">}</a></code></pre></div>
-<h2 id="stop_pd">stop_pd</h2>
-<div class="sourceCode" id="cb19"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb19-1" title="1"><span class="dt">void</span> stop_pd(<span class="dt">void</span>)</a>
-<a class="sourceLine" id="cb19-2" title="2">{</a>
-<a class="sourceLine" id="cb19-3" title="3">    <span class="cf">while</span>(!UART1_is_tx_ready()) <span class="cf">continue</span>;</a>
-<a class="sourceLine" id="cb19-4" title="4">    UART1_Write(<span class="bn">0xBC</span>);   <span class="co">// stop PD control</span></a>
-<a class="sourceLine" id="cb19-5" title="5">}</a></code></pre></div>
+<a class="sourceLine" id="cb18-4" title="4">    UART1_Write(<span class="bn">0xBC</span>);   <span class="co">// stop PD control</span></a>
+<a class="sourceLine" id="cb18-5" title="5">}</a></code></pre></div>
 </body>
 </html>

@@ -13,7 +13,6 @@
       - [LCD\_print](#lcd_print)
       - [LCD\_line2](#lcd_line2)
       - [display\_signature](#display_signature)
-      - [send\_hyphen](#send_hyphen)
       - [send\_APSC1299](#send_apsc1299)
       - [calibrate](#calibrate)
       - [go\_pd](#go_pd)
@@ -30,8 +29,10 @@ pandoc -s --toc -t gfm pololu3pi.c-details.pandoc.md -o pololu3pi.c-details.md
 
 ## menu
 
-  - This function is called after initialization of PIC peripherals.
-  - It can also be called from the menu using the **Esc** key.
+  - This function is called after initialization of PIC peripherals
+    regardless of **Roam** or **No Roam** mode.
+  - This function is also called in No Roam mode when from the menu
+    using the **Esc** key.
 
 <!-- end list -->
 
@@ -63,7 +64,8 @@ void menu(void)
 
 ## print\_sensors
 
-  - This function only used in No Roam mode and is called as a menu item
+  - This function only used in **No Roam** mode and is called as a menu
+    item
   - ~~Calibrates sensors~~
   - Reads sensors and prints values to virtual COM port.
   - ~~prints timer3 value~~
@@ -105,7 +107,7 @@ void print_sensors(void)
 
 ## foreward
 
-  - This function only used in Roam mode
+  - This function only used in **Roam** mode
 
 <!-- end list -->
 
@@ -125,7 +127,7 @@ void foreward(unsigned char speed)
 
 ## backward
 
-  - This function only used in Roam mode
+  - This function only used in **Roam** mode
 
 <!-- end list -->
 
@@ -145,7 +147,7 @@ void backward(unsigned char speed)
 
 ## spinleft
 
-  - This function only used in Roam mode
+  - This function only used in **Roam** mode
 
 <!-- end list -->
 
@@ -165,7 +167,7 @@ void spinleft(unsigned char speed)
 
 ## spinright
 
-  - This function only used in Roam mode
+  - This function only used in **Roam** mode
 
 <!-- end list -->
 
@@ -291,6 +293,10 @@ void sendchar(char a_char)
 
 ## clearLCD
 
+  - Clears the LCD and moves cursor to row zero column zero
+
+<!-- end list -->
+
 ``` c
 void clearLCD(void)
 {
@@ -300,6 +306,10 @@ void clearLCD(void)
 ```
 
 ## LCD\_print
+
+  - Prints a string to the LCD.
+
+<!-- end list -->
 
 ``` c
 void LCD_print(char *str, char length)
@@ -323,6 +333,10 @@ void LCD_print(char *str, char length)
 
 ## LCD\_line2
 
+  - Moves the LCD cursor to the beginning of the second row (row 1).
+
+<!-- end list -->
+
 ``` c
 void LCD_line2(void)
 {
@@ -336,6 +350,11 @@ void LCD_line2(void)
 ```
 
 ## display\_signature
+
+  - Obtains a version signature form the slave program and prints it in
+    the LCD.
+
+<!-- end list -->
 
 ``` c
 void display_signature(void)
@@ -355,22 +374,6 @@ void display_signature(void)
     signature[sig_length] = '\0';  // terminate string
     printf("\r\n\tThe Signature from 3Pi is: %s\r\n", signature);
     LCD_print(signature, sig_length);
-}
-```
-
-## send\_hyphen
-
-``` c
-// just to test that printing to the LCD is working
-void send_hyphen(void)
-{
-    // see https://www.pololu.com/docs/0J21/10.a 
-    while(!UART1_is_tx_ready()) continue;
-    UART1_Write(0xB8);   // print LCD command to slave
-    while(!UART1_is_tx_ready()) continue;
-    UART1_Write(1);     // send one character
-    while(!UART1_is_tx_ready()) continue;
-    UART1_Write('-');   // send a hyphen
 }
 ```
 
