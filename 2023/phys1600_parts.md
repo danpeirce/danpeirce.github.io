@@ -13,7 +13,7 @@ Note that this shelf is moved to the APSC1299 box for the spring semester.
 
 ## Ultrasonic Sensors, Acclelerometers... (shelf)
 
-### IR Sensor 
+### IR Sensor - 23
 
 * [datasheet](https://www.onsemi.com/pdf/datasheet/qse159-d.pdf)
 * [digikey.ca](https://www.digikey.ca/en/products/detail/onsemi/QSE159/187485?s=N4IgTCBcDaIIoGUCiBGArATgLQDkAiIAugL5A)
