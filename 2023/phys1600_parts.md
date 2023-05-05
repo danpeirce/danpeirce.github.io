@@ -11,6 +11,26 @@ pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.c
 
 Note that this shelf is moved to the APSC1299 box for the spring semester.
 
+### RGB LEDs
+
+* [datasheet](http://cdn.sparkfun.com/datasheets/Components/General/YSL-R1047CR4G3BW-F8.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/sparkfun-electronics/COM-11120/5673801)
+
+I have tested the RGB LED and it works nicely.
+
+I used 200 ohm resistors so had about 10 mA for the green and blue and about 15 ma for the red. 
+The intensity of this LED is much less than some of the hi efficiency ones we have. It is physically 
+arger and frosted white in appearance and the colors are well combined.
+
+One possible issue is the only distinction between the different leads is the lead length and that 
+indication would disappear if/when the leads are trimed. One solution might be to mark the underside 
+with a blue sharpie and a red sharpie.  At the moment I have a blue sharpie and it appears that the 
+white plastic takes the blue quite well. The order of the leads is 
+
+red---common Cathode---green--- blue
+
+Note there is an anode lead for each color.
+
 ## Ultrasonic Sensors, Acclelerometers... (shelf)
 
 ### IR Sensor - 23

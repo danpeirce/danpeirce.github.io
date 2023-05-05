@@ -20,7 +20,9 @@
 <nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#phys1600-parts-main-box">PHYS1600 Parts Main Box</a><ul>
-<li><a href="#leds-mom-switches-resistors-shelf">LEDs, mom Switches, Resistors (shelf)</a></li>
+<li><a href="#leds-mom-switches-resistors-shelf">LEDs, mom Switches, Resistors (shelf)</a><ul>
+<li><a href="#rgb-leds">RGB LEDs</a></li>
+</ul></li>
 <li><a href="#ultrasonic-sensors-acclelerometers-shelf">Ultrasonic Sensors, Acclelerometers… (shelf)</a><ul>
 <li><a href="#ir-sensor---23">IR Sensor - 23</a></li>
 <li><a href="#adxl335---accelerometer-3-axis-sensor">ADXL335 - Accelerometer, 3 Axis Sensor</a></li>
@@ -40,6 +42,16 @@ pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.c
 <h1 id="phys1600-parts-main-box">PHYS1600 Parts Main Box</h1>
 <h2 id="leds-mom-switches-resistors-shelf">LEDs, mom Switches, Resistors (shelf)</h2>
 <p>Note that this shelf is moved to the APSC1299 box for the spring semester.</p>
+<h3 id="rgb-leds">RGB LEDs</h3>
+<ul>
+<li><a href="http://cdn.sparkfun.com/datasheets/Components/General/YSL-R1047CR4G3BW-F8.pdf">datasheet</a></li>
+<li><a href="https://www.digikey.ca/en/products/detail/sparkfun-electronics/COM-11120/5673801">digikey.ca</a></li>
+</ul>
+<p>I have tested the RGB LED and it works nicely.</p>
+<p>I used 200 ohm resistors so had about 10 mA for the green and blue and about 15 ma for the red. The intensity of this LED is much less than some of the hi efficiency ones we have. It is physically arger and frosted white in appearance and the colors are well combined.</p>
+<p>One possible issue is the only distinction between the different leads is the lead length and that indication would disappear if/when the leads are trimed. One solution might be to mark the underside with a blue sharpie and a red sharpie. At the moment I have a blue sharpie and it appears that the white plastic takes the blue quite well. The order of the leads is</p>
+<p>red—common Cathode—green— blue</p>
+<p>Note there is an anode lead for each color.</p>
 <h2 id="ultrasonic-sensors-acclelerometers-shelf">Ultrasonic Sensors, Acclelerometers… (shelf)</h2>
 <h3 id="ir-sensor---23">IR Sensor - 23</h3>
 <ul>
