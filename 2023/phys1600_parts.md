@@ -31,6 +31,44 @@ red---common Cathode---green--- blue
 
 Note there is an anode lead for each color.
 
+### Bi-Color LEDs
+
+* [datasheet](https://www.sunledusa.com/products/spec/XLUGR58M.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/sunled/XLUGR58M/4745841)
+
+Newer stock from digikey. The advantage is availabilty and quick delivery. Also previous vendor did not provide datasheet.
+
+### Tacktile Switch (mom)
+
+A breadboard friendly, two lead, momentary, normally open tacktile switch.
+
+* [datasheet](https://sten-eswitch-13110800-production.s3.amazonaws.com/system/asset/product_line/data_sheet/184/TL59-TL58.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/e-switch/TL59FF160Q/1767493)
+
+### Amber LED
+
+[datasheet](https://media.digikey.com/pdf/Data%20Sheets/CREE%20Power/C556D-RFx,GFx,BFx,AFx.pdf)
+[digikey.ca](https://www.digikey.ca/en/products/detail/creeled-inc/C566D-AFE-CV0X0251/4793716)
+
+With these oval LEDs the part ordered in the past may not have always been the same.
+
+### Red LED
+
+* [datasheet](https://assets.cree-led.com/a/ds/h/HB-C5SMF-RJF-RJE-GJF-GJE-BJF-BJE.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/creeled-inc/C5SMF-RJF-CT0W0BB2/4794052)
+
+### Green LED
+
+* [datasheet](https://media.digikey.com/pdf/Data%20Sheets/CREE%20Power/C5SME-RJx,C5SMF-RJx,GJx,BJx.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/creeled-inc/C5SMF-GJS-CV0Y0792/1987463?s=N4IgTCBcDaIMIFYDKBZAYgcQFJILQAI4A1ABgE0SB2ATjDgBVcA5AERAF0BfIA)
+
+
+### Blue LED
+
+* [datasheet](https://media.digikey.com/PDF/Data%20Sheets/Everlight%20PDFs/5484BN_BADC_AGJA_X_MS.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/everlight-electronics-co-ltd/5484BN-BADC-AGJA-PR-MS/4950440?s=N4IgTCBcDaIIwAYAcCC0i4FZ2oHIBEQBdAXyA)
+
+
 ## Ultrasonic Sensors, Acclelerometers... (shelf)
 
 ### IR Sensor - 23
