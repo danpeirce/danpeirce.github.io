@@ -1,12 +1,21 @@
-title: Phys1600 Parts
+
+<!---
+use 
+pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../../pandocbd.css phys1600_parts.md -o phys1600_parts.html
+
+-->
+
+# Historical Only
+
+This page was relavent in the early years of the PHYS1600 course. The parts used have been revised more than once since this page was last updated. 
+
+A new page has been created for 2023.
 
 ## Related Pages
 
   * [pic18lf_sound_project](pic18lf_sound_project.html) \-- moved some "other things of interest" not related to sound from that page to this page.
   * <https://bitbucket.org/danpeirce/pic18_serial_io> \-- some basic code for testing the serial/USB interface is on that public page -- branches of the project related to specific projects has not been added to that repository. 
   * [hello33](hello33.html) even more basic code used to test the USB to UART bridge. 
-
-[TOC]
 
     by Dan Peirce
 
