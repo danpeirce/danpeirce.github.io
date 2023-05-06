@@ -38,6 +38,15 @@ Note there is an anode lead for each color.
 
 Newer stock from digikey. The advantage is availabilty and quick delivery. Also previous vendor did not provide datasheet.
 
+### Ceramic Capacitor 10 nF
+
+General Purpose, 20%, multilayer, Radial
+Here generally used for decoupling
+(AKA 10,000 pf, 0.01 μF and 103)
+
+* [Datasheet](https://www.vishay.com/docs/45171/kseries.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/vishay-beyschlag-draloric-bc-components/K103M15X7RF53H6/2824341)
+
 ### Tacktile Switch (mom)
 
 A breadboard friendly, two lead, momentary, normally open tacktile switch.
@@ -68,6 +77,17 @@ With these oval LEDs the part ordered in the past may not have always been the s
 * [datasheet](https://media.digikey.com/PDF/Data%20Sheets/Everlight%20PDFs/5484BN_BADC_AGJA_X_MS.pdf)
 * [digikey.ca](https://www.digikey.ca/en/products/detail/everlight-electronics-co-ltd/5484BN-BADC-AGJA-PR-MS/4950440?s=N4IgTCBcDaIIwAYAcCC0i4FZ2oHIBEQBdAXyA)
 
+### 470 Ω Resistors
+
+1/4 watt, 5% and through hole.
+
+### 10 KΩ Resistors
+
+1/4 watt, 5% and through hole.
+
+### 200 Ω Resistors
+
+1/4 watt, 5% and through hole.
 
 ## Ultrasonic Sensors, Acclelerometers... (shelf)
 
@@ -82,6 +102,14 @@ With these oval LEDs the part ordered in the past may not have always been the s
 * [datasheet Analog Devices](https://www.analog.com/media/en/technical-documentation/data-sheets/ADXL335.pdf)
 * [digikey.ca](https://www.digikey.ca/en/products/detail/sparkfun-electronics/SEN-09269/5140809?utm_adgroup=Evaluation%20Boards%20-%20Sensors&utm_source=google&utm_medium=cpc&utm_campaign=Shopping_Product_Development%20Boards%2C%20Kits%2C%20Programmers_NEW&utm_term=&productid=5140809&gclid=Cj0KCQjwr82iBhCuARIsAO0EAZzBkcJxeCtOusvQLKyJGVo_n0F11KZxi8es8bdkXn1FImPJarY9HfEaAqLKEALw_wcB)
 * this sensor has three analog output. There are newer sensors with more features but Mike was using this as an example of an analog device.
+
+### Grove Ultrasonic Distance Sensor
+
+* [Seeed 101020010 ](https://www.seeedstudio.com/Grove-Ultrasonic-Distance-Sensor.html)
+* [digikey.ca 1597-1122-ND](https://www.digikey.ca/en/products/detail/seeed-technology-co-ltd/101020010/5482600)
+* [mouser 713-101020010](https://www.mouser.ca/ProductDetail/Seeed-Studio/101020010?qs=1%252B9yuXKSi8D6aN06jq6dCQ%3D%3D)
+
+* [custom braket designed to be used with sensor](https://github.com/danpeirce/us-sensor)
 
 ## 12 Button Keypad (shelf)
 
