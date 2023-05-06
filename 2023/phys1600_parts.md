@@ -99,6 +99,7 @@ With these oval LEDs the part ordered in the past may not have always been the s
 
 ### ADXL335 - Accelerometer, 3 Axis Sensor
 
+* [sparkfun breakout board](https://www.sparkfun.com/products/9269)
 * [datasheet Analog Devices](https://www.analog.com/media/en/technical-documentation/data-sheets/ADXL335.pdf)
 * [digikey.ca](https://www.digikey.ca/en/products/detail/sparkfun-electronics/SEN-09269/5140809?utm_adgroup=Evaluation%20Boards%20-%20Sensors&utm_source=google&utm_medium=cpc&utm_campaign=Shopping_Product_Development%20Boards%2C%20Kits%2C%20Programmers_NEW&utm_term=&productid=5140809&gclid=Cj0KCQjwr82iBhCuARIsAO0EAZzBkcJxeCtOusvQLKyJGVo_n0F11KZxi8es8bdkXn1FImPJarY9HfEaAqLKEALw_wcB)
 * this sensor has three analog output. There are newer sensors with more features but Mike was using this as an example of an analog device.
