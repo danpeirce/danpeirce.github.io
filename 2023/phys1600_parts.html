@@ -35,8 +35,11 @@
 </ul></li>
 <li><a href="#ultrasonic-sensors-acclelerometers-shelf">Ultrasonic Sensors, Acclelerometers… (shelf)</a><ul>
 <li><a href="#ir-sensor---23">IR Sensor - 23</a></li>
+<li><a href="#ir-emitter">IR Emitter</a></li>
 <li><a href="#adxl335---accelerometer-3-axis-sensor">ADXL335 - Accelerometer, 3 Axis Sensor</a></li>
 <li><a href="#grove-ultrasonic-distance-sensor">Grove Ultrasonic Distance Sensor</a></li>
+<li><a href="#lv-maxsonar-ez1">LV-MaxSonar-EZ1</a></li>
+<li><a href="#bright-yellow-50ma-led">Bright Yellow 50mA LED</a></li>
 </ul></li>
 <li><a href="#button-keypad-shelf">12 Button Keypad (shelf)</a><ul>
 <li><a href="#twelve-button-keypads---11">twelve button keypads - 11</a></li>
@@ -48,7 +51,7 @@
 <!---
 use 
 pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.css phys1600_parts.md -o phys1600_parts.html
-
+   to create HTML5 page.
 -->
 <h1 id="phys1600-parts-main-box">PHYS1600 Parts Main Box</h1>
 <h2 id="leds-mom-switches-resistors-shelf">LEDs, mom Switches, Resistors (shelf)</h2>
@@ -107,10 +110,25 @@ pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.c
 <p>1/4 watt, 5% and through hole.</p>
 <h2 id="ultrasonic-sensors-acclelerometers-shelf">Ultrasonic Sensors, Acclelerometers… (shelf)</h2>
 <h3 id="ir-sensor---23">IR Sensor - 23</h3>
+<p>Has been used for optical 9600 bps serial data link. Has also been used in photogate like applications.</p>
+<p>Used with the <a href="#ir-emitter">IR emitter</a> listed as the next item.</p>
 <ul>
-<li><a href="https://www.onsemi.com/pdf/datasheet/qse159-d.pdf">datasheet</a></li>
+<li><a href="https://www.onsemi.com/pdf/datasheet/qse159-d.pdf">datasheet</a>
+<ul>
+<li>Open collector output!</li>
+<li>Use with external pullup resistor!</li>
+<li>Binary logic output</li>
+<li>Schmitt trigger built in</li>
+</ul></li>
 <li><a href="https://www.digikey.ca/en/products/detail/onsemi/QSE159/187485?s=N4IgTCBcDaIIoGUCiBGArATgLQDkAiIAugL5A">digikey.ca</a></li>
 <li><a href="https://www.mouser.ca/ProductDetail/onsemi-Fairchild/QSE159?qs=PzUwjIhihRtaYi%252B1q6Eqeg%3D%3D&amp;gclid=Cj0KCQjwr82iBhCuARIsAO0EAZzeTVX80WdByrLldwyaHA-ZI1hhMHG4lRAH-acrE2eZ1GeSL52osf0aAsxnEALw_wcB">mouser.ca</a></li>
+</ul>
+<h3 id="ir-emitter">IR Emitter</h3>
+<p>Has been used for optical 9600 bps serial data link. Has also been used in photogate like applications.</p>
+<p>Used with the <a href="#ir-sensor---23">IR sensor</a> listed as the previous item</p>
+<ul>
+<li><a href="https://media.digikey.com/pdf/Data%20Sheets/ON%20Semiconductor%20PDFs/QEE122_123.pdf">datasheet</a></li>
+<li><a href="https://www.digikey.ca/en/products/detail/onsemi/QEE123/187428">digikey.ca</a></li>
 </ul>
 <h3 id="adxl335---accelerometer-3-axis-sensor">ADXL335 - Accelerometer, 3 Axis Sensor</h3>
 <ul>
@@ -125,6 +143,19 @@ pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.c
 <li><p><a href="https://www.digikey.ca/en/products/detail/seeed-technology-co-ltd/101020010/5482600">digikey.ca 1597-1122-ND</a></p></li>
 <li><p><a href="https://www.mouser.ca/ProductDetail/Seeed-Studio/101020010?qs=1%252B9yuXKSi8D6aN06jq6dCQ%3D%3D">mouser 713-101020010</a></p></li>
 <li><p><a href="https://github.com/danpeirce/us-sensor">custom braket designed to be used with sensor</a></p></li>
+</ul>
+<h3 id="lv-maxsonar-ez1">LV-MaxSonar-EZ1</h3>
+<p>These are expensive. In recent years we have generally used the <a href="#grove-ultrasonic-distance-sensor">Grove Ultrasonic Distance Sensor</a> instead!</p>
+<ul>
+<li><a href="https://maxbotix.com/pages/lv-maxsonar-ez-datasheet">datasheet</a></li>
+<li><a href="https://abra-electronics.com/sensors/sensors-maxbotix/mb1010-ultrasonic-range-finder-lv-maxsonar-ez1-mb1010.html">abra-electronics.com</a></li>
+</ul>
+<h3 id="bright-yellow-50ma-led">Bright Yellow 50mA LED</h3>
+<p>This part was used in PHYS1220 take home kits for an IV curve lab during the pandemic. I have put the extras here in case they are useful at some point.</p>
+<ul>
+<li><p>static sensitive according to datasheet!</p></li>
+<li><p><a href="https://www.ttelectronics.com/TTElectronics/media/ProductFiles/Datasheet/OVLL.pdf">datasheet</a></p></li>
+<li><p><a href="https://www.digikey.ca/en/products/detail/tt-electronics-optek-technology/OVLLY8C7/827140">digikey.ca</a></p></li>
 </ul>
 <h2 id="button-keypad-shelf">12 Button Keypad (shelf)</h2>
 <h3 id="twelve-button-keypads---11">twelve button keypads - 11</h3>

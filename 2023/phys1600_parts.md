@@ -2,7 +2,7 @@
 <!---
 use 
 pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.css phys1600_parts.md -o phys1600_parts.html
-
+   to create HTML5 page.
 -->
 
 # PHYS1600 Parts Main Box
@@ -93,9 +93,26 @@ With these oval LEDs the part ordered in the past may not have always been the s
 
 ### IR Sensor - 23
 
+Has been used for optical 9600 bps serial data link. Has also been used in photogate like applications.
+
+Used with the [IR emitter](#ir-emitter) listed as the next item.
+
 * [datasheet](https://www.onsemi.com/pdf/datasheet/qse159-d.pdf)
+    * Open collector output! 
+	* Use with external pullup resistor!
+    * Binary logic output
+	* Schmitt trigger built in
 * [digikey.ca](https://www.digikey.ca/en/products/detail/onsemi/QSE159/187485?s=N4IgTCBcDaIIoGUCiBGArATgLQDkAiIAugL5A)
 * [mouser.ca](https://www.mouser.ca/ProductDetail/onsemi-Fairchild/QSE159?qs=PzUwjIhihRtaYi%252B1q6Eqeg%3D%3D&gclid=Cj0KCQjwr82iBhCuARIsAO0EAZzeTVX80WdByrLldwyaHA-ZI1hhMHG4lRAH-acrE2eZ1GeSL52osf0aAsxnEALw_wcB)
+
+### IR Emitter
+
+Has been used for optical 9600 bps serial data link. Has also been used in photogate like applications.
+
+Used with the [IR sensor](#ir-sensor---23) listed as the previous item
+
+* [datasheet](https://media.digikey.com/pdf/Data%20Sheets/ON%20Semiconductor%20PDFs/QEE122_123.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/onsemi/QEE123/187428)
 
 ### ADXL335 - Accelerometer, 3 Axis Sensor
 
@@ -111,6 +128,22 @@ With these oval LEDs the part ordered in the past may not have always been the s
 * [mouser 713-101020010](https://www.mouser.ca/ProductDetail/Seeed-Studio/101020010?qs=1%252B9yuXKSi8D6aN06jq6dCQ%3D%3D)
 
 * [custom braket designed to be used with sensor](https://github.com/danpeirce/us-sensor)
+
+### LV-MaxSonar-EZ1
+
+These are expensive. In recent years we have generally used the [Grove Ultrasonic Distance Sensor](#grove-ultrasonic-distance-sensor) instead!
+
+* [datasheet](https://maxbotix.com/pages/lv-maxsonar-ez-datasheet)
+* [abra-electronics.com](https://abra-electronics.com/sensors/sensors-maxbotix/mb1010-ultrasonic-range-finder-lv-maxsonar-ez1-mb1010.html)
+
+### Bright Yellow 50mA LED
+
+This part was used in PHYS1220 take home kits for an IV curve lab during the pandemic. I have put the extras here in case they are useful at some point.
+
+* static sensitive according to datasheet!
+
+* [datasheet](https://www.ttelectronics.com/TTElectronics/media/ProductFiles/Datasheet/OVLL.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/tt-electronics-optek-technology/OVLLY8C7/827140)
 
 ## 12 Button Keypad (shelf)
 
