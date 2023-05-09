@@ -36,10 +36,17 @@
 <li><a href="#ultrasonic-sensors-acclelerometers-shelf">Ultrasonic Sensors, Acclelerometers… (shelf)</a><ul>
 <li><a href="#ir-sensor---23">IR Sensor - 23</a></li>
 <li><a href="#ir-emitter">IR Emitter</a></li>
+<li><a href="#ir-emitter---higher-intensity">IR Emitter - higher intensity</a></li>
 <li><a href="#adxl335---accelerometer-3-axis-sensor">ADXL335 - Accelerometer, 3 Axis Sensor</a></li>
 <li><a href="#grove-ultrasonic-distance-sensor">Grove Ultrasonic Distance Sensor</a></li>
 <li><a href="#lv-maxsonar-ez1">LV-MaxSonar-EZ1</a></li>
 <li><a href="#bright-yellow-50ma-led">Bright Yellow 50mA LED</a></li>
+<li><a href="#mhz-crystal-oscillator-5v">8MHz crystal Oscillator 5v</a></li>
+<li><a href="#mhz-crystal-oscillator-3.3v">8MHz crystal Oscillator 3.3v</a></li>
+<li><a href="#ceramic-capacitor-0.01-μf">Ceramic Capacitor 0.01 μF</a></li>
+<li><a href="#ttly-ftdi-usb-to-serial">TTLy FTDI USB to serial</a></li>
+<li><a href="#grove-4pin-male-jumpers-to-connector-5pack">Grove 4PIN MALE Jumpers to connector 5PACK</a></li>
+<li><a href="#m5stack-cardkb-mini-keyboard">M5Stack CardKB Mini Keyboard</a></li>
 </ul></li>
 <li><a href="#button-keypad-shelf">12 Button Keypad (shelf)</a><ul>
 <li><a href="#twelve-button-keypads---11">twelve button keypads - 11</a></li>
@@ -73,7 +80,7 @@ pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.c
 </ul>
 <p>Newer stock from digikey. The advantage is availabilty and quick delivery. Also previous vendor did not provide datasheet.</p>
 <h3 id="ceramic-capacitor-10-nf">Ceramic Capacitor 10 nF</h3>
-<p>General Purpose, 20%, multilayer, Radial Here generally used for decoupling (AKA 10,000 pf, 0.01 μF and 103)</p>
+<p>General Purpose, 20%, multilayer, Radial Here generally used for decoupling (AKA 10,000 pf, 0.01 μF and 103) – also <a href="#ceramic-capacitor-0.01-μf">located on a different shelf</a></p>
 <ul>
 <li><a href="https://www.vishay.com/docs/45171/kseries.pdf">Datasheet</a></li>
 <li><a href="https://www.digikey.ca/en/products/detail/vishay-beyschlag-draloric-bc-components/K103M15X7RF53H6/2824341">digikey.ca</a></li>
@@ -124,11 +131,17 @@ pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.c
 <li><a href="https://www.mouser.ca/ProductDetail/onsemi-Fairchild/QSE159?qs=PzUwjIhihRtaYi%252B1q6Eqeg%3D%3D&amp;gclid=Cj0KCQjwr82iBhCuARIsAO0EAZzeTVX80WdByrLldwyaHA-ZI1hhMHG4lRAH-acrE2eZ1GeSL52osf0aAsxnEALw_wcB">mouser.ca</a></li>
 </ul>
 <h3 id="ir-emitter">IR Emitter</h3>
-<p>Has been used for optical 9600 bps serial data link. Has also been used in photogate like applications.</p>
+<p>Has been used for optical 9600 bps serial data link. Has also been used in photogate like applications. This part has a side facing lens like the sensor. It is easy to set up to work with the sensor as both have the same dimensions and side facing lenses.</p>
 <p>Used with the <a href="#ir-sensor---23">IR sensor</a> listed as the previous item</p>
 <ul>
 <li><a href="https://media.digikey.com/pdf/Data%20Sheets/ON%20Semiconductor%20PDFs/QEE122_123.pdf">datasheet</a></li>
 <li><a href="https://www.digikey.ca/en/products/detail/onsemi/QEE123/187428">digikey.ca</a></li>
+</ul>
+<h3 id="ir-emitter---higher-intensity">IR Emitter - higher intensity</h3>
+<p>This IR emitter has a smaller emission angle than the one listed above. It also has a higher maximum current rating. We use this one to make a custom photogate.</p>
+<ul>
+<li><a href="https://www.onsemi.com/pdf/datasheet/qed123-d.pdf">datasheet</a></li>
+<li><a href="https://www.mouser.ca/ProductDetail/onsemi-Fairchild/QED123">mouser</a></li>
 </ul>
 <h3 id="adxl335---accelerometer-3-axis-sensor">ADXL335 - Accelerometer, 3 Axis Sensor</h3>
 <ul>
@@ -157,6 +170,50 @@ pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.c
 <li><p><a href="https://www.ttelectronics.com/TTElectronics/media/ProductFiles/Datasheet/OVLL.pdf">datasheet</a></p></li>
 <li><p><a href="https://www.digikey.ca/en/products/detail/tt-electronics-optek-technology/OVLLY8C7/827140">digikey.ca</a></p></li>
 </ul>
+<h3 id="mhz-crystal-oscillator-5v">8MHz crystal Oscillator 5v</h3>
+<p>With the PIC MCU we generally used the internal oscillator (with phase locked loop multiplier) most of the time. The students also used an external oscillator for particular projects when the added stability was wanted. This is not likely to be used with the Arduino Nano as that board has an on board crystal and does not offer other clock options.</p>
+<ul>
+<li><a href="https://www.ctscorp.com/wp-content/uploads/MXO45_MXO45HS.pdf">datasheet MXO45HS-3C-8M000000</a>
+<ul>
+<li>Note that it is recommended to put a 0.01 µF capacitor as close as possible to the Vcc and gnd pins.</li>
+</ul></li>
+<li><a href="https://www.digikey.ca/en/products/detail/cts-frequency-controls/MXO45HS-3C-8M000000/1801858">digikey.ca</a></li>
+</ul>
+<h3 id="mhz-crystal-oscillator-3.3v">8MHz crystal Oscillator 3.3v</h3>
+<p>With the PIC MCU we generally used the internal oscillator (with phase locked loop multiplier) most of the time. The students also used an external oscillator for particular projects when the added stability was wanted. This is not likely to be used with the Arduino Nano as that board has an on board crystal and does not offer other clock options.</p>
+<p>There were a number of years where we used a 3.3 volt PIC board rather than a 5 volt board. That is why we have a small old stock of 3.3 volt oscillators.</p>
+<ul>
+<li><a href="https://abracon.com/Oscillators/ACHL.pdf">datasheet ACHL-8.000MHZ-EK</a></li>
+<li><a href="https://www.digikey.ca/en/products/detail/abracon-llc/ACHL-8-000MHZ-EK/675397">digikey.ca</a></li>
+</ul>
+<h3 id="ceramic-capacitor-0.01-μf">Ceramic Capacitor 0.01 μF</h3>
+<p>General Purpose, 20%, multilayer, Radial Here generally used for decoupling (AKA 10,000 pf, 10 nF and 103)</p>
+<p>Historically located by the oscilators for convenience. I also have <a href="#ceramic-capacitor-10-nf">these on another tray</a>.</p>
+<ul>
+<li><a href="https://www.vishay.com/docs/45171/kseries.pdf">Datasheet</a></li>
+<li><a href="https://www.digikey.ca/en/products/detail/vishay-beyschlag-draloric-bc-components/K103M15X7RF53H6/2824341">digikey.ca</a></li>
+</ul>
+<h3 id="ttly-ftdi-usb-to-serial">TTLy FTDI USB to serial</h3>
+<p>A USB to serial addaptor that can be set to work at either 3.3 or 5 volts.</p>
+<ul>
+<li>the default is 5 volts. To change to 3.3 one must cut a small trace and add a solder bump.</li>
+</ul>
+<p><strong>Warning</strong> – there is at least one of these boards set to 3.3 volts.</p>
+<ul>
+<li><a href="https://www.solarbotics.com/product/39240/">solarbotics.com</a></li>
+<li><a href="https://ca.robotshop.com/products/ttlyftdi-usb-to-ttl-cable-adapter">ca.robotshop.com</a></li>
+</ul>
+<h3 id="grove-4pin-male-jumpers-to-connector-5pack">Grove 4PIN MALE Jumpers to connector 5PACK</h3>
+<p>Breaks out the Grove 4 pin connector to pins suitable for a breadboard. Total length is about 20 cm.</p>
+<p>We use as a replacment cable for items that come with a grove cable having a grove connector on both ends.</p>
+<p>Examples:</p>
+<ul>
+<li><p>Grove I²C LCD</p></li>
+<li><p>MSTACK devices like the Mini Keyboard</p></li>
+<li><p><a href="https://www.digikey.ca/en/products/detail/seeed-technology-co.,-ltd/110990210/5482570">digikey.ca</a></p></li>
+</ul>
+<h3 id="m5stack-cardkb-mini-keyboard">M5Stack CardKB Mini Keyboard</h3>
+<p>*<a href="https://ca.robotshop.com/products/m5stack-cardkb-mini-keyboard-programmable-unit-v11-mega8a">ca.robotshop.com</a></p>
 <h2 id="button-keypad-shelf">12 Button Keypad (shelf)</h2>
 <h3 id="twelve-button-keypads---11">twelve button keypads - 11</h3>
 <ul>

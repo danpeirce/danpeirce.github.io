@@ -42,7 +42,7 @@ Newer stock from digikey. The advantage is availabilty and quick delivery. Also 
 
 General Purpose, 20%, multilayer, Radial
 Here generally used for decoupling
-(AKA 10,000 pf, 0.01 μF and 103)
+(AKA 10,000 pf, 0.01 μF and 103)  -- also [located on a different shelf](#ceramic-capacitor-0.01-μf)
 
 * [Datasheet](https://www.vishay.com/docs/45171/kseries.pdf)
 * [digikey.ca](https://www.digikey.ca/en/products/detail/vishay-beyschlag-draloric-bc-components/K103M15X7RF53H6/2824341)
@@ -108,11 +108,20 @@ Used with the [IR emitter](#ir-emitter) listed as the next item.
 ### IR Emitter
 
 Has been used for optical 9600 bps serial data link. Has also been used in photogate like applications.
+This part has a side facing lens like the sensor. It is easy to set up to work with the sensor as both have the same dimensions and side facing lenses.
 
 Used with the [IR sensor](#ir-sensor---23) listed as the previous item
 
 * [datasheet](https://media.digikey.com/pdf/Data%20Sheets/ON%20Semiconductor%20PDFs/QEE122_123.pdf)
 * [digikey.ca](https://www.digikey.ca/en/products/detail/onsemi/QEE123/187428)
+
+### IR Emitter - higher intensity
+
+This IR emitter has a smaller emission angle than the one listed above. It also has a higher maximum current rating. 
+We use this one to make a custom photogate.
+
+* [datasheet](https://www.onsemi.com/pdf/datasheet/qed123-d.pdf)
+* [mouser](https://www.mouser.ca/ProductDetail/onsemi-Fairchild/QED123)
 
 ### ADXL335 - Accelerometer, 3 Axis Sensor
 
@@ -144,6 +153,67 @@ This part was used in PHYS1220 take home kits for an IV curve lab during the pan
 
 * [datasheet](https://www.ttelectronics.com/TTElectronics/media/ProductFiles/Datasheet/OVLL.pdf)
 * [digikey.ca](https://www.digikey.ca/en/products/detail/tt-electronics-optek-technology/OVLLY8C7/827140)
+
+### 8MHz crystal Oscillator 5v
+
+With the PIC MCU we generally used the internal oscillator (with phase locked loop multiplier) most of the time. The students also used an 
+external oscillator for particular projects when the added stability was wanted. This is not likely to be used with the Arduino Nano as that board 
+has an on board crystal and does not offer other clock options.
+
+* [datasheet MXO45HS-3C-8M000000](https://www.ctscorp.com/wp-content/uploads/MXO45_MXO45HS.pdf)
+    * Note that it is recommended to put a 0.01 µF capacitor as close as possible to the Vcc and gnd pins.
+* [digikey.ca](https://www.digikey.ca/en/products/detail/cts-frequency-controls/MXO45HS-3C-8M000000/1801858)
+
+### 8MHz crystal Oscillator 3.3v
+
+With the PIC MCU we generally used the internal oscillator (with phase locked loop multiplier) most of the time. The students also used an 
+external oscillator for particular projects when the added stability was wanted. This is not likely to be used with the Arduino Nano as that board 
+has an on board crystal and does not offer other clock options.
+
+There were a number of years where we used a 3.3 volt PIC board rather than a 5 volt board. That is why we have a small old stock of 3.3 volt oscillators.
+
+* [datasheet ACHL-8.000MHZ-EK](https://abracon.com/Oscillators/ACHL.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/abracon-llc/ACHL-8-000MHZ-EK/675397)
+
+### Ceramic Capacitor 0.01 μF
+
+General Purpose, 20%, multilayer, Radial
+Here generally used for decoupling
+(AKA 10,000 pf, 10 nF and 103)
+
+Historically located by the oscilators for convenience. I also have [these on another tray](#ceramic-capacitor-10-nf).
+
+* [Datasheet](https://www.vishay.com/docs/45171/kseries.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/vishay-beyschlag-draloric-bc-components/K103M15X7RF53H6/2824341)
+
+### TTLy FTDI USB to serial
+
+A USB to serial addaptor that can be set to work at either 3.3 or 5 volts. 
+
+* the default is 5 volts. To change to 3.3 one must cut a small trace and add a solder bump. 
+
+**Warning** -- there is at least one of these boards set to 3.3 volts.
+
+* [solarbotics.com](https://www.solarbotics.com/product/39240/)
+* [ca.robotshop.com](https://ca.robotshop.com/products/ttlyftdi-usb-to-ttl-cable-adapter)
+
+### Grove 4PIN MALE Jumpers to connector 5PACK
+
+Breaks out the Grove 4 pin connector to pins suitable for a breadboard.
+Total length is about 20 cm. 
+
+We use as a replacment cable for items that come with a grove cable having a grove connector on both ends.
+
+Examples:
+
+* Grove I²C LCD
+* MSTACK devices like the Mini Keyboard
+
+* [digikey.ca](https://www.digikey.ca/en/products/detail/seeed-technology-co.,-ltd/110990210/5482570)
+
+### M5Stack CardKB Mini Keyboard
+
+*[ca.robotshop.com](https://ca.robotshop.com/products/m5stack-cardkb-mini-keyboard-programmable-unit-v11-mega8a)
 
 ## 12 Button Keypad (shelf)
 
