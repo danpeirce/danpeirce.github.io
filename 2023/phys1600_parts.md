@@ -225,6 +225,45 @@ Examples:
 	
 ### Water Pumps with USB A plug
 
+Since this item has a USB A plug but one will want to switch it on and off with the MCU board it is suggested that the student also use 
+[USB breakout socket](#usb-a-socket-breakout) with this device.
+
 * [https://ca.robotshop.com](https://ca.robotshop.com/products/5v-brushless-portable-submersible-pump)
 * used with USB breakout for switching.
 	
+## USB-C to USB-A Socket (side bin)
+
+### USB-C to USB-A Socket Adaptor
+
+Some **laptops** lack USB-A sockets and have only USB-C sockets. These adaptors will allow one to plug a USB-A plug 
+into one of these computers and is USB 3.1 conpatable.
+
+The following is simular if not exactly the same as the ones in the bin.
+
+* [datasheet](https://www.digikey.ca/en/products/detail/tripp-lite/U428-000-F/7243253)
+* [digikey.ca](https://assets.tripplite.com/product-pdfs/en/u428000f.pdf)
+
+### USB MicroB socket to USB-C plug Adaptor
+
+Some devices arrive with a USB-C socket but we have far more USB microB cables than USB-C cables. 
+This adaptor allows one to use a USB MicroB cable with a USB-C device. In many cases this works fine as the device often actually only supports USB 2 anyway.
+
+Note that USB-C cables are more versitile but also more expensive.
+
+* [datasheet](https://media.digikey.com/pdf/Data%20Sheets/CNC%20Tech%20PDFs/1005-1092-WH.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/cnc-tech/1005-1092-WH/8747889)
+
+### USB A socket breakout
+
+For possible use with [water pump](#water-pumps-with-usb-a-plug) that uses a USB A plug. In that case a project would be done in which the MCU would need to
+be able to switch the water pump on and off.
+
+There are a number of other USB breakout boards in the bin. I am moving on to other parts for now.
+
+### USB hub
+
+Some students have laptops that don't have enough USB ports.
+
+### USB to SD card reader
+
+Not frequently used in PHYS1600 but on ocasion someone has needed a card reader to transfer files from a laptop to a desktop.	

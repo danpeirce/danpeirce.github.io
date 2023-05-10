@@ -52,6 +52,13 @@
 <li><a href="#twelve-button-keypads---11">twelve button keypads - 11</a></li>
 <li><a href="#water-pumps-with-usb-a-plug">Water Pumps with USB A plug</a></li>
 </ul></li>
+<li><a href="#usb-c-to-usb-a-socket-side-bin">USB-C to USB-A Socket (side bin)</a><ul>
+<li><a href="#usb-c-to-usb-a-socket-adaptor">USB-C to USB-A Socket Adaptor</a></li>
+<li><a href="#usb-microb-socket-to-usb-c-plug-adaptor">USB MicroB socket to USB-C plug Adaptor</a></li>
+<li><a href="#usb-a-socket-breakout">USB A socket breakout</a></li>
+<li><a href="#usb-hub">USB hub</a></li>
+<li><a href="#usb-to-sd-card-reader">USB to SD card reader</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -222,9 +229,32 @@ pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.c
 <li><a href="https://www.digikey.ca/en/products/detail/adafruit-industries-llc/419/5353596">digikey.ca site</a></li>
 </ul>
 <h3 id="water-pumps-with-usb-a-plug">Water Pumps with USB A plug</h3>
+<p>Since this item has a USB A plug but one will want to switch it on and off with the MCU board it is suggested that the student also use <a href="#usb-a-socket-breakout">USB breakout socket</a> with this device.</p>
 <ul>
 <li><a href="https://ca.robotshop.com/products/5v-brushless-portable-submersible-pump">https://ca.robotshop.com</a></li>
 <li>used with USB breakout for switching.</li>
 </ul>
+<h2 id="usb-c-to-usb-a-socket-side-bin">USB-C to USB-A Socket (side bin)</h2>
+<h3 id="usb-c-to-usb-a-socket-adaptor">USB-C to USB-A Socket Adaptor</h3>
+<p>Some <strong>laptops</strong> lack USB-A sockets and have only USB-C sockets. These adaptors will allow one to plug a USB-A plug into one of these computers and is USB 3.1 conpatable.</p>
+<p>The following is simular if not exactly the same as the ones in the bin.</p>
+<ul>
+<li><a href="https://www.digikey.ca/en/products/detail/tripp-lite/U428-000-F/7243253">datasheet</a></li>
+<li><a href="https://assets.tripplite.com/product-pdfs/en/u428000f.pdf">digikey.ca</a></li>
+</ul>
+<h3 id="usb-microb-socket-to-usb-c-plug-adaptor">USB MicroB socket to USB-C plug Adaptor</h3>
+<p>Some devices arrive with a USB-C socket but we have far more USB microB cables than USB-C cables. This adaptor allows one to use a USB MicroB cable with a USB-C device. In many cases this works fine as the device often actually only supports USB 2 anyway.</p>
+<p>Note that USB-C cables are more versitile but also more expensive.</p>
+<ul>
+<li><a href="https://media.digikey.com/pdf/Data%20Sheets/CNC%20Tech%20PDFs/1005-1092-WH.pdf">datasheet</a></li>
+<li><a href="https://www.digikey.ca/en/products/detail/cnc-tech/1005-1092-WH/8747889">digikey.ca</a></li>
+</ul>
+<h3 id="usb-a-socket-breakout">USB A socket breakout</h3>
+<p>For possible use with <a href="#water-pumps-with-usb-a-plug">water pump</a> that uses a USB A plug. In that case a project would be done in which the MCU would need to be able to switch the water pump on and off.</p>
+<p>There are a number of other USB breakout boards in the bin. I am moving on to other parts for now.</p>
+<h3 id="usb-hub">USB hub</h3>
+<p>Some students have laptops that don’t have enough USB ports.</p>
+<h3 id="usb-to-sd-card-reader">USB to SD card reader</h3>
+<p>Not frequently used in PHYS1600 but on ocasion someone has needed a card reader to transfer files from a laptop to a desktop.</p>
 </body>
 </html>
