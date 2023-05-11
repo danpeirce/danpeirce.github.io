@@ -60,6 +60,18 @@
 <li><a href="#usb-to-sd-card-reader">USB to SD card reader</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#phys1600-parts-2nd-box">PHYS1600 Parts 2nd Box</a><ul>
+<li><a href="#heart-pulse-sensor-shelf">Heart Pulse Sensor (shelf)</a><ul>
+<li><a href="#sparkfun-level-converter">Sparkfun level converter</a></li>
+<li><a href="#n-channel-enhancement-mode-mosfet">N-Channel Enhancement Mode MOSFET</a></li>
+<li><a href="#heart-pulse-sensor-sparkfun">Heart Pulse Sensor (Sparkfun)</a></li>
+</ul></li>
+<li><a href="#relay-shelf">Relay (shelf)</a></li>
+<li><a href="#potentiometer---mini-joystick-shelf">Potentiometer - mini Joystick (shelf)</a><ul>
+<li><a href="#potentiometer">Potentiometer</a></li>
+<li><a href="#mini-joystick">Mini Joystick</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </nav>
 <!---
@@ -116,6 +128,7 @@ pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.c
 <li><a href="https://media.digikey.com/PDF/Data%20Sheets/Everlight%20PDFs/5484BN_BADC_AGJA_X_MS.pdf">datasheet</a></li>
 <li><a href="https://www.digikey.ca/en/products/detail/everlight-electronics-co-ltd/5484BN-BADC-AGJA-PR-MS/4950440?s=N4IgTCBcDaIIwAYAcCC0i4FZ2oHIBEQBdAXyA">digikey.ca</a></li>
 </ul>
+<p>The blue LEDs have a greater forward voltage than other colors. To get it to work with a 3.3 volt MCU a drive circuit should be used. One simple drive method makes use of an <a href="#n-channel-enhancement-mode-mosfet">N-Channel MOSFET - details</a>.</p>
 <h3 id="ω-resistors">470 Ω Resistors</h3>
 <p>1/4 watt, 5% and through hole.</p>
 <h3 id="kω-resistors">10 KΩ Resistors</h3>
@@ -256,5 +269,53 @@ pandoc --metadata pagetitle="PHYS1600 Parts"  -s --toc -t html5 -c ../pandocbd.c
 <p>Some students have laptops that don’t have enough USB ports.</p>
 <h3 id="usb-to-sd-card-reader">USB to SD card reader</h3>
 <p>Not frequently used in PHYS1600 but on ocasion someone has needed a card reader to transfer files from a laptop to a desktop.</p>
+<h1 id="phys1600-parts-2nd-box">PHYS1600 Parts 2nd Box</h1>
+<h2 id="heart-pulse-sensor-shelf">Heart Pulse Sensor (shelf)</h2>
+<h3 id="sparkfun-level-converter">Sparkfun level converter</h3>
+<p>This part will work in many circumstances but it has limitations.</p>
+<ul>
+<li>It may not transition fast enough for some applications.</li>
+<li>It is intended to be used to provide logic levels and not drive any significant load current (like an LED).</li>
+</ul>
+<p>To drive a load at a different voltage one can <a href="#n-channel-enhancement-mode-mosfet">use a MOSFET</a></p>
+<ul>
+<li><a href="http://cdn.sparkfun.com/tutorialimages/BD-LogicLevelConverter/an97055.pdf">Applcation Note</a></li>
+<li><a href="https://learn.sparkfun.com/tutorials/bi-directional-logic-level-converter-hookup-guide">level coverter hookup guide -html</a></li>
+<li><a href="https://media.digikey.com/pdf/Data%20Sheets/Sparkfun%20PDFs/Bi-Directional-Logic-Level_HookupGuide.pdf">level coverter hookup guide - pdf</a></li>
+<li><a href="https://www.digikey.ca/en/products/detail/sparkfun-electronics/BOB-12009/5673795">digikey.ca</a></li>
+</ul>
+<h3 id="n-channel-enhancement-mode-mosfet">N-Channel Enhancement Mode MOSFET</h3>
+<p>The BS170 is an N-Channel Enhancment Mode MOSFET that can drive up to 500 mV.</p>
+<ul>
+<li><a href="https://rocelec.widen.net/view/pdf/fonxoqycul/FAIRS29185-1.pdf">datasheet</a></li>
+<li><a href="https://www.digikey.ca/en/products/detail/onsemi/BS170-D26Z/3042544">digikey.ca</a></li>
+</ul>
+<p>Possible application</p>
+<ul>
+<li>If one has 3.3 volt logic and would like to drive a blue LED a drive circuit is needed. In this case a N-Channel MOSFET can have the
+<ul>
+<li>3.3 logic connected to the gate.</li>
+<li>The source connected to ground</li>
+<li>A current limiting resistor in series with the BLUE LED and the drian (the other side of the resistor can go to 5V)</li>
+</ul></li>
+</ul>
+<h3 id="heart-pulse-sensor-sparkfun">Heart Pulse Sensor (Sparkfun)</h3>
+<p>Supply voltage anything from 3 to 5.5 volts.</p>
+<ul>
+<li><a href="https://cdn.shopify.com/s/files/1/0100/6632/files/Pulse_Sensor_Data_Sheet.pdf?14358792549038671331">datasheet</a></li>
+<li><a href="https://www.sparkfun.com/products/11574">sparkfun</a>
+<ul>
+<li><a href="https://github.com/WorldFamousElectronics/PulseSensorPlayground">github - most recent version</a></li>
+<li><a href="https://github.com/WorldFamousElectronics/PulseSensor_Amped_Arduino">github - older but more documentation</a></li>
+</ul></li>
+<li><a href="https://www.mouser.ca/ProductDetail/SparkFun/SEN-11574">mouser.ca</a></li>
+</ul>
+<h2 id="relay-shelf">Relay (shelf)</h2>
+<p>relays (details to come)</p>
+<h2 id="potentiometer---mini-joystick-shelf">Potentiometer - mini Joystick (shelf)</h2>
+<h3 id="potentiometer">Potentiometer</h3>
+<p>1k with knob Breadboard friendly</p>
+<h3 id="mini-joystick">Mini Joystick</h3>
+<p>Mini Joystick (details to come)</p>
 </body>
 </html>

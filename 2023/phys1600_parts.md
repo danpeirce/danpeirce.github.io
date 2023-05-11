@@ -77,6 +77,9 @@ With these oval LEDs the part ordered in the past may not have always been the s
 * [datasheet](https://media.digikey.com/PDF/Data%20Sheets/Everlight%20PDFs/5484BN_BADC_AGJA_X_MS.pdf)
 * [digikey.ca](https://www.digikey.ca/en/products/detail/everlight-electronics-co-ltd/5484BN-BADC-AGJA-PR-MS/4950440?s=N4IgTCBcDaIIwAYAcCC0i4FZ2oHIBEQBdAXyA)
 
+The blue LEDs have a greater forward voltage than other colors. To get it to work with a 3.3 volt MCU a drive circuit should be used. One simple drive method
+makes use of an [N-Channel MOSFET - details](#n-channel-enhancement-mode-mosfet). 
+
 ### 470 Ω Resistors
 
 1/4 watt, 5% and through hole.
@@ -267,3 +270,60 @@ Some students have laptops that don't have enough USB ports.
 ### USB to SD card reader
 
 Not frequently used in PHYS1600 but on ocasion someone has needed a card reader to transfer files from a laptop to a desktop.	
+
+# PHYS1600 Parts 2nd Box
+
+## Heart Pulse Sensor (shelf)
+
+### Sparkfun level converter
+
+This part will work in many circumstances but it has limitations. 
+
+* It may not transition fast enough for some applications.
+* It is intended to be used to provide logic levels and not drive any significant load current (like an LED).
+
+To drive a load at a different voltage one can [use a MOSFET](#n-channel-enhancement-mode-mosfet)
+
+* [Applcation Note](http://cdn.sparkfun.com/tutorialimages/BD-LogicLevelConverter/an97055.pdf)
+* [level coverter hookup guide -html](https://learn.sparkfun.com/tutorials/bi-directional-logic-level-converter-hookup-guide)
+* [level coverter hookup guide - pdf](https://media.digikey.com/pdf/Data%20Sheets/Sparkfun%20PDFs/Bi-Directional-Logic-Level_HookupGuide.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/sparkfun-electronics/BOB-12009/5673795)
+
+### N-Channel Enhancement Mode MOSFET
+
+The BS170 is an N-Channel Enhancment Mode MOSFET that can drive up to 500 mV.
+
+* [datasheet](https://rocelec.widen.net/view/pdf/fonxoqycul/FAIRS29185-1.pdf)
+* [digikey.ca](https://www.digikey.ca/en/products/detail/onsemi/BS170-D26Z/3042544)
+
+Possible application
+
+* If one has 3.3 volt logic and would like to drive a blue LED a drive circuit is needed. In this case a N-Channel MOSFET can have the 
+    * 3.3 logic connected to the gate.
+	* The source connected to ground
+	* A current limiting resistor in series with the BLUE LED and the drian (the other side of the resistor can go to 5V)
+
+### Heart Pulse Sensor (Sparkfun)
+
+Supply voltage anything from 3 to 5.5 volts.
+
+* [datasheet](https://cdn.shopify.com/s/files/1/0100/6632/files/Pulse_Sensor_Data_Sheet.pdf?14358792549038671331)
+* [sparkfun](https://www.sparkfun.com/products/11574)
+    * [github - most recent version](https://github.com/WorldFamousElectronics/PulseSensorPlayground)
+	* [github - older but more documentation](https://github.com/WorldFamousElectronics/PulseSensor_Amped_Arduino)
+* [mouser.ca](https://www.mouser.ca/ProductDetail/SparkFun/SEN-11574)
+
+## Relay (shelf)
+
+relays (details to come)
+
+## Potentiometer - mini Joystick (shelf)
+
+### Potentiometer
+
+1k with knob
+Breadboard friendly
+
+### Mini Joystick
+
+Mini Joystick (details to come)
