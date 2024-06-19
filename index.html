@@ -9,15 +9,21 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="pandocbd.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
 <header id="title-block-header">
@@ -28,54 +34,37 @@
 use pandoc -s -t html5 -c pandocbd.css index.md -o index.html
 -->
 <ul>
-<li><p><a href="https://github.com/danpeirce/xpress-pic18f46k42">xpress-pic18f46k42</a></p></li>
-<li><p><a href="https://github.com/danpeirce/pureThermal2">pureThermal2</a></p></li>
-<li><p><a href="https://sites.google.com/site/danpeircenotes/">My Google Sites Links to Notes Page</a></p></li>
+<li><p><a
+href="https://github.com/danpeirce/xpress-pic18f46k42">xpress-pic18f46k42</a></p></li>
+<li><p><a
+href="https://github.com/danpeirce/pureThermal2">pureThermal2</a></p></li>
+<li><p><a href="https://sites.google.com/site/danpeircenotes/">My Google
+Sites Links to Notes Page</a></p></li>
 </ul>
 <p>Some of those links are copied here:</p>
 <ul>
-<li><a href="https://danpeirce.github.io/4d_lcd.html">4d_lcd.html</a></li>
-<li><a href="https://danpeirce.github.io/ASTR1100/AstrophotographyI.html">AstrophotographyI.html</a></li>
-<li><a href="https://danpeirce.github.io/buzzer_timer/index.html">buzzer_timer</a> (2007)<br />
+<li><a
+href="https://danpeirce.github.io/ASTR1100/AstrophotographyI.html">AstrophotographyI.html</a></li>
+<li><a
+href="https://danpeirce.github.io/buzzer_timer/index.html">buzzer_timer</a>
+(2007)<br />
 </li>
-<li><a href="https://danpeirce.github.io/sumovore/ChangesToSumovoreBB2.html">ChangesToSumovoreBB2.html</a></li>
-<li><a href="https://danpeirce.github.io/charge_pump.html">charge_pump.html</a></li>
-<li><a href="https://danpeirce.github.io/dc_to_dc_converter.html">dc_to_dc_converter.html</a></li>
-<li><a href="https://danpeirce.github.io/geany.html">geany.html</a></li>
-<li><a href="https://github.com/danpeirce?tab=repositories">https://github.com/danpeirce?tab=repositories</a></li>
-<li><a href="https://danpeirce.github.io/git_notes.html">git_notes.html</a></li>
-<li><a href="https://drive.google.com/file/d/0B_zZrPaAgSx5VHBqZnJLZGpqUzA/view?usp=sharing">Intel Edison Notes</a> – Notes on Using the Edison</li>
-<li><a href="https://danpeirce.github.io/intel-edison.html">intel-edison.html</a> – from before obtaining an Edison</li>
-<li><a href="https://danpeirce.github.io/ipython_notes.html">ipython_notes.html</a></li>
-<li><a href="https://danpeirce.github.io/ipython_rpi.html">ipython_rpi.html</a></li>
-<li><a href="https://danpeirce.github.io/matplotlib.html">matplotlib.html</a></li>
-<li><a href="https://danpeirce.github.io/2018/oled-v1.2/oled-v1.2.html">oled-v1.2.html</a></li>
-<li><a href="https://danpeirce.github.io/openscad.html">openscad.html</a></li>
-<li><a href="https://danpeirce.github.io/photogate/">photogate (old)</a></li>
-<li><a href="https://danpeirce.github.io/phys1600_parts.html">phys1600_parts.html</a></li>
-<li><a href="https://danpeirce.github.io/pulsed_light_sensor.html">pulsed_light_sensor.html</a></li>
-<li><a href="https://danpeirce.github.io/pyboard.html">pyboard.html</a></li>
-<li><a href="https://danpeirce.github.io/python.html">python.html</a></li>
-<li><a href="https://danpeirce.github.io/python_ftp.html">python_ftp.html</a> (some editing required as shaw site not available)</li>
-<li><a href="https://danpeirce.github.io/python_markdown.html">python_markdown.html</a></li>
-<li><a href="https://danpeirce.github.io/raspberry_pi">raspberry_pi</a></li>
-<li><a href="https://danpeirce.github.io/2017/Raspberry/RPi-PC-desktop.html">Raspberry Pi Desktop for PC and Mac - 2017</a></li>
+<li><a
+href="https://github.com/danpeirce?tab=repositories">https://github.com/danpeirce?tab=repositories</a></li>
+<li><a
+href="https://danpeirce.github.io/2018/oled-v1.2/oled-v1.2.html">oled-v1.2.html</a></li>
+<li><a
+href="https://danpeirce.github.io/openscad.html">openscad.html</a></li>
+<li><a href="https://danpeirce.github.io/photogate/">photogate
+(old)</a></li>
+<li><a
+href="https://danpeirce.github.io/phys1600_parts.html">phys1600_parts.html</a></li>
 <li><a href="https://danpeirce.github.io/RCA_remote">RCA_remote</a></li>
-<li><a href="https://github.com/danpeirce/reflective-module">reflective-module</a></li>
-<li><a href="https://danpeirce.github.io/2010/robot_diagnostic.html">robot_diagnostic.html</a>
-<ul>
-<li>used in APSC1299<br />
-</li>
-</ul></li>
-<li><a href="https://danpeirce.github.io/rpi_echo_led.html">rpi_echo_led.html</a></li>
-<li><a href="https://danpeirce.github.io/ssh.html">ssh.html (2012)</a></li>
-<li><a href="https://danpeirce.github.io/win7ssh.html">Secure Shell and Windows win7ssh.html</a></li>
-<li><a href="https://github.com/danpeirce/tektronix-oscilloscope">tektronix-oscilloscope – interface TBS1022</a></li>
-<li><a href="https://danpeirce.github.io/testing_usb_powered_pic.html">testing_usb_powered_pic.html</a></li>
-<li><a href="https://danpeirce.github.io/ultrasonic_ranger.html">ultrasonic_ranger.html</a></li>
-<li><a href="https://danpeirce.github.io/usb_virtual_com.html">usb_virtual_com.html</a></li>
-<li><a href="https://danpeirce.github.io/vnc.html">vnc.html</a></li>
-<li><a href="https://danpeirce.github.io/zumo-robot.html">zumo-robot.html</a></li>
+<li><a
+href="https://github.com/danpeirce/tektronix-oscilloscope">tektronix-oscilloscope
+– interface TBS1022</a></li>
+<li><a
+href="https://danpeirce.github.io/ultrasonic_ranger.html">ultrasonic_ranger.html</a></li>
 </ul>
 </body>
 </html>
