@@ -18,8 +18,6 @@ Some of those links are copied here:
 -   [openscad.html](https://danpeirce.github.io/openscad.html)
 -   [photogate (old)](https://danpeirce.github.io/photogate/)
 -   [phys1600\_parts.html](https://danpeirce.github.io/phys1600_parts.html)
--   [python.html](https://danpeirce.github.io/python.html)
--   [python\_ftp.html](https://danpeirce.github.io/python_ftp.html)
 -   [RCA\_remote](https://danpeirce.github.io/RCA_remote)
 -   [reflective-module](https://github.com/danpeirce/reflective-module)
 -   [tektronix-oscilloscope -- interface
